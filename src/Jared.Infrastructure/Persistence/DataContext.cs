@@ -1,9 +1,10 @@
-﻿using Jared.Domain.Models;
+﻿using Jared.Domain.Interfaces;
+using Jared.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Infrastructure.Persistence;
 
-public class DataContext : DbContext
+public class DataContext : DbContext, IDataContext
 {
     public DataContext()
     {
@@ -13,11 +14,10 @@ public class DataContext : DbContext
     {
     }
 
-    public DbSet<Epic>? Epics { get; set; }
-    public DbSet<User>? Users { get; set; }
-    public DbSet<History>? History { get; set; }
-    public DbSet<Domain.Models.Task>? Tasks { get; set; }
-    public DbSet<Project>? Projects { get; set; }
+    public new virtual DbSet<TEntity> Set<TEntity>() where TEntity : class, IEntity
+    {
+        return base.Set<TEntity>();
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
