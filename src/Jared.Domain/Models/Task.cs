@@ -4,16 +4,14 @@ public class Task
 {
     public int Id { get; set; }
     public int? ParentId { get; set; }
-    public int ReporterId { get; set; }
-    public int AssigneeId { get; set; }
-    public int ProjectId { get; set; }
+    public int? ProjectId { get; set; }
+    public int? EpicId { get; set; }
     public int StatusId { get; set; }
     public int PriorityId { get; set; }
-    public int EpicId { get; set; }
 
     public string Title { get; set; } = default!;
     public string? Description { get; set; }
-    public string Code { get; set; } = default!;
+    public string? Code { get; set; } = default!;
     public DateTime? CreatedAt { get; set; } = DateTime.UtcNow;
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
