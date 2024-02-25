@@ -1,29 +1,24 @@
 ﻿using Jared.Domain.Abstractions;
 using Jared.Domain.Interfaces;
+using MapsterMapper;
 using MediatR;
-using TaskE = Jared.Domain.Models.Task;
 
 namespace Jared.Application.Commands.Task;
 
 public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, Result>
 {
     private readonly IDataContext dataContext;
+    private readonly IMapper mapper;
 
-    public CreateTaskCommandHandler(IDataContext dataContext)
+    public CreateTaskCommandHandler(IDataContext dataContext, IMapper mapper)
     {
         this.dataContext = dataContext;
+        this.mapper = mapper;
     }
 
     public async Task<Result> Handle(CreateTaskCommand command, CancellationToken cancellationToken)
     {
-        TaskE task = new()
-        {
-            Title = command.dto.Title,
-            Description = command.dto.Description,
-            Deadline = command.dto.Deadline,
-            StartDate = command.dto.StartDate,
-            EndDate = command.dto.EndDate,
-        };
+        var task = mapper.Map<Domain.Models.Task>(command.dto);
 
         try
         {
