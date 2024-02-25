@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using MapsterMapper;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -13,6 +14,7 @@ public static class DepedencyInjection
 
         services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(assembly);
+        services.AddScoped<IMapper, Mapper>();
 
         return services;
     }
