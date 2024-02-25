@@ -1,6 +1,8 @@
 using Jared.Application;
 using Jared.Infrastructure;
 using Jared.Presentation.Data;
+using MediatR;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,10 @@ builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
 

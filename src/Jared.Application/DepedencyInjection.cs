@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Jared.Application;
 
@@ -9,8 +11,7 @@ public static class DepedencyInjection
     {
         var assembly = typeof(DepedencyInjection).Assembly;
 
-        services.AddMediatR(configuration =>
-            configuration.RegisterServicesFromAssembly(assembly));
+        services.AddMediatR(Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(assembly);
 
         return services;
