@@ -1,4 +1,5 @@
 using Jared.Application;
+using Jared.Application.Mapping;
 using Jared.Infrastructure;
 using Jared.Presentation.Data;
 using MediatR;
@@ -16,6 +17,7 @@ builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.RegisterMappingConfigurations();
 
 var app = builder.Build();
 

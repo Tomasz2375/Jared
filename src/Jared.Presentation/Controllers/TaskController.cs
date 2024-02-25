@@ -1,4 +1,6 @@
 ﻿using Jared.Application.Commands.Task;
+using Jared.Application.Dtos.TaskDto;
+using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,5 +24,13 @@ public class TaskController : ControllerBase
         await mediator.Send(command);
 
         return Result.Ok();
+    }
+
+    [HttpGet]
+    public async Task<Result<List<TaskListDto>>> GetTaskListAsync()
+    {
+        var result = await mediator.Send(new TaskListQuery());
+
+        return result;
     }
 }
