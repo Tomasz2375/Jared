@@ -1,9 +1,9 @@
-﻿namespace Jared.Domain.Models;
+﻿using Jared.Domain.Abstractions;
 
-public class Project
+namespace Jared.Domain.Models;
+
+public class Project : Entity
 {
-    public int Id { get; set; }
-
     public string Title { get; set; } = default!;
     public string? Description { get; set; } = default!;
     public string Code { get; set; } = default!;

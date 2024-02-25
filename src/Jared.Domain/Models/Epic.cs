@@ -1,8 +1,9 @@
-﻿namespace Jared.Domain.Models;
+﻿using Jared.Domain.Abstractions;
 
-public class Epic
+namespace Jared.Domain.Models;
+
+public class Epic : Entity
 {
-    public int Id { get; set; }
     public int? ParentId { get; set; }
     public int ProjectId { get; set; }
 
