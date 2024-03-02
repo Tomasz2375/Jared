@@ -1,7 +1,6 @@
 using Jared.Application;
 using Jared.Application.Mapping;
 using Jared.Infrastructure;
-using Jared.Presentation.Data;
 using MediatR;
 using System.Reflection;
 
@@ -10,7 +9,6 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
