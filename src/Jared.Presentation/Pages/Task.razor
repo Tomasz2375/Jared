@@ -1,0 +1,13 @@
+﻿@page "/task"
+@using MediatR;
+@inject IMediator Mediator
+
+@if (Model is null)
+{
+    return;
+}
+
+@foreach (var item in Model)
+{
+    <h3>@item.Id | @item.Title | @item.Code</h3>
+}

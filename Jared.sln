@@ -5,13 +5,13 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{09D3D703-C7D8-4D39-8A72-EDB5B4E7C2E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Application", "src\Jared.Application\Jared.Application.csproj", "{FCDC5AEB-C692-4CE6-9EF5-FD01E1067D21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Application", "src\Jared.Application\Jared.Application.csproj", "{FCDC5AEB-C692-4CE6-9EF5-FD01E1067D21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Domain", "src\Jared.Domain\Jared.Domain.csproj", "{E2BA7053-38C7-477F-9F8F-416CD68CFCF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Domain", "src\Jared.Domain\Jared.Domain.csproj", "{E2BA7053-38C7-477F-9F8F-416CD68CFCF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Infrastructure", "src\Jared.Infrastructure\Jared.Infrastructure.csproj", "{24E4C3EB-396C-492C-854A-3AA5A4985FBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Infrastructure", "src\Jared.Infrastructure\Jared.Infrastructure.csproj", "{24E4C3EB-396C-492C-854A-3AA5A4985FBA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Presentation", "src\Jared.Presentation\Jared.Presentation.csproj", "{899736A0-483A-42BF-869A-C4A8469F190E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Presentation", "src\Jared.Presentation\Jared.Presentation.csproj", "{899736A0-483A-42BF-869A-C4A8469F190E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
