@@ -41,11 +41,11 @@ public class Result
 
 public class Result<T> : Result
 {
-    public T Value { get; set; }
+    public T Data { get; set; }
 
-    protected internal Result(T value, bool success, string error)
+    protected internal Result(T data, bool success, string error)
         : base(success, error)
     {
-        Value = value;
+        Data = data;
     }
 }
