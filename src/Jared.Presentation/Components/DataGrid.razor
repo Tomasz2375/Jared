@@ -1,0 +1,29 @@
+﻿@typeparam TItem
+
+<h3>GridComponent</h3>
+
+<table class="data-grid">
+    <thead>
+        <tr>
+            @foreach(var type in typeof(TItem).GetProperties())
+            {
+                <th>
+                    @type.Name
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Items)
+        {
+            <tr>
+                @foreach (var type in typeof(TItem).GetProperties())
+                {
+                    <td>
+                        @item!.GetType().GetProperty(type.Name)!.GetValue(item)
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

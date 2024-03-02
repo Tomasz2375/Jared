@@ -1,4 +1,6 @@
 ﻿@page "/task"
+@using Jared.Application.Dtos.TaskDto;
+@using Jared.Presentation.Components
 @using MediatR;
 @inject IMediator Mediator
 
@@ -7,7 +9,6 @@
     return;
 }
 
-@foreach (var item in Model)
-{
-    <h3>@item.Id | @item.Title | @item.Code</h3>
-}
+<DataGrid
+    TItem="TaskListDto"
+    Items="Model" />
