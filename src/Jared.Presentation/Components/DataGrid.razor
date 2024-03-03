@@ -5,10 +5,10 @@
 <table class="data-grid">
     <thead>
         <tr>
-            @foreach(var type in typeof(TItem).GetProperties())
+            @foreach(var column in ItemsDefinition)
             {
                 <th>
-                    @type.Name
+                    @column.ColumnName
                 </th>
             }
         </tr>
@@ -17,10 +17,10 @@
         @foreach (var item in Items)
         {
             <tr>
-                @foreach (var type in typeof(TItem).GetProperties())
+                @foreach (var column in ItemsDefinition)
                 {
                     <td>
-                        @item!.GetType().GetProperty(type.Name)!.GetValue(item)
+                        @item!.GetType().GetProperty(column.ColumnName)!.GetValue(item)
                     </td>
                 }
             </tr>
