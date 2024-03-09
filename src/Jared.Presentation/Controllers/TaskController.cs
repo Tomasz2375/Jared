@@ -27,7 +27,7 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Result<List<TaskListDto>>> GetTaskListAsync()
+    public async Task<Result<TaskPageDto>> GetTaskListAsync()
     {
         var result = await mediator.Send(new TaskListQuery());
 
