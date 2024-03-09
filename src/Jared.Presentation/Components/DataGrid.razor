@@ -7,7 +7,7 @@
         <tr>
             @foreach(var column in ItemsDefinition)
             {
-                <th>
+                <th class="align-@column.Alignment.ToString().ToLower()">
                     @column.ColumnName
                 </th>
             }
@@ -16,10 +16,10 @@
     <tbody>
         @foreach (var item in Items)
         {
-            <tr>
+            <tr class="data-grid-body">
                 @foreach (var column in ItemsDefinition)
                 {
-                    <td>
+                    <td class="align-@column.Alignment.ToString().ToLower()">
                         @item!.GetType().GetProperty(column.ColumnName)!.GetValue(item)
                     </td>
                 }
@@ -27,3 +27,32 @@
         }
     </tbody>
 </table>
+
+<style>
+    .data-grid {
+        width: 100%;
+    }
+
+    .data-grid-header {
+        font-weight: bold;
+    }
+
+    .data-grid-body {
+        border-top: solid 1px green;
+    }
+
+    .data-grid-body:hover {
+        background-color: #DDDDDDDD;
+        cursor: pointer;
+    }
+
+    .align-left{
+        text-align: left !important;
+    }
+    .align-center{
+        text-align: center !important;
+    }
+    .align-right{
+        text-align: right !important;
+    }
+</style>
