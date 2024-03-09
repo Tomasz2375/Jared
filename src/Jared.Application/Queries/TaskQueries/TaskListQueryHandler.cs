@@ -10,7 +10,7 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace Jared.Application.Queries.TaskQueries;
 
-public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<TaskListDto>>>
+public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPageDto>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
@@ -21,17 +21,25 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
         this.mapper = mapper;
     }
 
-    public async Task<Result<List<TaskListDto>>> Handle(TaskListQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TaskPageDto>> Handle(TaskListQuery query, CancellationToken cancellationToken)
     {
         var tasks = dataContext
             .Set<Domain.Models.Task>()
             .AsNoTracking();
-        
+
         tasks = filterResult(tasks, query);
+        TaskPageDto result = new()
+        {
+            TasksCount = tasks.Count(),
+            TasksFrom = (query.page - 1) * query.pageSize + 1,
+            TasksTo = query.page * query.pageSize,
+            CurrentPage = query.page,
+            PageSize = query.pageSize,
+            PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
+        };
         tasks = sortResult(tasks, query);
         tasks = paginateResult(tasks, query);
-
-        var result = mapper.Map<List<TaskListDto>>(tasks);
+        result.Tasks = mapper.Map<List<TaskListDto>>(tasks);
 
         return Result.Ok(result);
     }
@@ -49,7 +57,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
         IQueryable<Domain.Models.Task> tasks,
         TaskListQuery query)
     {
-        if (query.sortingProperty is null)
+        if (query.sortingProperty is null || query.SortingDirection is null)
         {
             return tasks;
         }
@@ -75,13 +83,8 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
         IQueryable<Domain.Models.Task> tasks,
         TaskListQuery query)
     {
-        if (query.page is null || query.pageSize is null)
-        {
-            return tasks;
-        }
-
         return tasks
-            .Skip((int)(query.page - 1) * (int)query.pageSize)
-            .Take((int)query.pageSize);
+            .Skip((query.page - 1) * query.pageSize)
+            .Take(query.pageSize);
     }
 }
