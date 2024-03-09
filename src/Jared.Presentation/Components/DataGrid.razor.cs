@@ -9,5 +9,5 @@ public partial class DataGrid<TItem>
     [Parameter]
     public List<TItem> Items { get; set; } = new();
     [Parameter]
-    public IEnumerable<IColumnDefinition<TaskListDto>> ItemsDefinition { get; set; }
+    public IEnumerable<IColumnDefinition<TItem>> ItemsDefinition { get; set; }
 }
