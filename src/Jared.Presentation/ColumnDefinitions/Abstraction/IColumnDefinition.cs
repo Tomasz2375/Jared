@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Jared.Domain.Enums;
+using System.Linq.Expressions;
 
 namespace Jared.Presentation.ColumnDefinitions.Abstraction;
 
@@ -15,4 +16,5 @@ public interface IColumnDefinition
     Type? Type { get; set; }
     bool IsNullable { get; set; }
     string? ParentPath { get; set; }
+    public ColumnAlignment Alignment { get; set; }
 }
