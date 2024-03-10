@@ -2,6 +2,7 @@
 using Jared.Application.Dtos.TaskDto;
 using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
+using Jared.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -27,9 +28,19 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Result<TaskPageDto>> GetTaskListAsync()
+    public async Task<Result<TaskPageDto>> GetTaskListAsync(
+        int page,
+        int pageSize,
+        string? filter,
+        string? sortingProperty,
+        SortingDirection sortingDirection)
     {
-        var result = await mediator.Send(new TaskListQuery());
+        var result = await mediator.Send(new TaskListQuery(
+            page,
+            pageSize,
+            filter,
+            sortingProperty,
+            sortingDirection));
 
         return result;
     }
