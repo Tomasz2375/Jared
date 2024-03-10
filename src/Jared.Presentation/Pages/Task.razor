@@ -8,5 +8,8 @@
 
 <DataGrid
     TItem="TaskListDto"
-    Items="Model"
-    ItemsDefinition="new TaskListDefinition().GetColumns()" />
+    Items="Model.Tasks"
+    ItemsDefinition="new TaskListDefinition().GetColumns()"
+    Pagination="Model.Pagination"
+    Query="Query"
+    SendPageQuery="SendPageQuery"/>
