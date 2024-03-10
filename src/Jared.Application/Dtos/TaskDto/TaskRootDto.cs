@@ -1,4 +1,5 @@
-﻿using Jared.Domain.Enums;
+﻿using Jared.Application.Dtos.Abstractions;
+using Jared.Domain.Enums;
 using TaskStatus = Jared.Domain.Enums.TaskStatus;
 
 namespace Jared.Application.Dtos.TaskDto

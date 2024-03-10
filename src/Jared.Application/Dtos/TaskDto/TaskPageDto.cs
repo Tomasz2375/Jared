@@ -1,12 +1,9 @@
-﻿namespace Jared.Application.Dtos.TaskDto;
+﻿using Jared.Application.Dtos.PageDto;
+
+namespace Jared.Application.Dtos.TaskDto;
 
 public class TaskPageDto
 {
-    public int TasksCount { get; set; }
-    public int TasksFrom { get; set; }
-    public int TasksTo { get; set; }
-    public int? CurrentPage { get; set; }
-    public int? PageSize { get; set; }
-    public int? PageCount { get; set; }
+    public PaginationDto Pagination { get; set; } = default!;
     public List<TaskListDto> Tasks { get; set; } = new();
 }
