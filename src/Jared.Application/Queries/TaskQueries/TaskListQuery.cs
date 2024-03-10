@@ -6,10 +6,10 @@ using MediatR;
 namespace Jared.Application.Queries.TaskQueries;
 
 public sealed record class TaskListQuery(
-    int page = 1,
-    int pageSize = (int)PageSize.Ten,
-    string? filter = null,
-    string? sortingProperty = null,
-    SortingDirection? SortingDirection = null)
+    int page,
+    int pageSize,
+    string? filter,
+    string? sortingProperty,
+    SortingDirection? SortingDirection)
     : IRequest<Result<TaskPageDto>>;
 

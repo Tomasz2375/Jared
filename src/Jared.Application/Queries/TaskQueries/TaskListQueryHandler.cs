@@ -1,4 +1,5 @@
-﻿using Jared.Application.Dtos.TaskDto;
+﻿using Jared.Application.Dtos.PageDto;
+using Jared.Application.Dtos.TaskDto;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using Jared.Domain.Interfaces;
@@ -6,7 +7,6 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Jared.Application.Queries.TaskQueries;
 
@@ -25,21 +25,34 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
     {
         var tasks = dataContext
             .Set<Domain.Models.Task>()
+            .Include(x => x.Epic)
+            .Include(x => x.Project)
             .AsNoTracking();
 
         tasks = filterResult(tasks, query);
-        TaskPageDto result = new()
+
+        PaginationDto pagination = new()
         {
-            TasksCount = tasks.Count(),
-            TasksFrom = (query.page - 1) * query.pageSize + 1,
-            TasksTo = query.page * query.pageSize,
+            ItemsCount = tasks.Count(),
+            ItemFrom = (query.page - 1) * query.pageSize + 1,
+            ItemTo = query.page * query.pageSize > tasks.Count() ?
+                tasks.Count() :
+                query.page * query.pageSize,
             CurrentPage = query.page,
             PageSize = query.pageSize,
             PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
         };
+
         tasks = sortResult(tasks, query);
         tasks = paginateResult(tasks, query);
-        result.Tasks = mapper.Map<List<TaskListDto>>(tasks);
+
+        var test = await tasks.ToListAsync();
+
+        TaskPageDto result = new()
+        {
+            Pagination = pagination,
+            Tasks = mapper.Map<List<TaskListDto>>(test),
+        };
 
         return Result.Ok(result);
     }
@@ -49,34 +62,34 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
         IQueryable<Domain.Models.Task> tasks,
         TaskListQuery query)
     {
-        return tasks.Where(x => query.filter == null ||
+        return tasks.Where(x => string.IsNullOrEmpty(query.filter) ||
             (x.Title.ToLower().Contains(query.filter.ToLower()) ||
             x.Description!.ToLower().Contains(query.filter.ToLower())));
     }
+
     private IQueryable<Domain.Models.Task> sortResult(
         IQueryable<Domain.Models.Task> tasks,
         TaskListQuery query)
     {
-        if (query.sortingProperty is null || query.SortingDirection is null)
+        if (query.sortingProperty is null)
         {
-            return tasks;
+            return tasks.OrderBy(x => x.Id);
         }
 
         Dictionary<string, Expression<Func<Domain.Models.Task, object>>> columnSelector = new()
         {
             { nameof(Domain.Models.Task.Id), x => x.Id },
             { nameof(Domain.Models.Task.Title), x => x.Title },
-            { nameof(Domain.Models.Task.StartDate), x => x.StartDate! },
-            { nameof(Domain.Models.Task.EndDate), x => x.EndDate! },
+            { nameof(Domain.Models.Task.Code), x => x.Code! },
             { nameof(Domain.Models.Task.StatusId), x => x.StatusId },
             { nameof(Domain.Models.Task.PriorityId), x => x.PriorityId },
         };
 
         var sortByExpression = columnSelector[query.sortingProperty];
 
-        return query.SortingDirection == SortingDirection.Ascending ?
-            tasks.OrderBy(sortByExpression) :
-            tasks.OrderByDescending(sortByExpression);
+        return query.SortingDirection == SortingDirection.Descending ?
+            tasks.OrderByDescending(sortByExpression) :
+            tasks.OrderBy(sortByExpression);
     }
 
     private IQueryable<Domain.Models.Task> paginateResult(
