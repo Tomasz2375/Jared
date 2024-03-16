@@ -8,14 +8,19 @@ namespace Jared.Presentation.Components;
 public partial class DataGrid<TItem>
 {
     [Parameter]
-    public List<TItem> Items { get; set; } = new();
+    [EditorRequired]
+    public IEnumerable<TItem> Items { get; set; }
     [Parameter]
+    [EditorRequired]
     public IEnumerable<IColumnDefinition<TItem>> ItemsDefinition { get; set; }
     [Parameter]
+    [EditorRequired]
     public IPagination Pagination { get; set; }
     [Parameter]
+    [EditorRequired]
     public Query Query { get; set; }
     [Parameter]
+    [EditorRequired]
     public EventCallback<Query> SendPageQuery { get; set; }
 
     private void previousPage()
