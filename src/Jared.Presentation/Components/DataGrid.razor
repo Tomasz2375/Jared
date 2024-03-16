@@ -27,9 +27,10 @@
         }
     </tbody>
 </table>
-<div>
-    <button class="button" @onclick="previousPage">Previous</button>
-    <button class="button" @onclick="nextPage">Next</button>
+<div class="align-center">
+    <button class="btn btn-primary" disabled="@(Query.Page == 1)" @onclick="previousPage">Previous</button>
+    <span>@($"{Query.Page} / {Pagination.PageCount}")</span>
+    <button class="btn btn-primary" disabled="@(Query.Page == Pagination.PageCount)" @onclick="nextPage">Next</button>
 </div>
 
 <style>
