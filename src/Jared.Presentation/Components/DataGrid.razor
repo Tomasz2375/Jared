@@ -7,8 +7,9 @@
         <tr>
             @foreach(var column in ItemsDefinition)
             {
-                <th class="align-@column.Alignment.ToString().ToLower()">
+                <th class="align-@column.Alignment.ToString().ToLower()" @onclick="(() => sortByColumn(column.ColumnName))">
                     @column.ColumnName
+                    <span class="@sortCssClass(column.ColumnName)"/>
                 </th>
             }
         </tr>
@@ -28,9 +29,9 @@
     </tbody>
 </table>
 <div class="align-center">
-    <button class="btn btn-primary" disabled="@(Query.Page == 1)" @onclick="previousPage">Previous</button>
-    <span>@($"{Query.Page} / {Pagination.PageCount}")</span>
-    <button class="btn btn-primary" disabled="@(Query.Page == Pagination.PageCount)" @onclick="nextPage">Next</button>
+    <button class="btn btn-primary" disabled="@(Query.Page == 1)" @onclick="previousPage">&lt;&lt;</button>
+    <span style="font-size:16px">@($"{Query.Page} / {Pagination.PageCount}")</span>
+    <button class="btn btn-primary" disabled="@(Query.Page == Pagination.PageCount)" @onclick="nextPage">&gt;&gt;</button>
 </div>
 
 <style>
@@ -52,12 +53,30 @@
     }
 
     .align-left{
+        cursor: pointer;
         text-align: left !important;
     }
     .align-center{
+        cursor: pointer;
         text-align: center !important;
     }
     .align-right{
+        cursor: pointer;
         text-align: right !important;
+    }
+
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+    .arrow-up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+    .arrow-down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
     }
 </style>

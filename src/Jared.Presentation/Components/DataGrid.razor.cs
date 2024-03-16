@@ -1,4 +1,5 @@
 ﻿using Jared.Application.Dtos.Abstractions;
+using Jared.Domain.Enums;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
 using Microsoft.AspNetCore.Components;
@@ -44,4 +45,33 @@ public partial class DataGrid<TItem>
         SendPageQuery.InvokeAsync(Query);
     }
 
+    private string sortCssClass(string columnName)
+    {
+        if (Query.SortingProperty is null || columnName.ToLower() != Query.SortingProperty!.ToLower())
+        {
+            return string.Empty;
+        }
+
+        return Query.SortingDirection == SortingDirection.Descending ?
+            "arrow arrow-down" :
+            "arrow arrow-up";
+    }
+
+    private void sortByColumn(string columnName)
+    {
+        if (Query.SortingProperty is null || columnName.ToLower() != Query.SortingProperty!.ToLower())
+        {
+            Query.SortingProperty = columnName;
+            Query.SortingDirection = SortingDirection.Ascending;
+        }
+        else
+        {
+            Query.SortingDirection = 
+                Query.SortingDirection == SortingDirection.Ascending ?
+                SortingDirection.Descending :
+                SortingDirection.Ascending;
+        }
+
+        SendPageQuery.InvokeAsync(Query);
+    }
 }
