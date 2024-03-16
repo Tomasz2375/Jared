@@ -12,10 +12,10 @@ public partial class Task : ComponentBase
 
     protected override async System.Threading.Tasks.Task OnInitializedAsync()
     {
-        await SendPageQuery(Query);
+        await sendPageQuery(Query);
     }
 
-    private async System.Threading.Tasks.Task SendPageQuery(Query query)
+    private async System.Threading.Tasks.Task sendPageQuery(Query query)
     {
         var result = await Mediator.Send(new TaskListQuery(
             query.Page,
@@ -30,7 +30,5 @@ public partial class Task : ComponentBase
         }
 
         Model = result.Data;
-
-        StateHasChanged();
     }
 }
