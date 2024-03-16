@@ -5,5 +5,5 @@ namespace Jared.Application.Dtos.TaskDto;
 public class TaskPageDto
 {
     public PaginationDto Pagination { get; set; } = default!;
-    public List<TaskListDto> Tasks { get; set; } = new();
+    public IEnumerable<TaskListDto> Tasks { get; set; } = Array.Empty<TaskListDto>();
 }
