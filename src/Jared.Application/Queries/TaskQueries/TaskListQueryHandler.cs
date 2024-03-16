@@ -23,35 +23,34 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
 
     public async Task<Result<TaskPageDto>> Handle(TaskListQuery query, CancellationToken cancellationToken)
     {
-        var tasks = dataContext
+        var tasksQuery = dataContext
             .Set<Domain.Models.Task>()
             .Include(x => x.Epic)
             .Include(x => x.Project)
             .AsNoTracking();
 
-        tasks = filterResult(tasks, query);
+        tasksQuery = filterResult(tasksQuery, query);
 
         PaginationDto pagination = new()
         {
-            ItemsCount = tasks.Count(),
+            ItemsCount = tasksQuery.Count(),
             ItemFrom = (query.page - 1) * query.pageSize + 1,
-            ItemTo = query.page * query.pageSize > tasks.Count() ?
-                tasks.Count() :
+            ItemTo = query.page * query.pageSize > tasksQuery.Count() ?
+                tasksQuery.Count() :
                 query.page * query.pageSize,
             CurrentPage = query.page,
             PageSize = query.pageSize,
-            PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
+            PageCount = (tasksQuery.Count() + query.pageSize - 1) / query.pageSize,
         };
 
-        tasks = sortResult(tasks, query);
-        tasks = paginateResult(tasks, query);
-
-        var test = await tasks.ToListAsync();
+        tasksQuery = sortResult(tasksQuery, query);
+        tasksQuery = paginateResult(tasksQuery, query);
+        var tasks = tasksQuery.AsEnumerable();
 
         TaskPageDto result = new()
         {
             Pagination = pagination,
-            Tasks = mapper.Map<List<TaskListDto>>(test),
+            Tasks = mapper.Map<IEnumerable<TaskListDto>>(tasks),
         };
 
         return Result.Ok(result);
