@@ -77,11 +77,11 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
 
         Dictionary<string, Expression<Func<Domain.Models.Task, object>>> columnSelector = new()
         {
-            { nameof(Domain.Models.Task.Id), x => x.Id },
-            { nameof(Domain.Models.Task.Title), x => x.Title },
-            { nameof(Domain.Models.Task.Code), x => x.Code! },
-            { nameof(Domain.Models.Task.StatusId), x => x.StatusId },
-            { nameof(Domain.Models.Task.PriorityId), x => x.PriorityId },
+            { nameof(TaskListDto.Id), x => x.Id },
+            { nameof(TaskListDto.Title), x => x.Title },
+            { nameof(TaskListDto.Code), x => x.Code! },
+            { nameof(TaskListDto.Status), x => x.StatusId },
+            { nameof(TaskListDto.Priority), x => x.PriorityId },
         };
 
         var sortByExpression = columnSelector[query.sortingProperty];
