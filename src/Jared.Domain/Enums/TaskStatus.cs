@@ -2,6 +2,7 @@
 
 public enum TaskStatus
 {
+    Created,
     ToDo,
     Doing,
     Done,
