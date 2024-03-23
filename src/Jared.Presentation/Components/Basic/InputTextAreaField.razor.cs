@@ -6,7 +6,7 @@ namespace Jared.Presentation.Components.Basic;
 public partial class InputTextAreaField
 {
     [Parameter]
-    public Expression<Func<int>> ValidationFor { get; set; } = default!;
+    public Expression<Func<string>> ValidationFor { get; set; } = default!;
     [Parameter]
     public string? Id { get; set; }
     [Parameter]
