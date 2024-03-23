@@ -1,0 +1,25 @@
+﻿@inherits InputBase<TEnum>
+@typeparam TEnum
+
+<div class="input-field">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <label class="form-control-label" for="@($"label-{Id}")">@Label</label>
+    }
+    <select class="form-control @CssClass" id="@Id" @bind="@CurrentValue">
+        <i class="oi oi-arrow-left" />
+        @foreach (var item in Enum.GetValues(typeof(TEnum)))
+        {
+            <option value="@item">@item</option>
+        }
+    </select>
+    <div class="form-control-validation">
+        <ValidationMessage For="@ValidationFor" />
+    </div>
+</div>
+
+<style>
+    .input-field {
+        margin: 1rem;
+    }
+</style>
