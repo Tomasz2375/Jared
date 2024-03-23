@@ -80,8 +80,8 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
             { nameof(TaskListDto.Id), x => x.Id },
             { nameof(TaskListDto.Title), x => x.Title },
             { nameof(TaskListDto.Code), x => x.Code! },
-            { nameof(TaskListDto.Status), x => x.StatusId },
-            { nameof(TaskListDto.Priority), x => x.PriorityId },
+            { nameof(TaskListDto.Status), x => x.Status },
+            { nameof(TaskListDto.Priority), x => x.Priority },
         };
 
         var sortByExpression = columnSelector[query.sortingProperty];
