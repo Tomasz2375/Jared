@@ -3,7 +3,7 @@ using Jared.Domain.Interfaces;
 using MapsterMapper;
 using MediatR;
 
-namespace Jared.Application.Commands.Task;
+namespace Jared.Application.Commands.TaskCommand;
 
 public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, Result>
 {
@@ -15,8 +15,9 @@ public class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, Resul
         this.dataContext = dataContext;
         this.mapper = mapper;
     }
-
+#pragma warning disable CS1998
     public async Task<Result> Handle(CreateTaskCommand command, CancellationToken cancellationToken)
+#pragma warning restore CS1998
     {
         var task = mapper.Map<Domain.Models.Task>(command.dto);
 

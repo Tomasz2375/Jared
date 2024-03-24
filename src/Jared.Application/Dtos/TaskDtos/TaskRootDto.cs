@@ -2,7 +2,7 @@
 using Jared.Domain.Enums;
 using TaskStatus = Jared.Domain.Enums.TaskStatus;
 
-namespace Jared.Application.Dtos.TaskDto
+namespace Jared.Application.Dtos.TaskDtos
 {
     public class TaskRootDto : EntityDto<int>
     {

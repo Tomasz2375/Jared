@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.TaskDto;
+﻿using Jared.Application.Dtos.TaskDtos;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;

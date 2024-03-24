@@ -1,4 +1,4 @@
-﻿namespace Jared.Application.Dtos.TaskDto;
+﻿namespace Jared.Application.Dtos.TaskDtos;
 
 public class TaskDetailsDto : TaskRootDto
 {

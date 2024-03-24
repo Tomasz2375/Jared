@@ -1,5 +1,5 @@
-﻿using Jared.Application.Dtos.PageDto;
-using Jared.Application.Dtos.TaskDto;
+﻿using Jared.Application.Dtos.PageDtos;
+using Jared.Application.Dtos.TaskDtos;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using Jared.Domain.Interfaces;
@@ -21,7 +21,9 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
         this.mapper = mapper;
     }
 
+#pragma warning disable CS1998
     public async Task<Result<TaskPageDto>> Handle(TaskListQuery query, CancellationToken cancellationToken)
+#pragma warning restore CS1998
     {
         var tasksQuery = dataContext
             .Set<Domain.Models.Task>()

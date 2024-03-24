@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.PageDto;
+﻿using Jared.Application.Dtos.PageDtos;
 
-namespace Jared.Application.Dtos.TaskDto;
+namespace Jared.Application.Dtos.TaskDtos;
 
 public class TaskPageDto
 {
