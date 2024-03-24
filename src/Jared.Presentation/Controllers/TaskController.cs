@@ -1,5 +1,5 @@
-﻿using Jared.Application.Commands.Task;
-using Jared.Application.Dtos.TaskDto;
+﻿using Jared.Application.Commands.TaskCommand;
+using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Jared.Presentation.Controllers;
 
 [ApiController]
-[Route("controller")]
+[Route("[controller]")]
 public class TaskController : ControllerBase
 {
     private readonly IMediator mediator;
@@ -17,14 +17,6 @@ public class TaskController : ControllerBase
     public TaskController(IMediator mediator)
     {
         this.mediator = mediator;
-    }
-
-    [HttpPost]
-    public async Task<Result> CreateTask(CreateTaskCommand command)
-    {
-        await mediator.Send(command);
-
-        return Result.Ok();
     }
 
     [HttpGet]
@@ -35,13 +27,17 @@ public class TaskController : ControllerBase
         string? sortingProperty,
         SortingDirection sortingDirection)
     {
-        var result = await mediator.Send(new TaskListQuery(
+        return await mediator.Send(new TaskListQuery(
             page,
             pageSize,
             filter,
             sortingProperty,
             sortingDirection));
+    }
 
-        return result;
+    [HttpPost]
+    public async Task<Result> CreateTask(TaskCreateCommand command)
+    {
+        return await mediator.Send(command);
     }
 }
