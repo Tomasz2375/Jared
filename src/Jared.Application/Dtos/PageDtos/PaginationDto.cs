@@ -1,6 +1,6 @@
 ﻿using Jared.Application.Dtos.Abstractions;
 
-namespace Jared.Application.Dtos.PageDto;
+namespace Jared.Application.Dtos.PageDtos;
 
 public class PaginationDto : IPagination
 {
