@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Jared.Application.Queries.TaskQueries;
 
-public sealed record class TaskListQuery(
+public sealed record TaskListQuery(
     int page,
     int pageSize,
     string? filter,
