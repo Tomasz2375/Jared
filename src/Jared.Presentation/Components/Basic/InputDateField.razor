@@ -1,0 +1,18 @@
+﻿@inherits InputBase<DateTime?>
+
+<div class="input-field">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <label class="form-control-label" for="@($"label-{Id}")">@Label</label>
+    }
+    <input type="date" class="form-control @CssClass" id="@Id" @bind="@CurrentValue" />
+    <div class="form-control-validation">
+        <ValidationMessage For="@ValidationFor" />
+    </div>
+</div>
+
+<style>
+    .input-field {
+        margin: 1rem;
+    }
+</style>
