@@ -1,21 +1,21 @@
-﻿using Jared.Application.Dtos.TaskDto;
+﻿using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.TaskQueries;
 using Jared.Presentation.ColumnDefinitions;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
 
-public partial class Task : ComponentBase
+public partial class Tasks : ComponentBase
 {
     public TaskPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
 
-    protected override async System.Threading.Tasks.Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         await sendPageQuery(Query);
     }
 
-    private async System.Threading.Tasks.Task sendPageQuery(Query query)
+    private async Task sendPageQuery(Query query)
     {
         var result = await Mediator.Send(new TaskListQuery(
             query.Page,

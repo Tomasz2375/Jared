@@ -1,0 +1,17 @@
+﻿@page "/projects"
+@inject IMediator Mediator
+
+@if (Model is null)
+{
+    return;
+}
+
+<DataGrid
+    Title="Projects"
+    TItem="ProjectListDto"
+    Items="Model.Projects"
+    ItemsDefinition="new ProjectListDefinition().GetColumns()"
+    Pagination="Model.Pagination"
+    SwitchPagination="false"
+    Query="Query"
+    SendPageQuery="sendPageQuery"/>

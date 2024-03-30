@@ -1,4 +1,4 @@
-﻿@page "/task"
+﻿@page "/tasks"
 @inject IMediator Mediator
 
 @if (Model is null)
@@ -7,9 +7,11 @@
 }
 
 <DataGrid
+    Title="Tasks"
     TItem="TaskListDto"
     Items="Model.Tasks"
     ItemsDefinition="new TaskListDefinition().GetColumns()"
     Pagination="Model.Pagination"
+    SwitchPagination="true"
     Query="Query"
     SendPageQuery="sendPageQuery"/>
