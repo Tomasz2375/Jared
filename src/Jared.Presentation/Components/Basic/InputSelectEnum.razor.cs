@@ -20,5 +20,4 @@ public partial class InputSelectEnum<TEnum> where TEnum : struct, Enum
         validationErrorMessage = null!;
         return true;
     }
-
 }
