@@ -1,7 +1,8 @@
-﻿@typeparam TItem
+﻿@using Jared.Domain.Enums;
+@using Jared.Presentation.Components.Basic
+@typeparam TItem
 
-<h3>GridComponent</h3>
-
+<h3>@Title</h3>
 <table class="data-grid">
     <thead>
         <tr>
@@ -28,10 +29,27 @@
         }
     </tbody>
 </table>
+
 <div class="align-center">
-    <button class="btn btn-primary" disabled="@(Query.Page == 1)" @onclick="previousPage">&lt;&lt;</button>
+    <button type="button" class="btn btn-primary" disabled="@(Query.Page == 1)" @onclick="previousPage">&lt;&lt;</button>
     <span style="font-size:16px">@($"{Query.Page} / {Pagination.PageCount}")</span>
-    <button class="btn btn-primary" disabled="@(Query.Page == Pagination.PageCount)" @onclick="nextPage">&gt;&gt;</button>
+    <button type="button" class="btn btn-primary" disabled="@(Query.Page == Pagination.PageCount)" @onclick="nextPage">&gt;&gt;</button>
+</div>
+<div class="align-center">
+    <EditForm Model="Query">
+        <label id="page-size">Page size: </label>
+        <InputSelect DisplayName="Page size:" @bind-Value=@Query.PageSize>
+            @foreach (var item in pageSizes)
+            {
+                <option value="@item" @onclick="pageSize">@item</option>
+            }
+        </InputSelect>
+    </EditForm>
+</div>
+<div class="align-center">
+    <span class="align-center">
+        @($"{Pagination.ItemFrom} - {Pagination.ItemTo} from {Pagination.ItemsCount}")
+    </span>
 </div>
 
 <style>

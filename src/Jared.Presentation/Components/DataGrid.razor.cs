@@ -10,19 +10,29 @@ public partial class DataGrid<TItem>
 {
     [Parameter]
     [EditorRequired]
-    public IEnumerable<TItem> Items { get; set; }
+    public string Title { get; set; } = default!;
     [Parameter]
     [EditorRequired]
-    public IEnumerable<IColumnDefinition<TItem>> ItemsDefinition { get; set; }
+    public IEnumerable<TItem> Items { get; set; } = default!;
     [Parameter]
     [EditorRequired]
-    public IPagination Pagination { get; set; }
+    public IEnumerable<IColumnDefinition<TItem>> ItemsDefinition { get; set; } = default!;
     [Parameter]
     [EditorRequired]
-    public Query Query { get; set; }
+    public IPagination Pagination { get; set; } = default!;
+    [Parameter]
+    [EditorRequired]
+    public Query Query { get; set; } = default!;
     [Parameter]
     [EditorRequired]
     public EventCallback<Query> SendPageQuery { get; set; }
+    [Parameter]
+    public bool SwitchPagination { get; set; }
+
+    private List<int> pageSizes = new()
+    {
+        5, 10, 20, 30, 50, 100,
+    };
 
     private void previousPage()
     {
@@ -72,6 +82,11 @@ public partial class DataGrid<TItem>
                 SortingDirection.Ascending;
         }
 
+        SendPageQuery.InvokeAsync(Query);
+    }
+
+    private void pageSize()
+    {
         SendPageQuery.InvokeAsync(Query);
     }
 }
