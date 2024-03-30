@@ -24,7 +24,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
 
 #pragma warning disable CS1998
     public async Task<Result<ProjectPageDto>> Handle(ProjectListQuery query, CancellationToken cancellationToken)
-#pragma warning disable CS1998
+#pragma warning restore CS1998
     {
         var projectsQuery = dataContext
             .Set<Project>()
@@ -79,7 +79,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
         {
             { nameof(ProjectListDto.Id), x => x.Id },
             { nameof(ProjectListDto.Title), x => x.Title },
-            { nameof(ProjectListDto.Code), x => x.Code! },
+            { nameof(ProjectListDto.Code), x => x.Code },
         };
 
         var sortByExpression = columnSelector[query.sortingProperty];
