@@ -2,6 +2,7 @@
 using Jared.Application.Dtos.ProjectDtos;
 using Jared.Application.Queries.ProjectQueries;
 using Jared.Domain.Abstractions;
+using Jared.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,9 +20,19 @@ public class ProjectController
     }
 
     [HttpGet]
-    public async Task<Result<List<ProjectListDto>>> GetProjectListAsync()
+    public async Task<Result<ProjectPageDto>> GetProjectListAsync(
+        int page,
+        int pageSize,
+        string? filter,
+        string? sortingProperty,
+        SortingDirection sortingDirection)
     {
-        return await mediator.Send(new ProjectListQuery());
+        return await mediator.Send(new ProjectListQuery(
+            page,
+            pageSize,
+            filter,
+            sortingProperty,
+            sortingDirection));
     }
 
     [HttpPost]
