@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.TaskDto;
+﻿using Jared.Application.Dtos.TaskDtos;
 using Jared.Domain.Enums;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
 
