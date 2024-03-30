@@ -1,0 +1,116 @@
+﻿@using Jared.Domain.Enums;
+@using Jared.Presentation.Components.Basic
+@inject IMediator Mediator
+
+<div class="blazor-modal">
+    <div class="blazor-modal-content">
+        <div class="blazor-modal-header">
+            <h4 class="blazor-modal-title">&nbsp;&nbsp;@Title</h4>
+            <button class="btn btn-close" @onclick="cancel" />
+        </div>
+        <EditForm Model="@Dto">
+            <div class="blazor-modal-body">
+                <div class="right-border">
+                    <InputTextField
+                        @bind-Value="@Dto.Title"
+                        Id="title"
+                        Label="Title"
+                        ValidationFor="(() => Dto.Title)" />
+                    <InputTextAreaField
+                        @bind-Value="@Dto.Description"
+                        Id="description"
+                        Label="Description"
+                        ValidationFor="(() => Dto.Description)" />
+                </div>
+                <div>
+                    <InputSelectEnum
+                        @bind-Value="@(Dto.Priority)"
+                        ValidationFor="(() => Dto.Priority)"
+                        Id="priority"
+                        Label="Priority" />
+                    <InputSelectEnum
+                        @bind-Value="@(Dto.Status)"
+                        ValidationFor="(() => Dto.Status)"
+                        Id="status"
+                        Label="Status" />
+                    <InputDateField
+                        @bind-Value="@(Dto.Deadline)"
+                        Label="Deadline"
+                        Id="deadline"
+                        ValidationFor="(() => Dto.Deadline)" />
+                </div>
+            </div>
+        </EditForm>
+        <div class="blazor-modal-footer">
+            <button class="btn btn-primary" @onclick="save">Save task</button>
+            <button class="btn btn-danger" @onclick="cancel">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .right-border {
+        border-right: 2px solid;
+        border-color: #00FF0055;
+    }
+    .input-style{
+        width: 100%;
+    }
+
+    .blazor-modal {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #EEEEEE77;
+    }
+
+    .blazor-modal-content {
+        width: 70%;
+        max-width: 800px;
+        height: auto;
+        margin: auto;
+        margin-top: 150px;
+        background-color: #DDDDDD;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .blazor-modal-header {
+        background-color: darkgreen;
+        padding: 15px;
+    }
+
+    .blazor-modal-title {
+        margin: 2px;
+        display: inline-block;
+    }
+
+    .blazor-modal-body {
+        padding: 10px;
+        display: grid;
+        grid-template-columns:60% 40%;
+        max-height: 600px;
+    }
+
+    .blazor-modal-footer {
+        padding: 0.6rem;
+        height: 60px;
+        background-color: darkgreen;
+    }
+
+    .btn-close {
+        float: right;
+    }
+
+    .btn-primary {
+        float: right;
+        margin-right: 15px;
+    }
+
+    .btn-danger {
+        float: right;
+        margin-right: 20px
+    }
+</style>
