@@ -1,13 +1,12 @@
-﻿using Jared.Application.Dtos.TaskDtos;
-using Jared.Application.Queries.TaskQueries;
+﻿using Jared.Application.Dtos.EpicDtos;
+using Jared.Application.Queries.EpicQueries;
 using Jared.Presentation.ColumnDefinitions;
-using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
 
-public partial class Tasks : ComponentBase
+public partial class Epics
 {
-    public TaskPageDto Model { get; set; } = new();
+    public EpicPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
@@ -17,7 +16,7 @@ public partial class Tasks : ComponentBase
 
     private async Task sendPageQuery(Query query)
     {
-        var result = await Mediator.Send(new TaskPageQuery(
+        var result = await Mediator.Send(new EpicPageQuery(
             query.Page,
             query.PageSize,
             query.Filter,

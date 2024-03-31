@@ -17,7 +17,7 @@ public partial class Projects : ComponentBase
 
     private async Task sendPageQuery(Query query)
     {
-        var result = await Mediator.Send(new ProjectListQuery(
+        var result = await Mediator.Send(new ProjectPageQuery(
             query.Page,
             query.PageSize,
             query.Filter,
