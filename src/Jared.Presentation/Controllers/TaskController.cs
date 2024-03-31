@@ -20,6 +20,7 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet]
+    [Route("Page")]
     public async Task<Result<TaskPageDto>> GetTaskListAsync(
         int page,
         int pageSize,
@@ -27,7 +28,7 @@ public class TaskController : ControllerBase
         string? sortingProperty,
         SortingDirection sortingDirection)
     {
-        return await mediator.Send(new TaskListQuery(
+        return await mediator.Send(new TaskPageQuery(
             page,
             pageSize,
             filter,
