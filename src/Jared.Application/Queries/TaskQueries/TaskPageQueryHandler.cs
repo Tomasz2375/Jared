@@ -12,19 +12,19 @@ using System.Linq.Expressions;
 
 namespace Jared.Application.Queries.TaskQueries;
 
-public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPageDto>>
+public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPageDto>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
 
-    public TaskListQueryHandler(IDataContext dataContext, IMapper mapper)
+    public TaskPageQueryHandler(IDataContext dataContext, IMapper mapper)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
     }
 
 #pragma warning disable CS1998
-    public async Task<Result<TaskPageDto>> Handle(TaskListQuery query, CancellationToken cancellationToken)
+    public async Task<Result<TaskPageDto>> Handle(TaskPageQuery query, CancellationToken cancellationToken)
 #pragma warning restore CS1998
     {
         var tasksQuery = dataContext
@@ -52,7 +52,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
 
     private PaginationDto createPagination(
         IQueryable<Domain.Models.Task> tasks,
-        TaskListQuery query)
+        TaskPageQuery query)
     {
         return new()
         {
@@ -69,7 +69,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
 
     private IQueryable<Domain.Models.Task> filterResult(
         IQueryable<Domain.Models.Task> tasks,
-        TaskListQuery query)
+        TaskPageQuery query)
     {
         return tasks.Where(x => string.IsNullOrEmpty(query.filter) ||
             (x.Title.ToLower().Contains(query.filter.ToLower()) ||
@@ -78,7 +78,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
 
     private IQueryable<Domain.Models.Task> sortResult(
         IQueryable<Domain.Models.Task> tasks,
-        TaskListQuery query)
+        TaskPageQuery query)
     {
         if (query.sortingProperty is null)
         {
@@ -103,7 +103,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
 
     private IQueryable<Domain.Models.Task> paginateResult(
         IQueryable<Domain.Models.Task> tasks,
-        TaskListQuery query)
+        TaskPageQuery query)
     {
         return tasks
             .Skip((query.page - 1) * query.pageSize)

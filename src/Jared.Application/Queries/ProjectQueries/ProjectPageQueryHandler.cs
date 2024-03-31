@@ -12,19 +12,19 @@ using System.Linq.Expressions;
 
 namespace Jared.Application.Queries.ProjectQueries;
 
-public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<ProjectPageDto>>
+public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
 
-    public ProjectListQueryHandler(IDataContext dataContext, IMapper mapper)
+    public ProjectPageQueryHandler(IDataContext dataContext, IMapper mapper)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
     }
 
 #pragma warning disable CS1998
-    public async Task<Result<ProjectPageDto>> Handle(ProjectListQuery query, CancellationToken cancellationToken)
+    public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery query, CancellationToken cancellationToken)
 #pragma warning restore CS1998
     {
         var projectsQuery = dataContext
@@ -49,7 +49,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
 
     private IQueryable<Project> filterResult(
         IQueryable<Project> projects,
-        ProjectListQuery query)
+        ProjectPageQuery query)
     {
         return projects.Where(x => string.IsNullOrEmpty(query.filter) ||
             x.Title.ToLower().Contains(query.filter.ToLower()) ||
@@ -58,7 +58,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
 
     private PaginationDto createPagination(
         IQueryable<Project> projects,
-        ProjectListQuery query)
+        ProjectPageQuery query)
     {
         return new()
         {
@@ -75,7 +75,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
 
     private IQueryable<Project> sortResult(
         IQueryable<Project> projects,
-        ProjectListQuery query)
+        ProjectPageQuery query)
     {
         if (query.sortingProperty is null)
         {
@@ -98,7 +98,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
 
     private IQueryable<Project> paginateResult(
         IQueryable<Project> projects,
-        ProjectListQuery query)
+        ProjectPageQuery query)
     {
         return projects
             .Skip((query.page - 1) * query.pageSize)

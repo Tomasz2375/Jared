@@ -11,19 +11,19 @@ using System.Linq.Expressions;
 
 namespace Jared.Application.Queries.EpicQueries;
 
-public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<EpicPageDto>>
+public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPageDto>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
 
-    public EpicListQueryHandler(IDataContext dataContext, IMapper mapper)
+    public EpicPageQueryHandler(IDataContext dataContext, IMapper mapper)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
     }
 
 #pragma warning disable CS1998
-    public async Task<Result<EpicPageDto>> Handle(EpicListQuery query, CancellationToken cancellationToken)
+    public async Task<Result<EpicPageDto>> Handle(EpicPageQuery query, CancellationToken cancellationToken)
 #pragma warning restore CS1998
     {
         var epicsQuery = dataContext
@@ -50,7 +50,7 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<EpicPa
 
     private IQueryable<Epic> filterResult(
         IQueryable<Epic> epics,
-        EpicListQuery query)
+        EpicPageQuery query)
     {
         return epics.Where(x => string.IsNullOrEmpty(query.filter) ||
             x.Title.ToLower().Contains(query.filter.ToLower()) ||
@@ -59,7 +59,7 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<EpicPa
 
     private PaginationDto createPagination(
         IQueryable<Epic> epics,
-        EpicListQuery query)
+        EpicPageQuery query)
     {
         return new()
         {
@@ -76,7 +76,7 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<EpicPa
 
     private IQueryable<Epic> sortResult(
         IQueryable<Epic> epics,
-        EpicListQuery query)
+        EpicPageQuery query)
     {
         if (query.sortingProperty is null)
         {
@@ -100,7 +100,7 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<EpicPa
 
     private IQueryable<Epic> paginateResult(
         IQueryable<Epic> epics,
-        EpicListQuery query)
+        EpicPageQuery query)
     {
         return epics
             .Skip((query.page - 1) * query.pageSize)
