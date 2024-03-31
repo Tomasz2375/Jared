@@ -22,9 +22,7 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
         this.mapper = mapper;
     }
 
-#pragma warning disable CS1998
     public async Task<Result<EpicPageDto>> Handle(EpicPageQuery query, CancellationToken cancellationToken)
-#pragma warning restore CS1998
     {
         var epicsQuery = dataContext
             .Set<Epic>()
@@ -36,7 +34,7 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
 
         epicsQuery = sortResult(epicsQuery, query);
         epicsQuery = paginateResult(epicsQuery, query);
-        var epics = epicsQuery.AsEnumerable();
+        var epics = await epicsQuery.ToListAsync();
 
         EpicPageDto result = new()
         {

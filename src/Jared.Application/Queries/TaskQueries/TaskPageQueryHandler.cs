@@ -23,9 +23,7 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         this.mapper = mapper;
     }
 
-#pragma warning disable CS1998
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery query, CancellationToken cancellationToken)
-#pragma warning restore CS1998
     {
         var tasksQuery = dataContext
             .Set<Domain.Models.Task>()
@@ -39,7 +37,7 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
 
         tasksQuery = sortResult(tasksQuery, query);
         tasksQuery = paginateResult(tasksQuery, query);
-        var tasks = tasksQuery.AsEnumerable();
+        var tasks = await tasksQuery.ToListAsync();
 
         TaskPageDto result = new()
         {

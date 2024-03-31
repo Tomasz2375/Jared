@@ -23,9 +23,7 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
         this.mapper = mapper;
     }
 
-#pragma warning disable CS1998
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery query, CancellationToken cancellationToken)
-#pragma warning restore CS1998
     {
         var projectsQuery = dataContext
             .Set<Project>()
@@ -36,7 +34,7 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
 
         projectsQuery = sortResult(projectsQuery, query);
         projectsQuery = paginateResult(projectsQuery, query);
-        var projects = projectsQuery.AsEnumerable();
+        var projects = await projectsQuery.ToListAsync();
 
         ProjectPageDto result = new()
         {
