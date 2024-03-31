@@ -1,5 +1,6 @@
 ﻿using Jared.Application.Dtos.PageDtos;
 using Jared.Application.Dtos.ProjectDtos;
+using Jared.Application.Queries.EpicQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using Jared.Domain.Interfaces;
@@ -31,18 +32,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
             .AsNoTracking();
 
         projectsQuery = filterResult(projectsQuery, query);
-
-        PaginationDto pagination = new()
-        {
-            ItemsCount = projectsQuery.Count(),
-            ItemFrom = (query.page - 1) * query.pageSize + 1,
-            ItemTo = query.page * query.pageSize > projectsQuery.Count() ?
-                projectsQuery.Count() :
-                query.page * query.pageSize,
-            CurrentPage = query.page,
-            PageSize = query.pageSize,
-            PageCount = (projectsQuery.Count() + query.pageSize - 1) / query.pageSize,
-        };
+        var pagination = createPagination(projectsQuery, query);
 
         projectsQuery = sortResult(projectsQuery, query);
         projectsQuery = paginateResult(projectsQuery, query);
@@ -64,6 +54,23 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
         return projects.Where(x => string.IsNullOrEmpty(query.filter) ||
             x.Title.ToLower().Contains(query.filter.ToLower()) ||
             x.Description!.ToLower().Contains(query.filter.ToLower()));
+    }
+
+    private PaginationDto createPagination(
+        IQueryable<Project> projects,
+        ProjectListQuery query)
+    {
+        return new()
+        {
+            ItemsCount = projects.Count(),
+            ItemFrom = (query.page - 1) * query.pageSize + 1,
+            ItemTo = query.page * query.pageSize > projects.Count() ?
+                projects.Count() :
+                query.page * query.pageSize,
+            CurrentPage = query.page,
+            PageSize = query.pageSize,
+            PageCount = (projects.Count() + query.pageSize - 1) / query.pageSize,
+        };
     }
 
     private IQueryable<Project> sortResult(

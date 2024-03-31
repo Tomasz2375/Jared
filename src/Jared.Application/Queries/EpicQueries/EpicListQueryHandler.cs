@@ -32,18 +32,7 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<EpicPa
             .AsNoTracking();
 
         epicsQuery = filterResult(epicsQuery, query);
-
-        PaginationDto pagination = new()
-        {
-            ItemsCount = epicsQuery.Count(),
-            ItemFrom = (query.page - 1) * query.pageSize + 1,
-            ItemTo = query.page * query.pageSize > epicsQuery.Count() ?
-                epicsQuery.Count() :
-                query.page * query.pageSize,
-            CurrentPage = query.page,
-            PageSize = query.pageSize,
-            PageCount = (epicsQuery.Count() + query.pageSize - 1) / query.pageSize,
-        };
+        var pagination = createPagination(epicsQuery, query);
 
         epicsQuery = sortResult(epicsQuery, query);
         epicsQuery = paginateResult(epicsQuery, query);
@@ -58,13 +47,31 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<EpicPa
         return Result.Ok(result);
     }
 
+
     private IQueryable<Epic> filterResult(
-        IQueryable<Epic> projects,
+        IQueryable<Epic> epics,
         EpicListQuery query)
     {
-        return projects.Where(x => string.IsNullOrEmpty(query.filter) ||
+        return epics.Where(x => string.IsNullOrEmpty(query.filter) ||
             x.Title.ToLower().Contains(query.filter.ToLower()) ||
             x.Description!.ToLower().Contains(query.filter.ToLower()));
+    }
+
+    private PaginationDto createPagination(
+        IQueryable<Epic> epics,
+        EpicListQuery query)
+    {
+        return new()
+        {
+            ItemsCount = epics.Count(),
+            ItemFrom = (query.page - 1) * query.pageSize + 1,
+            ItemTo = query.page * query.pageSize > epics.Count() ?
+                epics.Count() :
+                query.page * query.pageSize,
+            CurrentPage = query.page,
+            PageSize = query.pageSize,
+            PageCount = (epics.Count() + query.pageSize - 1) / query.pageSize,
+        };
     }
 
     private IQueryable<Epic> sortResult(

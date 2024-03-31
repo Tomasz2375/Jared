@@ -1,8 +1,10 @@
 ﻿using Jared.Application.Dtos.PageDtos;
 using Jared.Application.Dtos.TaskDtos;
+using Jared.Application.Queries.EpicQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using Jared.Domain.Interfaces;
+using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -33,17 +35,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
 
         tasksQuery = filterResult(tasksQuery, query);
 
-        PaginationDto pagination = new()
-        {
-            ItemsCount = tasksQuery.Count(),
-            ItemFrom = (query.page - 1) * query.pageSize + 1,
-            ItemTo = query.page * query.pageSize > tasksQuery.Count() ?
-                tasksQuery.Count() :
-                query.page * query.pageSize,
-            CurrentPage = query.page,
-            PageSize = query.pageSize,
-            PageCount = (tasksQuery.Count() + query.pageSize - 1) / query.pageSize,
-        };
+        var pagination = createPagination(tasksQuery, query);
 
         tasksQuery = sortResult(tasksQuery, query);
         tasksQuery = paginateResult(tasksQuery, query);
@@ -58,6 +50,22 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<TaskPa
         return Result.Ok(result);
     }
 
+    private PaginationDto createPagination(
+        IQueryable<Domain.Models.Task> tasks,
+        TaskListQuery query)
+    {
+        return new()
+        {
+            ItemsCount = tasks.Count(),
+            ItemFrom = (query.page - 1) * query.pageSize + 1,
+            ItemTo = query.page * query.pageSize > tasks.Count() ?
+                tasks.Count() :
+                query.page * query.pageSize,
+            CurrentPage = query.page,
+            PageSize = query.pageSize,
+            PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
+        };
+    }
 
     private IQueryable<Domain.Models.Task> filterResult(
         IQueryable<Domain.Models.Task> tasks,
