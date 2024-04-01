@@ -87,6 +87,8 @@ public partial class DataGrid<TItem>
 
     private void pageSize()
     {
+        Query.Page = 1 + Pagination.ItemFrom / Query.PageSize;
+
         SendPageQuery.InvokeAsync(Query);
     }
 }
