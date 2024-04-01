@@ -1,0 +1,94 @@
+﻿.right-border {
+    border-right: 2px solid;
+    border-color: #00FF0055;
+}
+
+.input-style {
+    width: 100%;
+}
+
+.blazor-modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #EEEEEE77;
+}
+
+.blazor-modal-content-small {
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    margin: auto;
+    margin-top: 150px;
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.blazor-modal-content-medium {
+    width: 90%;
+    max-width: 800px;
+    height: auto;
+    margin: auto;
+    margin-top: 150px;
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.blazor-modal-content-large {
+    width: 90%;
+    max-width: 1000px;
+    height: auto;
+    margin: auto;
+    margin-top: 150px;
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.blazor-modal-header {
+    background-color: darkgreen;
+    padding: 15px;
+}
+
+.blazor-modal-title {
+    margin: 2px;
+    display: inline-block;
+}
+
+.blazor-modal-body-1 {
+    display: grid;
+    grid-template-columns: 100%;
+    max-height: 600px;
+    padding: 10px !important;
+}
+
+.blazor-modal-body-2 {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    max-height: 600px;
+    padding: 10px !important;
+}
+
+.blazor-modal-footer {
+    padding: 0.6rem;
+    height: 60px;
+    background-color: darkgreen;
+}
+
+.btn-close {
+    float: right;
+}
+
+.btn-primary {
+    float: right;
+    margin-right: 15px;
+}
+
+.btn-danger {
+    float: right;
+    margin-right: 20px
+}
