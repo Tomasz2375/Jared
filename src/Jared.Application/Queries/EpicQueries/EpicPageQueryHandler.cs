@@ -39,7 +39,7 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
         EpicPageDto result = new()
         {
             Pagination = pagination,
-            Epics = mapper.Map<IEnumerable<EpicListDto>>(epics),
+            Epics = mapper.Map<List<EpicListDto>>(epics),
         };
 
         return Result.Ok(result);

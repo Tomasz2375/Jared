@@ -39,7 +39,7 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
         ProjectPageDto result = new()
         {
             Pagination = pagination,
-            Projects = mapper.Map<IEnumerable<ProjectListDto>>(projects),
+            Projects = mapper.Map<List<ProjectListDto>>(projects),
         };
 
         return Result.Ok(result);

@@ -42,7 +42,7 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         TaskPageDto result = new()
         {
             Pagination = pagination,
-            Tasks = mapper.Map<IEnumerable<TaskListDto>>(tasks),
+            Tasks = mapper.Map<List<TaskListDto>>(tasks),
         };
 
         return Result.Ok(result);
