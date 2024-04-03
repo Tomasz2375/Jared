@@ -1,7 +1,6 @@
 ﻿using Jared.Application.Commands.EpicCommands;
 using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Queries.EpicQueries;
-using Jared.Application.Queries.ProjectQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
@@ -21,8 +20,15 @@ public class EpicController
     }
 
     [HttpGet]
+    [Route("List")]
+    public async Task<Result<List<EpicListDto>>> GetProjectListAsync(int? projectId)
+    {
+        return await mediator.Send(new EpicListQuery(projectId));
+    }
+
+    [HttpGet]
     [Route("Page")]
-    public async Task<Result<EpicPageDto>> GetEpicListAsync(
+    public async Task<Result<EpicPageDto>> GetEpicPageAsync(
         int page,
         int pageSize,
         string? filter,

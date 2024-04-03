@@ -21,7 +21,7 @@ public class TaskController : ControllerBase
 
     [HttpGet]
     [Route("Page")]
-    public async Task<Result<TaskPageDto>> GetTaskListAsync(
+    public async Task<Result<TaskPageDto>> GetTaskPageAsync(
         int page,
         int pageSize,
         string? filter,

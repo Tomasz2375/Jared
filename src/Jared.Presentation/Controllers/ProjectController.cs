@@ -20,8 +20,15 @@ public class ProjectController
     }
 
     [HttpGet]
+    [Route("List")]
+    public async Task<Result<List<ProjectListDto>>> GetProjectListAsync()
+    {
+        return await mediator.Send(new ProjectListQuery());
+    }
+
+    [HttpGet]
     [Route("Page")]
-    public async Task<Result<ProjectPageDto>> GetProjectListAsync(
+    public async Task<Result<ProjectPageDto>> GetProjectPageAsync(
         int page,
         int pageSize,
         string? filter,
