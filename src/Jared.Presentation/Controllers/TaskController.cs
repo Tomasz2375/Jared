@@ -19,9 +19,15 @@ public class TaskController : ControllerBase
         this.mediator = mediator;
     }
 
+    [HttpGet("{id}")]
+    public async Task<Result<TaskDetailsDto>> TaskDetails(int id)
+    {
+        return await mediator.Send(new TaskDetailsQuery(id));
+    }
+
     [HttpGet]
     [Route("Page")]
-    public async Task<Result<TaskPageDto>> GetTaskPageAsync(
+    public async Task<Result<TaskPageDto>> TaskPage(
         int page,
         int pageSize,
         string? filter,
@@ -37,7 +43,7 @@ public class TaskController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<Result> CreateTask(TaskCreateCommand command)
+    public async Task<Result> TaskCreate(TaskCreateCommand command)
     {
         return await mediator.Send(command);
     }
