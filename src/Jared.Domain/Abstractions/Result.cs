@@ -3,8 +3,8 @@
 public class Result
 {
     public bool Success { get; set; }
-    public string Error { get; private set; } = default!;
-    
+    public string Error { get; set; } = default!;
+
     protected Result(bool success, string error)
     {
         if (success && error != string.Empty)
@@ -41,7 +41,11 @@ public class Result
 
 public class Result<T> : Result
 {
-    public T Data { get; set; }
+    public Result(bool success, string error) : base(success, error)
+    {
+    }
+
+    public T Data { get; set; } = default!;
 
     protected internal Result(T data, bool success, string error)
         : base(success, error)
