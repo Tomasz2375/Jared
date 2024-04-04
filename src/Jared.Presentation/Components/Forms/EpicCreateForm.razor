@@ -15,12 +15,24 @@
                     Id="title"
                     Label="Title"
                     ValidationFor="(() => Dto.Title)" />
+
+
                 <InputSelectList
                     @bind-Value="@Dto.ProjectId"
+                    Items="@projectsDictionary"
+                    TKey="int"
                     Id="project"
                     Label="Project"
-                    Items="projectsDictionary"
-                    ValidationFor="(() => Dto.ProjectId)"/>
+                    ValidationFor="@(() => Dto.ProjectId)" />
+
+                <InputSelectList
+                    @bind-Value="@Dto.ParentId"
+                    Items="@epicsDictionary"
+                    TKey="int?"
+                    Id="project"
+                    Label="Project"
+                    ValidationFor="@(() => Dto.ParentId)" />
+
                 <InputTextAreaField
                     @bind-Value="@Dto.Description"
                     Id="description"

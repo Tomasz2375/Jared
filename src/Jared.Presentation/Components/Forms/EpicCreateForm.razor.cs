@@ -1,6 +1,7 @@
 ﻿using Jared.Application.Commands.EpicCommands;
 using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.ProjectDtos;
+using Jared.Application.Queries.EpicQueries;
 using Jared.Application.Queries.ProjectQueries;
 using Microsoft.AspNetCore.Components;
 
@@ -16,11 +17,14 @@ public partial class EpicCreateForm
 
     public EpicDetailsDto Dto { get; set; } = new();
     private List<ProjectListDto> projects = new();
+    private List<EpicListDto> epics = new();
     private Dictionary<int, string> projectsDictionary = new();
+    private Dictionary<int, string> epicsDictionary = new();
 
     protected override async Task OnInitializedAsync()
     {
         await getProjectsAsync();
+        await getEpicsAsync();
     }
 
     private void cancel()
@@ -51,5 +55,20 @@ public partial class EpicCreateForm
 
         projects = result.Data;
         projectsDictionary = projects.ToDictionary(x => x.Id, x => x.Title);
+    }
+
+
+    private async Task getEpicsAsync()
+    {
+        var result = await Mediator.Send(new EpicListQuery(Dto.ProjectId));
+
+        if (!result.Success)
+        {
+            Console.WriteLine("Error when get project list");
+            return;
+        }
+
+        epics = result.Data;
+        epicsDictionary = epics.ToDictionary(x => x.Id, x => x.Title);
     }
 }
