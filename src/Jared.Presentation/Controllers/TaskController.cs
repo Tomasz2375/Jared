@@ -1,4 +1,5 @@
 ﻿using Jared.Application.Commands.TaskCommand;
+using Jared.Application.Commands.TaskCommands;
 using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
@@ -40,6 +41,12 @@ public class TaskController : ControllerBase
             filter,
             sortingProperty,
             sortingDirection));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<Result<TaskDetailsDto>> TaskUpdate(TaskDetailsDto dto)
+    {
+        return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
     [HttpPost]
