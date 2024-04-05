@@ -26,7 +26,7 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
         {
             dataContext.Add(task);
             await dataContext.SaveChangesAsync(cancellationToken);
-            
+
             return Result.Ok();
         }
         catch (Exception ex)
