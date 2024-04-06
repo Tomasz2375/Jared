@@ -83,7 +83,10 @@
     float: right;
 }
 
-.btn-primary {
+.btn-primary-dialog {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
     float: right;
     margin-right: 15px;
 }
