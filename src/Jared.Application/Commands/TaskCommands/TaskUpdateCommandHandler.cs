@@ -1,25 +1,21 @@
-﻿using Jared.Application.Dtos.TaskDtos;
-using Jared.Domain.Abstractions;
+﻿using Jared.Domain.Abstractions;
 using Jared.Domain.Interfaces;
 using Mapster;
-using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Commands.TaskCommands;
 
-public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result<TaskDetailsDto>>
+public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result>
 {
     private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
 
-    public TaskUpdateCommandHandler(IDataContext dataContext, IMapper mapper)
+    public TaskUpdateCommandHandler(IDataContext dataContext)
     {
         this.dataContext = dataContext;
-        this.mapper = mapper;
     }
 
-    public async Task<Result<TaskDetailsDto>> Handle(TaskUpdateCommand command, CancellationToken cancellationToken)
+    public async Task<Result> Handle(TaskUpdateCommand command, CancellationToken cancellationToken)
     {
         try
         {
@@ -28,15 +24,14 @@ public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Resul
                 .Include(x => x.Epic)
                 .FirstAsync(x => x.Id == command.dto.Id);
 
-            task!.Title = command.dto.Title;
+            command.dto.Adapt(task);
             await dataContext.SaveChangesAsync(cancellationToken);
 
             return Result.Ok(command.dto);
         }
         catch (Exception ex)
         {
-            return new(false, ex.Message);
-
+            return Result.Fail(ex.Message);
         }
 
     }

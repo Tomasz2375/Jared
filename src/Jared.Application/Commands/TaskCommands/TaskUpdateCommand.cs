@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Commands.TaskCommands;
 
-public record TaskUpdateCommand(TaskDetailsDto dto) : IRequest<Result<TaskDetailsDto>>;
+public record TaskUpdateCommand(TaskDetailsDto dto) : IRequest<Result>;

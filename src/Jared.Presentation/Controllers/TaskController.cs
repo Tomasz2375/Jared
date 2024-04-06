@@ -44,7 +44,7 @@ public class TaskController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<Result<TaskDetailsDto>> TaskUpdate(TaskDetailsDto dto)
+    public async Task<Result> TaskUpdate(TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
