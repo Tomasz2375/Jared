@@ -1,4 +1,5 @@
-﻿@inherits InputBase<int>
+﻿@inherits InputBase<TKey>
+@typeparam TKey
 
 <div class="field-input">
     @if (!string.IsNullOrWhiteSpace(Label))
@@ -7,9 +8,13 @@
     }
     <select class="form-control @CssClass" id="@Id" @bind="@CurrentValue">
         <i class="oi oi-arrow-left" />
+        @if (default(TKey) is null)
+        {
+            <option value="0"></option>
+        }
         @foreach (var item in Items)
         {
-            <option value="item.Key">@item.Value</option>
+            <option value="@item.Key">@item.Value</option>
         }
     </select>
     <div class="form-control-validation">

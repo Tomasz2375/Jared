@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Jared.Domain.Interfaces;
+using Microsoft.AspNetCore.Components;
 using System.Linq.Expressions;
 
 namespace Jared.Presentation.Components.Basic;
 
-public partial class InputSelectList
+public partial class InputSelectList<TKey>
 {
     [Parameter]
-    public Expression<Func<int>> ValidationFor { get; set; } = default!;
+    public Dictionary<int, string> Items { get; set; } = default!;
     [Parameter]
     public string? Id { get; set; }
     [Parameter]
     public string? Label { get; set; }
     [Parameter]
-    public Dictionary<int, string> Items { get; set; } = new();
+    public Expression<Func<TKey>> ValidationFor { get; set; } = default!;
     [Parameter]
-    public EventCallback<int> ValuePropertyChanged { get; set; }
+    public EventCallback<TKey> ValuePropertyChanged { get; set; }
 
-    protected override bool TryParseValueFromString(string? value, out int result, out string validationErrorMessage)
+    protected override bool TryParseValueFromString(string? value, out TKey result, out string validationErrorMessage)
     {
-        result = Items.Single(x => x.Value == value).Key;
+        result = default(TKey)!;
         validationErrorMessage = null!;
         return true;
     }
