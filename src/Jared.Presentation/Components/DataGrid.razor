@@ -36,9 +36,9 @@
 </table>
 
 <div class="align-center">
-    <button type="button" class="btn btn-primary" disabled="@(Query.Page == 1)" @onclick="previousPage">&lt;&lt;</button>
+    <button type="button" class="btn nav-button@(Query.Page == 1 ? "-disable" : "")" @onclick="previousPage">&lt;&lt;</button>
     <span style="font-size:16px">@($"{Query.Page} / {Pagination.PageCount}")</span>
-    <button type="button" class="btn btn-primary" disabled="@(Query.Page == Pagination.PageCount)" @onclick="nextPage">&gt;&gt;</button>
+    <button type="button" class="btn nav-button@(Query.Page == Pagination.PageCount ? "-disable" : "")" @onclick="nextPage">&gt;&gt;</button>
 </div>
 <div class="align-center">
     <EditForm Model="Query">
@@ -101,5 +101,20 @@
     .arrow-down {
         transform: rotate(45deg);
         -webkit-transform: rotate(45deg);
+    }
+    .nav-button {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+    .nav-button-disable {
+        color: #fff;
+        background-color: #083b90;
+        border-color: #06408a;
+    }
+    .nav-button:hover {
+        color: #eee;
+        background-color: #0a5db1;
+        border-color: #07509b;
     }
 </style>
