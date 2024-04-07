@@ -8,10 +8,7 @@
     }
     <select class="form-control @CssClass" id="@Id" @bind="@CurrentValue">
         <i class="oi oi-arrow-left" />
-        @if (default(TKey) is null)
-        {
-            <option value="0"></option>
-        }
+        <option value="0"></option>
         @foreach (var item in Items)
         {
             <option value="@item.Key">@item.Value</option>
