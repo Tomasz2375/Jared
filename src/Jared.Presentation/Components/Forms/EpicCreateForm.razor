@@ -16,9 +16,8 @@
                     Label="Title"
                     ValidationFor="(() => Dto.Title)" />
 
-
                 <InputSelectList
-                    @bind-Value="@Dto.ProjectId"
+                    @bind-Value="@ProjectId"
                     Items="@projectsDictionary"
                     TKey="int"
                     Id="project"
@@ -26,11 +25,11 @@
                     ValidationFor="@(() => Dto.ProjectId)" />
 
                 <InputSelectList
-                    @bind-Value="@Dto.ParentId"
+                    @bind-Value="@EpicId"
                     Items="@epicsDictionary"
                     TKey="int?"
-                    Id="project"
-                    Label="Project"
+                    Id="parent"
+                    Label="Partent"
                     ValidationFor="@(() => Dto.ParentId)" />
 
                 <InputTextAreaField

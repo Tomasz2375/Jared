@@ -21,6 +21,48 @@ public partial class EpicCreateForm
     private Dictionary<int, string> projectsDictionary = new();
     private Dictionary<int, string> epicsDictionary = new();
 
+    public int? EpicId
+    {
+        get => Dto.ParentId;
+        set
+        {
+            if (Dto.ParentId != value)
+            {
+                Dto.ParentId = value;
+                var epic = epics.FirstOrDefault(x => x.Id == value);
+                if (epic != null)
+                {
+                    Dto.ProjectId = epic.ProjectId;
+                    projectsDictionary = projects
+                        .Where(x => x.Id == epic.ProjectId)
+                        .ToDictionary(x => x.Id, x => x.Title);
+                }
+                else
+                {
+                    projectsDictionary = projects
+                        .ToDictionary(x => x.Id, x => x.Title);
+                }
+            }
+        }
+    }
+    public int ProjectId
+    {
+        get => Dto.ProjectId;
+        set
+        {
+            if (Dto.ProjectId != value)
+            {
+                Dto.ProjectId = value;
+                setEpics();
+            }
+            if (value == 0)
+            {
+                epicsDictionary = epics
+                    .ToDictionary(x => x.Id, x => x.Title);
+            }
+        }
+    }
+
     protected override async Task OnInitializedAsync()
     {
         await getProjectsAsync();
@@ -57,7 +99,6 @@ public partial class EpicCreateForm
         projectsDictionary = projects.ToDictionary(x => x.Id, x => x.Title);
     }
 
-
     private async Task getEpicsAsync()
     {
         var result = await Mediator.Send(new EpicListQuery(Dto.ProjectId));
@@ -68,7 +109,14 @@ public partial class EpicCreateForm
             return;
         }
 
-        epics = result.Data;
+        epics = result.Data.ToList();
         epicsDictionary = epics.ToDictionary(x => x.Id, x => x.Title);
+    }
+
+    private void setEpics()
+    {
+        epicsDictionary = epics
+            .Where(x => x.ProjectId == Dto.ProjectId).ToList()
+            .ToDictionary(x => x.Id, x => x.Title);
     }
 }
