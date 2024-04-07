@@ -1,12 +1,14 @@
 ﻿using Jared.Application.Dtos.Abstractions;
 using Jared.Domain.Enums;
+using Jared.Domain.Interfaces;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
+using Jared.Presentation.Components.Forms;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components;
 
-public partial class DataGrid<TItem>
+public partial class DataGrid<TItem> where TItem : class, IEntity
 {
     [Parameter]
     [EditorRequired]
@@ -28,7 +30,10 @@ public partial class DataGrid<TItem>
     public EventCallback<Query> SendPageQuery { get; set; }
     [Parameter]
     public bool SwitchPagination { get; set; }
-
+    [Parameter]
+    public TaskDetailsForm TaskDetailsForm { get; set; } = default!;
+    
+    private int showDetails;
     private List<int> pageSizes = new()
     {
         5, 10, 20, 30, 50, 100,

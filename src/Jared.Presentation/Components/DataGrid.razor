@@ -1,5 +1,6 @@
 ﻿@using Jared.Domain.Enums;
 @using Jared.Presentation.Components.Basic
+@using Jared.Presentation.Components.Forms
 @typeparam TItem
 
 @if (Pagination is null || Items is null)
@@ -23,7 +24,7 @@
     <tbody>
         @foreach (var item in Items)
         {
-            <tr class="data-grid-body">
+            <tr class="data-grid-body" @onclick="@(() => showDetails = int.Parse(item.Id.ToString()))">
                 @foreach (var column in ItemsDefinition)
                 {
                     <td class="align-@column.Alignment.ToString().ToLower()">
@@ -56,6 +57,11 @@
         @($"{Pagination.ItemFrom} - {Pagination.ItemTo} from {Pagination.ItemsCount}")
     </span>
 </div>
+
+@if (showDetails != 0 && TaskDetailsForm is not null)
+{
+    <TaskDetailsForm Id="@showDetails"></TaskDetailsForm>
+}
 
 <style>
     .data-grid {
