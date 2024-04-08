@@ -33,7 +33,7 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
     [Parameter]
     public TaskDetailsForm TaskDetailsForm { get; set; } = default!;
     
-    private int showDetails;
+    private int showDetailsId;
     private List<int> pageSizes = new()
     {
         5, 10, 20, 30, 50, 100,

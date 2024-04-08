@@ -24,7 +24,7 @@
     <tbody>
         @foreach (var item in Items)
         {
-            <tr class="data-grid-body" @onclick="@(() => showDetails = int.Parse(item.Id.ToString()))">
+            <tr class="data-grid-body" @onclick="@(() => showDetailsId = int.Parse(item.Id.ToString()))">
                 @foreach (var column in ItemsDefinition)
                 {
                     <td class="align-@column.Alignment.ToString().ToLower()">
@@ -58,9 +58,9 @@
     </span>
 </div>
 
-@if (showDetails != 0 && TaskDetailsForm is not null)
+@if (showDetailsId != 0 && TaskDetailsForm is not null)
 {
-    <TaskDetailsForm Id="@showDetails"></TaskDetailsForm>
+    <TaskDetailsForm Id="@showDetailsId" CloseDialog="(() => showDetailsId = 0)"></TaskDetailsForm>
 }
 
 <style>
