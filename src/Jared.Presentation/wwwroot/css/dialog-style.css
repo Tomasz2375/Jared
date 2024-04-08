@@ -49,6 +49,18 @@
     overflow: hidden;
 }
 
+.blazor-modal-content-very-large {
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    max-height: 90%;
+    margin: auto;
+    margin-top: 150px;
+    background-color: #DDDDDD;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
 .blazor-modal-header {
     background-color: darkgreen;
     padding: 15px;
@@ -70,6 +82,13 @@
     display: grid;
     grid-template-columns: 60% 40%;
     max-height: 600px;
+    padding: 10px !important;
+}
+
+.blazor-modal-body-3 {
+    display: grid;
+    grid-template-columns: 50% 25% 25%;
+    max-height: 700px;
     padding: 10px !important;
 }
 
