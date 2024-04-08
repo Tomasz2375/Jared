@@ -1,0 +1,24 @@
+﻿@inherits InputBase<TimeSpan>
+
+<div class="input-field">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <label class="form-control-label" for="@($"label-{Id}")">@Label</label>
+    }
+    <div style="display:flex !important">
+        <input class="form-control @CssClass" id="@Id" @bind="@CurrentValue" />
+    </div>
+    <div class="form-control-validation">
+        <ValidationMessage For="@ValidationFor" />
+    </div>
+</div>
+
+<style>
+    .input-field {
+        margin: 0.3rem !important
+    }
+</style>
+
+@code {
+
+}
