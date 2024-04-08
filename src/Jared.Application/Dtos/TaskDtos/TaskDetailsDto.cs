@@ -11,4 +11,7 @@ public class TaskDetailsDto : TaskRootDto
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public DateTime? Deadline { get; set; }
+
+    public TimeSpan EstimatedTime { get; set; }
+    public TimeSpan TotalWorkTime { get; set; }
 }
