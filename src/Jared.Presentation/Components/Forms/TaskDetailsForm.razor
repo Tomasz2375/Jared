@@ -9,20 +9,43 @@
             <button class="btn btn-close" @onclick="cancel" />
         </div>
         <EditForm Model="@Dto">
-            <div class="blazor-modal-body-2">
+            <div class="blazor-modal-body-3">
                 <div class="right-border">
                     <InputTextField
                         @bind-Value="@Dto.Title"
                         Id="title"
                         Label="Title"
                         ValidationFor="(() => Dto.Title)" />
+                    <label title="code">Code</label>
+                    <span>@Dto.Code</span>
                     <InputTextAreaField
                         @bind-Value="@Dto.Description"
                         Id="description"
                         Label="Description"
                         ValidationFor="(() => Dto.Description)" />
                 </div>
-                <div>
+                <div class="right-border">
+                    <InputSelectList
+                        @bind-Value="@ProjectId"
+                        Items="@projectsDictionary"
+                        TKey="int?"
+                        Id="project"
+                        Label="Project"
+                        ValidationFor="@(() => Dto.ProjectId)" />
+                    <InputSelectList
+                        @bind-Value="@EpicId"
+                        Items="@epicsDictionary"
+                        TKey="int?"
+                        Id="epic"
+                        Label="Epic"
+                        ValidationFor="@(() => Dto.EpicId)" />
+                    <InputSelectList
+                        @bind-Value="@ParentId"
+                        Items="@parentDictionary"
+                        TKey="int?"
+                        Id="parent"
+                        Label="Parent task"
+                        ValidationFor="@(() => Dto.ParentId)" />
                     <InputSelectEnum
                         @bind-Value="@(Dto.Priority)"
                         ValidationFor="(() => Dto.Priority)"
@@ -33,11 +56,24 @@
                         ValidationFor="(() => Dto.Status)"
                         Id="status"
                         Label="Status" />
+                </div>
+                <div>
                     <InputDateField
                         @bind-Value="@(Dto.Deadline)"
                         Label="Deadline"
                         Id="deadline"
                         ValidationFor="(() => Dto.Deadline)" />
+                    <InputTimeSpanField
+                        @bind-Value="@(Dto.EstimatedTime)"
+                        Label="Estimated time"
+                        Id="estimated-time"
+                        ValidationFor="(() => Dto.EstimatedTime)" />
+                    <InputTimeSpanField
+                        @bind-Value="@(Dto.TotalWorkTime)"
+                        Label="Total work time"
+                        Id="total-work-time"
+                        ValidationFor="(() => Dto.TotalWorkTime)" />
+
                 </div>
             </div>
         </EditForm>
