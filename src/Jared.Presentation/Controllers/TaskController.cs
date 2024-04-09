@@ -27,6 +27,13 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet]
+    [Route("List")]
+    public async Task<Result<List<TaskListDto>>> TaskListAsync(int? projectId, int? epicId)
+    {
+        return await mediator.Send(new TaskListQuery(projectId, epicId));
+    }
+
+    [HttpGet]
     [Route("Page")]
     public async Task<Result<TaskPageDto>> TaskPage(
         int page,
