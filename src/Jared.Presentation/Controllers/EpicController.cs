@@ -21,14 +21,14 @@ public class EpicController
 
     [HttpGet]
     [Route("List")]
-    public async Task<Result<List<EpicListDto>>> GetProjectListAsync(int? projectId)
+    public async Task<Result<List<EpicListDto>>> EpicListAsync(int? projectId)
     {
         return await mediator.Send(new EpicListQuery(projectId));
     }
 
     [HttpGet]
     [Route("Page")]
-    public async Task<Result<EpicPageDto>> GetEpicPageAsync(
+    public async Task<Result<EpicPageDto>> EpicPageAsync(
         int page,
         int pageSize,
         string? filter,
@@ -44,7 +44,7 @@ public class EpicController
     }
 
     [HttpPost]
-    public async Task<Result> CreateEpic(EpicCreateCommand command)
+    public async Task<Result> EpicCreateAsync(EpicCreateCommand command)
     {
         return await mediator.Send(command);
     }

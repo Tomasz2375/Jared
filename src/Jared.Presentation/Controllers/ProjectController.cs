@@ -21,14 +21,14 @@ public class ProjectController
 
     [HttpGet]
     [Route("List")]
-    public async Task<Result<List<ProjectListDto>>> GetProjectListAsync()
+    public async Task<Result<List<ProjectListDto>>> ProjectListAsync()
     {
         return await mediator.Send(new ProjectListQuery());
     }
 
     [HttpGet]
     [Route("Page")]
-    public async Task<Result<ProjectPageDto>> GetProjectPageAsync(
+    public async Task<Result<ProjectPageDto>> ProjectPageAsync(
         int page,
         int pageSize,
         string? filter,
@@ -44,7 +44,7 @@ public class ProjectController
     }
 
     [HttpPost]
-    public async Task<Result> CreateProject(ProjectCreateCommand command)
+    public async Task<Result> ProjectCreateAsync(ProjectCreateCommand command)
     {
         return await mediator.Send(command);
     }

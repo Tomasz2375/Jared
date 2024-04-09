@@ -1,6 +1,8 @@
 ﻿using Jared.Application.Commands.TaskCommand;
 using Jared.Application.Commands.TaskCommands;
+using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.TaskDtos;
+using Jared.Application.Queries.EpicQueries;
 using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
@@ -21,7 +23,7 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<Result<TaskDetailsDto>> TaskDetails(int id)
+    public async Task<Result<TaskDetailsDto>> TaskDetailsAsync(int id)
     {
         return await mediator.Send(new TaskDetailsQuery(id));
     }
@@ -35,7 +37,7 @@ public class TaskController : ControllerBase
 
     [HttpGet]
     [Route("Page")]
-    public async Task<Result<TaskPageDto>> TaskPage(
+    public async Task<Result<TaskPageDto>> TaskPageAsync(
         int page,
         int pageSize,
         string? filter,
@@ -51,13 +53,13 @@ public class TaskController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<Result> TaskUpdate(TaskDetailsDto dto)
+    public async Task<Result> TaskUpdateAsync(TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
     [HttpPost]
-    public async Task<Result> TaskCreate(TaskCreateCommand command)
+    public async Task<Result> TaskCreateAsync(TaskCreateCommand command)
     {
         return await mediator.Send(command);
     }
