@@ -77,6 +77,9 @@ public partial class TaskDetailsForm
     protected override async Task OnInitializedAsync()
     {
         await getDetails(Id);
+        await getProjectsAsync();
+        await getEpicsAsync();
+        await getTaskAsync();
     }
 
     private async Task getProjectsAsync()
@@ -105,6 +108,20 @@ public partial class TaskDetailsForm
 
         epics = result.Data.ToList();
         epicsDictionary = epics.ToDictionary(x => x.Id, x => x.Title);
+    }
+
+    private async Task getTaskAsync()
+    {
+        var result = await Mediator.Send(new TaskListQuery(Dto.ProjectId, Dto.EpicId));
+
+        if (!result.Success)
+        {
+            Console.WriteLine("Error when get project list");
+            return;
+        }
+
+        parents = result.Data.ToList();
+        parentDictionary = parents.ToDictionary(x => x.Id, x => x.Title);
     }
 
     private void cancel()
