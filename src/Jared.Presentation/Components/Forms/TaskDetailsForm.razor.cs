@@ -63,13 +63,13 @@ public partial class TaskDetailsForm
     {
         get
         {
-            return Dto.EpicId;
+            return Dto.ParentId;
         }
         set
         {
-            if (value != Dto.EpicId)
+            if (value != Dto.ParentId)
             {
-                Dto.EpicId = value;
+                Dto.ParentId = value;
             }
         }
     }
@@ -138,6 +138,15 @@ public partial class TaskDetailsForm
         }
 
         await CloseDialog.InvokeAsync();
+    }
+
+    private async Task saveAndStay()
+    {
+        var result = await Mediator.Send(new TaskUpdateCommand(Dto));
+        if (!result.Success)
+        {
+            Console.WriteLine("Create task failed");
+        }
     }
 
     private async Task getDetails(int id)
