@@ -1,4 +1,5 @@
 ﻿@page "/tasks"
+@using Jared.Presentation.Components.Forms;
 @inject IMediator Mediator
 
 @if (Model is null)
@@ -14,4 +15,5 @@
     Pagination="Model.Pagination"
     SwitchPagination="true"
     Query="Query"
-    SendPageQuery="sendPageQuery"/>
+    SendPageQuery="sendPageQuery"
+    TaskDetailsForm="new TaskDetailsForm()"/>
