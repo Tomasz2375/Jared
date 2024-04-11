@@ -1,7 +1,7 @@
 ﻿@inherits InputBase<TKey>
 @typeparam TKey
 
-<div class="field-input">
+<div class="input-field">
     @if (!string.IsNullOrWhiteSpace(Label))
     {
         <label class="form-control-label" for="@($"label-{Id}")">@Label</label>
@@ -20,8 +20,7 @@
 </div>
 
 <style>
-    .field-input {
-        padding: 0.3rem !important;
-        margin: 0rem !important;
+    .input-field {
+        margin: 0.3rem !important
     }
 </style>
