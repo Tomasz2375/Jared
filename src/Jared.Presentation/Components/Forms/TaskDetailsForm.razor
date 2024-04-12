@@ -5,7 +5,7 @@
 <div class="blazor-modal">
     <div class="blazor-modal-content-medium">
         <div class="blazor-modal-header">
-            <h4 class="blazor-modal-title">&nbsp;&nbsp;@Title</h4>
+            <h4 class="blazor-modal-title">&nbsp;&nbsp;@Dto.Code</h4>
             <button class="btn btn-close" @onclick="cancel" />
         </div>
         <EditForm Model="@Dto">
@@ -16,8 +16,6 @@
                         Id="title"
                         Label="Title"
                         ValidationFor="(() => Dto.Title)" />
-                    <label title="code">Code</label>
-                    <span>@Dto.Code</span>
                     <InputTextAreaField
                         @bind-Value="@Dto.Description"
                         Id="description"

@@ -1,12 +1,10 @@
-﻿using Jared.Application.Commands.TaskCommand;
-using Jared.Application.Commands.TaskCommands;
+﻿using Jared.Application.Commands.TaskCommands;
 using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.ProjectDtos;
 using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.EpicQueries;
 using Jared.Application.Queries.ProjectQueries;
 using Jared.Application.Queries.TaskQueries;
-using Jared.Presentation.Pages;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
@@ -16,8 +14,6 @@ public partial class TaskDetailsForm
     [Parameter]
     public EventCallback CloseDialog { get; set; }
 
-    [Parameter]
-    public string? Title { get; set; }
     [Parameter]
     public int Id { get; set; }
 
