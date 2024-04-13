@@ -13,6 +13,8 @@ public partial class InputSelectList<TKey>
     [Parameter]
     public string? Label { get; set; }
     [Parameter]
+    public bool Disabled { get; set; }
+    [Parameter]
     public Expression<Func<TKey>> ValidationFor { get; set; } = default!;
     [Parameter]
     public EventCallback<TKey> ValuePropertyChanged { get; set; }

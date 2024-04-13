@@ -9,7 +9,7 @@
             <button class="btn btn-close" @onclick="cancel" />
         </div>
         <EditForm Model="@Dto">
-            <div class="blazor-modal-body-2">
+            <div class="blazor-modal-body-3">
                 <div class="right-border">
                     <InputTextField
                         @bind-Value="@Dto.Title"
@@ -21,6 +21,31 @@
                         Id="description"
                         Label="Description"
                         ValidationFor="(() => Dto.Description)" />
+                </div>
+                <div class="right-border">
+                    <InputSelectList
+                        @bind-Value="@ProjectId"
+                        Items="@projectsDictionary"
+                        TKey="int"
+                        Id="project"
+                        Label="Project"
+                        ValidationFor="@(() => Dto.ProjectId)" />
+                    <InputSelectList
+                        @bind-Value="@EpicId"
+                        Items="@epicsDictionary"
+                        TKey="int"
+                        Id="epic"
+                        Label="Epic"
+                        Disabled=@(Dto.ProjectId == 0)
+                        ValidationFor="@(() => Dto.EpicId)" />
+                    <InputSelectList
+                        @bind-Value="@ParentTaskId"
+                        Items="@tasksDictionary"
+                        TKey="int?"
+                        Id="parent"
+                        Label="Parent task"
+                        Disabled=@(Dto.EpicId == 0)
+                        ValidationFor="@(() => Dto.ParentId)" />
                 </div>
                 <div>
                     <InputSelectEnum

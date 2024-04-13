@@ -8,6 +8,9 @@ namespace Jared.Application.Dtos.TaskDtos
     {
         public string Title { get; set; } = default!;
         public string? Code { get; set; }
+        public int ProjectId { get; set; }
+        public int EpicId { get; set; }
+
         public TaskStatus Status { get; set; }
         public Priority Priority { get; set; }
     }
