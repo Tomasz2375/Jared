@@ -25,7 +25,7 @@ public partial class TaskCreateForm
     private Dictionary<int, string> epicsDictionary = new();
     private Dictionary<int, string> tasksDictionary = new();
 
-    public int? ProjectId
+    public int ProjectId
     {
         get
         {
@@ -42,11 +42,13 @@ public partial class TaskCreateForm
                 tasksDictionary = tasks
                     .Where(x => value == 0 || x.ProjectId == value)
                     .ToDictionary(x => x.Id, x => x.Title);
+                EpicId = 0;
+                ParentTaskId = 0;
             }
         }
     }
 
-    public int? EpicId
+    public int EpicId
     {
         get
         {
@@ -61,6 +63,7 @@ public partial class TaskCreateForm
                 tasksDictionary = tasks
                     .Where(x => value == 0 || x.EpicId == value)
                     .ToDictionary(x => x.Id, x => x.Title);
+                ParentTaskId = 0;
             }
         }
     }

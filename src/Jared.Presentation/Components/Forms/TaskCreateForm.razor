@@ -26,16 +26,17 @@
                     <InputSelectList
                         @bind-Value="@ProjectId"
                         Items="@projectsDictionary"
-                        TKey="int?"
+                        TKey="int"
                         Id="project"
                         Label="Project"
                         ValidationFor="@(() => Dto.ProjectId)" />
                     <InputSelectList
                         @bind-Value="@EpicId"
                         Items="@epicsDictionary"
-                        TKey="int?"
+                        TKey="int"
                         Id="epic"
                         Label="Epic"
+                        Disabled=@(Dto.ProjectId == 0)
                         ValidationFor="@(() => Dto.EpicId)" />
                     <InputSelectList
                         @bind-Value="@ParentTaskId"
@@ -43,6 +44,7 @@
                         TKey="int?"
                         Id="parent"
                         Label="Parent task"
+                        Disabled=@(Dto.EpicId == 0)
                         ValidationFor="@(() => Dto.ParentId)" />
                 </div>
                 <div>
