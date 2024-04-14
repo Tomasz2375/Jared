@@ -25,7 +25,7 @@ public partial class TaskDetailsForm
     private Dictionary<int, string> epicsDictionary = new();
     private Dictionary<int, string> parentDictionary = new();
 
-    public int? ProjectId
+    public int ProjectId
     {
         get
         {
@@ -40,7 +40,7 @@ public partial class TaskDetailsForm
         }
     }
 
-    public int? EpicId
+    public int EpicId
     {
         get
         {
