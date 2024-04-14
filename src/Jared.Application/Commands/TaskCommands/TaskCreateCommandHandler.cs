@@ -1,7 +1,9 @@
 ﻿using Jared.Domain.Abstractions;
 using Jared.Domain.Interfaces;
+using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Commands.TaskCommand;
 
@@ -20,10 +22,16 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
     public async Task<Result> Handle(TaskCreateCommand command, CancellationToken cancellationToken)
 #pragma warning restore CS1998
     {
-        var task = mapper.Map<Domain.Models.Task>(command.dto);
-
         try
         {
+            var project = await dataContext
+                .Set<Project>()
+                .FirstAsync(x => x.Id == command.dto.ProjectId, cancellationToken);
+
+            project.LastTaskNumber++;
+            command.dto.Code = createCode(project);
+            var task = mapper.Map<Domain.Models.Task>(command.dto);
+
             dataContext.Add(task);
             await dataContext.SaveChangesAsync(cancellationToken);
 
@@ -34,5 +42,10 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
             return Result.Fail(ex.Message);
         }
 
+    }
+
+    private string createCode(Project project)
+    {
+        return project.Code + " - " + project.LastTaskNumber;
     }
 }
