@@ -24,7 +24,7 @@
     <tbody>
         @foreach (var item in Items)
         {
-            <tr class="data-grid-body" @onclick="@(() => showDetailsId = int.Parse(item.Id.ToString()))">
+            <tr class="data-grid-body" @onclick="@(() => showDetailsId = int.Parse(item.Id.ToString()!))">
                 @foreach (var column in ItemsDefinition)
                 {
                     <td class="align-@column.Alignment.ToString().ToLower()">
