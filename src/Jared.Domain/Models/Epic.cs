@@ -11,7 +11,7 @@ public class Epic : Entity
     public string? Description { get; set; }
 
     public Epic? Parent { get; set; }
-    public Project Project { get; set; } = default!;
+    public Project? Project { get; set; } = default!;
 
     public List<Task> Tasks { get; set; } = new();
 }
