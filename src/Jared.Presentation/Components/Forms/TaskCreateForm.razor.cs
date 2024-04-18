@@ -78,6 +78,10 @@ public partial class TaskCreateForm
         {
             if (value != Dto.ParentId)
             {
+                if (value == 0)
+                {
+                    value = null;
+                }
                 Dto.ParentId = value;
             }
         }
@@ -93,6 +97,7 @@ public partial class TaskCreateForm
         Dto.Deadline = DateTime.Now.Date;
         Dto.Priority = Domain.Enums.Priority.Normal;
         Dto.Status = Domain.Enums.TaskStatus.Created;
+        Dto.ParentId = null;
     }
 
     private async Task getProjectsAsync()
