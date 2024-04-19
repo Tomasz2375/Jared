@@ -40,7 +40,7 @@ public partial class TaskDetailsForm
         }
     }
 
-    public int EpicId
+    public int? EpicId
     {
         get
         {
@@ -50,6 +50,10 @@ public partial class TaskDetailsForm
         {
             if (value != Dto.EpicId)
             {
+                if (value == 0)
+                {
+                    value = null;
+                }
                 Dto.EpicId = value;
             }
         }
@@ -65,6 +69,10 @@ public partial class TaskDetailsForm
         {
             if (value != Dto.ParentId)
             {
+                if (value == 0)
+                {
+                    value = null;
+                }
                 Dto.ParentId = value;
             }
         }

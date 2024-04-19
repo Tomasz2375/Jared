@@ -103,7 +103,7 @@ namespace Jared.Infrastructure.Migrations
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("EpicId")
+                    b.Property<int?>("EpicId")
                         .HasColumnType("int");
 
                     b.Property<TimeSpan>("EstimatedTime")
@@ -164,8 +164,7 @@ namespace Jared.Infrastructure.Migrations
                     b.HasOne("Jared.Domain.Models.Epic", "Epic")
                         .WithMany("Tasks")
                         .HasForeignKey("EpicId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Jared.Domain.Models.Task", "Parent")
                         .WithMany()
@@ -174,7 +173,7 @@ namespace Jared.Infrastructure.Migrations
                     b.HasOne("Jared.Domain.Models.Project", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Epic");

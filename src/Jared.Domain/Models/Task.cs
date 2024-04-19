@@ -6,7 +6,7 @@ namespace Jared.Domain.Models;
 public class Task : Entity
 {
     public int ProjectId { get; set; }
-    public int EpicId { get; set; }
+    public int? EpicId { get; set; }
     public int? ParentId { get; set; }
 
     public string Title { get; set; } = default!;
@@ -21,8 +21,8 @@ public class Task : Entity
     public TimeSpan EstimatedTime { get; set; }
     public TimeSpan TotalWorkTime { get; set; }
 
-    public Project Project { get; set; } = default!;
-    public Epic Epic { get; set; } = default!;
+    public Project? Project { get; set; }
+    public Epic? Epic { get; set; }
     public Task? Parent { get; set; }
 
 

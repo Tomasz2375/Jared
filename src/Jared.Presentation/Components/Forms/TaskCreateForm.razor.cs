@@ -48,7 +48,7 @@ public partial class TaskCreateForm
         }
     }
 
-    public int EpicId
+    public int? EpicId
     {
         get
         {
@@ -58,6 +58,10 @@ public partial class TaskCreateForm
         {
             if (value != Dto.EpicId)
             {
+                if (value == 0)
+                {
+                    value = null;
+                }
                 Dto.EpicId = value;
 
                 tasksDictionary = tasks
@@ -78,6 +82,10 @@ public partial class TaskCreateForm
         {
             if (value != Dto.ParentId)
             {
+                if (value == 0)
+                {
+                    value = null;
+                }
                 Dto.ParentId = value;
             }
         }
@@ -93,6 +101,7 @@ public partial class TaskCreateForm
         Dto.Deadline = DateTime.Now.Date;
         Dto.Priority = Domain.Enums.Priority.Normal;
         Dto.Status = Domain.Enums.TaskStatus.Created;
+        Dto.ParentId = null;
     }
 
     private async Task getProjectsAsync()
