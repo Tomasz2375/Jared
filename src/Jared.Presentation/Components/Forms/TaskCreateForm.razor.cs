@@ -48,7 +48,7 @@ public partial class TaskCreateForm
         }
     }
 
-    public int EpicId
+    public int? EpicId
     {
         get
         {
@@ -58,6 +58,10 @@ public partial class TaskCreateForm
         {
             if (value != Dto.EpicId)
             {
+                if (value == 0)
+                {
+                    value = null;
+                }
                 Dto.EpicId = value;
 
                 tasksDictionary = tasks

@@ -33,7 +33,7 @@
                     <InputSelectList
                         @bind-Value="@EpicId"
                         Items="@epicsDictionary"
-                        TKey="int"
+                        TKey="int?"
                         Id="epic"
                         Label="Epic"
                         Disabled=@(Dto.ProjectId == 0)
@@ -44,7 +44,7 @@
                         TKey="int?"
                         Id="parent"
                         Label="Parent task"
-                        Disabled=@(Dto.EpicId == 0)
+                        Disabled=@(Dto.EpicId == 0 || Dto.EpicId is null)
                         ValidationFor="@(() => Dto.ParentId)" />
                 </div>
                 <div>
