@@ -6,7 +6,7 @@ namespace Jared.Domain.Models;
 public class Task : Entity
 {
     public int ProjectId { get; set; }
-    public int EpicId { get; set; }
+    public int? EpicId { get; set; }
     public int? ParentId { get; set; }
 
     public string Title { get; set; } = default!;
