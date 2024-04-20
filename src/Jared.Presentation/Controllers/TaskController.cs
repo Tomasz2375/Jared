@@ -40,16 +40,16 @@ public class TaskController : ControllerBase
     public async Task<Result<TaskPageDto>> TaskPageAsync(
         int page,
         int pageSize,
-        string? filter,
         string? sortingProperty,
-        SortingDirection sortingDirection)
+        SortingDirection sortingDirection,
+        IDictionary<string, string?>? filter)
     {
         return await mediator.Send(new TaskPageQuery(
             page,
             pageSize,
-            filter,
             sortingProperty,
-            sortingDirection));
+            sortingDirection,
+            filter));
     }
 
     [HttpPut("{id}")]

@@ -31,16 +31,16 @@ public class ProjectController
     public async Task<Result<ProjectPageDto>> ProjectPageAsync(
         int page,
         int pageSize,
-        string? filter,
         string? sortingProperty,
-        SortingDirection sortingDirection)
+        SortingDirection sortingDirection,
+        IDictionary<string, string?>? filter)
     {
         return await mediator.Send(new ProjectPageQuery(
             page,
             pageSize,
-            filter,
             sortingProperty,
-            sortingDirection));
+            sortingDirection,
+            filter));
     }
 
     [HttpPost]
