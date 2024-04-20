@@ -1,10 +1,8 @@
 ﻿using Jared.Application.Dtos.PageDtos;
 using Jared.Application.Dtos.TaskDtos;
-using Jared.Application.Queries.EpicQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using Jared.Domain.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -69,9 +67,7 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         IQueryable<Domain.Models.Task> tasks,
         TaskPageQuery query)
     {
-        return tasks.Where(x => string.IsNullOrEmpty(query.filter) ||
-            (x.Title.ToLower().Contains(query.filter.ToLower()) ||
-            x.Description!.ToLower().Contains(query.filter.ToLower())));
+        return tasks;
     }
 
     private IQueryable<Domain.Models.Task> sortResult(
