@@ -20,9 +20,9 @@ public partial class Projects : ComponentBase
         var result = await Mediator.Send(new ProjectPageQuery(
             query.Page,
             query.PageSize,
-            query.Filter,
             query.SortingProperty,
-            query.SortingDirection));
+            query.SortingDirection,
+            query.Filter));
 
         if (!result.Success)
         {

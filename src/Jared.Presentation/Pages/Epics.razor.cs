@@ -19,9 +19,9 @@ public partial class Epics
         var result = await Mediator.Send(new EpicPageQuery(
             query.Page,
             query.PageSize,
-            query.Filter,
             query.SortingProperty,
-            query.SortingDirection));
+            query.SortingDirection,
+            query.Filter));
 
         if (!result.Success)
         {

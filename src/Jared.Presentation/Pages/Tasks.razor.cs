@@ -1,11 +1,10 @@
 ﻿using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.TaskQueries;
 using Jared.Presentation.ColumnDefinitions;
-using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
 
-public partial class Tasks : ComponentBase
+public partial class Tasks
 {
     public TaskPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
@@ -20,9 +19,9 @@ public partial class Tasks : ComponentBase
         var result = await Mediator.Send(new TaskPageQuery(
             query.Page,
             query.PageSize,
-            query.Filter,
             query.SortingProperty,
-            query.SortingDirection));
+            query.SortingDirection,
+            query.Filter));
 
         if (!result.Success)
         {
