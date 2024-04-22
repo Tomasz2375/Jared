@@ -4,7 +4,7 @@ using Jared.Presentation.ColumnDefinitions;
 
 namespace Jared.Presentation.Pages;
 
-public partial class Tasks
+public partial class Dashboard
 {
     public TaskPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
@@ -16,6 +16,8 @@ public partial class Tasks
 
     private async Task sendPageQuery(Query query)
     {
+        query.Filter!.Add("Status", "6");
+
         var result = await Mediator.Send(new TaskPageQuery(
             query.Page,
             query.PageSize,

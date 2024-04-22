@@ -8,8 +8,8 @@ namespace Jared.Application.Queries.TaskQueries;
 public sealed record TaskPageQuery(
     int page,
     int pageSize,
-    string? filter,
     string? sortingProperty,
-    SortingDirection? SortingDirection)
+    SortingDirection? SortingDirection,
+    IDictionary<string, string?>? filters)
     : IRequest<Result<TaskPageDto>>;
 

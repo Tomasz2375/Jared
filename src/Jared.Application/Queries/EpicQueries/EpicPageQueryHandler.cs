@@ -50,9 +50,7 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
         IQueryable<Epic> epics,
         EpicPageQuery query)
     {
-        return epics.Where(x => string.IsNullOrEmpty(query.filter) ||
-            x.Title.ToLower().Contains(query.filter.ToLower()) ||
-            x.Description!.ToLower().Contains(query.filter.ToLower()));
+        return epics;
     }
 
     private PaginationDto createPagination(

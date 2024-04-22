@@ -8,7 +8,7 @@ namespace Jared.Application.Queries.ProjectQueries;
 public sealed record ProjectPageQuery(
     int page,
     int pageSize,
-    string? filter,
     string? sortingProperty,
-    SortingDirection? SortingDirection)
+    SortingDirection? SortingDirection,
+    IDictionary<string, string?>? filter)
     : IRequest<Result<ProjectPageDto>>;
