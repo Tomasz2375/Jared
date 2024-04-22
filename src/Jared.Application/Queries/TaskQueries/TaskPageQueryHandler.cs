@@ -6,6 +6,8 @@ using Jared.Domain.Interfaces;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Jared.Application.Queries.TaskQueries;
@@ -67,6 +69,34 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         IQueryable<Domain.Models.Task> tasks,
         TaskPageQuery query)
     {
+        foreach (var (key, value) in query.filters!)
+        {
+            if (key == nameof(TaskListDto.Id))
+            {
+                tasks = tasks.Where(x => x.Id.ToString().Contains(value!));
+            }
+            else if (key == nameof(TaskListDto.Title))
+            {
+                tasks = tasks.Where(x => x.Title.Contains(value!));
+            }
+            else if (key == nameof(TaskListDto.Code))
+            {
+                tasks = tasks.Where(x => x.Code.Contains(value!));
+            }
+            else if (key == nameof(TaskListDto.EpicId))
+            {
+                tasks = tasks.Where(x => x.Id.ToString().Contains(value!));
+            }
+            else if (key == nameof(TaskListDto.Status))
+            {
+                tasks = tasks.Where(x => ((int)x.Status & int.Parse(value!)) != 0);
+            }
+            else if (key == nameof(TaskListDto.Priority))
+            {
+                tasks = tasks.Where(x => ((int)x.Priority & int.Parse(value!)) != 0);
+            }
+        }
+
         return tasks;
     }
 
