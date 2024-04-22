@@ -1,0 +1,20 @@
+﻿@page "/"
+
+@using Jared.Presentation.Components.Forms;
+@inject IMediator Mediator
+
+@if (Model is null)
+{
+    return;
+}
+
+<DataGrid
+    Title="Tasks"
+    TItem="TaskListDto"
+    Items="Model.Tasks"
+    ItemsDefinition="new TaskListDefinition().GetColumns()"
+    Pagination="Model.Pagination"
+    SwitchPagination="true"
+    Query="Query"
+    SendPageQuery="sendPageQuery"
+    TaskDetailsForm="new TaskDetailsForm()" />

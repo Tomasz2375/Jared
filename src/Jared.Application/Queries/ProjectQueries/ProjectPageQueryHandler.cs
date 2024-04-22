@@ -49,9 +49,7 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
         IQueryable<Project> projects,
         ProjectPageQuery query)
     {
-        return projects.Where(x => string.IsNullOrEmpty(query.filter) ||
-            x.Title.ToLower().Contains(query.filter.ToLower()) ||
-            x.Description!.ToLower().Contains(query.filter.ToLower()));
+        return projects;
     }
 
     private PaginationDto createPagination(

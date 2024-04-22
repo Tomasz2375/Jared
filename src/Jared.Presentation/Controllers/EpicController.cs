@@ -31,16 +31,16 @@ public class EpicController
     public async Task<Result<EpicPageDto>> EpicPageAsync(
         int page,
         int pageSize,
-        string? filter,
         string? sortingProperty,
-        SortingDirection sortingDirection)
+        SortingDirection sortingDirection,
+        IDictionary<string, string?>? filter)
     {
         return await mediator.Send(new EpicPageQuery(
             page,
             pageSize,
-            filter,
             sortingProperty,
-            sortingDirection));
+            sortingDirection,
+            filter));
     }
 
     [HttpPost]
