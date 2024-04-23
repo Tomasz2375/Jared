@@ -14,7 +14,7 @@
         <tr>
             @foreach(var column in ItemsDefinition)
             {
-                <th class="align-@column.Alignment.ToString().ToLower()" @onclick="(() => sortByColumn(column.ColumnName))">
+                <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width" @onclick="(() => sortByColumn(column.ColumnName))">
                     @column.ColumnName
                     <span class="@sortCssClass(column.ColumnName)"/>
                 </th>
