@@ -7,13 +7,13 @@ namespace Jared.Presentation.ColumnDefinitions;
 public class ProjectListDefinition : ListDefinitionBase<ProjectListDto>
 {
     public IColumnDefinition<ProjectListDto> Id { get; } =
-    new ColumnDefinition<ProjectListDto>("Id", x => x.Id, ColumnAlignment.Left);
+    new ColumnDefinition<ProjectListDto>("Id", x => x.Id, ColumnAlignment.Left, "1");
 
     public IColumnDefinition<ProjectListDto> Title { get; } =
-        new ColumnDefinition<ProjectListDto>("Title", x => x.Title, ColumnAlignment.Left);
+        new ColumnDefinition<ProjectListDto>("Title", x => x.Title, ColumnAlignment.Left, "4");
 
     public IColumnDefinition<ProjectListDto> Code { get; } =
-        new ColumnDefinition<ProjectListDto>("Code", x => x.Code, ColumnAlignment.Left);
+        new ColumnDefinition<ProjectListDto>("Code", x => x.Code, ColumnAlignment.Left, "3");
 
     public override IEnumerable<IColumnDefinition<ProjectListDto>> GetColumns()
     {
