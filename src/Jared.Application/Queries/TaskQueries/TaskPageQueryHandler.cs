@@ -7,7 +7,6 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Jared.Application.Queries.TaskQueries;
@@ -95,6 +94,20 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
             {
                 tasks = tasks.Where(x => ((int)x.Priority & int.Parse(value!)) != 0);
             }
+            else if (key == nameof(TaskListDto.CreatedAt))
+            {
+                var dateFrom = DateTime.Parse(value!.Split('-')[0]);
+                var dateTo = DateTime.Parse(value!.Split('-')[1]);
+
+                tasks = tasks.Where(x => dateFrom <= x.CreatedAt || dateTo >= x.CreatedAt);
+            }
+            else if (key == nameof(TaskListDto.CreatedAt))
+            {
+                var dateFrom = DateTime.Parse(value!.Split('-')[0]);
+                var dateTo = DateTime.Parse(value!.Split('-')[1]);
+
+                tasks = tasks.Where(x => dateFrom <= x.Deadline || dateTo >= x.Deadline);
+            }
         }
 
         return tasks;
@@ -116,6 +129,8 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
             { nameof(TaskListDto.Code), x => x.Code! },
             { nameof(TaskListDto.Status), x => x.Status },
             { nameof(TaskListDto.Priority), x => x.Priority },
+            { nameof(TaskListDto.CreatedAt), x => x.CreatedAt },
+            { nameof(TaskListDto.Deadline), x => x.Deadline! },
         };
 
         var sortByExpression = columnSelector[query.sortingProperty];
