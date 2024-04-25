@@ -96,4 +96,27 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
 
         SendPageQuery.InvokeAsync(Query);
     }
+
+    private object? showValue(TItem item, IColumnDefinition<TItem> column)
+    {
+        var property = item.GetType().GetProperty(column.ColumnName)!;
+        if (property.GetValue(item) is null)
+        {
+            return null;
+        }
+        if (column.Format is null)
+        {
+            return property.GetValue(item)!;
+        }
+
+        if (property.PropertyType == typeof(DateTime?) || property.PropertyType == typeof(DateTime))
+        {
+            var date = (DateTime)property.GetValue(item)!;
+            return date.ToString(column.Format);
+        }
+        else
+        {
+            return property.GetValue(item)!;
+        }
+    }
 }
