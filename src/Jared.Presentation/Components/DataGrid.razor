@@ -1,4 +1,4 @@
-﻿@using Jared.Domain.Enums;
+﻿@using Jared.Domain.Enums
 @using Jared.Presentation.Components.Basic
 @using Jared.Presentation.Components.Forms
 @typeparam TItem
@@ -14,7 +14,7 @@
         <tr>
             @foreach(var column in ItemsDefinition)
             {
-                <th class="align-@column.Alignment.ToString().ToLower()" @onclick="(() => sortByColumn(column.ColumnName))">
+                <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width" @onclick="(() => sortByColumn(column.ColumnName))">
                     @column.ColumnName
                     <span class="@sortCssClass(column.ColumnName)"/>
                 </th>
@@ -28,7 +28,7 @@
                 @foreach (var column in ItemsDefinition)
                 {
                     <td class="align-@column.Alignment.ToString().ToLower()">
-                        @item!.GetType().GetProperty(column.ColumnName)!.GetValue(item)
+                        @showValue(item, column)
                     </td>
                 }
             </tr>
@@ -92,6 +92,27 @@
     .align-right{
         cursor: pointer;
         text-align: right !important;
+    }
+
+    .column-width-1 {
+        width: 10rem;
+        min-width:2rem;
+    }
+    .column-width-2 {
+        width: 20rem;
+        min-width:4rem;
+    }
+    .column-width-3 {
+        width: 30rem;
+        min-width:6rem;
+    }
+    .column-width-4 {
+        width: 40rem;
+        min-width:8rem;
+    }
+    .column-width-5 {
+        width: 50rem;
+        min-width:10rem;
     }
 
     .arrow {

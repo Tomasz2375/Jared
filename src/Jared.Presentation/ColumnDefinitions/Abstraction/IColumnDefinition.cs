@@ -17,4 +17,6 @@ public interface IColumnDefinition
     bool IsNullable { get; set; }
     string? ParentPath { get; set; }
     public ColumnAlignment Alignment { get; set; }
+    public string Width { get; set; }
+    public string? Format { get; set; }
 }

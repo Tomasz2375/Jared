@@ -13,5 +13,8 @@ namespace Jared.Application.Dtos.TaskDtos
 
         public TaskStatus Status { get; set; }
         public Priority Priority { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime? Deadline { get; set; }
     }
 }
