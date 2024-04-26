@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace Jared.Infrastructure.ModelConfiguration;
 
@@ -16,6 +15,9 @@ public class TaskConfiguration : IEntityTypeConfiguration<Domain.Models.Task>
         builder.HasOne(t => t.Project)
             .WithMany(p => p.Tasks)
             .HasForeignKey(t => t.ProjectId)
-            .OnDelete(DeleteBehavior.Cascade); ;
+            .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Property(x => x.CreatedAt)
+            .HasDefaultValueSql("getdate()");
     }
 }
