@@ -9,14 +9,26 @@
 }
 
 <h3>@Title</h3>
+<button @onclick=@(() => SendPageQuery.InvokeAsync(Query))>
+    Show results
+</button>
 <table class="data-grid">
     <thead>
         <tr>
             @foreach(var column in ItemsDefinition)
             {
-                <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width" @onclick="(() => sortByColumn(column.ColumnName))">
-                    @column.ColumnName
-                    <span class="@sortCssClass(column.ColumnName)"/>
+                <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width">
+                    <div @onclick="(() => sortByColumn(column.ColumnName))">
+                        @column.ColumnName
+                        <span class="@sortCssClass(column.ColumnName)"/>
+                    </div>
+                    <div>
+                        <DataGridFilter
+                            Id="@createDictionary(column)"
+                            Filter="@Query.Filter![column.ColumnName]"
+                            Type="@column.Type"
+                            OnFilterChange="(value => updateFilters(column.ColumnName, value))"/>
+                    </div>
                 </th>
             }
         </tr>
