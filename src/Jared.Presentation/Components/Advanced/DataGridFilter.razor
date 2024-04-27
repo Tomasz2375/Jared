@@ -1,0 +1,19 @@
+﻿
+@if (Type == typeof(DateTime) || Type == typeof(DateTime?))
+{
+    <input
+        type="date"
+        @bind-value="@DateFrom"
+        id="From-@Id" />
+    <input
+        type="date"
+        @bind-value="@DateTo"
+        id="To-@Id" />
+}
+else
+{
+    <input
+        type="text"
+        @bind-value="@Value"
+        id="@Id" />
+}
