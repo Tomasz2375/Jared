@@ -16,6 +16,11 @@ public partial class Tasks
 
     private async Task sendPageQuery(Query query)
     {
+        if (!query.Filter!.ContainsKey("Status"))
+        {
+            query.Filter!.Add("Status", "7");
+        }
+
         var result = await Mediator.Send(new TaskPageQuery(
             query.Page,
             query.PageSize,
