@@ -8,6 +8,7 @@ public class ColumnDefinition<T> : IColumnDefinition<T>
 {
     public ColumnDefinition(
         string columnName,
+        Type? type,
         Expression<Func<T,object?>> valueSelector,
         ColumnAlignment alignment,
         string width,
@@ -15,6 +16,7 @@ public class ColumnDefinition<T> : IColumnDefinition<T>
     )
     {
         ColumnName = columnName;
+        Type = type;
         ValueSelector = valueSelector;
         Alignment = alignment;
         Width = width;

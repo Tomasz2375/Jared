@@ -1,22 +1,31 @@
-﻿@using Jared.Domain.Enums
-@using Jared.Presentation.Components.Basic
-@using Jared.Presentation.Components.Forms
-@typeparam TItem
+﻿@typeparam TItem
 
 @if (Pagination is null || Items is null)
 {
     return;
 }
 
-<h3>@Title</h3>
+<div>
+    <h3>@Title</h3>
+</div>
 <table class="data-grid">
     <thead>
         <tr>
             @foreach(var column in ItemsDefinition)
             {
-                <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width" @onclick="(() => sortByColumn(column.ColumnName))">
-                    @column.ColumnName
-                    <span class="@sortCssClass(column.ColumnName)"/>
+                <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width">
+                    <div @onclick="(() => sortByColumn(column.ColumnName))">
+                        @column.ColumnName
+                        <span class="@sortCssClass(column.ColumnName)"/>
+                    </div>
+                    <div>
+                        <DataGridFilter
+                            Id="@createDictionary(column)"
+                            Filter="@Query.Filter![column.ColumnName]"
+                            Type="@column.Type"
+                            Size="@column.Width"
+                            OnFilterChange="(value => updateFilters(column.ColumnName, value))"/>
+                    </div>
                 </th>
             }
         </tr>
