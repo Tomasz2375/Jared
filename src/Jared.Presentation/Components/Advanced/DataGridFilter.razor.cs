@@ -11,8 +11,9 @@ public partial class DataGridFilter
     [Parameter]
     public Type Type { get; set; } = default!;
     [Parameter]
+    public string Size { get; set; } = default!;
+    [Parameter]
     public EventCallback<string> OnFilterChange { get; set; }
-    private string dateFormat = "dd/MM/yyyy";
 
     public string? Value
     {
@@ -27,13 +28,13 @@ public partial class DataGridFilter
         }
     }
 
-    public DateTime DateFrom
+    public DateTime? DateFrom
     {
         get
         {
             if (string.IsNullOrEmpty(Filter!.Split('-')[0]))
             {
-                return DateTime.Now;
+                return null;
             }
             else
             {
@@ -42,21 +43,18 @@ public partial class DataGridFilter
         }
         set
         {
-            if (value.ToString(dateFormat) != Filter!.Split('-')[0])
-            {
-                Filter = createDateFilter(value, DateTo);
-                OnFilterChange.InvokeAsync(Filter);
-            }
+            Filter = createDateFilter(value, DateTo);
+            OnFilterChange.InvokeAsync(Filter);
         }
     }
 
-    public DateTime DateTo
+    public DateTime? DateTo
     {
         get
         {
             if (string.IsNullOrEmpty(Filter!.Split('-')[1]))
             {
-                return DateTime.Now;
+                return null;
             }
             else
             {
@@ -65,11 +63,35 @@ public partial class DataGridFilter
         }
         set
         {
-            if (value.ToString(dateFormat) != Filter!.Split('-')[1])
+            Filter = createDateFilter(DateFrom, value);
+            OnFilterChange.InvokeAsync(Filter);
+        }
+    }
+
+    public string? SelectedValue
+    {
+        get
+        {
+            return Filter;
+        }
+        set
+        {
+            if (string.IsNullOrEmpty(value) || value == "0")
             {
-                Filter = createDateFilter(DateFrom, value);
-                OnFilterChange.InvokeAsync(Filter);
+                Filter = "0";
             }
+            else
+            {
+                if ((int.Parse(value!) & int.Parse(Filter!)) == 0)
+                {
+                    Filter = (int.Parse(Filter!) + int.Parse(value!)).ToString();
+                }
+                else
+                {
+                    Filter = (int.Parse(Filter!) - int.Parse(value!)).ToString();
+                }
+            }
+            OnFilterChange.InvokeAsync(Filter);
         }
     }
 
@@ -78,23 +100,31 @@ public partial class DataGridFilter
         string from = string.Empty;
         string to = string.Empty;
 
-        if (dateFrom is null)
+        if (dateFrom is not null)
         {
-            from = DateTime.MinValue.ToString(dateFormat);
+            from = ((DateTime)dateFrom).ToString();
         }
-        else
+        if (dateTo is not null)
         {
-            from = ((DateTime)dateFrom).ToString(dateFormat);
-        }
-        if (dateTo is null)
-        {
-            to = DateTime.MaxValue.ToString(dateFormat);
-        }
-        else
-        {
-            to = ((DateTime)dateTo).ToString(dateFormat);
+            to = ((DateTime)dateTo).ToString();
         }
 
         return from + "-" + to;
+    }
+
+    private string colorSelectedEnum(object item)
+    {
+        if (string.IsNullOrEmpty(Filter))
+        {
+            Filter = "0";
+        }
+        foreach (var value in Type.GetEnumValues())
+        {
+            if (((int)item & int.Parse(Filter)) != 0)
+            {
+                return "edit-select";
+            }
+        }
+        return string.Empty;
     }
 }
