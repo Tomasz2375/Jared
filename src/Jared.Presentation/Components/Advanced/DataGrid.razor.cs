@@ -59,6 +59,11 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
         Query.Page++;
         SendPageQuery.InvokeAsync(Query);
     }
+    private void showFilterResult()
+    {
+        Query.Page = 1;
+        SendPageQuery.InvokeAsync(Query);
+    }
 
     private string sortCssClass(string columnName)
     {
@@ -147,5 +152,6 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
         }
 
         Query.Filter[key] = value;
+        showFilterResult();
     }
 }
