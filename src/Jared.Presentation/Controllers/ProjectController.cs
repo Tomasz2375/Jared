@@ -1,6 +1,9 @@
 ﻿using Jared.Application.Commands.ProjectCommands;
+using Jared.Application.Commands.TaskCommands;
 using Jared.Application.Dtos.ProjectDtos;
+using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.ProjectQueries;
+using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
@@ -17,6 +20,12 @@ public class ProjectController
     public ProjectController(IMediator mediator)
     {
         this.mediator = mediator;
+    }
+
+    [HttpGet("{id}")]
+    public async Task<Result<ProjectDetailsDto>> ProjectDetailsAsync(int id)
+    {
+        return await mediator.Send(new ProjectDetailsQuery(id));
     }
 
     [HttpGet]
@@ -41,6 +50,12 @@ public class ProjectController
             sortingProperty,
             sortingDirection,
             filter));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<Result> ProjectUpdateAsync(ProjectDetailsDto dto)
+    {
+        return await mediator.Send(new ProjectUpdateCommand(dto));
     }
 
     [HttpPost]
