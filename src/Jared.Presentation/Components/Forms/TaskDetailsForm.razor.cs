@@ -106,7 +106,7 @@ public partial class TaskDetailsForm
 
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            Console.WriteLine("Error when get epic list");
             return;
         }
 
@@ -120,7 +120,7 @@ public partial class TaskDetailsForm
 
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            Console.WriteLine("Error when get task list");
             return;
         }
 
@@ -138,7 +138,7 @@ public partial class TaskDetailsForm
         var result = await Mediator.Send(new TaskUpdateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Create task failed");
+            Console.WriteLine("Save task failed");
         }
 
         await CloseDialog.InvokeAsync();
@@ -149,7 +149,7 @@ public partial class TaskDetailsForm
         var result = await Mediator.Send(new TaskUpdateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Create task failed");
+            Console.WriteLine("Save task failed");
         }
     }
 
@@ -159,7 +159,7 @@ public partial class TaskDetailsForm
 
         if (!result.Success)
         {
-            Console.WriteLine("Create task failed");
+            Console.WriteLine("Get task details failed");
         }
 
         Dto = result.Data;
