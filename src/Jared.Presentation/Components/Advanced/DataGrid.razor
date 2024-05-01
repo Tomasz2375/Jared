@@ -33,7 +33,7 @@
     <tbody>
         @foreach (var item in Items)
         {
-            <tr class="data-grid-body" @onclick="@(() => showDetailsId = int.Parse(item.Id.ToString()!))">
+            <tr class="data-grid-body" @onclick="@(() => ShowDialog.InvokeAsync((int)item.Id))">
                 @foreach (var column in ItemsDefinition)
                 {
                     <td class="align-@column.Alignment.ToString().ToLower()">
@@ -66,11 +66,6 @@
         @($"{Pagination.ItemFrom} - {Pagination.ItemTo} from {Pagination.ItemsCount}")
     </span>
 </div>
-
-@if (showDetailsId != 0 && TaskDetailsForm is not null)
-{
-    <TaskDetailsForm Id="@showDetailsId" CloseDialog="(() => showDetailsId = 0)"></TaskDetailsForm>
-}
 
 <style>
     .data-grid {

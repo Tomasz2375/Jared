@@ -9,6 +9,7 @@ public partial class Projects : ComponentBase
 {
     public ProjectPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
+    private int showDialogWithId;
 
     protected override async Task OnInitializedAsync()
     {

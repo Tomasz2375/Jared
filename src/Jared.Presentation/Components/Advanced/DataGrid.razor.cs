@@ -3,7 +3,6 @@ using Jared.Domain.Enums;
 using Jared.Domain.Interfaces;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
-using Jared.Presentation.Components.Forms;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Advanced;
@@ -31,9 +30,8 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
     [Parameter]
     public bool SwitchPagination { get; set; }
     [Parameter]
-    public TaskDetailsForm TaskDetailsForm { get; set; } = default!;
+    public EventCallback<int> ShowDialog { get; set; }
 
-    private int showDetailsId;
     private List<int> pageSizes = new()
     {
         5, 10, 20, 30, 50, 100,
