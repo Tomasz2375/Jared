@@ -8,6 +8,7 @@ public partial class Dashboard
 {
     public TaskPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
+    private int showDialogWithId;
 
     protected override async Task OnInitializedAsync()
     {
@@ -16,7 +17,10 @@ public partial class Dashboard
 
     private async Task sendPageQuery(Query query)
     {
-        query.Filter!.Add("Status", "6");
+        if (!query.Filter!.ContainsKey("Status"))
+        {
+            query.Filter!.Add("Status", "6");
+        }
 
         var result = await Mediator.Send(new TaskPageQuery(
             query.Page,

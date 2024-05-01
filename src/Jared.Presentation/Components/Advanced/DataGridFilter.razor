@@ -1,0 +1,64 @@
+﻿
+@if (Type == typeof(DateTime) || Type == typeof(DateTime?))
+{
+    <input
+        id="From-@Id"
+        class="edit-date"
+        type="date"
+        @bind-value="@DateFrom" />
+    <input
+        id="To-@Id"
+        class="edit-date"
+        type="date"
+        @bind-value="@DateTo" />
+}
+else if(Type.IsEnum)
+{
+    <select id="select-@Id" @bind="@SelectedValue">
+        @foreach (var item in Type.GetEnumValues())
+        {
+            <option class="@colorSelectedEnum(item)" value="@((int)item)">@item</option>
+        }
+    </select>
+}
+else
+{
+    <input
+        id="@Id"
+        type="text"
+        @bind-value="@Value"
+        class="edit-text-@Size"/>
+}
+
+<style>
+    .edit-date {
+        transform: scale(0.75) translate(-16%);
+        height: 23px;
+        width: 130px;
+        position: relative;
+    }
+
+    .edit-select {
+        color:green;
+    }
+
+    .edit-text-1{
+        width: 40px;
+    }
+
+    .edit-text-2 {
+        width: 80px;
+    }
+
+    .edit-text-3 {
+        width: 120px;
+    }
+
+    .edit-text-4 {
+        width: 160px;
+    }
+
+    .edit-text-5 {
+        width: 200px;
+    }
+</style>

@@ -4,6 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Queries.TaskQueries;
 
-public record TaskDetailsQuery(int id) : IRequest<Result<TaskDetailsDto>>
-{
-}
+public record TaskDetailsQuery(int id) : IRequest<Result<TaskDetailsDto>>;

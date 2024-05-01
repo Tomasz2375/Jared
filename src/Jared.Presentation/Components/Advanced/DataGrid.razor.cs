@@ -3,10 +3,9 @@ using Jared.Domain.Enums;
 using Jared.Domain.Interfaces;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
-using Jared.Presentation.Components.Forms;
 using Microsoft.AspNetCore.Components;
 
-namespace Jared.Presentation.Components;
+namespace Jared.Presentation.Components.Advanced;
 
 public partial class DataGrid<TItem> where TItem : class, IEntity
 {
@@ -31,9 +30,8 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
     [Parameter]
     public bool SwitchPagination { get; set; }
     [Parameter]
-    public TaskDetailsForm TaskDetailsForm { get; set; } = default!;
-    
-    private int showDetailsId;
+    public EventCallback<int> ShowDialog { get; set; }
+
     private List<int> pageSizes = new()
     {
         5, 10, 20, 30, 50, 100,
@@ -57,6 +55,11 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
         }
 
         Query.Page++;
+        SendPageQuery.InvokeAsync(Query);
+    }
+    private void showFilterResult()
+    {
+        Query.Page = 1;
         SendPageQuery.InvokeAsync(Query);
     }
 
@@ -118,5 +121,35 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
         {
             return property.GetValue(item)!;
         }
+    }
+
+    private string createDictionary(IColumnDefinition<TItem> column)
+    {
+        if (Query.Filter!.ContainsKey(column.ColumnName))
+        {
+            return column.ColumnName;
+        }
+
+        if (column.Type == typeof(DateTime) || column.Type == typeof(DateTime?))
+        {
+            Query.Filter!.Add(column.ColumnName, "-");
+        }
+        else
+        {
+            Query.Filter!.Add(column.ColumnName, null);
+        }
+
+        return column.ColumnName;
+    }
+
+    public void updateFilters(string key, string value)
+    {
+        if (string.IsNullOrEmpty(key) || !Query.Filter!.ContainsKey(key))
+        {
+            return;
+        }
+
+        Query.Filter[key] = value;
+        showFilterResult();
     }
 }

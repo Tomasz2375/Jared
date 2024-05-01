@@ -70,6 +70,10 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
     {
         foreach (var (key, value) in query.filters!)
         {
+            if (string.IsNullOrEmpty(value))
+            {
+                continue;
+            }
             if (key == nameof(TaskListDto.Id))
             {
                 tasks = tasks.Where(x => x.Id.ToString().Contains(value!));
@@ -88,25 +92,35 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
             }
             else if (key == nameof(TaskListDto.Status))
             {
+                if (value == "0")
+                {
+                    continue;
+                }
                 tasks = tasks.Where(x => ((int)x.Status & int.Parse(value!)) != 0);
             }
             else if (key == nameof(TaskListDto.Priority))
             {
+                if (value == "0")
+                {
+                    continue;
+                }
                 tasks = tasks.Where(x => ((int)x.Priority & int.Parse(value!)) != 0);
             }
             else if (key == nameof(TaskListDto.CreatedAt))
             {
-                var dateFrom = DateTime.Parse(value!.Split('-')[0]);
-                var dateTo = DateTime.Parse(value!.Split('-')[1]);
+                var hasDateFrom = DateTime.TryParse(value!.Split('-')[0], out DateTime dateFrom);
+                var hasDateTo = DateTime.TryParse(value!.Split('-')[1], out DateTime dateTo);
 
-                tasks = tasks.Where(x => dateFrom <= x.CreatedAt || dateTo >= x.CreatedAt);
+                tasks = tasks.Where(x => !hasDateFrom || x.CreatedAt >= dateFrom);
+                tasks = tasks.Where(x => !hasDateTo || x.CreatedAt <= dateTo);
             }
-            else if (key == nameof(TaskListDto.CreatedAt))
+            else if (key == nameof(TaskListDto.Deadline))
             {
-                var dateFrom = DateTime.Parse(value!.Split('-')[0]);
-                var dateTo = DateTime.Parse(value!.Split('-')[1]);
+                var hasDateFrom = DateTime.TryParse(value!.Split('-')[0], out DateTime dateFrom);
+                var hasDateTo = DateTime.TryParse(value!.Split('-')[1], out DateTime dateTo);
 
-                tasks = tasks.Where(x => dateFrom <= x.Deadline || dateTo >= x.Deadline);
+                tasks = tasks.Where(x => !hasDateFrom || x.Deadline >= dateFrom);
+                tasks = tasks.Where(x => !hasDateTo || x.Deadline <= dateTo);
             }
         }
 
