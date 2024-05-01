@@ -8,6 +8,7 @@ public partial class Epics
 {
     public EpicPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
+    private int showDialogWithId;
 
     protected override async Task OnInitializedAsync()
     {
