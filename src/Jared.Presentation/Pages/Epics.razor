@@ -14,4 +14,10 @@
     Pagination="Model.Pagination"
     SwitchPagination="true"
     Query="Query"
-    SendPageQuery="sendPageQuery" />
+    SendPageQuery="sendPageQuery"
+    ShowDialog="(id => showDialogWithId = id)" />
+
+@if (showDialogWithId > 0)
+{
+    <EpicDetailsForm Id="@showDialogWithId" CloseDialog="(() => showDialogWithId = 0)" />
+}
