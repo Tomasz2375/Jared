@@ -14,7 +14,7 @@ public class Task : Entity
     public string Code { get; set; } = default!;
     public Enums.TaskStatus Status { get; set; }
     public Priority Priority { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTime CreatedAt { get; set; }
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public DateTime? Deadline { get; set; }
@@ -25,5 +25,5 @@ public class Task : Entity
     public Epic? Epic { get; set; }
     public Task? Parent { get; set; }
 
-
+    public List<TaskHistory> TaskHistories { get; set; } = new();
 }

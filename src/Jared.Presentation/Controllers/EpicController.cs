@@ -1,6 +1,9 @@
 ﻿using Jared.Application.Commands.EpicCommands;
+using Jared.Application.Commands.TaskCommands;
 using Jared.Application.Dtos.EpicDtos;
+using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.EpicQueries;
+using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
@@ -17,6 +20,12 @@ public class EpicController
     public EpicController(IMediator mediator)
     {
         this.mediator = mediator;
+    }
+
+    [HttpGet("{id}")]
+    public async Task<Result<EpicDetailsDto>> EpicDetailsAsync(int id)
+    {
+        return await mediator.Send(new EpicDetailsQuery(id));
     }
 
     [HttpGet]
@@ -41,6 +50,12 @@ public class EpicController
             sortingProperty,
             sortingDirection,
             filter));
+    }
+
+    [HttpPut("{id}")]
+    public async Task<Result> EpicUpdateAsync(EpicDetailsDto dto)
+    {
+        return await mediator.Send(new EpicUpdateCommand(dto));
     }
 
     [HttpPost]

@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
-using Mapster;
-using MapsterMapper;
+using Jared.Application.Services.TaskHistory;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -15,6 +14,7 @@ public static class DepedencyInjection
 
         services.AddMediatR(assembly);
         services.AddValidatorsFromAssembly(assembly);
+        services.AddScoped<ITaskHistoryService, TaskHistoryService>();
 
         return services;
     }

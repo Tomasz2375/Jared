@@ -1,4 +1,6 @@
-﻿namespace Jared.Application.Dtos.TaskDtos;
+﻿using Jared.Application.Dtos.TaskHistoryDtos;
+
+namespace Jared.Application.Dtos.TaskDtos;
 
 public class TaskDetailsDto : TaskRootDto
 {
@@ -9,4 +11,6 @@ public class TaskDetailsDto : TaskRootDto
     public DateTime? EndDate { get; set; }
     public TimeSpan EstimatedTime { get; set; }
     public TimeSpan TotalWorkTime { get; set; }
+
+    public List<TaskHistoryDto> TaskHistories { get; set; } = new();
 }
