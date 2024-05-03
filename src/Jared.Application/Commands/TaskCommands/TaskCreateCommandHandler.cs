@@ -34,6 +34,8 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
 
             project.LastTaskNumber++;
             command.dto.Code = createCode(project);
+            var changes = taskHistoryService.GetChanged(new(), command.dto);
+            command.dto.TaskHistories.AddRange(changes);
             var task = mapper.Map<Domain.Models.Task>(command.dto);
 
             dataContext.Add(task);
