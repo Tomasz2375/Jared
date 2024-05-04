@@ -25,6 +25,7 @@ public class TaskDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, Result<
             var task = await dataContext.Set<Domain.Models.Task>()
                 .Include(x => x.Project)
                 .Include(x => x.Epic)
+                .Include(x => x.TaskHistories)
                 .FirstAsync(x => x.Id == query.id, cancellationToken);
 
             var result = mapper.Map<TaskDetailsDto>(task);
