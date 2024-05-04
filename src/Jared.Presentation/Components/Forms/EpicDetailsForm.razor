@@ -8,51 +8,53 @@
 }
 
 <div class="blazor-modal">
-    <div class="blazor-modal-content-large">
+    <div class="blazor-modal-medium">
         <div class="blazor-modal-header">
             <h4 class="blazor-modal-title">@Dto.Title</h4>
             <button class="btn btn-close" @onclick="cancel" />
         </div>
-        <EditForm Model="@Dto">
-            <div class="blazor-modal-body-2">
-                <div class="right-border">
-                    <InputTextField
-                        @bind-Value="@Dto.Title"
-                        Id="title"
-                        Label="Title"
-                        ValidationFor="(() => Dto.Title)" />
-                    <InputSelectList
-                        @bind-Value="@ProjectId"
-                        Items="@projectsDictionary"
-                        TKey="int"
-                        Id="project"
-                        Label="Project"
-                        ValidationFor="@(() => Dto.ProjectId)" />
-                    <InputSelectList
-                        @bind-Value="@ParentId"
-                        Items="@epicsDictionary"
-                        TKey="int?"
-                        Id="epic"
-                        Label="Parent"
-                        Disabled=@(Dto.ProjectId == 0)
-                        ValidationFor="@(() => Dto.ParentId)" />
-                    <InputTextAreaField
-                        @bind-Value="@Dto.Description"
-                        Id="description"
-                        Label="Description"
-                        ValidationFor="(() => Dto.Description)" />
+        <div class="blazor-modal-content-small">
+            <EditForm Model="@Dto">
+                <div class="blazor-modal-body-2">
+                    <div class="right-border">
+                        <InputTextField
+                            @bind-Value="@Dto.Title"
+                            Id="title"
+                            Label="Title"
+                            ValidationFor="(() => Dto.Title)" />
+                        <InputSelectList
+                            @bind-Value="@ProjectId"
+                            Items="@projectsDictionary"
+                            TKey="int"
+                            Id="project"
+                            Label="Project"
+                            ValidationFor="@(() => Dto.ProjectId)" />
+                        <InputSelectList
+                            @bind-Value="@ParentId"
+                            Items="@epicsDictionary"
+                            TKey="int?"
+                            Id="epic"
+                            Label="Parent"
+                            Disabled=@(Dto.ProjectId == 0)
+                            ValidationFor="@(() => Dto.ParentId)" />
+                        <InputTextAreaField
+                            @bind-Value="@Dto.Description"
+                            Id="description"
+                            Label="Description"
+                            ValidationFor="(() => Dto.Description)" />
+                    </div>
+                    <div style="height:50px !important">
+                        <label>&emsp;@nameof(Dto.Tasks)</label>
+                        <ul style="height:340px; overflow: auto">
+                            @foreach(var task in Dto.Tasks)
+                            {
+                                <li>@($"{task.Code}: {task.Title}")</li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-                <div style="height:50px !important">
-                    <label>&emsp;@nameof(Dto.Tasks)</label>
-                    <ul style="height:340px; overflow: auto">
-                        @foreach(var task in Dto.Tasks)
-                        {
-                            <li>@($"{task.Code}: {task.Title}")</li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </EditForm>
+            </EditForm>
+        </div>
         <div class="blazor-modal-footer">
             <button class="btn btn-primary-dialog" @onclick="save">Save task</button>
             <button class="btn btn-primary-dialog" @onclick="saveAndStay">Save and stay</button>

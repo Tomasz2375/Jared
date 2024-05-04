@@ -8,30 +8,32 @@
 }
 
 <div class="blazor-modal">
-    <div class="blazor-modal-content-small">
+    <div class="blazor-modal-small">
         <div class="blazor-modal-header">
             <h4 class="blazor-modal-title">@Dto.Title</h4>
             <button class="btn btn-close" @onclick="cancel" />
         </div>
-        <EditForm Model="@Dto">
-            <div class="blazor-modal-body-1">
-                <InputTextField
-                    @bind-Value="@Dto.Title"
-                    Id="title"
-                    Label="Title"
-                    ValidationFor="(() => Dto.Title)" />
-                <InputTextField
-                    @bind-Value="@Dto.Code"
-                    Id="code"
-                    Label="Code"
-                    ValidationFor="(() => Dto.Code)" />
-                <InputTextAreaField
-                    @bind-Value="@Dto.Description"
-                    Id="description"
-                    Label="Description"
-                    ValidationFor="(() => Dto.Description)" />
-            </div>
-        </EditForm>
+        <div class="blazor-modal-content-small">
+            <EditForm Model="@Dto">
+                <div class="blazor-modal-body-1">
+                    <InputTextField
+                        @bind-Value="@Dto.Title"
+                        Id="title"
+                        Label="Title"
+                        ValidationFor="(() => Dto.Title)" />
+                    <InputTextField
+                        @bind-Value="@Dto.Code"
+                        Id="code"
+                        Label="Code"
+                        ValidationFor="(() => Dto.Code)" />
+                    <InputTextAreaField
+                        @bind-Value="@Dto.Description"
+                        Id="description"
+                        Label="Description"
+                        ValidationFor="(() => Dto.Description)" />
+                </div>
+            </EditForm>
+        </div>
         <div class="blazor-modal-footer">
             <button class="btn btn-primary-dialog" @onclick="save">Save task</button>
             <button class="btn btn-primary-dialog" @onclick="saveAndStay">Save and stay</button>

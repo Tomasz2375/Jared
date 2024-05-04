@@ -1,6 +1,6 @@
 ﻿.right-border {
     border-right: 2px solid;
-    border-color: #00FF0055;
+    border-color: rgb(0, 62, 0) !important;
 }
 
 .input-style {
@@ -16,48 +16,79 @@
     background-color: #EEEEEE77;
 }
 
-.blazor-modal-content-small {
+.blazor-modal-small {
     width: 90%;
     max-width: 600px;
-    height: auto;
     margin: auto;
-    margin-top: 150px;
+    margin-top: 200px;
     background-color: #DDDDDD;
+    overflow: hidden;
     border-radius: 10px;
+}
+
+.blazor-modal-medium {
+    width: 90%;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 200px;
+    background-color: #DDDDDD;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.blazor-modal-large {
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 200px;
+    background-color: #DDDDDD;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.blazor-modal-very-large {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    margin-top: 200px;
+    background-color: #DDDDDD;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.blazor-modal-content-small {
+    min-height: 200px;
+    height: auto;
+    max-height: 400px;
+    margin: auto;
+    background-color: #DDDDDD;
     overflow: hidden;
 }
 
 .blazor-modal-content-medium {
-    width: 90%;
-    max-width: 800px;
+    min-height: 250px;
     height: auto;
+    max-height: 500px;
     margin: auto;
-    margin-top: 150px;
     background-color: #DDDDDD;
-    border-radius: 10px;
     overflow: hidden;
 }
 
 .blazor-modal-content-large {
-    width: 90%;
-    max-width: 1000px;
+    min-height: 300px;
     height: auto;
+    max-height: 600px;
     margin: auto;
-    margin-top: 150px;
     background-color: #DDDDDD;
-    border-radius: 10px;
     overflow: hidden;
 }
 
 .blazor-modal-content-very-large {
-    width: 90%;
-    max-width: 1200px;
+    min-height: 350px;
     height: auto;
-    max-height: 90%;
+    max-height: 700px;
     margin: auto;
-    margin-top: 150px;
     background-color: #DDDDDD;
-    border-radius: 10px;
     overflow: hidden;
 }
 
@@ -65,6 +96,7 @@
     padding: 1rem;
     height: 70px;
     background-color: darkgreen;
+    border-radius: 10px 10px 0 0;
 }
 
 .blazor-modal-title {
@@ -75,21 +107,18 @@
 .blazor-modal-body-1 {
     display: grid;
     grid-template-columns: 100%;
-    max-height: 600px;
     padding: 10px !important;
 }
 
 .blazor-modal-body-2 {
     display: grid;
     grid-template-columns: 60% 40%;
-    max-height: 600px;
     padding: 10px !important;
 }
 
 .blazor-modal-body-3 {
     display: grid;
     grid-template-columns: 50% 25% 25%;
-    max-height: 700px;
     padding: 10px !important;
 }
 
@@ -97,6 +126,7 @@
     padding: 0.6rem;
     height: 60px;
     background-color: darkgreen;
+    border-radius: 0 0 10px 10px;
 }
 
 .btn-close {
