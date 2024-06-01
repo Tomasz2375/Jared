@@ -1,9 +1,6 @@
 ﻿using Jared.Application.Commands.ProjectCommands;
-using Jared.Application.Commands.TaskCommands;
 using Jared.Application.Dtos.ProjectDtos;
-using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.ProjectQueries;
-using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;

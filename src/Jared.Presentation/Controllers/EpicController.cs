@@ -1,9 +1,6 @@
 ﻿using Jared.Application.Commands.EpicCommands;
-using Jared.Application.Commands.TaskCommands;
 using Jared.Application.Dtos.EpicDtos;
-using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.EpicQueries;
-using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
