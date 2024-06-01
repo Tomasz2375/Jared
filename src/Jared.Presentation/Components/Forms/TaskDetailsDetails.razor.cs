@@ -15,61 +15,7 @@ public partial class TaskDetailsDetails
 
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
-    private List<TaskListDto> parents = new();
-    private Dictionary<int, string> projectsDictionary = new();
-    private Dictionary<int, string> epicsDictionary = new();
-    private Dictionary<int, string> parentDictionary = new();
-
-    public int ProjectId
-    {
-        get
-        {
-            return Dto.ProjectId;
-        }
-        set
-        {
-            if (value != Dto.ProjectId)
-            {
-                Dto.ProjectId = value;
-            }
-        }
-    }
-    public int? EpicId
-    {
-        get
-        {
-            return Dto.EpicId;
-        }
-        set
-        {
-            if (value != Dto.EpicId)
-            {
-                if (value == 0)
-                {
-                    value = null;
-                }
-                Dto.EpicId = value;
-            }
-        }
-    }
-    public int? ParentId
-    {
-        get
-        {
-            return Dto.ParentId;
-        }
-        set
-        {
-            if (value != Dto.ParentId)
-            {
-                if (value == 0)
-                {
-                    value = null;
-                }
-                Dto.ParentId = value;
-            }
-        }
-    }
+    private List<TaskListDto> tasks = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -89,7 +35,6 @@ public partial class TaskDetailsDetails
         }
 
         projects = result.Data;
-        projectsDictionary = projects.ToDictionary(x => x.Id, x => x.Title);
     }
 
     private async Task getEpicsAsync()
@@ -103,7 +48,6 @@ public partial class TaskDetailsDetails
         }
 
         epics = result.Data.ToList();
-        epicsDictionary = epics.ToDictionary(x => x.Id, x => x.Title);
     }
 
     private async Task getTasksAsync()
@@ -116,7 +60,6 @@ public partial class TaskDetailsDetails
             return;
         }
 
-        parents = result.Data.ToList();
-        parentDictionary = parents.ToDictionary(x => x.Id, x => x.Title);
+        tasks = result.Data.ToList();
     }
 }
