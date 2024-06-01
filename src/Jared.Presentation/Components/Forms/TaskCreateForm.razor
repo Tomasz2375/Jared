@@ -46,7 +46,7 @@
                             TKey="int?"
                             Id="parent"
                             Label="Parent task"
-                            Disabled=@(Dto.EpicId == 0 || Dto.EpicId is null)
+                            Disabled=@(Dto.EpicId == 0 || Dto.EpicId is null || Dto.ProjectId == 0)
                             ValidationFor="@(() => Dto.ParentId)" />
                     </div>
                     <div>
