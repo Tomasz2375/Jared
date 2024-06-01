@@ -12,7 +12,7 @@ public static class DepedencyInjection
     {
         services.AddDbContext<DataContext>(options => options.UseSqlServer(
                 configuration.GetConnectionString("JaredConnectionString")));
-        services.AddScoped<IDataContext, DataContext>();
+        services.AddTransient<IDataContext, DataContext>();
 
         return services;
     }

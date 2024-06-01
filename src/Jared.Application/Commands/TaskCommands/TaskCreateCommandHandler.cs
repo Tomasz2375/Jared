@@ -1,4 +1,5 @@
-﻿using Jared.Domain.Abstractions;
+﻿using Jared.Application.Services.TaskHistory;
+using Jared.Domain.Abstractions;
 using Jared.Domain.Interfaces;
 using Jared.Domain.Models;
 using MapsterMapper;
@@ -11,16 +12,19 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
+    private readonly ITaskHistoryService taskHistoryService;
 
-    public TaskCreateCommandHandler(IDataContext dataContext, IMapper mapper)
+    public TaskCreateCommandHandler(
+        IDataContext dataContext,
+        IMapper mapper,
+        ITaskHistoryService taskHistoryService)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
+        this.taskHistoryService = taskHistoryService;
     }
 
-#pragma warning disable CS1998
     public async Task<Result> Handle(TaskCreateCommand command, CancellationToken cancellationToken)
-#pragma warning restore CS1998
     {
         try
         {
@@ -30,6 +34,8 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
 
             project.LastTaskNumber++;
             command.dto.Code = createCode(project);
+            var changes = taskHistoryService.GetChanged(new(), command.dto);
+            command.dto.TaskHistories.AddRange(changes);
             var task = mapper.Map<Domain.Models.Task>(command.dto);
 
             dataContext.Add(task);

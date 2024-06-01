@@ -1,0 +1,51 @@
+﻿@using Jared.Application.Dtos.TaskHistoryDtos;
+@if (TaskHistoryDtos is null)
+{
+    return;
+}
+
+ <div style="height:417px;overflow-y:scroll">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @nameof(TaskHistoryDto.Id)
+                </th>
+                <th>
+                    @nameof(TaskHistoryDto.Property)
+                </th>
+                <th>
+                    @nameof(TaskHistoryDto.OldValue)
+                </th>
+                <th>
+                    @nameof(TaskHistoryDto.NewValue)
+                </th>
+                <th>
+                    @nameof(TaskHistoryDto.CreatedAt)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var history in TaskHistoryDtos)
+            {
+                <tr>
+                    <td>
+                        @history.Id
+                    </td>
+                    <td>
+                        @history.Property
+                    </td>
+                    <td>
+                        @history.OldValue
+                    </td>
+                    <td>
+                        @history.NewValue
+                    </td>
+                    <td>
+                        @history.CreatedAt
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

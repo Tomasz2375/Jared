@@ -1,5 +1,4 @@
-﻿using Jared.Application.Commands.TaskCommand;
-using Jared.Application.Dtos.EpicDtos;
+﻿using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.ProjectDtos;
 using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.EpicQueries;
@@ -9,30 +8,20 @@ using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
 
-public partial class TaskCreateForm
+public partial class TaskDetailsDetails
 {
     [Parameter]
-    public EventCallback CloseDialog { get; set; }
+    public TaskDetailsDto Dto { get; set; } = default!;
 
-    [Parameter]
-    public string? Title { get; set; }
-
-    public TaskDetailsDto Dto { get; set; } = new();
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();
 
     protected override async Task OnInitializedAsync()
     {
-        base.OnInitialized();
+        await getTasksAsync();
         await getProjectsAsync();
         await getEpicsAsync();
-        await getTaskAsync();
-
-        Dto.Deadline = DateTime.Now.Date;
-        Dto.Priority = Domain.Enums.Priority.Normal;
-        Dto.Status = Domain.Enums.TaskStatus.Created;
-        Dto.ParentId = null;
     }
 
     private async Task getProjectsAsync()
@@ -54,39 +43,23 @@ public partial class TaskCreateForm
 
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            Console.WriteLine("Error when get epic list");
             return;
         }
 
         epics = result.Data.ToList();
     }
 
-    private async Task getTaskAsync()
+    private async Task getTasksAsync()
     {
         var result = await Mediator.Send(new TaskListQuery(Dto.ProjectId, Dto.EpicId));
 
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            Console.WriteLine("Error when get task list");
             return;
         }
 
         tasks = result.Data.ToList();
-    }
-
-    private void cancel()
-    {
-        CloseDialog.InvokeAsync();
-    }
-
-    private async Task save()
-    {
-        var result = await Mediator.Send(new TaskCreateCommand(Dto));
-        if (!result.Success)
-        {
-            Console.WriteLine("Create task failed");
-        }
-
-        await CloseDialog.InvokeAsync();
     }
 }

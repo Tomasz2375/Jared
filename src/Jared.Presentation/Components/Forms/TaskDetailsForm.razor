@@ -3,84 +3,62 @@
 @inject IMediator Mediator
 
 <div class="blazor-modal">
-    <div class="blazor-modal-content-medium">
+    <div class="blazor-modal-large">
         <div class="blazor-modal-header">
             <h4 class="blazor-modal-title">@Dto.Code</h4>
             <button class="btn btn-close" @onclick="cancel" />
         </div>
-        <EditForm Model="@Dto">
-            <div class="blazor-modal-body-3">
-                <div class="right-border">
-                    <InputTextField
-                        @bind-Value="@Dto.Title"
-                        Id="title"
-                        Label="Title"
-                        ValidationFor="(() => Dto.Title)" />
-                    <InputTextAreaField
-                        @bind-Value="@Dto.Description"
-                        Id="description"
-                        Label="Description"
-                        ValidationFor="(() => Dto.Description)" />
-                </div>
-                <div class="right-border">
-                    <InputSelectList
-                        @bind-Value="@ProjectId"
-                        Items="@projectsDictionary"
-                        TKey="int"
-                        Id="project"
-                        Label="Project"
-                        ValidationFor="@(() => Dto.ProjectId)" />
-                    <InputSelectList
-                        @bind-Value="@EpicId"
-                        Items="@epicsDictionary"
-                        TKey="int?"
-                        Id="epic"
-                        Label="Epic"
-                        Disabled=@(Dto.ProjectId == 0)
-                        ValidationFor="@(() => Dto.EpicId)" />
-                    <InputSelectList
-                        @bind-Value="@ParentId"
-                        Items="@parentDictionary"
-                        TKey="int?"
-                        Id="parent"
-                        Label="Parent task"
-                        Disabled=@(Dto.EpicId == 0 || Dto.EpicId is null)
-                        ValidationFor="@(() => Dto.ParentId)" />
-                    <InputSelectEnum
-                        @bind-Value="@(Dto.Priority)"
-                        ValidationFor="(() => Dto.Priority)"
-                        Id="priority"
-                        Label="Priority" />
-                    <InputSelectEnum
-                        @bind-Value="@(Dto.Status)"
-                        ValidationFor="(() => Dto.Status)"
-                        Id="status"
-                        Label="Status" />
-                </div>
-                <div>
-                    <InputDateField
-                        @bind-Value="@(Dto.Deadline)"
-                        Label="Deadline"
-                        Id="deadline"
-                        ValidationFor="(() => Dto.Deadline)" />
-                    <InputTimeSpanField
-                        @bind-Value="@(Dto.EstimatedTime)"
-                        Label="Estimated time"
-                        Id="estimated-time"
-                        ValidationFor="(() => Dto.EstimatedTime)" />
-                    <InputTimeSpanField
-                        @bind-Value="@(Dto.TotalWorkTime)"
-                        Label="Total work time"
-                        Id="total-work-time"
-                        ValidationFor="(() => Dto.TotalWorkTime)" />
-
-                </div>
+        <div style="display:flex">
+            <div class="@(tabNumber == 0 ? "tab-on" : "tab-off")" @onclick="@(() => tabNumber = 0)">
+                <h5>
+                    Task details
+                </h5>
             </div>
-        </EditForm>
-        <div class="blazor-modal-footer">
-            <button class="btn btn-primary-dialog" @onclick="save">Save task</button>
-            <button class="btn btn-primary-dialog" @onclick="saveAndStay">Save and stay</button>
-            <button class="btn btn-danger" @onclick="cancel">Cancel</button>
+            <div class="@(tabNumber == 1 ? "tab-on" : "tab-off")" @onclick="@(() => tabNumber = 1)">
+                <h5>
+                    Task history
+                </h5>
+            </div>
+        </div>
+        <div class="blazor-modal-content-large">
+            <EditForm Model="@Dto" OnValidSubmit="save">
+                <FluentValidationValidator />
+                @switch (tabNumber)
+                {
+                    case 0:
+                        <TaskDetailsDetails Dto="@Dto" />
+                    break;
+                    case 1:
+                        <TaskDetailsHistory TaskHistoryDtos="@Dto.TaskHistories" />
+                    break;
+                    default:
+                        <TaskDetailsDetails Dto="@Dto" />
+                    break;
+                }
+                <div class="blazor-modal-footer">
+                    <button class="btn btn-primary-dialog" @onclick="(async () => { await save(); closeDialog = true; })">Save task</button>
+                    <button class="btn btn-primary-dialog" @onclick=" (async ()=> { await save(); closeDialog = false; })">Save and stay</button>
+                    <button class="btn btn-danger" @onclick="cancel">Cancel</button>
+                </div>
+            </EditForm>
         </div>
     </div>
 </div>
+
+<style>
+    .tab-on{
+        width: 50%;
+        height: 2rem;
+        text-align:center;
+        background-color: rgb(29,31,32);
+        border-bottom: 2px solid;
+        border-color: rgb(255,190,255) !important;
+    }
+
+    .tab-off {
+        width: 50%;
+        height: 2rem;
+        text-align:center;
+        background-color: rgb(29,31,32);
+    }
+</style>
