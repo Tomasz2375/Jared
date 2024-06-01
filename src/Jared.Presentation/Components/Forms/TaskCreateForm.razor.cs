@@ -21,75 +21,6 @@ public partial class TaskCreateForm
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();
-    private Dictionary<int, string> projectsDictionary = new();
-    private Dictionary<int, string> epicsDictionary = new();
-    private Dictionary<int, string> tasksDictionary = new();
-
-    public int ProjectId
-    {
-        get
-        {
-            return Dto.ProjectId;
-        }
-        set
-        {
-            if (value != Dto.ProjectId)
-            {
-                Dto.ProjectId = value;
-                epicsDictionary = epics
-                    .Where(x => value == 0 || x.ProjectId == value)
-                    .ToDictionary(x => x.Id, x => x.Title);
-                tasksDictionary = tasks
-                    .Where(x => value == 0 || x.ProjectId == value)
-                    .ToDictionary(x => x.Id, x => x.Title);
-                EpicId = 0;
-                ParentTaskId = 0;
-            }
-        }
-    }
-
-    public int? EpicId
-    {
-        get
-        {
-            return Dto.EpicId;
-        }
-        set
-        {
-            if (value != Dto.EpicId)
-            {
-                if (value == 0)
-                {
-                    value = null;
-                }
-                Dto.EpicId = value;
-
-                tasksDictionary = tasks
-                    .Where(x => value == 0 || x.EpicId == value)
-                    .ToDictionary(x => x.Id, x => x.Title);
-                ParentTaskId = 0;
-            }
-        }
-    }
-
-    public int? ParentTaskId
-    {
-        get
-        {
-            return Dto.ParentId;
-        }
-        set
-        {
-            if (value != Dto.ParentId)
-            {
-                if (value == 0)
-                {
-                    value = null;
-                }
-                Dto.ParentId = value;
-            }
-        }
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -115,7 +46,6 @@ public partial class TaskCreateForm
         }
 
         projects = result.Data;
-        projectsDictionary = projects.ToDictionary(x => x.Id, x => x.Title);
     }
 
     private async Task getEpicsAsync()
@@ -129,7 +59,6 @@ public partial class TaskCreateForm
         }
 
         epics = result.Data.ToList();
-        epicsDictionary = epics.ToDictionary(x => x.Id, x => x.Title);
     }
 
     private async Task getTaskAsync()
@@ -143,7 +72,6 @@ public partial class TaskCreateForm
         }
 
         tasks = result.Data.ToList();
-        tasksDictionary = tasks.ToDictionary(x => x.Id, x => x.Title);
     }
 
     private void cancel()
