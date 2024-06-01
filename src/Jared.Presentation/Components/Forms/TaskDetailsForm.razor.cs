@@ -15,6 +15,7 @@ public partial class TaskDetailsForm
 
     public TaskDetailsDto Dto { get; set; } = new();
     private int tabNumber;
+    private bool closeDialog;
 
     protected override async Task OnInitializedAsync()
     {
@@ -34,15 +35,9 @@ public partial class TaskDetailsForm
             Console.WriteLine("Save task failed");
         }
 
-        await CloseDialog.InvokeAsync();
-    }
-
-    private async Task saveAndStay()
-    {
-        var result = await Mediator.Send(new TaskUpdateCommand(Dto));
-        if (!result.Success)
+        if (closeDialog)
         {
-            Console.WriteLine("Save task failed");
+            await CloseDialog.InvokeAsync();
         }
     }
 
