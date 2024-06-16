@@ -1,3 +1,4 @@
+using Blazored.LocalStorage;
 using Jared.Application;
 using Jared.Application.Mapping;
 using Jared.Domain.Models;
@@ -36,6 +37,7 @@ builder.Services.AddAuthentication(option =>
 });
 
 // Add services to the container.
+builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddApplication();
@@ -66,7 +68,7 @@ app.UseSwagger();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthorization();
 app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
