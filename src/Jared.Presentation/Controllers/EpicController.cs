@@ -4,6 +4,7 @@ using Jared.Application.Queries.EpicQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jared.Presentation.Controllers;
