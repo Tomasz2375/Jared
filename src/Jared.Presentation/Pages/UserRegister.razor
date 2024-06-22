@@ -1,0 +1,47 @@
+﻿@page "/register"
+@using MediatR;
+@inject IMediator Mediator
+
+<div>
+    <h4>User register</h4>
+</div>
+<div style="max-width:500px">
+    <EditForm Model="@Dto" OnValidSubmit="registerNewUser">
+        <FluentValidationValidator />
+        <div>
+            <InputTextField
+                @bind-Value="@Dto.FirstName"
+                Id="firstName"
+                Label="First name"
+                ValidationFor="(() => Dto.FirstName)" />
+            <InputTextField
+                @bind-Value="@Dto.LastName"
+                Id="lastName"
+                Label="Last name"
+                ValidationFor="(() => Dto.LastName)" />
+            <InputDateField
+                @bind-Value="@(Dto.DateOfBirth)"
+                Id="dateOfBirth"
+                Label="Date of birth"
+                ValidationFor="(() => Dto.DateOfBirth)" />
+            <InputTextField
+                @bind-Value="@Dto.Email"
+                Id="email"
+                Label="Email"
+                ValidationFor="(() => Dto.Email)" />
+            <InputTextField
+                @bind-Value="@Dto.Password"
+                Id="password"
+                Label="Password"
+                ValidationFor="(() => Dto.Password)" />
+            <InputTextField
+                @bind-Value="@Dto.ConfirmPassword"
+                Id="confirmPassword"
+                Label="Confirm password"
+                ValidationFor="(() => Dto.ConfirmPassword)" />
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary-dialog">Register</button>
+        </div>
+    </EditForm>
+</div>

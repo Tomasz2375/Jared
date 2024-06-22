@@ -19,5 +19,9 @@ public class TaskConfiguration : IEntityTypeConfiguration<Domain.Models.Task>
 
         builder.Property(x => x.CreatedAt)
             .HasDefaultValueSql("getdate()");
+
+        builder.Property(x => x.ProjectId).IsRequired();
+        builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
+        builder.Property(x => x.Code).HasMaxLength(10);
     }
 }
