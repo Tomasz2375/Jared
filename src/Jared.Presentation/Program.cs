@@ -4,7 +4,9 @@ using Jared.Application.Mapping;
 using Jared.Domain.Models;
 using Jared.Domain.Options;
 using Jared.Infrastructure;
+using Jared.Presentation.Components.Authentication;
 using MediatR;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
@@ -35,7 +37,10 @@ builder.Services.AddAuthentication(option =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationOptins.JwtKey)),
     };
 });
-
+builder.Services.AddOptions();
+builder.Services.AddAuthenticationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddHttpClient();
 // Add services to the container.
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddRazorPages();
