@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Presentation", "src\P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Api", "src\Jared.Api\Jared.Api.csproj", "{95A75F71-4E03-4C82-B53C-4956F140ABD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorApp1", "BlazorApp1\BlazorApp1.csproj", "{591C6531-508E-4ACB-B640-3DC37DCED115}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.App", "src\Jared.App\Jared.App.csproj", "{591C6531-508E-4ACB-B640-3DC37DCED115}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
