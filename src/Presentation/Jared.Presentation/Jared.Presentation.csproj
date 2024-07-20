@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Jared.Api\Jared.Api.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Jared.Infrastructure\Jared.Infrastructure.csproj" />
   </ItemGroup>
-
 </Project>

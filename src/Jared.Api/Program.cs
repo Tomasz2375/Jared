@@ -44,7 +44,7 @@ builder.Services.AddHttpClient();
 
 // Add services to the container.
 builder.Services.AddBlazoredLocalStorage();
-builder.Services.AddRazorPages();
+// builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddApplication();
@@ -55,6 +55,14 @@ builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterMappingConfigurations();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+// Add CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Jared.App", builder =>
+    {
+        builder.WithOrigins("https://localhost:7075").AllowAnyHeader().AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 

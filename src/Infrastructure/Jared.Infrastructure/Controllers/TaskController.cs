@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Jared.Infrastructure.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class TaskController : ControllerBase
 {
     private readonly IMediator mediator;

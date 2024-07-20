@@ -13,7 +13,6 @@ public static class DepedencyInjection
         var assembly = Assembly.GetExecutingAssembly();
 
         services.AddMediatR(assembly);
-        services.AddValidatorsFromAssembly(assembly);
         services.AddScoped<ITaskHistoryService, TaskHistoryService>();
 
         return services;
