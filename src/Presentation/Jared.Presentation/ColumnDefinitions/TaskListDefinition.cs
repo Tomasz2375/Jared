@@ -1,7 +1,6 @@
 ﻿using Jared.Application.Dtos.TaskDtos;
 using Jared.Domain.Enums;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Jared.Presentation.ColumnDefinitions;
 

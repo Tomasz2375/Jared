@@ -1,4 +1,4 @@
-﻿namespace Jared.Presentation.Shared;
+﻿namespace Jared.Presentation.Components.Advanced;
 
 public partial class UserButton
 {

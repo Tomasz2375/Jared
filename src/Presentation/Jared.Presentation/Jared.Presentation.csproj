@@ -9,5 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\Jared.Infrastructure\Jared.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Jared.Api\Jared.Api.csproj" />
   </ItemGroup>
 </Project>
