@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Jared.Infrastructure.Controllers;
 
 [ApiController]
-[Route("controller")]
+[Route("api/[controller]")]
 public class UserController
 {
     private readonly IMediator mediator;

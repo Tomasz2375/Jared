@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Jared.Infrastructure.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("api/[controller]")]
 public class EpicController
 {
     private readonly IMediator mediator;
