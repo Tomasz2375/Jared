@@ -1,14 +1,16 @@
+using Jared.Presentation;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-
-builder.Services.AddHttpClient("Jared.Api", client =>
+builder.Services.AddPresentation();
+builder.Services.AddScoped(client => new HttpClient
 {
-    client.BaseAddress = new Uri("https://localhost:7050/api/");
-
+    BaseAddress = new Uri("https://localhost:7050/api/")
 });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using Jared.Application.Services.TaskHistory;
+﻿using Jared.Application.Services.TaskHistory;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;

@@ -8,7 +8,7 @@
     }
   },
   "profiles": {
-    "BlazorApp1": {
+    "Jared.App": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
