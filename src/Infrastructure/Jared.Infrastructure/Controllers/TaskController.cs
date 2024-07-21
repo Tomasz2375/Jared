@@ -21,26 +21,24 @@ public class TaskController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<Result<TaskDetailsDto>> TaskDetailsAsync(int id)
+    public async Task<Result<TaskDetailsDto>> TaskDetailsAsync([FromRoute] int id)
     {
         return await mediator.Send(new TaskDetailsQuery(id));
     }
 
-    [HttpGet]
-    [Route("List")]
-    public async Task<Result<List<TaskListDto>>> TaskListAsync(int? projectId, int? epicId)
+    [HttpGet("List")]
+    public async Task<Result<List<TaskListDto>>> TaskListAsync([FromQuery] int? projectId, [FromQuery] int? epicId)
     {
         return await mediator.Send(new TaskListQuery(projectId, epicId));
     }
 
-    [HttpGet]
-    [Route("Page")]
+    [HttpGet("Page")]
     public async Task<Result<TaskPageDto>> TaskPageAsync(
-        int page,
-        int pageSize,
-        string? sortingProperty,
-        SortingDirection sortingDirection,
-        IDictionary<string, string?>? filter)
+        [FromQuery] int page,
+        [FromQuery] int pageSize,
+        [FromQuery] string? sortingProperty,
+        [FromQuery] SortingDirection sortingDirection,
+        [FromQuery] IDictionary<string, string?>? filter)
     {
         return await mediator.Send(new TaskPageQuery(
             page,
@@ -51,13 +49,13 @@ public class TaskController : ControllerBase
     }
 
     [HttpPut("{id}")]
-    public async Task<Result> TaskUpdateAsync(TaskDetailsDto dto)
+    public async Task<Result> TaskUpdateAsync([FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
-    [HttpPost]
-    public async Task<Result> TaskCreateAsync(TaskCreateCommand command)
+    [HttpPost("Create")]
+    public async Task<Result> TaskCreateAsync([FromBody] TaskCreateCommand command)
     {
         return await mediator.Send(command);
     }

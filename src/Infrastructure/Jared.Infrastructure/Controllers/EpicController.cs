@@ -20,14 +20,14 @@ public class EpicController
     }
 
     [HttpGet("{id}")]
-    public async Task<Result<EpicDetailsDto>> EpicDetailsAsync(int id)
+    public async Task<Result<EpicDetailsDto>> EpicDetailsAsync([FromRoute] int id)
     {
         return await mediator.Send(new EpicDetailsQuery(id));
     }
 
     [HttpGet]
     [Route("List")]
-    public async Task<Result<List<EpicListDto>>> EpicListAsync(int? projectId)
+    public async Task<Result<List<EpicListDto>>> EpicListAsync([FromQuery] int? projectId)
     {
         return await mediator.Send(new EpicListQuery(projectId));
     }
@@ -35,11 +35,11 @@ public class EpicController
     [HttpGet]
     [Route("Page")]
     public async Task<Result<EpicPageDto>> EpicPageAsync(
-        int page,
-        int pageSize,
-        string? sortingProperty,
-        SortingDirection sortingDirection,
-        IDictionary<string, string?>? filter)
+        [FromQuery] int page,
+        [FromQuery] int pageSize,
+        [FromQuery] string? sortingProperty,
+        [FromQuery] SortingDirection sortingDirection,
+        [FromQuery]  IDictionary<string, string?>? filter)
     {
         return await mediator.Send(new EpicPageQuery(
             page,
@@ -50,13 +50,13 @@ public class EpicController
     }
 
     [HttpPut("{id}")]
-    public async Task<Result> EpicUpdateAsync(EpicDetailsDto dto)
+    public async Task<Result> EpicUpdateAsync([FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicUpdateCommand(dto));
     }
 
-    [HttpPost]
-    public async Task<Result> EpicCreateAsync(EpicCreateCommand command)
+    [HttpPost("Create")]
+    public async Task<Result> EpicCreateAsync([FromBody] EpicCreateCommand command)
     {
         return await mediator.Send(command);
     }

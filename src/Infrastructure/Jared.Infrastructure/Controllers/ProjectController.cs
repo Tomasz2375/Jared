@@ -20,26 +20,24 @@ public class ProjectController
     }
 
     [HttpGet("{id}")]
-    public async Task<Result<ProjectDetailsDto>> ProjectDetailsAsync(int id)
+    public async Task<Result<ProjectDetailsDto>> ProjectDetailsAsync([FromRoute] int id)
     {
         return await mediator.Send(new ProjectDetailsQuery(id));
     }
 
-    [HttpGet]
-    [Route("List")]
+    [HttpGet("List")]
     public async Task<Result<List<ProjectListDto>>> ProjectListAsync()
     {
         return await mediator.Send(new ProjectListQuery());
     }
 
-    [HttpGet]
-    [Route("Page")]
+    [HttpGet("Page")]
     public async Task<Result<ProjectPageDto>> ProjectPageAsync(
-        int page,
-        int pageSize,
-        string? sortingProperty,
-        SortingDirection sortingDirection,
-        IDictionary<string, string?>? filter)
+        [FromQuery] int page,
+        [FromQuery] int pageSize,
+        [FromQuery] string? sortingProperty,
+        [FromQuery] SortingDirection sortingDirection,
+        [FromQuery] IDictionary<string, string?>? filter)
     {
         return await mediator.Send(new ProjectPageQuery(
             page,
@@ -50,13 +48,13 @@ public class ProjectController
     }
 
     [HttpPut("{id}")]
-    public async Task<Result> ProjectUpdateAsync(ProjectDetailsDto dto)
+    public async Task<Result> ProjectUpdateAsync([FromBody] ProjectDetailsDto dto)
     {
         return await mediator.Send(new ProjectUpdateCommand(dto));
     }
 
-    [HttpPost]
-    public async Task<Result> ProjectCreateAsync(ProjectCreateCommand command)
+    [HttpPost("Create")]
+    public async Task<Result> ProjectCreateAsync([FromBody] ProjectCreateCommand command)
     {
         return await mediator.Send(command);
     }

@@ -17,13 +17,13 @@ public class UserController
         this.mediator = mediator;
     }
 
-    [HttpPost("register")]
+    [HttpPost("Register")]
     public async Task<Result> UserRegister(UserRegisterDto dto)
     {
         return await mediator.Send(new UserRegisterCommand(dto));
     }
 
-    [HttpPost("login")]
+    [HttpPost("Login")]
     public async Task<Result<string>> UserLogin(UserLoginDto dto)
     {
         return await mediator.Send(new UserLoginCommand(dto));
