@@ -1,10 +1,10 @@
-﻿using Jared.Application.Commands.TaskCommand;
-using Jared.Application.Dtos.EpicDtos;
+﻿using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.ProjectDtos;
 using Jared.Application.Dtos.TaskDtos;
-using Jared.Application.Queries.EpicQueries;
-using Jared.Application.Queries.ProjectQueries;
-using Jared.Application.Queries.TaskQueries;
+using Jared.Presentation.CQRS.Epics.List;
+using Jared.Presentation.CQRS.Projects.List;
+using Jared.Presentation.CQRS.Tasks.Create;
+using Jared.Presentation.CQRS.Tasks.List;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
@@ -17,7 +17,7 @@ public partial class TaskCreateForm
     [Parameter]
     public string? Title { get; set; }
 
-    public TaskDetailsDto Dto { get; set; } = new();
+    public Application.Dtos.TaskDtos.TaskDetailsDto Dto { get; set; } = new();
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();

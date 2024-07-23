@@ -1,5 +1,5 @@
-﻿using Jared.Application.Commands.ProjectCommands;
-using Jared.Application.Dtos.ProjectDtos;
+﻿using Jared.Application.Dtos.ProjectDtos;
+using Jared.Presentation.CQRS.Projects.Create;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;

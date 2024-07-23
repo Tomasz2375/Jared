@@ -1,8 +1,8 @@
-﻿using Jared.Application.Commands.EpicCommands;
-using Jared.Application.Dtos.EpicDtos;
+﻿using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.ProjectDtos;
-using Jared.Application.Queries.EpicQueries;
-using Jared.Application.Queries.ProjectQueries;
+using Jared.Presentation.CQRS.Epics.Create;
+using Jared.Presentation.CQRS.Epics.List;
+using Jared.Presentation.CQRS.Projects.List;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;

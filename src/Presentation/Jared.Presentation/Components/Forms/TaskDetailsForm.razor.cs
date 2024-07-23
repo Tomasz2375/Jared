@@ -1,6 +1,6 @@
-﻿using Jared.Application.Commands.TaskCommands;
-using Jared.Application.Dtos.TaskDtos;
-using Jared.Application.Queries.TaskQueries;
+﻿using Jared.Application.Dtos.TaskDtos;
+using Jared.Presentation.CQRS.Tasks.Details;
+using Jared.Presentation.CQRS.Tasks.Update;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
