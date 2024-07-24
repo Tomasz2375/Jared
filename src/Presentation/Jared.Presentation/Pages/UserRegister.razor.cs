@@ -1,5 +1,5 @@
-﻿using Jared.Application.Commands.UserCommands;
-using Jared.Application.Dtos.UserDtos;
+﻿using Jared.Application.Dtos.UserDtos;
+using Jared.Presentation.CQRS.User.Register;
 
 namespace Jared.Presentation.Pages;
 
