@@ -1,6 +1,6 @@
 ﻿using Jared.Application.Dtos.ProjectDtos;
-using Jared.Application.Queries.ProjectQueries;
 using Jared.Presentation.ColumnDefinitions;
+using Jared.Presentation.CQRS.Projects.Page;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
@@ -18,12 +18,7 @@ public partial class Projects : ComponentBase
 
     private async Task sendPageQuery(Query query)
     {
-        var result = await Mediator.Send(new ProjectPageQuery(
-            query.Page,
-            query.PageSize,
-            query.SortingProperty,
-            query.SortingDirection,
-            query.Filter));
+        var result = await Mediator.Send(new ProjectPageQuery(query));
 
         if (!result.Success)
         {
