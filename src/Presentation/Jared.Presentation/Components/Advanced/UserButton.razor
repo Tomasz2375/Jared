@@ -12,7 +12,7 @@
     <div class="dropdown-menu @userMenuCssClass">
         <AuthorizeView>
             <Authorized>
-                <button onclick="@(() => logout)" class="dropdown-item">Logout</button>
+                <button onclick="@(async () => await logout())" class="dropdown-item">Logout</button>
             </Authorized>
             <NotAuthorized>
                 <a href="login" class="dropdown-item">Login</a>
