@@ -1,16 +1,13 @@
-using Jared.Domain.Models;
-using Jared.Domain.Options;
 using Jared.Application;
 using Jared.Application.Mapping;
+using Jared.Domain.Models;
+using Jared.Domain.Options;
 using Jared.Infrastructure;
-using Jared.Infrastructure.Authentication;
 using MediatR;
-using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
-using Blazored.LocalStorage;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,18 +34,9 @@ builder.Services.AddAuthentication(option =>
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationOptins.JwtKey)),
     };
 });
-builder.Services.AddOptions();
-builder.Services.AddAuthenticationCore();
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
-builder.Services.AddHttpClient();
 
-// Add services to the container.
-builder.Services.AddBlazoredLocalStorage();
-// builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
-
-builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddApplication();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
