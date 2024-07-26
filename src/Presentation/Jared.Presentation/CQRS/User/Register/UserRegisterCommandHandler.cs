@@ -16,7 +16,7 @@ public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, R
 
     public async Task<Result> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
     {
-        var baseUrl = "User/Register";
+        var baseUrl = BaseAdresses.USER_REGISTER;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

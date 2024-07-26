@@ -16,7 +16,7 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<List<E
 
     public async Task<Result<List<EpicListDto>>> Handle(EpicListQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = "epic/list";
+        string baseUrl = BaseAdresses.EPIC_LIST;
         string queryUrl = request.projectId is null
             ? string.Empty
             : $"?projectId={request.projectId}";

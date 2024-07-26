@@ -18,7 +18,7 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
 
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = "task/page";
+        string baseUrl = BaseAdresses.TASK_PAGE;
         string queryUrl = createQueryUrl(request.query);
 
         string url = baseUrl + queryUrl;

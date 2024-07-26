@@ -17,7 +17,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
 
     public async Task<Result<List<TaskListDto>>> Handle(TaskListQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = "task/list";
+        string baseUrl = BaseAdresses.TASK_LIST;
         string queryUrl = createQueryUrl(request.projectId, request.epicId);
         string url = baseUrl + queryUrl;
 

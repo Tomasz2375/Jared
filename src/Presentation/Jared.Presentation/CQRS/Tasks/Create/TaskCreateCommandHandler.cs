@@ -15,7 +15,7 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
 
     public async Task<Result> Handle(TaskCreateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = "task/create";
+        string baseUrl = BaseAdresses.TASK_CREATE;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

@@ -16,7 +16,7 @@ public class ProjectDetailsQueryHandler : IRequestHandler<ProjectDetailsQuery, R
 
     public async Task<Result<ProjectDetailsDto>> Handle(ProjectDetailsQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = $"project/{request.id}";
+        string baseUrl = $"{BaseAdresses.PROJECT_DETAILS}/{request.id}";
 
         return await httpClient.GetFromJsonAsync<Result<ProjectDetailsDto>>(baseUrl);
     }

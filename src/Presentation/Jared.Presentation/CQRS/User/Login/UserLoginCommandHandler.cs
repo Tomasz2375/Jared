@@ -15,7 +15,7 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
 
     public async Task<Result<string>> Handle(UserLoginCommand request, CancellationToken cancellationToken)
     {
-        var baseUrl = "User/Login";
+        var baseUrl = BaseAdresses.USER_LOGIN;
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 
         if (!result.IsSuccessStatusCode)

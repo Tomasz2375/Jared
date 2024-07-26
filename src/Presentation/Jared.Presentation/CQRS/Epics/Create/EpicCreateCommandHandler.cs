@@ -15,7 +15,7 @@ public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Resul
 
     public async Task<Result> Handle(EpicCreateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = "epic/create";
+        string baseUrl = BaseAdresses.EPIC_CREATE;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

@@ -15,7 +15,7 @@ public class ProjectCreateCommandHandler : IRequestHandler<ProjectCreateCommand,
 
     public async Task<Result> Handle(ProjectCreateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = "project/create";
+        string baseUrl = BaseAdresses.PROJECT_CREATE;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

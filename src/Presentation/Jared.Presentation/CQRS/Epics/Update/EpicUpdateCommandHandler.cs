@@ -16,7 +16,7 @@ public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Resul
 
     public async Task<Result> Handle(EpicUpdateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = "epic/update";
+        string baseUrl = BaseAdresses.EPIC_UPDATE;
 
         var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

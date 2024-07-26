@@ -15,7 +15,7 @@ public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Resul
 
     public async Task<Result> Handle(TaskUpdateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = $"task/update";
+        string baseUrl = BaseAdresses.TASK_UPDATE;
 
         var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

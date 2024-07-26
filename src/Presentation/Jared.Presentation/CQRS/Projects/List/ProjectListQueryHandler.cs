@@ -16,7 +16,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
 
     public async Task<Result<List<ProjectListDto>>> Handle(ProjectListQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = "project/list";
+        string baseUrl = BaseAdresses.PROJECT_LIST;
 
         return await httpClient.GetFromJsonAsync<Result<List<ProjectListDto>>>(baseUrl);
     }

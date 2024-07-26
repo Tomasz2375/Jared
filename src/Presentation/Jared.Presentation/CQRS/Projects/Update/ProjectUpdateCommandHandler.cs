@@ -15,7 +15,7 @@ public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand,
 
     public async Task<Result> Handle(ProjectUpdateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = "project/update";
+        string baseUrl = BaseAdresses.PROJECT_UPDATE;
 
         var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

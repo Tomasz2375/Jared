@@ -16,7 +16,7 @@ public class EpicDetailsQueryHandler : IRequestHandler<EpicDetailsQuery, Result<
 
     public async Task<Result<EpicDetailsDto>> Handle(EpicDetailsQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = $"epic/{request.id}";
+        string baseUrl = $"{BaseAdresses.EPIC_DETAILS}/{request.id}";
 
         return await httpClient.GetFromJsonAsync<Result<EpicDetailsDto>>(baseUrl);
     }
