@@ -1,0 +1,82 @@
+﻿@using Jared.Presentation.Components.Advanced
+@using Jared.Presentation.Components.Forms
+@inherits LayoutComponentBase
+
+<PageTitle>Jared.Presentation</PageTitle>
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <button class="btn btn-primary button-size" @onclick="showCreateTaskDialog">Create task</button>
+            <button class="btn btn-primary button-size" @onclick="showCreateEpicDialog">Create epic</button>
+            <button class="btn btn-primary button-size" @onclick="showCreateProjectDialog">Create project</button>
+            <UserButton />
+        </div>
+
+        <article class="content px-4">
+            @if (isActiveCreateNewTask)
+            {
+                <TaskCreateForm Title="Create new task" CloseDialog="showCreateTaskDialog"/>
+            }
+            else if (isActiveCreateNewEpic)
+            {
+                <EpicCreateForm title="Create new epic" CloseDialog="showCreateEpicDialog" />
+            }
+            else if (isActiveCreateNewProject)
+            {
+                <ProjectCreateForm title="Create new project" CloseDialog="showCreateProjectDialog" />
+            }
+            @Body
+        </article>
+    </main>
+</div>
+
+@code {
+    private bool isActiveCreateNewTask;
+    private bool isActiveCreateNewEpic;
+    private bool isActiveCreateNewProject;
+
+    private void showCreateTaskDialog()
+    {
+        isActiveCreateNewTask = !isActiveCreateNewTask;
+
+        if (isActiveCreateNewTask)
+        {
+            isActiveCreateNewEpic = false;
+            isActiveCreateNewProject = false;
+        }
+    }
+
+    private void showCreateEpicDialog()
+    {
+        isActiveCreateNewEpic = !isActiveCreateNewEpic;
+
+        if (isActiveCreateNewEpic)
+        {
+            isActiveCreateNewTask = false;
+            isActiveCreateNewProject = false;
+        }
+    }
+
+    private void showCreateProjectDialog()
+    {
+        isActiveCreateNewProject = !isActiveCreateNewProject;
+
+        if (isActiveCreateNewProject)
+        {
+            isActiveCreateNewTask = false;
+            isActiveCreateNewEpic = false;
+        }
+    }
+}
+
+<style>
+    .button-size{
+        width: 150px;
+        margin-left: 1rem;
+    }
+</style>
