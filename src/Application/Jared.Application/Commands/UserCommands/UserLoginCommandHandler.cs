@@ -2,7 +2,6 @@
 using Jared.Domain.Interfaces;
 using Jared.Domain.Models;
 using Jared.Domain.Options;
-using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -76,7 +75,7 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
         SymmetricSecurityKey key =
             new(Encoding.UTF8.GetBytes(authenticationOptions.JwtKey));
         SigningCredentials credentials =
-            new(key, SecurityAlgorithms.HmacSha256);
+            new(key, SecurityAlgorithms.HmacSha512Signature);
         var expires = DateTime.Now.AddDays(authenticationOptions.JwtExpireDays);
 
         JwtSecurityToken token = new(
