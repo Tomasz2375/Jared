@@ -4,7 +4,7 @@ using Jared.Domain.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jared.Infrastructure.Controllers;
+namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

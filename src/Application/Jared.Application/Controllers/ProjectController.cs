@@ -6,7 +6,7 @@ using Jared.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jared.Infrastructure.Controllers;
+namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -47,15 +47,15 @@ public class ProjectController
             filter));
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("Update")]
     public async Task<Result> ProjectUpdateAsync([FromBody] ProjectDetailsDto dto)
     {
         return await mediator.Send(new ProjectUpdateCommand(dto));
     }
 
     [HttpPost("Create")]
-    public async Task<Result> ProjectCreateAsync([FromBody] ProjectCreateCommand command)
+    public async Task<Result> ProjectCreateAsync([FromBody] ProjectDetailsDto dto)
     {
-        return await mediator.Send(command);
+        return await mediator.Send(new ProjectCreateCommand(dto));
     }
 }

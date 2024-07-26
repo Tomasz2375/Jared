@@ -7,7 +7,7 @@ using Jared.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jared.Infrastructure.Controllers;
+namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -48,15 +48,15 @@ public class TaskController : ControllerBase
             filter));
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("Update")]
     public async Task<Result> TaskUpdateAsync([FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
     [HttpPost("Create")]
-    public async Task<Result> TaskCreateAsync([FromBody] TaskCreateCommand command)
+    public async Task<Result> TaskCreateAsync([FromBody] TaskDetailsDto dto)
     {
-        return await mediator.Send(command);
+        return await mediator.Send(new TaskCreateCommand(dto));
     }
 }

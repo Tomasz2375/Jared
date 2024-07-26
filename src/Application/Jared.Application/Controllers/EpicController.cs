@@ -6,7 +6,7 @@ using Jared.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Jared.Infrastructure.Controllers;
+namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -49,15 +49,15 @@ public class EpicController
             filter));
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("Update")]
     public async Task<Result> EpicUpdateAsync([FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicUpdateCommand(dto));
     }
 
     [HttpPost("Create")]
-    public async Task<Result> EpicCreateAsync([FromBody] EpicCreateCommand command)
+    public async Task<Result> EpicCreateAsync([FromBody] EpicDetailsDto dto)
     {
-        return await mediator.Send(command);
+        return await mediator.Send(new EpicCreateCommand(dto));
     }
 }
