@@ -10,8 +10,19 @@ public static class DepedencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<DataContext>(options => options.UseSqlServer(
-                configuration.GetConnectionString("JaredConnectionString")));
+        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+        switch (environment)
+        {
+            case "Development":
+                services.AddDbContext<DataContext>(options => options.UseSqlServer(
+                    configuration.GetConnectionString("JaredDevelopmentConnectionString")));
+                break;
+            case "Production":
+                services.AddDbContext<DataContext>(options => options.UseSqlServer(
+                    configuration.GetConnectionString("JaredConnectionString")));
+                break;
+        }
+
         services.AddTransient<IDataContext, DataContext>();
 
         return services;
