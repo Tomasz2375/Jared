@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="wwwroot\css\dialog-style.css">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="6.0.32" />
   </ItemGroup>
 

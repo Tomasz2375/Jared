@@ -1,0 +1,22 @@
+﻿.show-menu {
+    display: grid;
+}
+
+.user-button {
+    margin-left: 1rem;
+}
+
+.top-row a {
+    margin-left: 0 !important;
+    vertical-align: middle !important;
+}
+
+.dropdown-item:hover {
+    background-color: #DDDDDD;
+}
+
+.dropdown-menu {
+    left: auto;
+    right: -0.2rem;
+    margin-top: 0.1rem;
+}
