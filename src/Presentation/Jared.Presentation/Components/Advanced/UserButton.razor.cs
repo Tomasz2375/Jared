@@ -13,7 +13,7 @@ public partial class UserButton
 
     private async Task hideUserMemu()
     {
-        await Task.Delay(200);
+        await Task.Delay(100);
         showUserMenu = false;
     }
 

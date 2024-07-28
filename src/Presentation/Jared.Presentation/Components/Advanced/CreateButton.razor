@@ -1,0 +1,16 @@
+﻿<div class="dropdown">
+    <button @onclick="toggleUserMenu"
+            @onfocusout="hideUserMemu"
+            class="btn btn-secondary dropdown-toggle user-button">
+        <i class="oi oi-file" />
+    </button>
+    <div class="dropdown-menu @userMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <button class="dropdown-item" @onclick="openTaskDialog">Create task</button>
+                <button class="dropdown-item" @onclick="openEpicDialog">Create epic</button>
+                <button class="dropdown-item" @onclick="openProjectDialog">Create project</button>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</div>
