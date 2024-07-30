@@ -1,5 +1,6 @@
 ﻿using Jared.Application.Dtos.PageDtos;
 using Jared.Application.Dtos.ProjectDtos;
+using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Queries.EpicQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
@@ -8,7 +9,9 @@ using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace Jared.Application.Queries.ProjectQueries;
 
@@ -49,6 +52,26 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
         IQueryable<Project> projects,
         ProjectPageQuery query)
     {
+        foreach (var (key, value) in query.filters!)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                continue;
+            }
+            if (key == nameof(ProjectListDto.Id))
+            {
+                projects = projects.Where(x => x.Id.ToString().Contains(value!));
+            }
+            else if (key == nameof(ProjectListDto.Title))
+            {
+                projects = projects.Where(x => x.Title.Contains(value!));
+            }
+            else if (key == nameof(ProjectListDto.Code))
+            {
+                projects = projects.Where(x => x.Code.Contains(value!));
+            }
+        }
+
         return projects;
     }
 
