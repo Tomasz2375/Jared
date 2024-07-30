@@ -1,5 +1,6 @@
 ﻿using Jared.Application.Dtos.UserDtos;
 using Jared.Presentation.CQRS.User.Register;
+using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
 
@@ -14,5 +15,7 @@ public partial class UserRegister
         {
             Console.WriteLine("Register user failed");
         }
+
+        NavigationManager.NavigateTo("login");
     }
 }

@@ -11,22 +11,23 @@
 
     <main>
         <div class="top-row px-4">
-            <button class="btn btn-primary button-size" @onclick="showCreateTaskDialog">Create task</button>
-            <button class="btn btn-primary button-size" @onclick="showCreateEpicDialog">Create epic</button>
-            <button class="btn btn-primary button-size" @onclick="showCreateProjectDialog">Create project</button>
+            <CreateButton
+                OpenTaskDialog="@showCreateTaskDialog"
+                OpenEpicDialog="@showCreateEpicDialog"
+                OpenProjectDialog="@showCreateProjectDialog"/>
             <UserButton />
         </div>
 
         <article class="content px-4">
-            @if (isActiveCreateNewTask)
+            @if (isActiveTaskCreateDialog)
             {
                 <TaskCreateForm Title="Create new task" CloseDialog="showCreateTaskDialog"/>
             }
-            else if (isActiveCreateNewEpic)
+            else if (isActiveEpicCreateDialog)
             {
                 <EpicCreateForm title="Create new epic" CloseDialog="showCreateEpicDialog" />
             }
-            else if (isActiveCreateNewProject)
+            else if (isActiveProjectCreateDialog)
             {
                 <ProjectCreateForm title="Create new project" CloseDialog="showCreateProjectDialog" />
             }
@@ -36,40 +37,40 @@
 </div>
 
 @code {
-    private bool isActiveCreateNewTask;
-    private bool isActiveCreateNewEpic;
-    private bool isActiveCreateNewProject;
+    private bool isActiveTaskCreateDialog;
+    private bool isActiveEpicCreateDialog;
+    private bool isActiveProjectCreateDialog;
 
     private void showCreateTaskDialog()
     {
-        isActiveCreateNewTask = !isActiveCreateNewTask;
+        isActiveTaskCreateDialog = !isActiveTaskCreateDialog;
 
-        if (isActiveCreateNewTask)
+        if (isActiveTaskCreateDialog)
         {
-            isActiveCreateNewEpic = false;
-            isActiveCreateNewProject = false;
+            isActiveEpicCreateDialog = false;
+            isActiveProjectCreateDialog = false;
         }
     }
 
     private void showCreateEpicDialog()
     {
-        isActiveCreateNewEpic = !isActiveCreateNewEpic;
+        isActiveEpicCreateDialog = !isActiveEpicCreateDialog;
 
-        if (isActiveCreateNewEpic)
+        if (isActiveEpicCreateDialog)
         {
-            isActiveCreateNewTask = false;
-            isActiveCreateNewProject = false;
+            isActiveTaskCreateDialog = false;
+            isActiveProjectCreateDialog = false;
         }
     }
 
     private void showCreateProjectDialog()
     {
-        isActiveCreateNewProject = !isActiveCreateNewProject;
+        isActiveProjectCreateDialog = !isActiveProjectCreateDialog;
 
-        if (isActiveCreateNewProject)
+        if (isActiveProjectCreateDialog)
         {
-            isActiveCreateNewTask = false;
-            isActiveCreateNewEpic = false;
+            isActiveTaskCreateDialog = false;
+            isActiveEpicCreateDialog = false;
         }
     }
 }

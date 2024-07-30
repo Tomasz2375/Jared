@@ -135,6 +135,7 @@
 }
 
 .btn-primary-dialog {
+    min-width: 100px;
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
@@ -143,6 +144,7 @@
 }
 
 .btn-danger {
+    min-width: 100px;
     float: right;
     margin-right: 15px;
 }

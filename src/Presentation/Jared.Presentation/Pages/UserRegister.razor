@@ -1,6 +1,7 @@
 ﻿@page "/register"
 @using MediatR;
 @inject IMediator Mediator
+@inject NavigationManager NavigationManager
 
 <div>
     <h4>User register</h4>
@@ -29,12 +30,12 @@
                 Id="email"
                 Label="Email"
                 ValidationFor="(() => Dto.Email)" />
-            <InputTextField
+            <InputPasswordField
                 @bind-Value="@Dto.Password"
                 Id="password"
                 Label="Password"
                 ValidationFor="(() => Dto.Password)" />
-            <InputTextField
+            <InputPasswordField
                 @bind-Value="@Dto.ConfirmPassword"
                 Id="confirmPassword"
                 Label="Confirm password"
