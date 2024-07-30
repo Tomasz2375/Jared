@@ -10,5 +10,5 @@ public sealed record ProjectPageQuery(
     int pageSize,
     string? sortingProperty,
     SortingDirection? SortingDirection,
-    IDictionary<string, string?>? filter)
+    IDictionary<string, string?>? filters)
     : IRequest<Result<ProjectPageDto>>;

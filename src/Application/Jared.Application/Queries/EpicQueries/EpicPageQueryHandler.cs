@@ -50,6 +50,30 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
         IQueryable<Epic> epics,
         EpicPageQuery query)
     {
+        foreach (var (key, value) in query.filter!)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                continue;
+            }
+            if (key == nameof(EpicListDto.Id))
+            {
+                epics = epics.Where(x => x.Id.ToString().Contains(value!));
+            }
+            else if (key == nameof(EpicListDto.Title))
+            {
+                epics = epics.Where(x => x.Title.Contains(value!));
+            }
+            else if (key == nameof(EpicListDto.ParentId))
+            {
+                epics = epics.Where(x => x.ParentId.ToString()!.Contains(value));
+            }
+            else if (key == nameof(EpicListDto.ProjectId))
+            {
+                epics = epics.Where(x => x.ProjectId.ToString().Contains(value));
+            }
+        }
+
         return epics;
     }
 
