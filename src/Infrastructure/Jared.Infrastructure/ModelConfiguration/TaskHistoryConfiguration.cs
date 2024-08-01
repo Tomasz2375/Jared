@@ -13,6 +13,11 @@ public class TaskHistoryConfiguration : IEntityTypeConfiguration<TaskHistory>
             .HasForeignKey(th => th.TaskId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        builder.HasOne(th => th.User)
+            .WithMany(u => u.TaskHistories)
+            .HasForeignKey(th => th.UserId)
+            .OnDelete(DeleteBehavior.ClientCascade);
+
         builder.Property(x => x.CreatedAt)
             .HasDefaultValueSql("getdate()");
     }
