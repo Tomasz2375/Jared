@@ -5,7 +5,9 @@ using Jared.Application.Queries.TaskQueries;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Jared.Application.Controllers;
 
@@ -48,12 +50,14 @@ public class TaskController : ControllerBase
             filter));
     }
 
+    [Authorize]
     [HttpPut("Update")]
     public async Task<Result> TaskUpdateAsync([FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
+    [Authorize]
     [HttpPost("Create")]
     public async Task<Result> TaskCreateAsync([FromBody] TaskDetailsDto dto)
     {
