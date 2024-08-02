@@ -1,4 +1,5 @@
 ﻿using Jared.Application.Services.TaskHistory;
+using Jared.Application.Services.User;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -13,6 +14,7 @@ public static class DepedencyInjection
 
         services.AddMediatR(assembly);
         services.AddScoped<ITaskHistoryService, TaskHistoryService>();
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }

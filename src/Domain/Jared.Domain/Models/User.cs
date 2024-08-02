@@ -13,4 +13,6 @@ public class User : Entity
     public string PasswordHash { get; set; } = default!;
 
     public Role? Role { get; set; }
+
+    public List<TaskHistory> TaskHistories { get; set; } = new();
 }
