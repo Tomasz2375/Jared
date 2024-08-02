@@ -7,5 +7,6 @@ public interface ITaskHistoryService
 {
     List<TaskHistoryDto> GetChanged(
         TaskDetailsDto oldTaskDetails,
-        TaskDetailsDto newTaskDetails);
+        TaskDetailsDto newTaskDetails,
+        int userId);
 }
