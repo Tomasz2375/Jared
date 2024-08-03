@@ -1,6 +1,5 @@
 ﻿using Jared.Domain.Abstractions;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
 
 namespace Jared.Presentation.CQRS.User.Register;
@@ -19,8 +18,6 @@ public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, R
         var baseUrl = BaseAdresses.USER_REGISTER;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
-
-        // var test = await result.Content.ReadFromJsonAsync<ActionResult<Result>>();
 
         return Result.Ok();
     }

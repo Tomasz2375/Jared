@@ -28,4 +28,10 @@ public class UserController
     {
         return await mediator.Send(new UserLoginCommand(dto));
     }
+
+    [HttpPost("Password")]
+    public async Task<Result<bool>> UserPassword(UserPasswordDto dto)
+    {
+        return await mediator.Send(new UserPasswordCommand(dto));
+    }
 }
