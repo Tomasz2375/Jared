@@ -23,7 +23,6 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
             return Result.Fail<string>("Nieudana próba logowania");
         }
 
-        // return await result.Content.ReadFromJsonAsync<Result<string>>();
         return await result.Content.ReadFromJsonAsync<Result<string>>();
     }
 }
