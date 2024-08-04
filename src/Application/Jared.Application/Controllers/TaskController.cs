@@ -1,13 +1,14 @@
-﻿using Jared.Application.Commands.TaskCommand;
-using Jared.Application.Commands.TaskCommands;
-using Jared.Application.Dtos.TaskDtos;
-using Jared.Application.Queries.TaskQueries;
+﻿using Jared.Application.Dtos.TaskDtos;
+using Jared.Application.Requests.Tasks.Create;
+using Jared.Application.Requests.Tasks.Details;
+using Jared.Application.Requests.Tasks.List;
+using Jared.Application.Requests.Tasks.Page;
+using Jared.Application.Requests.Tasks.Update;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Jared.Application.Controllers;
 
