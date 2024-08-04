@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Commands.TaskCommands;
+namespace Jared.Application.Requests.Tasks.Update;
 
 public record TaskUpdateCommand(TaskDetailsDto dto) : IRequest<Result>;

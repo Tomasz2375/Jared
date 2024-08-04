@@ -7,7 +7,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Commands.TaskCommand;
+namespace Jared.Application.Requests.Tasks.Create;
 
 public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Result>
 {

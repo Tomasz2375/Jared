@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Commands.TaskCommand;
+namespace Jared.Application.Requests.Tasks.Create;
 
 public sealed record TaskCreateCommand(TaskDetailsDto dto) : IRequest<Result>;

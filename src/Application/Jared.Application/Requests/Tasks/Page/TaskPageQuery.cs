@@ -3,7 +3,7 @@ using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
 
-namespace Jared.Application.Queries.TaskQueries;
+namespace Jared.Application.Requests.Tasks.Page;
 
 public sealed record TaskPageQuery(
     int page,

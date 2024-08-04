@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Queries.TaskQueries;
+namespace Jared.Application.Requests.Tasks.Details;
 
 public record TaskDetailsQuery(int id) : IRequest<Result<TaskDetailsDto>>;

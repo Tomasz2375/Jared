@@ -5,7 +5,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Queries.TaskQueries;
+namespace Jared.Application.Requests.Tasks.List;
 
 public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<TaskListDto>>>
 {

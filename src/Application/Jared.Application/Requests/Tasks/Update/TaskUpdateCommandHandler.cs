@@ -10,7 +10,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Commands.TaskCommands;
+namespace Jared.Application.Requests.Tasks.Update;
 
 public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result>
 {

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Linq.Expressions;
 
-namespace Jared.Application.Queries.TaskQueries;
+namespace Jared.Application.Requests.Tasks.Page;
 
 public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPageDto>>
 {
