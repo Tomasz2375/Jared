@@ -1,5 +1,4 @@
-﻿using Jared.Application.Commands.EpicCommands;
-using Jared.Domain.Abstractions;
+﻿using Jared.Domain.Abstractions;
 using MediatR;
 using System.Net.Http.Json;
 

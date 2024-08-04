@@ -17,7 +17,7 @@ public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, R
     {
         var baseUrl = BaseAdresses.USER_PASSWORD;
 
-        var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
+        var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 
         if (!result.IsSuccessStatusCode)
         {
