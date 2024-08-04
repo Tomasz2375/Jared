@@ -9,7 +9,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Jared.Application.Queries.EpicQueries;
+namespace Jared.Application.Requests.Epics.Page;
 
 public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPageDto>>
 {

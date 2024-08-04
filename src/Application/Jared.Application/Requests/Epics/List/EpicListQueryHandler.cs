@@ -6,7 +6,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Queries.EpicQueries;
+namespace Jared.Application.Requests.Epics.List;
 
 public class EpicListQueryHandler
     : IRequestHandler<EpicListQuery, Result<List<EpicListDto>>>

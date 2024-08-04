@@ -3,7 +3,7 @@ using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
 
-namespace Jared.Application.Queries.EpicQueries;
+namespace Jared.Application.Requests.Epics.Page;
 
 public record EpicPageQuery(
     int page,

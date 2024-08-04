@@ -4,7 +4,7 @@ using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 
-namespace Jared.Application.Commands.EpicCommands;
+namespace Jared.Application.Requests.Epics.Create;
 
 public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Result>
 {

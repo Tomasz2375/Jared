@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Commands.EpicCommands;
+namespace Jared.Application.Requests.Epics.Update;
 
 public sealed record EpicUpdateCommand(EpicDetailsDto dto) : IRequest<Result>;

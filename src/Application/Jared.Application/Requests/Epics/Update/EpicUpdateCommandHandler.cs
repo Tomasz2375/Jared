@@ -5,7 +5,7 @@ using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Commands.EpicCommands;
+namespace Jared.Application.Requests.Epics.Update;
 
 public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Result>
 {

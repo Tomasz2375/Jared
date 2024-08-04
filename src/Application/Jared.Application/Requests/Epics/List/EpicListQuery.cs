@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Queries.EpicQueries;
+namespace Jared.Application.Requests.Epics.List;
 
 public record EpicListQuery(int? projectId) : IRequest<Result<List<EpicListDto>>>;
