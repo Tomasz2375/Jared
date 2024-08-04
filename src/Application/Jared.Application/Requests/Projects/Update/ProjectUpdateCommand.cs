@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Commands.ProjectCommands;
+namespace Jared.Application.Requests.Projects.Update;
 
 public sealed record ProjectUpdateCommand(ProjectDetailsDto dto) : IRequest<Result>;

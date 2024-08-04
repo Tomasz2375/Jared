@@ -5,7 +5,7 @@ using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Commands.ProjectCommands;
+namespace Jared.Application.Requests.Projects.Update;
 
 public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand, Result>
 {

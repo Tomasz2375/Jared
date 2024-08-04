@@ -1,5 +1,4 @@
 ﻿using Jared.Application.Dtos.ProjectDtos;
-using Jared.Application.Dtos.TaskDtos;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Interfaces;
 using Jared.Domain.Models;
@@ -7,7 +6,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Queries.ProjectQueries;
+namespace Jared.Application.Requests.Projects.Details;
 
 public class ProjectDetailsQueryHandler : IRequestHandler<ProjectDetailsQuery, Result<ProjectDetailsDto>>
 {

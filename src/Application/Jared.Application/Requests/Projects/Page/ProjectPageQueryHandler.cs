@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Jared.Application.Queries.ProjectQueries;
+namespace Jared.Application.Requests.Projects.Page;
 
 public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
 {

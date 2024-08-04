@@ -6,7 +6,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Queries.ProjectQueries;
+namespace Jared.Application.Requests.Projects.List;
 
 public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<List<ProjectListDto>>>
 {

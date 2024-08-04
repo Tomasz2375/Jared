@@ -1,11 +1,10 @@
-﻿using Jared.Application.Commands.ProjectCommands;
-using Jared.Domain.Abstractions;
+﻿using Jared.Domain.Abstractions;
 using Jared.Domain.Interfaces;
 using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 
-namespace Jared.Application.Commands.TaskCommand;
+namespace Jared.Application.Requests.Projects.Create;
 
 public class ProjectCreateCommandHandler : IRequestHandler<ProjectCreateCommand, Result>
 {

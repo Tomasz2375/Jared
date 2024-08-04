@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Queries.ProjectQueries;
+namespace Jared.Application.Requests.Projects.List;
 
 public record ProjectListQuery : IRequest<Result<List<ProjectListDto>>>;
