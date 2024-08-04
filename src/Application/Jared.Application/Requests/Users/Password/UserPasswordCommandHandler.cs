@@ -7,7 +7,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace Jared.Application.Commands.UserCommands;
+namespace Jared.Application.Requests.Users.Password;
 
 public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, Result<bool>>
 {

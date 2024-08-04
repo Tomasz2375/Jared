@@ -5,7 +5,7 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace Jared.Application.Commands.UserCommands;
+namespace Jared.Application.Requests.Users.Register;
 
 public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, Result>
 {

@@ -10,7 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Jared.Application.Commands.UserCommands;
+namespace Jared.Application.Requests.Users.Login;
 
 public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<string>>
 {
@@ -37,7 +37,7 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
             var user = await dataContext
                 .Set<User>()
                 .Include(x => x.Role)
-                .FirstOrDefaultAsync(x => 
+                .FirstOrDefaultAsync(x =>
                     x.Email.ToLower() == request.dto.Email.ToLower(),
                     cancellationToken)
                 ?? throw new Exception("Invalid user name or password");

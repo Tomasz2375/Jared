@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Commands.UserCommands;
+namespace Jared.Application.Requests.Users.Password;
 
 public sealed record UserPasswordCommand(UserPasswordDto dto) : IRequest<Result<bool>>;

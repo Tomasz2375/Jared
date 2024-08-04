@@ -2,6 +2,6 @@
 using Jared.Domain.Abstractions;
 using MediatR;
 
-namespace Jared.Application.Commands.UserCommands;
+namespace Jared.Application.Requests.Users.Register;
 
 public sealed record UserRegisterCommand(UserRegisterDto dto) : IRequest<Result>;
