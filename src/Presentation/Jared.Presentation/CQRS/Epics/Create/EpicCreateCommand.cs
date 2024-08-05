@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Presentation.CQRS.Epics.Create;
 
-public sealed record EpicCreateCommand(EpicDetailsDto dto) : IRequest<Result>;
+public sealed record EpicCreateCommand(EpicDetailsDto dto) : IRequest<Result<bool>>;

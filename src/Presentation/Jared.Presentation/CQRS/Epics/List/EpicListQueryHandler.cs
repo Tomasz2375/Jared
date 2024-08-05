@@ -20,7 +20,16 @@ public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<List<E
         string queryUrl = request.projectId is null
             ? string.Empty
             : $"?projectId={request.projectId}";
+
         string url = baseUrl + queryUrl;
-        return await httpClient.GetFromJsonAsync<Result<List<EpicListDto>>>(url);
+
+        var response = await httpClient.GetFromJsonAsync<Result<List<EpicListDto>>>(url);
+
+        if (response is null)
+        {
+            return Result.Fail<List<EpicListDto>>("Invalid response type");
+        }
+
+        return response;
     }
 }

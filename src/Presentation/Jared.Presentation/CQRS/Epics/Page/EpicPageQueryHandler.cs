@@ -23,7 +23,14 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
 
         string url = baseUrl + queryUrl;
 
-        return await httpClient.GetFromJsonAsync<Result<EpicPageDto>>(url);
+        var response = await httpClient.GetFromJsonAsync<Result<EpicPageDto>>(url);
+
+        if (response is null)
+        {
+            return Result.Fail<EpicPageDto>("Invalid response type");
+        }
+
+        return response;
     }
 
     private string createQueryUrl(Query query)

@@ -18,6 +18,13 @@ public class EpicDetailsQueryHandler : IRequestHandler<EpicDetailsQuery, Result<
     {
         string baseUrl = $"{BaseAdresses.EPIC_DETAILS}/{request.id}";
 
-        return await httpClient.GetFromJsonAsync<Result<EpicDetailsDto>>(baseUrl);
+        var response = await httpClient.GetFromJsonAsync<Result<EpicDetailsDto>>(baseUrl, cancellationToken);
+
+        if (response is null)
+        {
+            return Result.Fail<EpicDetailsDto>("Invalid response type");
+        }
+
+        return response;
     }
 }
