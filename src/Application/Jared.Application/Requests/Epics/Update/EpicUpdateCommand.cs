@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Requests.Epics.Update;
 
-public sealed record EpicUpdateCommand(EpicDetailsDto dto) : IRequest<Result>;
+public sealed record EpicUpdateCommand(EpicDetailsDto dto) : IRequest<Result<bool>>;

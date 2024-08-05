@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Epics.Update;
 
-public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Result>
+public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
 
@@ -16,7 +16,7 @@ public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Resul
         this.dataContext = dataContext;
     }
 
-    public async Task<Result> Handle(EpicUpdateCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(EpicUpdateCommand command, CancellationToken cancellationToken)
     {
         try
         {
@@ -24,13 +24,14 @@ public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Resul
                 .FirstAsync(x => x.Id == command.dto.Id, cancellationToken);
 
             command.dto.Adapt(epic);
+
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok(command.dto);
+            return Result.Ok(true);
         }
         catch (Exception ex)
         {
-            return Result.Fail(ex.Message);
+            return Result.Fail<bool>(ex.Message);
         }
     }
 }

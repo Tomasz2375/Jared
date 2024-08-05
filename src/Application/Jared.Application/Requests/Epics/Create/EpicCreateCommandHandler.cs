@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Jared.Application.Requests.Epics.Create;
 
-public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Result>
+public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
@@ -17,9 +17,7 @@ public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Resul
         this.mapper = mapper;
     }
 
-#pragma warning disable CS1998
-    public async Task<Result> Handle(EpicCreateCommand command, CancellationToken cancellationToken)
-#pragma warning restore CS1998
+    public async Task<Result<bool>> Handle(EpicCreateCommand command, CancellationToken cancellationToken)
     {
         var epic = mapper.Map<Epic>(command.dto);
 
@@ -28,11 +26,11 @@ public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Resul
             dataContext.Add(epic);
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok();
+            return Result.Ok(true);
         }
         catch (Exception ex)
         {
-            return Result.Fail(ex.Message);
+            return Result.Fail<bool>(ex.Message);
         }
     }
 }

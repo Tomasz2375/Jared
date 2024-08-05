@@ -22,15 +22,22 @@ public class EpicListQueryHandler
 
     public async Task<Result<List<EpicListDto>>> Handle(EpicListQuery query, CancellationToken cancellationToken)
     {
-        var epicsQuery = dataContext
-            .Set<Epic>()
-            .Where(x => query.projectId == null || query.projectId == 0 || x.ProjectId == query.projectId)
-            .AsNoTracking();
+        try
+        {
+            var epicsQuery = dataContext
+                .Set<Epic>()
+                .Where(x => query.projectId == null || query.projectId == 0 || x.ProjectId == query.projectId)
+                .AsNoTracking();
 
-        var epics = await epicsQuery.ToListAsync();
+            var epics = await epicsQuery.ToListAsync();
 
-        var result = mapper.Map<List<EpicListDto>>(epics);
+            var result = mapper.Map<List<EpicListDto>>(epics);
 
-        return Result.Ok(result);
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<List<EpicListDto>>(ex.Message);
+        }
     }
 }

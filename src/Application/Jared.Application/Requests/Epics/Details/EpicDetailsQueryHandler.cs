@@ -33,7 +33,7 @@ public class EpicDetailsQueryHandler : IRequestHandler<EpicDetailsQuery, Result<
         }
         catch (Exception ex)
         {
-            return new(false, ex.Message);
+            return Result.Fail<EpicDetailsDto>(ex.Message);
         }
     }
 }

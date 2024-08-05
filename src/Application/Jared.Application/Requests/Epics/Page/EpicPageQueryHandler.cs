@@ -24,25 +24,32 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
 
     public async Task<Result<EpicPageDto>> Handle(EpicPageQuery query, CancellationToken cancellationToken)
     {
-        var epicsQuery = dataContext
-            .Set<Epic>()
-            .Include(x => x.Project)
-            .AsNoTracking();
-
-        epicsQuery = filterResult(epicsQuery, query);
-        var pagination = createPagination(epicsQuery, query);
-
-        epicsQuery = sortResult(epicsQuery, query);
-        epicsQuery = paginateResult(epicsQuery, query);
-        var epics = await epicsQuery.ToListAsync();
-
-        EpicPageDto result = new()
+        try
         {
-            Pagination = pagination,
-            Epics = mapper.Map<List<EpicListDto>>(epics),
-        };
+            var epicsQuery = dataContext
+                .Set<Epic>()
+                .Include(x => x.Project)
+                .AsNoTracking();
 
-        return Result.Ok(result);
+            epicsQuery = filterResult(epicsQuery, query);
+            var pagination = createPagination(epicsQuery, query);
+
+            epicsQuery = sortResult(epicsQuery, query);
+            epicsQuery = paginateResult(epicsQuery, query);
+            var epics = await epicsQuery.ToListAsync();
+
+            EpicPageDto result = new()
+            {
+                Pagination = pagination,
+                Epics = mapper.Map<List<EpicListDto>>(epics),
+            };
+
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<EpicPageDto>(ex.Message);
+        }
     }
 
 
