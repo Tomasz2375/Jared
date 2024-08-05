@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Requests.Epics.List;
 
-public record EpicListQuery(int? projectId) : IRequest<Result<List<EpicListDto>>>;
+public sealed record EpicListQuery(int? projectId) : IRequest<Result<List<EpicListDto>>>;

@@ -20,15 +20,23 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
 
     public async Task<Result<List<TaskListDto>>> Handle(TaskListQuery query, CancellationToken cancellationToken)
     {
-        var taskQuery = dataContext
-            .Set<Domain.Models.Task>()
-            .Where(x => query.projectId == null || query.projectId == 0 || x.ProjectId == query.projectId)
-            .Where(x => query.epicId == null || query.epicId == 0 || x.EpicId == query.epicId)
-            .AsNoTracking();
+        try
+        {
+            var taskQuery = dataContext
+                .Set<Domain.Models.Task>()
+                .Where(x => query.projectId == null || query.projectId == 0 || x.ProjectId == query.projectId)
+                .Where(x => query.epicId == null || query.epicId == 0 || x.EpicId == query.epicId)
+                .AsNoTracking();
 
-        var tasks = await taskQuery.ToListAsync();
-        var result = mapper.Map<List<TaskListDto>>(tasks);
+            var tasks = await taskQuery.ToListAsync();
 
-        return Result.Ok(result);
+            var result = mapper.Map<List<TaskListDto>>(tasks);
+
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<List<TaskListDto>>(ex.Message);
+        }
     }
 }

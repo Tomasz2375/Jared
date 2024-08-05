@@ -33,7 +33,6 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
 
             epicsQuery = filterResult(epicsQuery, query);
             var pagination = createPagination(epicsQuery, query);
-
             epicsQuery = sortResult(epicsQuery, query);
             epicsQuery = paginateResult(epicsQuery, query);
             var epics = await epicsQuery.ToListAsync();

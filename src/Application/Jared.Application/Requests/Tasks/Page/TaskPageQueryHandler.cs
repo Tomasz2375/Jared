@@ -24,44 +24,32 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
 
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery query, CancellationToken cancellationToken)
     {
-        var tasksQuery = dataContext
-            .Set<Domain.Models.Task>()
-            .Include(x => x.Epic)
-            .Include(x => x.Project)
-            .AsNoTracking();
-
-        tasksQuery = filterResult(tasksQuery, query);
-
-        var pagination = createPagination(tasksQuery, query);
-
-        tasksQuery = sortResult(tasksQuery, query);
-        tasksQuery = paginateResult(tasksQuery, query);
-        var tasks = await tasksQuery.ToListAsync();
-
-        TaskPageDto result = new()
+        try
         {
-            Pagination = pagination,
-            Tasks = mapper.Map<List<TaskListDto>>(tasks),
-        };
+            var tasksQuery = dataContext
+                .Set<Domain.Models.Task>()
+                .Include(x => x.Epic)
+                .Include(x => x.Project)
+                .AsNoTracking();
 
-        return Result.Ok(result);
-    }
+            tasksQuery = filterResult(tasksQuery, query);
+            var pagination = createPagination(tasksQuery, query);
+            tasksQuery = sortResult(tasksQuery, query);
+            tasksQuery = paginateResult(tasksQuery, query);
+            var tasks = await tasksQuery.ToListAsync();
 
-    private PaginationDto createPagination(
-        IQueryable<Domain.Models.Task> tasks,
-        TaskPageQuery query)
-    {
-        return new()
+            TaskPageDto result = new()
+            {
+                Pagination = pagination,
+                Tasks = mapper.Map<List<TaskListDto>>(tasks),
+            };
+
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
         {
-            ItemsCount = tasks.Count(),
-            ItemFrom = (query.page - 1) * query.pageSize + 1,
-            ItemTo = query.page * query.pageSize > tasks.Count() ?
-                tasks.Count() :
-                query.page * query.pageSize,
-            CurrentPage = query.page,
-            PageSize = query.pageSize,
-            PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
-        };
+            return Result.Fail<TaskPageDto>(ex.Message);
+        }
     }
 
     private IQueryable<Domain.Models.Task> filterResult(
@@ -125,6 +113,23 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         }
 
         return tasks;
+    }
+
+    private PaginationDto createPagination(
+        IQueryable<Domain.Models.Task> tasks,
+        TaskPageQuery query)
+    {
+        return new()
+        {
+            ItemsCount = tasks.Count(),
+            ItemFrom = (query.page - 1) * query.pageSize + 1,
+            ItemTo = query.page * query.pageSize > tasks.Count() ?
+                tasks.Count() :
+                query.page * query.pageSize,
+            CurrentPage = query.page,
+            PageSize = query.pageSize,
+            PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
+        };
     }
 
     private IQueryable<Domain.Models.Task> sortResult(

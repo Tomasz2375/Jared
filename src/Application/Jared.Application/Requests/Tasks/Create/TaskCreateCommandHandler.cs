@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Tasks.Create;
 
-public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Result>
+public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
@@ -28,7 +28,7 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
         this.userService = userService;
     }
 
-    public async Task<Result> Handle(TaskCreateCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(TaskCreateCommand command, CancellationToken cancellationToken)
     {
         try
         {
@@ -46,11 +46,11 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
             dataContext.Add(task);
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok();
+            return Result.Ok(true);
         }
         catch (Exception ex)
         {
-            return Result.Fail(ex.Message);
+            return Result.Fail<bool>(ex.Message);
         }
 
     }

@@ -23,6 +23,7 @@ public class TaskDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, Result<
         try
         {
             var task = await dataContext.Set<Domain.Models.Task>()
+                .AsNoTracking()
                 .Include(x => x.Project)
                 .Include(x => x.Epic)
                 .Include(x => x.TaskHistories)
@@ -34,7 +35,7 @@ public class TaskDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, Result<
         }
         catch (Exception ex)
         {
-            return new(false, ex.Message);
+            return Result.Fail<TaskDetailsDto>(ex.Message);
         }
     }
 }

@@ -24,6 +24,7 @@ public class EpicDetailsQueryHandler : IRequestHandler<EpicDetailsQuery, Result<
         try
         {
             var epic = await dataContext.Set<Epic>()
+                .AsNoTracking()
                 .Include(x => x.Tasks)
                 .FirstAsync(x => x.Id == request.id, cancellationToken);
 

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Requests.Tasks.Create;
 
-public sealed record TaskCreateCommand(TaskDetailsDto dto) : IRequest<Result>;
+public sealed record TaskCreateCommand(TaskDetailsDto dto) : IRequest<Result<bool>>;

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Requests.Tasks.List;
 
-public record TaskListQuery(int? projectId, int? epicId) : IRequest<Result<List<TaskListDto>>>;
+public sealed record TaskListQuery(int? projectId, int? epicId) : IRequest<Result<List<TaskListDto>>>;

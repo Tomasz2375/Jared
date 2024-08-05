@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Tasks.Update;
 
-public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result>
+public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
     private readonly ITaskHistoryService taskHistoryService;
@@ -29,7 +29,7 @@ public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Resul
         this.userService = userService;
     }
 
-    public async Task<Result> Handle(TaskUpdateCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(TaskUpdateCommand command, CancellationToken cancellationToken)
     {
         try
         {
@@ -48,11 +48,11 @@ public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Resul
 
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok();
+            return Result.Ok(true);
         }
         catch (Exception ex)
         {
-            return Result.Fail(ex.Message);
+            return Result.Fail<bool>(ex.Message);
         }
     }
 }

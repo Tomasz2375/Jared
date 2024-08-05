@@ -5,7 +5,7 @@ using MediatR;
 
 namespace Jared.Application.Requests.Epics.Page;
 
-public record EpicPageQuery(
+public sealed record EpicPageQuery(
     int page,
     int pageSize,
     string? sortingProperty,
