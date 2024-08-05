@@ -18,6 +18,13 @@ public class ProjectDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, Resu
     {
         string baseUrl = $"{BaseAdresses.TASK_DETAILS}/{request.id}";
 
-        return await httpClient.GetFromJsonAsync<Result<TaskDetailsDto>>(baseUrl);
+        var response = await httpClient.GetFromJsonAsync<Result<TaskDetailsDto>>(baseUrl, cancellationToken);
+
+        if (response is null)
+        {
+            return Result.Fail<TaskDetailsDto>("Invalid response type");
+        }
+
+        return response;
     }
 }

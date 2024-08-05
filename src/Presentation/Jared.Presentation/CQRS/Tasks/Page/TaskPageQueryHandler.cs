@@ -23,7 +23,14 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
 
         string url = baseUrl + queryUrl;
 
-        return await httpClient.GetFromJsonAsync<Result<TaskPageDto>>(url);
+        var response = await httpClient.GetFromJsonAsync<Result<TaskPageDto>>(url, cancellationToken);
+
+        if (response is null)
+        {
+            return Result.Fail<TaskPageDto>("Invalid response type");
+        }
+
+        return response;
     }
 
     private string createQueryUrl(Query query)

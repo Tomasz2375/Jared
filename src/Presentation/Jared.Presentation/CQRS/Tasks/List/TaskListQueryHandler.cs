@@ -21,8 +21,14 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
         string queryUrl = createQueryUrl(request.projectId, request.epicId);
         string url = baseUrl + queryUrl;
 
-        return await httpClient.GetFromJsonAsync<Result<List<TaskListDto>>>(url);
+        var response = await httpClient.GetFromJsonAsync<Result<List<TaskListDto>>>(url, cancellationToken);
 
+        if (response is null)
+        {
+            return Result.Fail<List<TaskListDto>>("Invalid response type");
+        }
+
+        return response;
     }
 
     private string createQueryUrl(int? projectId, int? epicId)
