@@ -21,7 +21,7 @@ public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, R
 
         if (!result.IsSuccessStatusCode)
         {
-            return Result.Fail<bool>("Password change failed");
+            return Result.Fail<bool>($"Password change failed. Status code: {(int)result.StatusCode} ({result.StatusCode})");
         }
 
         var response = await result.Content.ReadFromJsonAsync<Result<bool>>();

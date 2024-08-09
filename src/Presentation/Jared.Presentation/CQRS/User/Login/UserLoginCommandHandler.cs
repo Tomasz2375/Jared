@@ -16,13 +16,21 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
     public async Task<Result<string>> Handle(UserLoginCommand request, CancellationToken cancellationToken)
     {
         var baseUrl = BaseAdresses.USER_LOGIN;
+
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 
         if (!result.IsSuccessStatusCode)
         {
-            return Result.Fail<string>("Nieudana próba logowania");
+            return Result.Fail<string>($"Login attempt failed. Status code: {(int)result.StatusCode} ({result.StatusCode})");
         }
 
-        return await result.Content.ReadFromJsonAsync<Result<string>>();
+        var response = await result.Content.ReadFromJsonAsync<Result<string>>();
+
+        if (response is null)
+        {
+            return Result.Fail<string>("Invalid response type");
+        }
+
+        return response;
     }
 }

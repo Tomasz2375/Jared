@@ -4,7 +4,7 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.CQRS.Tasks.Update;
 
-public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result>
+public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result<bool>>
 {
     private readonly HttpClient httpClient;
 
@@ -13,7 +13,7 @@ public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Resul
         this.httpClient = httpClient;
     }
 
-    public async Task<Result> Handle(TaskUpdateCommand request, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(TaskUpdateCommand request, CancellationToken cancellationToken)
     {
         string baseUrl = BaseAdresses.TASK_UPDATE;
 
