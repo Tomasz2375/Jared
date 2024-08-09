@@ -39,8 +39,12 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
                 .Include(x => x.Role)
                 .FirstOrDefaultAsync(x =>
                     x.Email.ToLower() == request.dto.Email.ToLower(),
-                    cancellationToken)
-                ?? throw new Exception("Invalid user name or password");
+                    cancellationToken);
+
+            if (user is null)
+            {
+                return Result.Fail<string>("Invalid user name or password");
+            }
 
             var passwordVerificationResult = passwordHasher.VerifyHashedPassword(
                 user,
@@ -49,7 +53,7 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
 
             if (passwordVerificationResult == PasswordVerificationResult.Failed)
             {
-                throw new Exception("Invalid user name or password");
+                return Result.Fail<string>("Invalid user name or password");
             }
 
             var token = generateToken(user);

@@ -41,6 +41,7 @@ public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, R
             {
                 return Result.Fail<bool>("User not found");
             }
+
             if (command.dto.NewPassword != command.dto.ConfirmPassword)
             {
                 return Result.Fail<bool>("The value of the new password and confirm password fields must be the same");
@@ -57,6 +58,7 @@ public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, R
             }
 
             user.PasswordHash = passwordHasher.HashPassword(user, command.dto.NewPassword);
+
             await dataContext.SaveChangesAsync(cancellationToken);
 
             return Result.Ok(true);

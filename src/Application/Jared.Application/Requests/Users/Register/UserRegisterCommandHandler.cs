@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Jared.Application.Requests.Users.Register;
 
-public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, Result>
+public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
@@ -23,7 +23,7 @@ public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, R
         this.mapper = mapper;
         this.passwordHasher = passwordHasher;
     }
-    public async Task<Result> Handle(UserRegisterCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(UserRegisterCommand command, CancellationToken cancellationToken)
     {
         try
         {
@@ -33,13 +33,14 @@ public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, R
             user.RoleId = 1;
 
             dataContext.Add(user);
+
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok();
+            return Result.Ok(true);
         }
         catch (Exception ex)
         {
-            return Result.Fail(ex.Message);
+            return Result.Fail<bool>(ex.Message);
         }
     }
 }
