@@ -24,6 +24,7 @@ public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Resul
         try
         {
             dataContext.Add(epic);
+
             await dataContext.SaveChangesAsync(cancellationToken);
 
             return Result.Ok(true);

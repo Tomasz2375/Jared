@@ -21,14 +21,21 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
 
     public async Task<Result<List<ProjectListDto>>> Handle(ProjectListQuery query, CancellationToken cancellationToken)
     {
-        var projectsQuery = dataContext
-            .Set<Project>()
-            .AsNoTracking();
+        try
+        {
+            var projectsQuery = dataContext
+                .Set<Project>()
+                .AsNoTracking();
 
-        var projects = await projectsQuery.ToListAsync();
+            var projects = await projectsQuery.ToListAsync();
 
-        var result = mapper.Map<List<ProjectListDto>>(projects);
+            var result = mapper.Map<List<ProjectListDto>>(projects);
 
-        return Result.Ok(result);
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<List<ProjectListDto>> (ex.Message);
+        }
     }
 }

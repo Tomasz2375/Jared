@@ -19,14 +19,14 @@ public class EpicDetailsQueryHandler : IRequestHandler<EpicDetailsQuery, Result<
         this.mapper = mapper;
     }
 
-    public async Task<Result<EpicDetailsDto>> Handle(EpicDetailsQuery request, CancellationToken cancellationToken)
+    public async Task<Result<EpicDetailsDto>> Handle(EpicDetailsQuery query, CancellationToken cancellationToken)
     {
         try
         {
             var epic = await dataContext.Set<Epic>()
                 .AsNoTracking()
-                .Include(x => x.Tasks)
-                .FirstAsync(x => x.Id == request.id, cancellationToken);
+                .Include(x => x.Project)
+                .FirstAsync(x => x.Id == query.id, cancellationToken);
 
             var result = mapper.Map<EpicDetailsDto>(epic);
 

@@ -24,6 +24,7 @@ public class ProjectDetailsQueryHandler : IRequestHandler<ProjectDetailsQuery, R
         try
         {
             var project = await dataContext.Set<Project>()
+                .AsNoTracking()
                 .FirstAsync(x => x.Id == query.id, cancellationToken);
 
             var result = mapper.Map<ProjectDetailsDto>(project);
@@ -32,7 +33,7 @@ public class ProjectDetailsQueryHandler : IRequestHandler<ProjectDetailsQuery, R
         }
         catch (Exception ex)
         {
-            return new(false, ex.Message);
+            return Result.Fail<ProjectDetailsDto>(ex.Message);
         }
     }
 }

@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Jared.Application.Requests.Projects.Create;
 
-public class ProjectCreateCommandHandler : IRequestHandler<ProjectCreateCommand, Result>
+public class ProjectCreateCommandHandler : IRequestHandler<ProjectCreateCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
@@ -17,22 +17,21 @@ public class ProjectCreateCommandHandler : IRequestHandler<ProjectCreateCommand,
         this.mapper = mapper;
     }
 
-#pragma warning disable CS1998
-    public async Task<Result> Handle(ProjectCreateCommand command, CancellationToken cancellationToken)
-#pragma warning restore CS1998
+    public async Task<Result<bool>> Handle(ProjectCreateCommand command, CancellationToken cancellationToken)
     {
         var project = mapper.Map<Project>(command.dto);
 
         try
         {
             dataContext.Add(project);
+
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok();
+            return Result.Ok(true);
         }
         catch (Exception ex)
         {
-            return Result.Fail(ex.Message);
+            return Result.Fail<bool>(ex.Message);
         }
     }
 }

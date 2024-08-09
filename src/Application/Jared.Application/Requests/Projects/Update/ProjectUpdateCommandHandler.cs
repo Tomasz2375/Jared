@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Projects.Update;
 
-public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand, Result>
+public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
 
@@ -16,7 +16,7 @@ public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand,
         this.dataContext = dataContext;
     }
 
-    public async Task<Result> Handle(ProjectUpdateCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(ProjectUpdateCommand command, CancellationToken cancellationToken)
     {
         try
         {
@@ -24,13 +24,14 @@ public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand,
                 .FirstAsync(x => x.Id == command.dto.Id);
 
             command.dto.Adapt(project);
+
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok(command.dto);
+            return Result.Ok(true);
         }
         catch (Exception ex)
         {
-            return Result.Fail(ex.Message);
+            return Result.Fail<bool>(ex.Message);
         }
     }
 }

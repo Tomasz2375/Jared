@@ -24,24 +24,30 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
 
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery query, CancellationToken cancellationToken)
     {
-        var projectsQuery = dataContext
-            .Set<Project>()
-            .AsNoTracking();
-
-        projectsQuery = filterResult(projectsQuery, query);
-        var pagination = createPagination(projectsQuery, query);
-
-        projectsQuery = sortResult(projectsQuery, query);
-        projectsQuery = paginateResult(projectsQuery, query);
-        var projects = await projectsQuery.ToListAsync();
-
-        ProjectPageDto result = new()
+        try
         {
-            Pagination = pagination,
-            Projects = mapper.Map<List<ProjectListDto>>(projects),
-        };
+            var projectsQuery = dataContext
+                .Set<Project>()
+                .AsNoTracking();
 
-        return Result.Ok(result);
+            projectsQuery = filterResult(projectsQuery, query);
+            var pagination = createPagination(projectsQuery, query);
+            projectsQuery = sortResult(projectsQuery, query);
+            projectsQuery = paginateResult(projectsQuery, query);
+            var projects = await projectsQuery.ToListAsync();
+
+            ProjectPageDto result = new()
+            {
+                Pagination = pagination,
+                Projects = mapper.Map<List<ProjectListDto>>(projects),
+            };
+
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<ProjectPageDto>(ex.Message);
+        }
     }
 
     private IQueryable<Project> filterResult(

@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Requests.Projects.Create;
 
-public sealed record ProjectCreateCommand(ProjectDetailsDto dto) : IRequest<Result>;
+public sealed record ProjectCreateCommand(ProjectDetailsDto dto) : IRequest<Result<bool>>;

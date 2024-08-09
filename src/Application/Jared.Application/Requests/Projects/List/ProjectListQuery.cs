@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Application.Requests.Projects.List;
 
-public record ProjectListQuery : IRequest<Result<List<ProjectListDto>>>;
+public sealed record ProjectListQuery : IRequest<Result<List<ProjectListDto>>>;
