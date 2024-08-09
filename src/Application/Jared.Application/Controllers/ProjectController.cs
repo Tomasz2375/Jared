@@ -51,13 +51,13 @@ public class ProjectController
     }
 
     [HttpPut("Update")]
-    public async Task<Result> ProjectUpdateAsync([FromBody] ProjectDetailsDto dto)
+    public async Task<Result<bool>> ProjectUpdateAsync([FromBody] ProjectDetailsDto dto)
     {
         return await mediator.Send(new ProjectUpdateCommand(dto));
     }
 
     [HttpPost("Create")]
-    public async Task<Result> ProjectCreateAsync([FromBody] ProjectDetailsDto dto)
+    public async Task<Result<bool>> ProjectCreateAsync([FromBody] ProjectDetailsDto dto)
     {
         return await mediator.Send(new ProjectCreateCommand(dto));
     }

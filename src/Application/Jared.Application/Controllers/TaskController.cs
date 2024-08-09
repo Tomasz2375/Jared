@@ -53,14 +53,14 @@ public class TaskController : ControllerBase
 
     [Authorize]
     [HttpPut("Update")]
-    public async Task<Result> TaskUpdateAsync([FromBody] TaskDetailsDto dto)
+    public async Task<Result<bool>> TaskUpdateAsync([FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
     [Authorize]
     [HttpPost("Create")]
-    public async Task<Result> TaskCreateAsync([FromBody] TaskDetailsDto dto)
+    public async Task<Result<bool>> TaskCreateAsync([FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskCreateCommand(dto));
     }

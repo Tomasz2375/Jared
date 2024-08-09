@@ -20,7 +20,7 @@ public class UserController
     }
 
     [HttpPost("Register")]
-    public async Task<Result> UserRegister(UserRegisterDto dto)
+    public async Task<Result<bool>> UserRegister(UserRegisterDto dto)
     {
         return await mediator.Send(new UserRegisterCommand(dto));
     }

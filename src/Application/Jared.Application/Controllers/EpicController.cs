@@ -53,13 +53,13 @@ public class EpicController
     }
 
     [HttpPut("Update")]
-    public async Task<Result> EpicUpdateAsync([FromBody] EpicDetailsDto dto)
+    public async Task<Result<bool>> EpicUpdateAsync([FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicUpdateCommand(dto));
     }
 
     [HttpPost("Create")]
-    public async Task<Result> EpicCreateAsync([FromBody] EpicDetailsDto dto)
+    public async Task<Result<bool>> EpicCreateAsync([FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicCreateCommand(dto));
     }
