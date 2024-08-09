@@ -23,7 +23,14 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
 
         string url = baseUrl + queryUrl;
 
-        return await httpClient.GetFromJsonAsync<Result<ProjectPageDto>>(url);
+        var response = await httpClient.GetFromJsonAsync<Result<ProjectPageDto>>(url, cancellationToken);
+
+        if (response is null)
+        {
+            return Result.Fail<ProjectPageDto>("Invalid response type");
+        }
+
+        return response;
     }
 
     private string createQueryUrl(Query query)

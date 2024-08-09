@@ -19,8 +19,18 @@ public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand,
 
         var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 
-        var tt = result.StatusCode;
+        if (!result.IsSuccessStatusCode)
+        {
+            return Result.Fail<bool>($"Something went wrong. Status code: {(int)result.StatusCode} ({result.StatusCode})");
+        }
 
-        return Result.Ok();
+        var response = await result.Content.ReadFromJsonAsync<Result<bool>>();
+
+        if (response is null)
+        {
+            return Result.Fail<bool>("Invalid response type");
+        }
+
+        return response;
     }
 }

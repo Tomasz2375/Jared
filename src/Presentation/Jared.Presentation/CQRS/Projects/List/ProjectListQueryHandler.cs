@@ -18,6 +18,13 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
     {
         string baseUrl = BaseAdresses.PROJECT_LIST;
 
-        return await httpClient.GetFromJsonAsync<Result<List<ProjectListDto>>>(baseUrl);
+        var response = await httpClient.GetFromJsonAsync<Result<List<ProjectListDto>>>(baseUrl, cancellationToken);
+
+        if (response is null)
+        {
+            return Result.Fail<List<ProjectListDto>>("Invalid response type");
+        }
+
+        return response;
     }
 }

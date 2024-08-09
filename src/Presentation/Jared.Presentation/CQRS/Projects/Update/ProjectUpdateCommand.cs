@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Jared.Presentation.CQRS.Projects.Update;
 
-public sealed record ProjectUpdateCommand(ProjectDetailsDto dto) : IRequest<Result>;
+public sealed record ProjectUpdateCommand(ProjectDetailsDto dto) : IRequest<Result<bool>>;
