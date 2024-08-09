@@ -1,10 +1,10 @@
 ﻿using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.ProjectDtos;
 using Jared.Application.Dtos.TaskDtos;
-using Jared.Presentation.CQRS.Epics.List;
-using Jared.Presentation.CQRS.Projects.List;
-using Jared.Presentation.CQRS.Tasks.Create;
-using Jared.Presentation.CQRS.Tasks.List;
+using Jared.Presentation.Requests.Epics.List;
+using Jared.Presentation.Requests.Projects.List;
+using Jared.Presentation.Requests.Tasks.Create;
+using Jared.Presentation.Requests.Tasks.List;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
