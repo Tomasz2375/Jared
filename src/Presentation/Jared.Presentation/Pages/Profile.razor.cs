@@ -1,5 +1,5 @@
 ﻿using Jared.Application.Dtos.UserDtos;
-using Jared.Presentation.CQRS.User.Password;
+using Jared.Presentation.Requests.User.Password;
 
 namespace Jared.Presentation.Pages;
 

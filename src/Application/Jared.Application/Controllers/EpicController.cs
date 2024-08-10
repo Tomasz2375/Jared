@@ -1,6 +1,9 @@
-﻿using Jared.Application.Commands.EpicCommands;
-using Jared.Application.Dtos.EpicDtos;
-using Jared.Application.Queries.EpicQueries;
+﻿using Jared.Application.Dtos.EpicDtos;
+using Jared.Application.Requests.Epics.Create;
+using Jared.Application.Requests.Epics.Details;
+using Jared.Application.Requests.Epics.List;
+using Jared.Application.Requests.Epics.Page;
+using Jared.Application.Requests.Epics.Update;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
@@ -50,13 +53,13 @@ public class EpicController
     }
 
     [HttpPut("Update")]
-    public async Task<Result> EpicUpdateAsync([FromBody] EpicDetailsDto dto)
+    public async Task<Result<bool>> EpicUpdateAsync([FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicUpdateCommand(dto));
     }
 
     [HttpPost("Create")]
-    public async Task<Result> EpicCreateAsync([FromBody] EpicDetailsDto dto)
+    public async Task<Result<bool>> EpicCreateAsync([FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicCreateCommand(dto));
     }

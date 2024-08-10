@@ -1,13 +1,14 @@
-﻿using Jared.Application.Commands.TaskCommand;
-using Jared.Application.Commands.TaskCommands;
-using Jared.Application.Dtos.TaskDtos;
-using Jared.Application.Queries.TaskQueries;
+﻿using Jared.Application.Dtos.TaskDtos;
+using Jared.Application.Requests.Tasks.Create;
+using Jared.Application.Requests.Tasks.Details;
+using Jared.Application.Requests.Tasks.List;
+using Jared.Application.Requests.Tasks.Page;
+using Jared.Application.Requests.Tasks.Update;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace Jared.Application.Controllers;
 
@@ -52,14 +53,14 @@ public class TaskController : ControllerBase
 
     [Authorize]
     [HttpPut("Update")]
-    public async Task<Result> TaskUpdateAsync([FromBody] TaskDetailsDto dto)
+    public async Task<Result<bool>> TaskUpdateAsync([FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
     [Authorize]
     [HttpPost("Create")]
-    public async Task<Result> TaskCreateAsync([FromBody] TaskDetailsDto dto)
+    public async Task<Result<bool>> TaskCreateAsync([FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskCreateCommand(dto));
     }

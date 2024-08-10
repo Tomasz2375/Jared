@@ -1,5 +1,5 @@
 ﻿using Jared.Application.Dtos.UserDtos;
-using Jared.Presentation.CQRS.User.Register;
+using Jared.Presentation.Requests.User.Register;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
