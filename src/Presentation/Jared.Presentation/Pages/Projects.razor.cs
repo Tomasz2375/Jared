@@ -1,6 +1,6 @@
 ﻿using Jared.Application.Dtos.ProjectDtos;
 using Jared.Presentation.ColumnDefinitions;
-using Jared.Presentation.CQRS.Projects.Page;
+using Jared.Presentation.Requests.Projects.Page;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
