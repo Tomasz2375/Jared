@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.Abstractions;
+﻿using Jared.Shared.Dtos.Abstractions;
 
-namespace Jared.Application.Dtos.ProjectDtos;
+namespace Jared.Shared.Dtos.ProjectDtos;
 
 public class ProjectRootDto : EntityDto<int>
 {

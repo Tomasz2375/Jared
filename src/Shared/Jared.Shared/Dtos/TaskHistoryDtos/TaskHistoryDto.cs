@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.Abstractions;
+﻿using Jared.Shared.Dtos.Abstractions;
 
-namespace Jared.Application.Dtos.TaskHistoryDtos;
+namespace Jared.Shared.Dtos.TaskHistoryDtos;
 
 public class TaskHistoryDto : EntityDto<int>
 {

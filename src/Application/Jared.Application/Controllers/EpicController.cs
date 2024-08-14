@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.EpicDtos;
+﻿using Jared.Shared.Dtos.EpicDtos;
 using Jared.Application.Requests.Epics.Create;
 using Jared.Application.Requests.Epics.Details;
 using Jared.Application.Requests.Epics.List;

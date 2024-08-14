@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.ProjectDtos;
+﻿using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Application.Requests.Projects.Create;
 using Jared.Application.Requests.Projects.Details;
 using Jared.Application.Requests.Projects.List;

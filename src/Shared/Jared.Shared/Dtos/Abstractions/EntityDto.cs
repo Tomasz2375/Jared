@@ -1,6 +1,6 @@
 ﻿using Jared.Shared.Interfaces;
 
-namespace Jared.Application.Dtos.Abstractions;
+namespace Jared.Shared.Dtos.Abstractions;
 
 public abstract class EntityDto<TKey> : IEntity<TKey>
 {

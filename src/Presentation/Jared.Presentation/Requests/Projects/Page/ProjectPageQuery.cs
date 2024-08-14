@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.ProjectDtos;
+﻿using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Abstractions;
 using Jared.Presentation.ColumnDefinitions;
 using MediatR;

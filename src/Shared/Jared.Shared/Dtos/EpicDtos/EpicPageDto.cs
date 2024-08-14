@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.PageDtos;
+﻿using Jared.Shared.Dtos.PageDtos;
 
-namespace Jared.Application.Dtos.EpicDtos;
+namespace Jared.Shared.Dtos.EpicDtos;
 
 public class EpicPageDto
 {

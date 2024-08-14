@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.TaskDtos;
+﻿using Jared.Shared.Dtos.TaskDtos;
 
-namespace Jared.Application.Dtos.EpicDtos;
+namespace Jared.Shared.Dtos.EpicDtos;
 
 public class EpicDetailsDto : EpicRootDto
 {

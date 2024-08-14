@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.TaskDtos;
+﻿using Jared.Shared.Dtos.TaskDtos;
 using Jared.Presentation.Requests.Tasks.Details;
 using Jared.Presentation.Requests.Tasks.Update;
 using Microsoft.AspNetCore.Components;

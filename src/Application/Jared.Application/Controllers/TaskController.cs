@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.TaskDtos;
+﻿using Jared.Shared.Dtos.TaskDtos;
 using Jared.Application.Requests.Tasks.Create;
 using Jared.Application.Requests.Tasks.Details;
 using Jared.Application.Requests.Tasks.List;

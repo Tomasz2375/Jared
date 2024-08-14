@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.ProjectDtos;
+﻿using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.Requests.Projects.Page;
 using Microsoft.AspNetCore.Components;

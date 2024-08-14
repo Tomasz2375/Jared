@@ -1,8 +1,8 @@
-﻿using Jared.Application.Dtos.Abstractions;
+﻿using Jared.Shared.Dtos.Abstractions;
 using Jared.Shared.Enums;
 using TaskStatus = Jared.Shared.Enums.TaskStatus;
 
-namespace Jared.Application.Dtos.TaskDtos;
+namespace Jared.Shared.Dtos.TaskDtos;
 
 public class TaskRootDto : EntityDto<int>
 {

@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.Abstractions;
+﻿using Jared.Shared.Dtos.Abstractions;
 
-namespace Jared.Application.Dtos.EpicDtos;
+namespace Jared.Shared.Dtos.EpicDtos;
 
 public class EpicRootDto : EntityDto<int>
 {

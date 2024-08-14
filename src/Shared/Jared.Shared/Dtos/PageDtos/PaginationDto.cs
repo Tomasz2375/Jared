@@ -1,6 +1,8 @@
-﻿namespace Jared.Application.Dtos.Abstractions;
+﻿using Jared.Shared.Dtos.Abstractions;
 
-public interface IPagination
+namespace Jared.Shared.Dtos.PageDtos;
+
+public class PaginationDto : IPagination
 {
     public int ItemsCount { get; set; }
     public int ItemFrom { get; set; }

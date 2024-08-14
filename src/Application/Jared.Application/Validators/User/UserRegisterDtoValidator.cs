@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Jared.Application.Dtos.UserDtos;
+using Jared.Shared.Dtos.UserDtos;
 
 namespace Jared.Application.Validators.User;
 

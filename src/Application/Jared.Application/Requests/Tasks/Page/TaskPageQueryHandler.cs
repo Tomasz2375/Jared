@@ -1,5 +1,5 @@
-﻿using Jared.Application.Dtos.PageDtos;
-using Jared.Application.Dtos.TaskDtos;
+﻿using Jared.Shared.Dtos.PageDtos;
+using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;

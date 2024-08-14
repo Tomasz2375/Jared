@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.UserDtos;
+﻿using Jared.Shared.Dtos.UserDtos;
 using Jared.Presentation.Requests.User.Register;
 using Microsoft.AspNetCore.Components;
 

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Jared.Application.Dtos.TaskDtos;
+using Jared.Shared.Dtos.TaskDtos;
 
 namespace Jared.Application.Validators.Task;
 

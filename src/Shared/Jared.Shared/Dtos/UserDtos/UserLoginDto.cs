@@ -1,4 +1,4 @@
-﻿namespace Jared.Application.Dtos.UserDtos;
+﻿namespace Jared.Shared.Dtos.UserDtos;
 
 public class UserLoginDto
 {

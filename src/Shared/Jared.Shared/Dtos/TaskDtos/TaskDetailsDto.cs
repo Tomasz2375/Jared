@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.TaskHistoryDtos;
+﻿using Jared.Shared.Dtos.TaskHistoryDtos;
 
-namespace Jared.Application.Dtos.TaskDtos;
+namespace Jared.Shared.Dtos.TaskDtos;
 
 public class TaskDetailsDto : TaskRootDto
 {

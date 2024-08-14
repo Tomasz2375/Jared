@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.PageDtos;
+﻿using Jared.Shared.Dtos.PageDtos;
 
-namespace Jared.Application.Dtos.ProjectDtos;
+namespace Jared.Shared.Dtos.ProjectDtos;
 
 public class ProjectPageDto
 {

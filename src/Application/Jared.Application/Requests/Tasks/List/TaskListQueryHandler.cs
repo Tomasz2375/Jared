@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.TaskDtos;
+﻿using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
 using MapsterMapper;

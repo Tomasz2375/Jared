@@ -1,5 +1,5 @@
-﻿using Jared.Application.Dtos.EpicDtos;
-using Jared.Application.Dtos.PageDtos;
+﻿using Jared.Shared.Dtos.EpicDtos;
+using Jared.Shared.Dtos.PageDtos;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;
