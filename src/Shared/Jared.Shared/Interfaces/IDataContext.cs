@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Jared.Domain.Interfaces;
+namespace Jared.Shared.Interfaces;
 
 public interface IDataContext : IDisposable
 {

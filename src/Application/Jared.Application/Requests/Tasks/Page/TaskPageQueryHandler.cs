@@ -2,7 +2,7 @@
 using Jared.Application.Dtos.TaskDtos;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
-using Jared.Domain.Interfaces;
+using Jared.Shared.Interfaces;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

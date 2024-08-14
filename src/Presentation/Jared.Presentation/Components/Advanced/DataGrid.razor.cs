@@ -1,6 +1,6 @@
 ﻿using Jared.Application.Dtos.Abstractions;
 using Jared.Domain.Enums;
-using Jared.Domain.Interfaces;
+using Jared.Shared.Interfaces;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
 using Microsoft.AspNetCore.Components;

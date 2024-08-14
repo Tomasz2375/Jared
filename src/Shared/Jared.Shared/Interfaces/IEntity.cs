@@ -1,4 +1,4 @@
-﻿namespace Jared.Domain.Interfaces;
+﻿namespace Jared.Shared.Interfaces;
 
 public interface IEntity<TKey> : IEntity
 {

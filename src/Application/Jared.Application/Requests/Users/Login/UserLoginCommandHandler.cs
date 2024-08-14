@@ -1,5 +1,5 @@
 ﻿using Jared.Domain.Abstractions;
-using Jared.Domain.Interfaces;
+using Jared.Shared.Interfaces;
 using Jared.Domain.Models;
 using Jared.Domain.Options;
 using MediatR;

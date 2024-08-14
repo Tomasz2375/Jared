@@ -2,7 +2,7 @@
 using Jared.Application.Dtos.PageDtos;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Enums;
-using Jared.Domain.Interfaces;
+using Jared.Shared.Interfaces;
 using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
