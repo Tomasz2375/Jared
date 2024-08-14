@@ -17,7 +17,7 @@ public partial class TaskCreateForm
     [Parameter]
     public string? Title { get; set; }
 
-    public Application.Dtos.TaskDtos.TaskDetailsDto Dto { get; set; } = new();
+    public TaskDetailsDto Dto { get; set; } = new();
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();
@@ -30,8 +30,8 @@ public partial class TaskCreateForm
         await getTaskAsync();
 
         Dto.Deadline = DateTime.Now.Date;
-        Dto.Priority = Domain.Enums.Priority.Normal;
-        Dto.Status = Domain.Enums.TaskStatus.Created;
+        Dto.Priority = Shared.Enums.Priority.Normal;
+        Dto.Status = Shared.Enums.TaskStatus.Created;
         Dto.ParentId = null;
     }
 

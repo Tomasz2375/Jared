@@ -1,7 +1,7 @@
 ﻿using Jared.Application.Dtos.EpicDtos;
 using Jared.Application.Dtos.PageDtos;
 using Jared.Domain.Abstractions;
-using Jared.Domain.Enums;
+using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;
 using Jared.Domain.Models;
 using MapsterMapper;

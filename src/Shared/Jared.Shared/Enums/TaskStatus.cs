@@ -1,4 +1,4 @@
-﻿namespace Jared.Domain.Enums;
+﻿namespace Jared.Shared.Enums;
 
 [Flags]
 public enum TaskStatus

@@ -1,6 +1,6 @@
 ﻿using Jared.Application.Dtos.EpicDtos;
 using Jared.Domain.Abstractions;
-using Jared.Domain.Enums;
+using Jared.Shared.Enums;
 using MediatR;
 
 namespace Jared.Application.Requests.Epics.Page;

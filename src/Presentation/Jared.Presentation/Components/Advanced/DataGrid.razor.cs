@@ -1,5 +1,5 @@
 ﻿using Jared.Application.Dtos.Abstractions;
-using Jared.Domain.Enums;
+using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.ColumnDefinitions.Abstraction;

@@ -1,5 +1,5 @@
 ﻿using Jared.Application.Dtos.TaskDtos;
-using Jared.Domain.Enums;
+using Jared.Shared.Enums;
 using Jared.Presentation.ColumnDefinitions.Abstraction;
 
 namespace Jared.Presentation.ColumnDefinitions;
@@ -19,7 +19,7 @@ public class TaskListDefinition : ListDefinitionBase<TaskListDto>
         new ColumnDefinition<TaskListDto>("Priority", typeof(Priority), x => x.Priority, ColumnAlignment.Left, "2", null);
 
     public IColumnDefinition<TaskListDto> Status { get; } =
-        new ColumnDefinition<TaskListDto>("Status", typeof(Domain.Enums.TaskStatus), x => x.Status, ColumnAlignment.Left, "2", null);
+        new ColumnDefinition<TaskListDto>("Status", typeof(Shared.Enums.TaskStatus), x => x.Status, ColumnAlignment.Left, "2", null);
 
     public IColumnDefinition<TaskListDto> CreatedAt { get; } =
         new ColumnDefinition<TaskListDto>("CreatedAt", typeof(DateTime), x => x.CreatedAt, ColumnAlignment.Left, "2", "dd/MM/yyyy");

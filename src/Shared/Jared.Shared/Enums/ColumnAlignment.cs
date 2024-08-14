@@ -1,4 +1,4 @@
-﻿namespace Jared.Domain.Enums;
+﻿namespace Jared.Shared.Enums;
 
 public enum ColumnAlignment
 {
