@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Jared.Shared.Dtos.TaskDtos;
 
-namespace Jared.Application.Validators.Task;
+namespace Jared.Shared.Validators.Task;
 
 public class TaskDetailsDtoValidator : AbstractValidator<TaskDetailsDto>
 {

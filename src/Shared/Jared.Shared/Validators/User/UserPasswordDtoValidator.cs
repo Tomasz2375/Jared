@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Jared.Shared.Dtos.UserDtos;
 
-namespace Jared.Application.Validators.User;
+namespace Jared.Shared.Validators.User;
 
 public class UserPasswordDtoValidator : AbstractValidator<UserPasswordDto>
 {
