@@ -1,6 +1,6 @@
 ﻿using Jared.Shared.Interfaces;
 
-namespace Jared.Domain.Abstractions;
+namespace Jared.Shared.Abstractions;
 
 public abstract class Entity : IEntity<int>
 {

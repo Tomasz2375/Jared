@@ -1,5 +1,5 @@
 ﻿using Jared.Application.Dtos.EpicDtos;
-using Jared.Domain.Abstractions;
+using Jared.Shared.Abstractions;
 using MediatR;
 using System.Net.Http.Json;
 

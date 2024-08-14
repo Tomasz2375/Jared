@@ -1,7 +1,7 @@
 ﻿using Jared.Application.Dtos.TaskDtos;
 using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
-using Jared.Domain.Abstractions;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
 using Mapster;
 using MapsterMapper;

@@ -1,5 +1,5 @@
 ﻿using Jared.Application.Dtos.ProjectDtos;
-using Jared.Domain.Abstractions;
+using Jared.Shared.Abstractions;
 using MediatR;
 
 namespace Jared.Presentation.Requests.Projects.Update;
