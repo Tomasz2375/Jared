@@ -27,6 +27,11 @@ public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, R
     {
         try
         {
+            if (dataContext.Set<User>().Any(x => x.Email == command.dto.Email))
+            {
+                return Result.Fail<bool>("A user with the given email address already exists in the database");
+            }
+
             var user = mapper.Map<User>(command.dto);
             var hashedPassword = passwordHasher.HashPassword(user, command.dto.Password);
             user.PasswordHash = hashedPassword;

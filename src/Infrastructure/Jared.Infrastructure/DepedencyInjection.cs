@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Interfaces;
-using Jared.Infrastructure.Persistence;
+﻿using Jared.Infrastructure.Persistence;
+using Jared.Shared.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

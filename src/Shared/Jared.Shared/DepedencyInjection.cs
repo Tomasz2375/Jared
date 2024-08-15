@@ -1,4 +1,7 @@
-﻿using Jared.Shared.Validators.Task;
+﻿using FluentValidation;
+using Jared.Shared.Dtos.TaskDtos;
+using Jared.Shared.Dtos.UserDtos;
+using Jared.Shared.Validators.Task;
 using Jared.Shared.Validators.User;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,11 +11,10 @@ public static class DepedencyInjection
 {
     public static IServiceCollection AddShared(this IServiceCollection services)
     {
-        services.AddScoped<TaskRootDtoValidator>();
-        services.AddScoped<TaskDetailsDtoValidator>();
-        services.AddScoped<UserLoginDtoValidator>();
-        services.AddScoped<UserRegisterDtoValidator>();
-        services.AddScoped<UserPasswordDtoValidator>();
+        services.AddScoped<IValidator<TaskDetailsDto>, TaskDetailsDtoValidator>();
+        services.AddScoped<IValidator<UserRegisterDto>, UserRegisterDtoValidator>();
+        services.AddScoped<IValidator<UserLoginDto>, UserLoginDtoValidator>();
+        services.AddScoped<IValidator<UserPasswordDto>, UserPasswordDtoValidator>();
 
         return services;
     }
