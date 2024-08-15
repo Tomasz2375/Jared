@@ -5,9 +5,10 @@ namespace Jared.Shared.Validators.Task;
 
 public class TaskDetailsDtoValidator : AbstractValidator<TaskDetailsDto>
 {
-    public TaskDetailsDtoValidator(TaskRootDtoValidator taskRootDoValidator)
+    public TaskDetailsDtoValidator()
     {
-        Include(taskRootDoValidator);
+        Include(new TaskRootDtoValidator());
+
         RuleFor(x => x.Description).MaximumLength(500);
     }
 }
