@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.ProjectDtos;
-using Jared.Domain.Abstractions;
-using Jared.Domain.Interfaces;
+﻿using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Shared.Abstractions;
+using Jared.Shared.Interfaces;
 using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;

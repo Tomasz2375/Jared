@@ -1,8 +1,8 @@
-﻿using Jared.Application.Dtos.UserDtos;
+﻿using Jared.Shared.Dtos.UserDtos;
 using Jared.Application.Requests.Users.Login;
 using Jared.Application.Requests.Users.Password;
 using Jared.Application.Requests.Users.Register;
-using Jared.Domain.Abstractions;
+using Jared.Shared.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,4 +1,4 @@
-﻿using Jared.Domain.Interfaces;
+﻿using Jared.Shared.Interfaces;
 using Jared.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

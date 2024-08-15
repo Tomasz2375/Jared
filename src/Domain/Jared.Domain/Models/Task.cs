@@ -1,5 +1,5 @@
-﻿using Jared.Domain.Abstractions;
-using Jared.Domain.Enums;
+﻿using Jared.Shared.Abstractions;
+using Jared.Shared.Enums;
 
 namespace Jared.Domain.Models;
 
@@ -12,7 +12,7 @@ public class Task : Entity
     public string Title { get; set; } = default!;
     public string? Description { get; set; }
     public string Code { get; set; } = default!;
-    public Enums.TaskStatus Status { get; set; }
+    public Shared.Enums.TaskStatus Status { get; set; }
     public Priority Priority { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? StartDate { get; set; }
