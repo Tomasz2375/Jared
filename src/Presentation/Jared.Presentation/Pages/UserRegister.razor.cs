@@ -13,7 +13,9 @@ public partial class UserRegister
         var result = await Mediator.Send(new UserRegisterCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Register user failed");
+            Console.WriteLine(result.Error);
+
+            return;
         }
 
         NavigationManager.NavigateTo("login");
