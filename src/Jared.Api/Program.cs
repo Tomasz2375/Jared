@@ -8,6 +8,7 @@ using Jared.Shared;
 using Jared.Shared.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
@@ -59,6 +60,14 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var dataContext = scope.ServiceProvider.GetService<IDataContext>();
+var pendingMigrations = dataContext!.Database.GetPendingMigrations();
+if (pendingMigrations.Any())
+{
+    dataContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
