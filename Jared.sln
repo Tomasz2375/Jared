@@ -46,6 +46,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Application.Tests", "UnitTests\Application\Jared.Application.Tests\Jared.Application.Tests.csproj", "{7AA588B0-F3EE-495E-91D8-077CBD03C6AF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C861F17F-8EC1-404F-A6EE-6AB5C421DC72}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Infrastructure.Tests", "UnitTests\Infrastructure\Jared.Infrastructure.Tests\Jared.Infrastructure.Tests.csproj", "{C060592D-0012-49AD-9501-83680336A398}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +96,10 @@ Global
 		{7AA588B0-F3EE-495E-91D8-077CBD03C6AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AA588B0-F3EE-495E-91D8-077CBD03C6AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AA588B0-F3EE-495E-91D8-077CBD03C6AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C060592D-0012-49AD-9501-83680336A398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C060592D-0012-49AD-9501-83680336A398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C060592D-0012-49AD-9501-83680336A398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C060592D-0012-49AD-9501-83680336A398}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +122,8 @@ Global
 		{6492DACC-0AF7-46E8-962B-F1247F6EB69D} = {B18974FF-0804-4D1E-BB28-5583173489E5}
 		{F7BCDE5C-6A12-4A1F-B9B2-86037906BC8D} = {D1D8F820-D34D-43B3-A2BA-B17680588BD7}
 		{7AA588B0-F3EE-495E-91D8-077CBD03C6AF} = {F7BCDE5C-6A12-4A1F-B9B2-86037906BC8D}
+		{C861F17F-8EC1-404F-A6EE-6AB5C421DC72} = {D1D8F820-D34D-43B3-A2BA-B17680588BD7}
+		{C060592D-0012-49AD-9501-83680336A398} = {C861F17F-8EC1-404F-A6EE-6AB5C421DC72}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC5AA28C-D0A6-47D5-BD33-30BFC6E5687C}

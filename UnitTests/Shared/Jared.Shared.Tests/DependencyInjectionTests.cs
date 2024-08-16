@@ -9,7 +9,6 @@ namespace Jared.Shared.Tests;
 
 public class DependencyInjectionTests
 {
-
     [Fact]
     public void AddShared_ShouldRegisterAppropriateServicesCount()
     {
