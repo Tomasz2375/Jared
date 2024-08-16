@@ -17,13 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Application\Jared.Application\Jared.Application.csproj" />
-    <ProjectReference Include="..\..\src\Domain\Jared.Domain\Jared.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Infrastructure\Jared.Infrastructure\Jared.Infrastructure.csproj" />
-    <ProjectReference Include="..\..\src\Jared.Api\Jared.Api.csproj" />
-    <ProjectReference Include="..\..\src\Jared.App\Jared.App.csproj" />
-    <ProjectReference Include="..\..\src\Presentation\Jared.Presentation\Jared.Presentation.csproj" />
-    <ProjectReference Include="..\..\src\Shared\Jared.Shared\Jared.Shared.csproj" />
+    <ProjectReference Include="..\..\..\src\Shared\Jared.Shared\Jared.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

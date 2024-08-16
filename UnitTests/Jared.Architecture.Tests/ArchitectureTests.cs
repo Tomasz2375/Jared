@@ -1,5 +1,4 @@
-﻿using FluentAssertions;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace Jared.Architecture.Tests;
 
@@ -37,7 +36,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        result.Should().BeFalse();
+        Assert.True(result);
     }
 
     [Fact]
@@ -60,7 +59,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        result.Should().BeFalse();
+        Assert.True(result);
     }
 
     [Fact]
@@ -82,7 +81,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        result.Should().BeFalse();
+        Assert.True(result);
     }
 
     [Fact]
@@ -103,7 +102,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        result.Should().BeFalse();
+        Assert.True(result);
     }
 
     [Fact]
@@ -123,7 +122,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        result.Should().BeFalse();
+        Assert.True(result);
     }
     #endregion
 
@@ -148,7 +147,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        result.Should().BeFalse();
+        Assert.True(result);
     }
 
     [Fact]
@@ -170,7 +169,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        result.Should().BeFalse();
+        Assert.True(result);
     }
     #endregion
 }

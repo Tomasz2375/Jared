@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Jared.Shared;
 
-public static class DepedencyInjection
+public static class DependencyInjection
 {
     public static IServiceCollection AddShared(this IServiceCollection services)
     {

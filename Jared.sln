@@ -38,6 +38,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Architecture.Tests", "UnitTests\Jared.Architecture.Tests\Jared.Architecture.Tests.csproj", "{428747FA-2847-4649-B492-5AEF65481C93}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B18974FF-0804-4D1E-BB28-5583173489E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Shared.Tests", "UnitTests\Shared\Jared.Shared.Tests\Jared.Shared.Tests.csproj", "{6492DACC-0AF7-46E8-962B-F1247F6EB69D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +80,10 @@ Global
 		{428747FA-2847-4649-B492-5AEF65481C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{428747FA-2847-4649-B492-5AEF65481C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{428747FA-2847-4649-B492-5AEF65481C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6492DACC-0AF7-46E8-962B-F1247F6EB69D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6492DACC-0AF7-46E8-962B-F1247F6EB69D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6492DACC-0AF7-46E8-962B-F1247F6EB69D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6492DACC-0AF7-46E8-962B-F1247F6EB69D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +102,8 @@ Global
 		{28BF256E-E80F-41E7-B00F-1E4886FD6099} = {09D3D703-C7D8-4D39-8A72-EDB5B4E7C2E9}
 		{504D7725-A65B-4B11-8B9A-84BC77EBB0A1} = {28BF256E-E80F-41E7-B00F-1E4886FD6099}
 		{428747FA-2847-4649-B492-5AEF65481C93} = {D1D8F820-D34D-43B3-A2BA-B17680588BD7}
+		{B18974FF-0804-4D1E-BB28-5583173489E5} = {D1D8F820-D34D-43B3-A2BA-B17680588BD7}
+		{6492DACC-0AF7-46E8-962B-F1247F6EB69D} = {B18974FF-0804-4D1E-BB28-5583173489E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC5AA28C-D0A6-47D5-BD33-30BFC6E5687C}
