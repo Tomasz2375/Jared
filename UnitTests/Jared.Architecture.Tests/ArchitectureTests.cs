@@ -36,7 +36,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        Assert.True(result);
+        Assert.False(result);
     }
 
     [Fact]
@@ -59,7 +59,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        Assert.True(result);
+        Assert.False(result);
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        Assert.True(result);
+        Assert.False(result);
     }
 
     [Fact]
@@ -102,7 +102,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        Assert.True(result);
+        Assert.False(result);
     }
 
     [Fact]
@@ -122,7 +122,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        Assert.True(result);
+        Assert.False(result);
     }
     #endregion
 
@@ -147,7 +147,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        Assert.True(result);
+        Assert.False(result);
     }
 
     [Fact]
@@ -169,7 +169,7 @@ public class ArchitectureTests
         var result = otherProjects.Any(x => assemblyName.Select(y => y.Name).Contains(x));
 
         // Assert
-        Assert.True(result);
+        Assert.False(result);
     }
     #endregion
 }
