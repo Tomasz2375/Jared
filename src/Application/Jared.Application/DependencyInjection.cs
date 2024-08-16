@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Jared.Application;
 
-public static class DepedencyInjection 
+public static class DependencyInjection 
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {
