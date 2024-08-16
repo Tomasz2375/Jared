@@ -1,11 +1,11 @@
-﻿using Jared.Application.Dtos.EpicDtos;
+﻿using Jared.Shared.Dtos.EpicDtos;
 using Jared.Application.Requests.Epics.Create;
 using Jared.Application.Requests.Epics.Details;
 using Jared.Application.Requests.Epics.List;
 using Jared.Application.Requests.Epics.Page;
 using Jared.Application.Requests.Epics.Update;
-using Jared.Domain.Abstractions;
-using Jared.Domain.Enums;
+using Jared.Shared.Abstractions;
+using Jared.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,6 +1,6 @@
-﻿using Jared.Application.Dtos.TaskDtos;
-using Jared.Domain.Abstractions;
-using Jared.Domain.Enums;
+﻿using Jared.Shared.Dtos.TaskDtos;
+using Jared.Shared.Abstractions;
+using Jared.Shared.Enums;
 using MediatR;
 
 namespace Jared.Application.Requests.Tasks.Page;

@@ -1,15 +1,15 @@
-﻿using Jared.Application.Dtos.TaskDtos;
-using Jared.Domain.Abstractions;
+﻿using Jared.Shared.Dtos.TaskDtos;
+using Jared.Shared.Abstractions;
 using MediatR;
 using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Tasks.Details;
 
-public class ProjectDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, Result<TaskDetailsDto>>
+public class TaskDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, Result<TaskDetailsDto>>
 {
     private readonly HttpClient httpClient;
 
-    public ProjectDetailsQueryHandler(HttpClient httpClient)
+    public TaskDetailsQueryHandler(HttpClient httpClient)
     {
         this.httpClient = httpClient;
     }

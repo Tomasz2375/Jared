@@ -1,5 +1,5 @@
-﻿using Jared.Application.Dtos.EpicDtos;
-using Jared.Domain.Abstractions;
+﻿using Jared.Shared.Dtos.EpicDtos;
+using Jared.Shared.Abstractions;
 using MediatR;
 
 namespace Jared.Presentation.Requests.Epics.Create;

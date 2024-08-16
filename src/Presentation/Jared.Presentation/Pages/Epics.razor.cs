@@ -1,4 +1,4 @@
-﻿using Jared.Application.Dtos.EpicDtos;
+﻿using Jared.Shared.Dtos.EpicDtos;
 using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.Requests.Epics.Page;
 

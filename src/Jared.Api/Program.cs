@@ -1,10 +1,14 @@
+using FluentValidation.AspNetCore;
 using Jared.Application;
 using Jared.Application.Mapping;
 using Jared.Domain.Models;
 using Jared.Domain.Options;
 using Jared.Infrastructure;
+using Jared.Shared;
+using Jared.Shared.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
@@ -37,7 +41,9 @@ builder.Services.AddAuthentication(option =>
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
+builder.Services.AddShared();
 builder.Services.AddControllers();
+builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddEndpointsApiExplorer();
@@ -54,6 +60,14 @@ builder.Services.AddCors(options =>
 });
 
 var app = builder.Build();
+
+using var scope = app.Services.CreateScope();
+var dataContext = scope.ServiceProvider.GetService<IDataContext>();
+var pendingMigrations = dataContext!.Database.GetPendingMigrations();
+if (pendingMigrations.Any())
+{
+    dataContext.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -1,11 +1,13 @@
 using Jared.App;
 using Jared.Presentation;
+using Jared.Shared;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddShared();
 builder.Services.AddPresentation();
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();

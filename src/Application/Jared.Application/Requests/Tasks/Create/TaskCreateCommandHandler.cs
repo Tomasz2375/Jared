@@ -1,7 +1,7 @@
 ﻿using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
-using Jared.Domain.Abstractions;
-using Jared.Domain.Interfaces;
+using Jared.Shared.Abstractions;
+using Jared.Shared.Interfaces;
 using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;

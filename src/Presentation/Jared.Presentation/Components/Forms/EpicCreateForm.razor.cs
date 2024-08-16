@@ -1,5 +1,5 @@
-﻿using Jared.Application.Dtos.EpicDtos;
-using Jared.Application.Dtos.ProjectDtos;
+﻿using Jared.Shared.Dtos.EpicDtos;
+using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Presentation.Requests.Epics.Create;
 using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Projects.List;
