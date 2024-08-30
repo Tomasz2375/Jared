@@ -1,5 +1,4 @@
-﻿using Jared.Domain.Models;
-using Jared.Infrastructure.Persistence;
+﻿using Jared.Infrastructure.Persistence;
 using Jared.Shared.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -14,23 +13,12 @@ public class JaredWebApplicationFactory : WebApplicationFactory<Program>, IDispo
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.ConfigureTestServices(services =>
-        {
-            var dbContextOptions = services.SingleOrDefault(s =>
-                s.ServiceType == typeof(DbContextOptions<DataContext>));
-
-            if (dbContextOptions is not null)
-            {
-                services.Remove(dbContextOptions);
-            }
-        });
-
         builder.ConfigureAppConfiguration((context, config) =>
         {
             config.AddJsonFile("appsettings.Tests.json");
         });
 
-        builder.ConfigureServices(async (context, services) =>
+        builder.ConfigureTestServices(async services =>
         {
             var descriptor = services.SingleOrDefault(
                 d => d.ServiceType == typeof(DbContextOptions<DataContext>));
@@ -39,19 +27,15 @@ public class JaredWebApplicationFactory : WebApplicationFactory<Program>, IDispo
                 services.Remove(descriptor);
             }
 
-            var connectionString = context
-                .Configuration.GetConnectionString("JaredConnectionString");
+            var connectionString = services
+                .BuildServiceProvider()
+                .GetRequiredService<IConfiguration>()
+                .GetConnectionString("JaredConnectionString");
 
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(connectionString);
             });
-
-            services.AddScoped(client => new HttpClient
-            {
-                BaseAddress = new Uri("https://localhost:7050/api/")
-            });
-
 
             var serviceProvider = services.BuildServiceProvider();
             using var scope = serviceProvider.CreateScope();
