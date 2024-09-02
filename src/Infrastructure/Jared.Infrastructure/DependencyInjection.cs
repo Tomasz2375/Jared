@@ -15,7 +15,7 @@ public static class DependencyInjection
         {
             case "Development":
                 services.AddDbContext<DataContext>(options => options.UseSqlServer(
-                    configuration.GetConnectionString("JaredDevelopmentConnectionString")));
+                    configuration.GetConnectionString("JaredConnectionString")));
                 break;
             case "Production":
                 services.AddDbContext<DataContext>(options => options.UseSqlServer(
