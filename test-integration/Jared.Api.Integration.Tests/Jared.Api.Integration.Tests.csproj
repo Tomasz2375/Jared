@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="coverlet.collector" Version="3.2.0" />
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="6.0.27" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
     <PackageReference Include="xunit" Version="2.4.2" />
@@ -19,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Jared.Api\Jared.Api.csproj" />
+    <ProjectReference Include="..\..\src\Presentation\Jared.Presentation\Jared.Presentation.csproj" />
   </ItemGroup>
 
   <ItemGroup>
