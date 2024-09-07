@@ -7,7 +7,7 @@ services:
     image: jared_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__JaredConnectionString=Server=host.docker.internal,1433;Database=Jared;User Id=${JARED_DB_USER};Password=${JARED_DB_PASSWORD};TrustServerCertificate=True;
+      - ConnectionStrings__JaredConnectionString=Server=host.docker.internal,1433;Database=${JARED_PROD_DB_NAME};User Id=${JARED_DB_USER};Password=${JARED_DB_PASSWORD};TrustServerCertificate=True;
     build:
       context: .
       dockerfile: src/Jared.Api/Dockerfile

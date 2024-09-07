@@ -1,3 +1,4 @@
+using ConfigurationSubstitution;
 using FluentValidation.AspNetCore;
 using Jared.Application;
 using Jared.Application.Mapping;
@@ -14,7 +15,6 @@ using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Authntication.
 AuthenticationOptions authenticationOptins = new();
 builder
@@ -62,6 +62,7 @@ if (corsSettings is not null)
         });
     });
 }
+builder.Configuration.EnableSubstitutions("{%", "%}");
 
 var app = builder.Build();
 

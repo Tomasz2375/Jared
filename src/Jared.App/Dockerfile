@@ -7,6 +7,8 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 5001
 
+ENV JARED_API_URL="http://jaredapi:80/api/"
+
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/Jared.App/Jared.App.csproj", "src/Jared.App/"]
