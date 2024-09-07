@@ -22,10 +22,9 @@ builder.Services.AddAuthentication(x =>
 
 builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
-
 builder.Services.AddScoped(client => new HttpClient
 {
-    BaseAddress = new Uri("https://localhost:7050/api/")
+    BaseAddress = new Uri(Environment.GetEnvironmentVariable("JARED_API_URL")!)
 });
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
