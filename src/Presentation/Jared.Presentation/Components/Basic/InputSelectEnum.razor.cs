@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Jared.Presentation.Components.Basic;
 
-public partial class InputSelectEnum<TEnum> where TEnum : struct, Enum
+public partial class InputSelectEnum<TEnum> where TEnum : Enum
 {
     [Parameter]
     public Expression<Func<TEnum>> ValidationFor { get; set; } = default!;
