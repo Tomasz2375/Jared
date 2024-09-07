@@ -50,14 +50,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterMappingConfigurations();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-// Add CORS
-builder.Services.AddCors(options =>
+
+var corsSettings = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>(); ;
+if (corsSettings is not null)
 {
-    options.AddPolicy("Jared.App", builder =>
+    builder.Services.AddCors(options =>
     {
-        builder.WithOrigins("https://localhost:7075").AllowAnyHeader().AllowAnyMethod();
+        options.AddPolicy("Jared.App", builder =>
+        {
+            builder.WithOrigins(corsSettings).AllowAnyHeader().AllowAnyMethod();
+        });
     });
-});
+}
 
 var app = builder.Build();
 
@@ -75,6 +79,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+    app.UseCors("Jared.App");
 }
 
 app.UseHttpsRedirection();
