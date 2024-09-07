@@ -20,7 +20,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddInfrastructure(services, configurationMock.Object);
 
         // Assert
-        Assert.Single(services);
+        Assert.Equal(4, services.Count);
     }
 
     [Fact]
@@ -39,24 +39,5 @@ public class DependencyInjectionTests
             x.ServiceType == typeof(IDataContext) &&
             x.ImplementationType == typeof(DataContext) &&
             x.Lifetime == ServiceLifetime.Transient));
-    }
-
-    [Theory]
-    [InlineData("Development")]
-    [InlineData("Production")]
-    public void AddInfrastructure_WhenEnvironmentIsSet_ShouldRegisterAppropriateServicesCount(string environmentName)
-    {
-        // Arrange
-        Mock<IConfiguration> configurationMock = new();
-        ServiceCollection services = new();
-        Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", environmentName);
-        var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
-        // Act
-        DependencyInjection.AddInfrastructure(services, configurationMock.Object);
-
-        // Assert
-        Assert.Equal(4, services.Count);
-        Assert.Equal(environmentName, environment);
     }
 }
