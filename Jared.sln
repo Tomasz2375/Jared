@@ -28,6 +28,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3F9CB067-D527-4F2E-BA7A-BE719A5794F7}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		docker-compose.yml = docker-compose.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{28BF256E-E80F-41E7-B00F-1E4886FD6099}"
@@ -56,7 +57,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Presentation.Tests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests-integration", "tests-integration", "{66C72575-A597-4DB9-89D3-1F39697B1313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Api.Integration.Tests", "test-integration\Jared.Api.Integration.Tests\Jared.Api.Integration.Tests.csproj", "{23C564AB-DAC0-4641-AD1A-D9B2B08EF3F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Api.Integration.Tests", "test-integration\Jared.Api.Integration.Tests\Jared.Api.Integration.Tests.csproj", "{23C564AB-DAC0-4641-AD1A-D9B2B08EF3F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
