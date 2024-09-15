@@ -58,7 +58,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Presentation.Tests", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests-integration", "tests-integration", "{66C72575-A597-4DB9-89D3-1F39697B1313}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Api.Integration.Tests", "test-integration\Jared.Api.Integration.Tests\Jared.Api.Integration.Tests.csproj", "{23C564AB-DAC0-4641-AD1A-D9B2B08EF3F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Api.Integration.Tests", "tests-integration\Jared.Api.Integration.Tests\Jared.Api.Integration.Tests.csproj", "{23C564AB-DAC0-4641-AD1A-D9B2B08EF3F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
