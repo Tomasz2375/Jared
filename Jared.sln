@@ -36,25 +36,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{28BF25
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Shared", "src\Shared\Jared.Shared\Jared.Shared.csproj", "{504D7725-A65B-4B11-8B9A-84BC77EBB0A1}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{D1D8F820-D34D-43B3-A2BA-B17680588BD7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D1D8F820-D34D-43B3-A2BA-B17680588BD7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Architecture.Tests", "UnitTests\Jared.Architecture.Tests\Jared.Architecture.Tests.csproj", "{428747FA-2847-4649-B492-5AEF65481C93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Architecture.Tests", "tests\Jared.Architecture.Tests\Jared.Architecture.Tests.csproj", "{428747FA-2847-4649-B492-5AEF65481C93}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{B18974FF-0804-4D1E-BB28-5583173489E5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Shared.Tests", "UnitTests\Shared\Jared.Shared.Tests\Jared.Shared.Tests.csproj", "{6492DACC-0AF7-46E8-962B-F1247F6EB69D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Shared.Tests", "tests\Shared\Jared.Shared.Tests\Jared.Shared.Tests.csproj", "{6492DACC-0AF7-46E8-962B-F1247F6EB69D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{F7BCDE5C-6A12-4A1F-B9B2-86037906BC8D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Application.Tests", "UnitTests\Application\Jared.Application.Tests\Jared.Application.Tests.csproj", "{7AA588B0-F3EE-495E-91D8-077CBD03C6AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Application.Tests", "tests\Application\Jared.Application.Tests\Jared.Application.Tests.csproj", "{7AA588B0-F3EE-495E-91D8-077CBD03C6AF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C861F17F-8EC1-404F-A6EE-6AB5C421DC72}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Infrastructure.Tests", "UnitTests\Infrastructure\Jared.Infrastructure.Tests\Jared.Infrastructure.Tests.csproj", "{C060592D-0012-49AD-9501-83680336A398}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Infrastructure.Tests", "tests\Infrastructure\Jared.Infrastructure.Tests\Jared.Infrastructure.Tests.csproj", "{C060592D-0012-49AD-9501-83680336A398}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1DBE5AC4-4815-41F6-9D48-DC83726B8586}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Presentation.Tests", "UnitTests\Presentation\Jared.Presentation.Tests\Jared.Presentation.Tests.csproj", "{088E8040-44D9-4F29-B449-FB5B159B59E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Presentation.Tests", "tests\Presentation\Jared.Presentation.Tests\Jared.Presentation.Tests.csproj", "{088E8040-44D9-4F29-B449-FB5B159B59E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests-integration", "tests-integration", "{66C72575-A597-4DB9-89D3-1F39697B1313}"
 EndProject
