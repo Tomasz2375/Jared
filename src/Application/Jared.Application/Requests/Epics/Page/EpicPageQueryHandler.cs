@@ -1,9 +1,9 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.PageDtos;
+﻿using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.EpicDtos;
+using Jared.Shared.Dtos.PageDtos;
 using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -78,6 +78,14 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
             {
                 epics = epics.Where(x => x.ProjectId.ToString().Contains(value));
             }
+            else if (key == nameof(EpicListDto.Status))
+            {
+                if (value == "0")
+                {
+                    continue;
+                }
+                epics = epics.Where(x => ((int)x.Status & int.Parse(value!)) != 0);
+            }
         }
 
         return epics;
@@ -115,6 +123,7 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
             { nameof(EpicListDto.Title), x => x.Title },
             { nameof(EpicListDto.ParentId), x => x.ParentId! },
             { nameof(EpicListDto.ProjectId), x => x.ProjectId },
+            { nameof(EpicListDto.Status), x => x.Status },
         };
 
         var sortByExpression = columnSelector[query.sortingProperty];

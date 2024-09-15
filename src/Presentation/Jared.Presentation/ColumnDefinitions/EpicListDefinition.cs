@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
+﻿using Jared.Presentation.ColumnDefinitions.Abstraction;
+using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Enums;
-using Jared.Presentation.ColumnDefinitions.Abstraction;
 
 namespace Jared.Presentation.ColumnDefinitions;
 
@@ -17,6 +17,9 @@ public class EpicListDefinition : ListDefinitionBase<EpicListDto>
 
     public IColumnDefinition<EpicListDto> ProjectId { get; } =
         new ColumnDefinition<EpicListDto>("ProjectId", typeof(int), x => x.ProjectId, ColumnAlignment.Left, "1", null);
+    
+    public IColumnDefinition<EpicListDto> Status { get; } =
+        new ColumnDefinition<EpicListDto>("Status", typeof(EpicStatus), x => x.Status, ColumnAlignment.Left, "1", null);
 
     public override IEnumerable<IColumnDefinition<EpicListDto>> GetColumns()
     {
@@ -24,5 +27,6 @@ public class EpicListDefinition : ListDefinitionBase<EpicListDto>
         yield return Title;
         yield return ParentId;
         yield return ProjectId;
+        yield return Status;
     }
 }

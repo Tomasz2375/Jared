@@ -1,9 +1,9 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Presentation.Requests.Epics.Details;
+﻿using Jared.Presentation.Requests.Epics.Details;
 using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Epics.Update;
 using Jared.Presentation.Requests.Projects.List;
+using Jared.Shared.Dtos.EpicDtos;
+using Jared.Shared.Dtos.ProjectDtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
@@ -21,6 +21,7 @@ public partial class EpicDetailsForm
     private List<EpicListDto> epics = new();
     private Dictionary<int, string> projectsDictionary = new();
     private Dictionary<int, string> epicsDictionary = new();
+    private bool closeDialog;
 
     public int ProjectId
     {
@@ -76,15 +77,9 @@ public partial class EpicDetailsForm
             Console.WriteLine("Save epic failed");
         }
 
-        await CloseDialog.InvokeAsync();
-    }
-
-    private async Task saveAndStay()
-    {
-        var result = await Mediator.Send(new EpicUpdateCommand(Dto));
-        if (!result.Success)
+        if (closeDialog)
         {
-            Console.WriteLine("Save epic failed");
+            await CloseDialog.InvokeAsync();
         }
     }
 

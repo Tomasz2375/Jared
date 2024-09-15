@@ -8,7 +8,7 @@
     }
     <select disabled=@Disabled class="form-control @CssClass" id="@Id" @bind="@CurrentValue">
         <i class="oi oi-arrow-left" />
-        <option value="0"></option>
+        <option value=@(default(TKey))></option>
         @foreach (var item in Items)
         {
             <option value="@item.Key">@item.Value</option>
