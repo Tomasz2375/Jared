@@ -16,7 +16,7 @@ public class ProjectPageTest : BaseIntegrationTest
     }
 
     [Fact]
-    public async Task ListProjects_When_Page_1_PageSize_2_ShoutdBeSuccess()
+    public async Task PageProject_When_Page_1_PageSize_2_ShoutdBeSuccess()
     {
         // Arrange
         var query = "?page=1&pageSize=2";
@@ -51,7 +51,7 @@ public class ProjectPageTest : BaseIntegrationTest
     }
 
     [Fact]
-    public async Task ListProjects_When_Page_1_PageSize_2_SortingProperty_Id_SortingDirection_Descending_ShoutdBeSuccess()
+    public async Task PageProject_When_Page_1_PageSize_2_SortingProperty_Id_SortingDirection_Descending_ShoutdBeSuccess()
     {
         // Arrange
         var query = "?page=1&pageSize=2&sortingProperty=Id&sortingDirection=Descending";
@@ -87,7 +87,7 @@ public class ProjectPageTest : BaseIntegrationTest
 
 
     [Fact]
-    public async Task ListProjects_When_Page_1_PageSize_10_Fileter_Title_First_ShoutdBeSuccess()
+    public async Task PageProject_When_Page_1_PageSize_10_Fileter_Title_First_ShoutdBeSuccess()
     {
         // Arrange
         var query = "?page=1&pageSize=10&Title=first";

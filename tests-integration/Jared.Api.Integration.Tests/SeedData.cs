@@ -65,7 +65,7 @@ public static class SeedData
 
             if (DateTime.TryParse(value!.ToString(), out var date))
             {
-                value = date.ToString("yyyy-MM-dd hh:mm:ss");
+                value = date.ToString("yyyy-MM-dd HH:mm:ss");
             }
             else if (value.GetType().IsEnum)
             {
