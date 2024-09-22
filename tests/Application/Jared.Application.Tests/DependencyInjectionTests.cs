@@ -16,14 +16,17 @@ using Jared.Application.Requests.Tasks.Update;
 using Jared.Application.Requests.Users.Login;
 using Jared.Application.Requests.Users.Password;
 using Jared.Application.Requests.Users.Register;
+using Jared.Application.Services.Filters;
 using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
+using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Dtos.TaskDtos;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using Task = Jared.Domain.Models.Task;
 
 namespace Jared.Application.Tests;
 
@@ -39,7 +42,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddApplication(services);
 
         // Assert
-        Assert.Equal(28, services.Count);
+        Assert.Equal(34, services.Count);
     }
 
     [Fact]
@@ -169,6 +172,36 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IUserService) &&
             x.ImplementationType == typeof(UserService) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IFilterStrategy<Task>) &&
+            x.ImplementationType == typeof(TaskFilter) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IFilterStrategy<Epic>) &&
+            x.ImplementationType == typeof(EpicFilter) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IFilterStrategy<Project>) &&
+            x.ImplementationType == typeof(ProjectFilter) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IFilterBuilder<Task>) &&
+            x.ImplementationType == typeof(FilterBuilder<Task>) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IFilterBuilder<Epic>) &&
+            x.ImplementationType == typeof(FilterBuilder<Epic>) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IFilterBuilder<Project>) &&
+            x.ImplementationType == typeof(FilterBuilder<Project>) &&
             x.Lifetime == ServiceLifetime.Scoped));
     }
 }
