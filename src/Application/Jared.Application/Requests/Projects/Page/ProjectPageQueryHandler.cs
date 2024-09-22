@@ -1,9 +1,10 @@
-﻿using Jared.Shared.Dtos.PageDtos;
-using Jared.Shared.Dtos.ProjectDtos;
+﻿using Jared.Application.Services.Filters;
+using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.PageDtos;
+using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,17 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
+    private readonly IFilter<Project> filter;
 
-    public ProjectPageQueryHandler(IDataContext dataContext, IMapper mapper)
+    public ProjectPageQueryHandler(
+        IDataContext dataContext,
+        IMapper mapper,
+        IFilterStrategy<Project> strategy,
+        IFilterBuilder<Project> filterBuilder)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
+        filter = filterBuilder.Build(strategy);
     }
 
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery query, CancellationToken cancellationToken)
@@ -60,18 +67,8 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
             {
                 continue;
             }
-            if (key == nameof(ProjectListDto.Id))
-            {
-                projects = projects.Where(x => x.Id.ToString().Contains(value!));
-            }
-            else if (key == nameof(ProjectListDto.Title))
-            {
-                projects = projects.Where(x => x.Title.Contains(value!));
-            }
-            else if (key == nameof(ProjectListDto.Code))
-            {
-                projects = projects.Where(x => x.Code.Contains(value!));
-            }
+
+            projects = filter.ApplyFilters(projects, key, value);
         }
 
         return projects;

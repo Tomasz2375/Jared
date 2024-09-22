@@ -1,4 +1,5 @@
-﻿using Jared.Domain.Models;
+﻿using Jared.Application.Services.Filters;
+using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.PageDtos;
@@ -15,11 +16,17 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
+    private readonly IFilter<Epic> filter;
 
-    public EpicPageQueryHandler(IDataContext dataContext, IMapper mapper)
+    public EpicPageQueryHandler(
+        IDataContext dataContext,
+        IMapper mapper,
+        IFilterStrategy<Epic> strategy,
+        IFilterBuilder<Epic> filterBuilder)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
+        filter = filterBuilder.Build(strategy);
     }
 
     public async Task<Result<EpicPageDto>> Handle(EpicPageQuery query, CancellationToken cancellationToken)
@@ -62,30 +69,8 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
             {
                 continue;
             }
-            if (key == nameof(EpicListDto.Id))
-            {
-                epics = epics.Where(x => x.Id.ToString().Contains(value!));
-            }
-            else if (key == nameof(EpicListDto.Title))
-            {
-                epics = epics.Where(x => x.Title.Contains(value!));
-            }
-            else if (key == nameof(EpicListDto.ParentId))
-            {
-                epics = epics.Where(x => x.ParentId.ToString()!.Contains(value));
-            }
-            else if (key == nameof(EpicListDto.ProjectId))
-            {
-                epics = epics.Where(x => x.ProjectId.ToString().Contains(value));
-            }
-            else if (key == nameof(EpicListDto.Status))
-            {
-                if (value == "0")
-                {
-                    continue;
-                }
-                epics = epics.Where(x => ((int)x.Status & int.Parse(value!)) != 0);
-            }
+
+            epics = filter.ApplyFilters(epics, key, value);
         }
 
         return epics;
