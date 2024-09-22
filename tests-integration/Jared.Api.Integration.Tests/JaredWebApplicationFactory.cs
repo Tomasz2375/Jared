@@ -1,5 +1,4 @@
-﻿using ConfigurationSubstitution;
-using Jared.Infrastructure.Persistence;
+﻿using Jared.Infrastructure.Persistence;
 using Jared.Shared.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;

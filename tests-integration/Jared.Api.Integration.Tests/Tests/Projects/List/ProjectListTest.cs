@@ -16,7 +16,7 @@ public class ProjectListTest : BaseIntegrationTest
     }
 
     [Fact]
-    public async Task DetailsProject_WhenProjectExists_ShoutdBeSuccess()
+    public async Task ListProjects_WhenProjectExists_ShoutdBeSuccess()
     {
         // Arrange
         Result<List<ProjectListDto>> expectedResponse = new(true, string.Empty)

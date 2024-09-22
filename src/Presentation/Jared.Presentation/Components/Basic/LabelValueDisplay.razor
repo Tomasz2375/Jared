@@ -1,0 +1,16 @@
+﻿<div class="input-field">
+    @if (!string.IsNullOrWhiteSpace(Label))
+    {
+        <label class="form-control-label" for="@($"label-{Id}")">@Label</label>
+        <br />
+    }
+    <span>
+        @(string.IsNullOrWhiteSpace(Value) ? "N/A" : Value)
+    </span>
+</div>
+
+<style>
+    .input-field {
+        padding: 0.3rem !important;
+    }
+</style>

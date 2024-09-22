@@ -11,10 +11,21 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Culture
+var cultureInfo = new CultureInfo("en-US");
+cultureInfo.DateTimeFormat.ShortTimePattern = "HH:mm";
+cultureInfo.DateTimeFormat.LongTimePattern = "HH:mm:ss";
+cultureInfo.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy";
+
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
 // Authntication.
 AuthenticationOptions authenticationOptins = new();
 builder

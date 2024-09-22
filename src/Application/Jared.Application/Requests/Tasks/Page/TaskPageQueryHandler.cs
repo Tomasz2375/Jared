@@ -1,6 +1,7 @@
-﻿using Jared.Shared.Dtos.PageDtos;
-using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Application.Services.Filters;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.PageDtos;
+using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;
 using MapsterMapper;
@@ -15,11 +16,17 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
 {
     private readonly IDataContext dataContext;
     private readonly IMapper mapper;
+    private readonly IFilter<Domain.Models.Task> filter;
 
-    public TaskPageQueryHandler(IDataContext dataContext, IMapper mapper)
+    public TaskPageQueryHandler(
+        IDataContext dataContext,
+        IMapper mapper,
+        IFilterStrategy<Domain.Models.Task> strategy,
+        IFilterBuilder<Domain.Models.Task> filterBuilder)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
+        filter = filterBuilder.Build(strategy);
     }
 
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery query, CancellationToken cancellationToken)
@@ -62,54 +69,8 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
             {
                 continue;
             }
-            if (key == nameof(TaskListDto.Id))
-            {
-                tasks = tasks.Where(x => x.Id.ToString().Contains(value!));
-            }
-            else if (key == nameof(TaskListDto.Title))
-            {
-                tasks = tasks.Where(x => x.Title.Contains(value!));
-            }
-            else if (key == nameof(TaskListDto.Code))
-            {
-                tasks = tasks.Where(x => x.Code.Contains(value!));
-            }
-            else if (key == nameof(TaskListDto.EpicId))
-            {
-                tasks = tasks.Where(x => x.Id.ToString().Contains(value!));
-            }
-            else if (key == nameof(TaskListDto.Status))
-            {
-                if (value == "0")
-                {
-                    continue;
-                }
-                tasks = tasks.Where(x => ((int)x.Status & int.Parse(value!)) != 0);
-            }
-            else if (key == nameof(TaskListDto.Priority))
-            {
-                if (value == "0")
-                {
-                    continue;
-                }
-                tasks = tasks.Where(x => ((int)x.Priority & int.Parse(value!)) != 0);
-            }
-            else if (key == nameof(TaskListDto.CreatedAt))
-            {
-                var hasDateFrom = DateTime.TryParse(value!.Split('-')[0], out DateTime dateFrom);
-                var hasDateTo = DateTime.TryParse(value!.Split('-')[1], out DateTime dateTo);
 
-                tasks = tasks.Where(x => !hasDateFrom || x.CreatedAt >= dateFrom);
-                tasks = tasks.Where(x => !hasDateTo || x.CreatedAt <= dateTo);
-            }
-            else if (key == nameof(TaskListDto.Deadline))
-            {
-                var hasDateFrom = DateTime.TryParse(value!.Split('-')[0], out DateTime dateFrom);
-                var hasDateTo = DateTime.TryParse(value!.Split('-')[1], out DateTime dateTo);
-
-                tasks = tasks.Where(x => !hasDateFrom || x.Deadline >= dateFrom);
-                tasks = tasks.Where(x => !hasDateTo || x.Deadline <= dateTo);
-            }
+            tasks = filter.ApplyFilters(tasks, key, value);
         }
 
         return tasks;
