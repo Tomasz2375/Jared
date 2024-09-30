@@ -11,13 +11,13 @@
     flex: 1;
     text-align: center;
     padding: 2px;
-    background-color: rgb(25,25,25);
 }
 
 .tab-off {
     flex: 1;
     text-align: center;
     padding: 2px;
+    background-color: rgb(25,25,25);
 }
 
 .form-control {
@@ -26,6 +26,7 @@
 }
 
 .form-modal-base {
+    z-index: 10;
     position: fixed;
     left: 0;
     top: 0;
@@ -54,8 +55,8 @@
 }
 
 .form-modal-content {
-    height: 600px;
-    max-height: 80vh;
+    min-height: 400px;
+    max-height: 600px;
     overflow-y: auto;
 }
 

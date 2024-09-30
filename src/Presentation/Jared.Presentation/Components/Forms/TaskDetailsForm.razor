@@ -1,9 +1,15 @@
 ﻿@inject IMediator Mediator
 @inject IJSRuntime JSRuntime
 
+@if (Dto is null)
+{
+    return;
+}
+
 <div class="form-modal-base">
     <div class="form-modal">
         <EditForm Model="@Dto" OnValidSubmit="save">
+            <FluentValidationValidator />
             <div class="form-modal-header">
                 <h4 class="form-modal-title">@Dto.Code</h4>
                 <button class="btn btn-close" @onclick="cancel" />
@@ -31,7 +37,6 @@
                             <TaskDetailsDetails Dto="@Dto" />
                             break;
                     }
-                    <FluentValidationValidator />
                 </div>
             </div>
             <div class="form-modal-footer">
