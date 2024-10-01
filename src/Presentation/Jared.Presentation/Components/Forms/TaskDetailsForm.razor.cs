@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Presentation.Requests.Tasks.Details;
+﻿using Jared.Presentation.Requests.Tasks.Details;
 using Jared.Presentation.Requests.Tasks.Update;
+using Jared.Shared.Dtos.TaskDtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;

@@ -1,9 +1,9 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Shared.Dtos.TaskDtos;
-using Jared.Presentation.Requests.Epics.List;
+﻿using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Projects.List;
 using Jared.Presentation.Requests.Tasks.List;
+using Jared.Shared.Dtos.EpicDtos;
+using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Shared.Dtos.TaskDtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;

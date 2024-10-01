@@ -1,64 +1,49 @@
-﻿@using Jared.Shared.Enums;
-@using Jared.Presentation.Components.Basic
-@inject IMediator Mediator
+﻿@inject IMediator Mediator
+@inject IJSRuntime JSRuntime
 
-<div class="blazor-modal">
-    <div class="blazor-modal-large">
-        <div class="blazor-modal-header">
-            <h4 class="blazor-modal-title">@Dto.Code</h4>
-            <button class="btn btn-close" @onclick="cancel" />
-        </div>
-        <div style="display:flex">
-            <div class="@(tabNumber == 0 ? "tab-on" : "tab-off")" @onclick="@(() => tabNumber = 0)">
-                <h5>
-                    Task details
-                </h5>
+@if (Dto is null)
+{
+    return;
+}
+
+<div class="form-modal-base">
+    <div class="form-modal">
+        <EditForm Model="@Dto" OnValidSubmit="save">
+            <FluentValidationValidator />
+            <div class="form-modal-header">
+                <h4 class="form-modal-title">@Dto.Code</h4>
+                <button class="btn btn-close" @onclick="cancel" />
             </div>
-            <div class="@(tabNumber == 1 ? "tab-on" : "tab-off")" @onclick="@(() => tabNumber = 1)">
-                <h5>
-                    Task history
-                </h5>
-            </div>
-        </div>
-        <div class="blazor-modal-content-large">
-            <EditForm Model="@Dto" OnValidSubmit="save">
-                <FluentValidationValidator />
-                @switch (tabNumber)
-                {
-                    case 0:
-                        <TaskDetailsDetails Dto="@Dto" />
-                    break;
-                    case 1:
-                        <TaskDetailsHistory TaskHistoryDtos="@Dto.TaskHistories" />
-                    break;
-                    default:
-                        <TaskDetailsDetails Dto="@Dto" />
-                    break;
-                }
-                <div class="blazor-modal-footer">
-                    <button class="btn btn-primary-dialog" @onclick="@(() => closeDialog = true)">Save</button>
-                    <button class="btn btn-primary-dialog" @onclick="@(() => closeDialog = false)">Save & stay</button>
-                    <button class="btn btn-danger" @onclick="cancel">Cancel</button>
+            <div class="form-modal-content">
+                <div class="form-modal-tabs">
+                    <TabForm
+                        Id="0"
+                        Label="Details"
+                        ActiceTab=@tabNumber
+                        OnTabSelected=@(_ => tabNumber = _)/>
+                    <TabForm
+                        Id="1"
+                        Label="History"
+                        ActiceTab=@tabNumber
+                        OnTabSelected=@(_ => tabNumber = _)/>
                 </div>
-            </EditForm>
-        </div>
+                <div class="form-modal-details">
+                    @switch (tabNumber)
+                    {
+                        case 1:
+                            <TaskDetailsHistory TaskHistoryDtos="@Dto.TaskHistories" />
+                            break;
+                        default:
+                            <TaskDetailsDetails Dto="@Dto" />
+                            break;
+                    }
+                </div>
+            </div>
+            <div class="form-modal-footer">
+                <button class="btn btn-primary-dialog" @onclick="@(() => closeDialog = true)">Save</button>
+                <button class="btn btn-primary-dialog" @onclick="@(() => closeDialog = false)">Save & stay</button>
+                <button class="btn btn-danger" @onclick="cancel">Cancel</button>
+            </div>
+        </EditForm>
     </div>
 </div>
-
-<style>
-    .tab-on{
-        width: 50%;
-        height: 2rem;
-        text-align:center;
-        background-color: rgb(29,31,32);
-        border-bottom: 2px solid;
-        border-color: rgb(255,190,255) !important;
-    }
-
-    .tab-off {
-        width: 50%;
-        height: 2rem;
-        text-align:center;
-        background-color: rgb(29,31,32);
-    }
-</style>
