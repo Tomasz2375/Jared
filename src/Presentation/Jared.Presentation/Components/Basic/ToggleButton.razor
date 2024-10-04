@@ -1,0 +1,59 @@
+<div class="toggle-container @buttonClass" @onclick="Toggle">
+    <div class="toggle-circle"></div>
+    <span class="toggle-text">@buttonText</span>
+</div>
+
+<style>
+    .toggle-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80px;
+        height: 30px;
+        border-radius: 20px;
+        padding: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        position: relative;
+        margin-left: 1rem;
+    }
+
+    .toggle-circle {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        transition: transform 0.3s;
+        position: absolute;
+    }
+
+    .toggle-off {
+        background-color: moccasin;
+        color: black;
+    }
+
+        .toggle-off .toggle-circle {
+            transform: translateX(0);
+            left: 5px;
+            background-color: white;
+        }
+
+        .toggle-off .toggle-text {
+            margin-left: 30px;
+        }
+
+    .toggle-on {
+        background-color: #121212;
+        color: #ededed;
+    }
+
+        .toggle-on .toggle-circle {
+            transform: translateX(40px);
+            right: 45px;
+            background-color: #ededed;
+        }
+
+        .toggle-on .toggle-text {
+            margin-left: 10px;
+        }
+
+</style>
