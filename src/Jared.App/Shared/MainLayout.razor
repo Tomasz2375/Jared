@@ -1,10 +1,12 @@
 ﻿@using Jared.Presentation.Components.Advanced
+@using Jared.Presentation.Components.Basic
 @using Jared.Presentation.Components.Forms
 @inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Jared.Presentation</PageTitle>
 
-<div class="page">
+<div class="page @selectedTheme">
     <div class="sidebar">
         <NavMenu />
     </div>
@@ -16,6 +18,7 @@
                 OpenEpicDialog="@showCreateEpicDialog"
                 OpenProjectDialog="@showCreateProjectDialog"/>
             <UserButton />
+            <ToggleButton IsToggled="@(selectedTheme == "dark-mode")" IsToggledChanged="(x => setTheme(x))" />
         </div>
 
         <article class="content px-4">
@@ -40,6 +43,22 @@
     private bool isActiveTaskCreateDialog;
     private bool isActiveEpicCreateDialog;
     private bool isActiveProjectCreateDialog;
+    private string selectedTheme = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var theme = await JSRuntime.InvokeAsync<string>("readLocalStorage", "theme");
+        if (!string.IsNullOrWhiteSpace(theme))
+        {
+            selectedTheme = theme;
+        }
+    }
+    private async Task setTheme(bool isDarkMode)
+    {
+        var theme = isDarkMode ? "dark-mode" : string.Empty;
+        await JSRuntime.InvokeVoidAsync("addToLocalStorage", "theme", theme);
+        selectedTheme = theme;
+    }
 
     private void showCreateTaskDialog()
     {
@@ -74,10 +93,3 @@
         }
     }
 }
-
-<style>
-    .button-size{
-        width: 150px;
-        margin-left: 1rem;
-    }
-</style>
