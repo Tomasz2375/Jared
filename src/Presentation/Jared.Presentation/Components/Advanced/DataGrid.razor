@@ -16,7 +16,7 @@
                 <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width">
                     <div @onclick="(() => sortByColumn(column.ColumnName))">
                         @column.ColumnName
-                        <span class="@sortCssClass(column.ColumnName)"/>
+                        &nbsp;<span class="@sortCssClass(column.ColumnName)"/>
                     </div>
                     <div>
                         <DataGridFilter
@@ -81,7 +81,7 @@
     }
 
     .data-grid-body:hover {
-        background-color: #DDDDDDDD;
+        background-color: var(--background-2);
         cursor: pointer;
     }
 
@@ -120,10 +120,10 @@
     }
 
     .arrow {
-        border: solid black;
+        border: solid var(--font-color);
         border-width: 0 3px 3px 0;
         display: inline-block;
-        padding: 3px;
+        padding: 4px;
     }
     .arrow-up {
         transform: rotate(-135deg);
