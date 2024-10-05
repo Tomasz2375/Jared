@@ -7,8 +7,8 @@
         <EditForm Model="@Dto" OnValidSubmit="save">
             <FluentValidationValidator />
             <div class="form-modal-header">
-                <h4 class="blazor-modal-title">&nbsp;&nbsp;@Title</h4>
-                <button class="btn btn-close" @onclick="cancel" />
+                <h4 class="form-modal-title">@Title</h4>
+                <button class="btn form-close" @onclick="cancel">✖</button>
             </div>
             <div class="form-modal-content">
                 <div class="form-modal-details">
