@@ -2,6 +2,8 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    background-color: var(--background-1);
+    color: var(--font-color);
 }
 
 main {
@@ -13,7 +15,7 @@ main {
 }
 
 .top-row {
-    background-color: #f7f7f7;
+    background-color: var(--background-2);
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
     height: 3.5rem;
