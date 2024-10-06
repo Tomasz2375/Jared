@@ -32,7 +32,7 @@
     }
 
     .nav-item ::deep a {
-        color: #d7d7d7;
+        color: var(--font-color);
         border-radius: 4px;
         height: 3rem;
         display: flex;
@@ -41,13 +41,15 @@
     }
 
         .nav-item ::deep a.active {
-            background-color: rgba(255,255,255,0.25);
-            color: white;
+            background-color: var(--background-1);
+            color: var(--font-color);
+            font-weight: bold;
         }
 
         .nav-item ::deep a:hover {
-            background-color: rgba(255,255,255,0.1);
-            color: white;
+            color: var(--font-color);
+            border: solid 1px var(--main-color);
+            font-weight: bold;
         }
 
 @media (min-width: 641px) {

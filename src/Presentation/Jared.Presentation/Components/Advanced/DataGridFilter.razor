@@ -3,18 +3,18 @@
 {
     <input
         id="From-@Id"
-        class="edit-date"
+        class="edit-date form-control"
         type="date"
         @bind-value="@DateFrom" />
     <input
         id="To-@Id"
-        class="edit-date"
+        class="edit-date form-control"
         type="date"
         @bind-value="@DateTo" />
 }
 else if(Type.IsEnum)
 {
-    <select id="select-@Id" @bind="@SelectedValue">
+    <select class="form-control edit-text-@Size" id="select-@Id" @bind="@SelectedValue">
         @foreach (var item in Type.GetEnumValues())
         {
             <option class="@colorSelectedEnum(item)" value="@((int)item)">@item</option>
@@ -27,7 +27,7 @@ else
         id="@Id"
         type="text"
         @bind-value="@Value"
-        class="edit-text-@Size"/>
+        class="edit-text-@Size form-control"/>
 }
 
 <style>
@@ -39,7 +39,7 @@ else
     }
 
     .edit-select {
-        color:green;
+        color: var(--main-color);
     }
 
     .edit-text-1{

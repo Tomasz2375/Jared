@@ -1,0 +1,65 @@
+<EditForm Model="Color">
+    <div class="toggle-container @buttonClass" @onclick="Toggle">
+        <input
+            type="color"
+            class="toggle-circle"
+            value="@Color"
+            @onchange="changeColor"
+            onclick="event.stopPropagation()"/>
+        <span class="toggle-text">@buttonText</span>
+    </div>
+</EditForm>
+
+<style>
+    .toggle-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 80px;
+        height: 30px;
+        border-radius: 20px;
+        padding: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        position: relative;
+        margin-left: 1rem;
+    }
+
+    .toggle-circle {
+        width: 16px;
+        height: 16px;
+        border-color: greenyellow;
+        border-radius: 50%;
+        transition: transform 0.3s;
+        position: absolute;
+    }
+
+    .toggle-off {
+        background-color: var(--background-1);
+        color: var(--font-color);
+    }
+
+        .toggle-off .toggle-circle {
+            transform: translateX(0);
+            left: 6px;
+        }
+
+        .toggle-off .toggle-text {
+            margin-left: 30px;
+        }
+
+    .toggle-on {
+        background-color: var(--background-1);
+        color: var(--font-color);
+    }
+
+        .toggle-on .toggle-circle {
+            transform: translateX(40px);
+            right: 44px;
+        }
+
+        .toggle-on .toggle-text {
+            margin-left: 10px;
+        }
+
+</style>
