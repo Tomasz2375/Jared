@@ -14,7 +14,7 @@
 }
 else if(Type.IsEnum)
 {
-    <select class="form-control" id="select-@Id" @bind="@SelectedValue">
+    <select class="form-control edit-text-@Size" id="select-@Id" @bind="@SelectedValue">
         @foreach (var item in Type.GetEnumValues())
         {
             <option class="@colorSelectedEnum(item)" value="@((int)item)">@item</option>

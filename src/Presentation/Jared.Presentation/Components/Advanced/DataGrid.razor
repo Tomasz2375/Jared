@@ -53,7 +53,7 @@
 <div class="align-center">
     <EditForm Model="Query">
         <label id="page-size">Page size: </label>
-        <InputSelect DisplayName="Page size:" @bind-Value=@Query.PageSize>
+        <InputSelect class="form-control" style="width: 50px; display:inline" DisplayName="Page size:" @bind-Value=@Query.PageSize>
             @foreach (var item in pageSizes)
             {
                 <option value="@item" @onclick="pageSize">@item</option>
