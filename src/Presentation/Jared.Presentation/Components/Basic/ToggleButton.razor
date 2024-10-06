@@ -1,7 +1,14 @@
-<div class="toggle-container @buttonClass" @onclick="Toggle">
-    <div class="toggle-circle"></div>
-    <span class="toggle-text">@buttonText</span>
-</div>
+<EditForm Model="Color">
+    <div class="toggle-container @buttonClass" @onclick="Toggle">
+        <input
+            type="color"
+            class="toggle-circle"
+            value="@Color"
+            @onchange="changeColor"
+            onclick="event.stopPropagation()"/>
+        <span class="toggle-text">@buttonText</span>
+    </div>
+</EditForm>
 
 <style>
     .toggle-container {
@@ -19,22 +26,22 @@
     }
 
     .toggle-circle {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
+        border-color: greenyellow;
         border-radius: 50%;
         transition: transform 0.3s;
         position: absolute;
     }
 
     .toggle-off {
-        background-color: moccasin;
-        color: black;
+        background-color: var(--background-1);
+        color: var(--font-color);
     }
 
         .toggle-off .toggle-circle {
             transform: translateX(0);
-            left: 5px;
-            background-color: white;
+            left: 6px;
         }
 
         .toggle-off .toggle-text {
@@ -42,14 +49,13 @@
         }
 
     .toggle-on {
-        background-color: #121212;
-        color: #ededed;
+        background-color: var(--background-1);
+        color: var(--font-color);
     }
 
         .toggle-on .toggle-circle {
             transform: translateX(40px);
-            right: 45px;
-            background-color: #ededed;
+            right: 44px;
         }
 
         .toggle-on .toggle-text {

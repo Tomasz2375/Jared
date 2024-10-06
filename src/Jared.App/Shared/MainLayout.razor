@@ -1,8 +1,10 @@
-﻿@using Jared.Presentation.Components.Advanced
+﻿@using Blazored.LocalStorage
+@using Jared.Presentation.Components.Advanced
 @using Jared.Presentation.Components.Basic
 @using Jared.Presentation.Components.Forms
 @inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime
+@inject ILocalStorageService LocalStorage
 
 <PageTitle>Jared.Presentation</PageTitle>
 
@@ -18,7 +20,11 @@
                 OpenEpicDialog="@showCreateEpicDialog"
                 OpenProjectDialog="@showCreateProjectDialog"/>
             <UserButton />
-            <ToggleButton IsToggled="@(selectedTheme == "dark-mode")" IsToggledChanged="(x => setTheme(x))" />
+            <ToggleButton
+                IsToggled="@(selectedTheme == "dark-mode")"
+                Color="@selectedColor"
+                IsToggledChanged="(x => setTheme(x))"
+                OnColorChange="setColor"/>
         </div>
 
         <article class="content px-4">
@@ -44,20 +50,33 @@
     private bool isActiveEpicCreateDialog;
     private bool isActiveProjectCreateDialog;
     private string selectedTheme = string.Empty;
+    private string selectedColor = string.Empty;
 
     protected override async Task OnInitializedAsync()
     {
-        var theme = await JSRuntime.InvokeAsync<string>("readLocalStorage", "theme");
+        var theme = (await LocalStorage.GetItemAsStringAsync("theme"))?.Replace("\"", "");
+        var color = (await LocalStorage.GetItemAsStringAsync("color"))?.Replace("\"", "");
         if (!string.IsNullOrWhiteSpace(theme))
         {
             selectedTheme = theme;
+        }
+        if (!string.IsNullOrWhiteSpace(color))
+        {
+            selectedColor = color;
+            await setColor(selectedColor);
         }
     }
     private async Task setTheme(bool isDarkMode)
     {
         var theme = isDarkMode ? "dark-mode" : string.Empty;
-        await JSRuntime.InvokeVoidAsync("addToLocalStorage", "theme", theme);
+        await LocalStorage.SetItemAsync("theme", theme);
         selectedTheme = theme;
+    }
+
+    private async Task setColor(string color)
+    {
+        await LocalStorage.SetItemAsync("color", color);
+        await JSRuntime.InvokeVoidAsync("setMainColor", color);
     }
 
     private void showCreateTaskDialog()
