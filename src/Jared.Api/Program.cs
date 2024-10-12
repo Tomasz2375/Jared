@@ -56,7 +56,6 @@ builder.Services.AddShared();
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddSwaggerGen();
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterMappingConfigurations();
 builder.Services.AddHttpContextAccessor();

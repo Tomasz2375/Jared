@@ -1,5 +1,4 @@
 ﻿using Blazored.LocalStorage;
-using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -11,7 +10,7 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        services.AddMediatR(assembly);
+        services.AddMediatR(config => config.RegisterServicesFromAssemblies(assembly));
         services.AddBlazoredLocalStorage();
 
         return services;
