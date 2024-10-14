@@ -7,16 +7,19 @@ using Jared.Domain.Options;
 using Jared.Infrastructure;
 using Jared.Shared;
 using Jared.Shared.Interfaces;
-using MediatR;
+using Jared.Shared.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Globalization;
-using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Logger
+builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
+    .ReadFrom.Configuration(context.Configuration));
 // Culture
 var cultureInfo = new CultureInfo("en-US");
 cultureInfo.DateTimeFormat.ShortTimePattern = "HH:mm";
@@ -60,7 +63,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterMappingConfigurations();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-
+// CORS
 var corsSettings = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>(); ;
 if (corsSettings is not null)
 {
@@ -85,6 +88,8 @@ if (pendingMigrations.Any())
 }
 
 // Configure the HTTP request pipeline.
+app.UseHttpsRedirection();
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
@@ -93,19 +98,25 @@ if (!app.Environment.IsDevelopment())
     app.UseCors("Jared.App");
 }
 
-app.UseHttpsRedirection();
-
+app.UseMiddleware<RequestLogContextMiddleware>();
+app.UseSerilogRequestLogging();
 app.UseStaticFiles();
-
 app.UseSwaggerUI();
 app.UseSwagger();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();
+try
+{
+    Log.Information("Startingup application");
+    app.Run();
+}
+catch (Exception e)
+{
+    Log.Fatal(e, "Application startup fail");
+}
 
 public partial class Program
 {
