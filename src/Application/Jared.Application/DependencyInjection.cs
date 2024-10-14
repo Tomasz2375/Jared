@@ -2,7 +2,7 @@
 using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
 using Jared.Domain.Models;
-using MediatR;
+using Jared.Shared.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Task = Jared.Domain.Models.Task;
@@ -15,7 +15,11 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        services.AddMediatR(assembly);
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssemblies(assembly);
+            config.AddOpenBehavior(typeof(RequestLogginPipelineBehaviour<,>));
+        });
         services.AddScoped<ITaskHistoryService, TaskHistoryService>();
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IFilterStrategy<Task>, TaskFilter>();

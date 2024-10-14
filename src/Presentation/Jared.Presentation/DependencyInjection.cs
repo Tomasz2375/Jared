@@ -1,5 +1,5 @@
 ﻿using Blazored.LocalStorage;
-using MediatR;
+using Jared.Shared.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -11,7 +11,11 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        services.AddMediatR(assembly);
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssemblies(assembly);
+            config.AddOpenBehavior(typeof(RequestLogginPipelineBehaviour<,>));
+        });
         services.AddBlazoredLocalStorage();
 
         return services;

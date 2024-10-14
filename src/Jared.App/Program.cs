@@ -1,11 +1,16 @@
 using Jared.App;
 using Jared.Presentation;
 using Jared.Shared;
+using Jared.Shared.Middleware;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Logger
+builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
+    .ReadFrom.Configuration(context.Configuration));
 // Add services to the container.
 builder.Services.AddShared();
 builder.Services.AddPresentation();
@@ -39,13 +44,21 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseMiddleware<RequestLogContextMiddleware>();
+app.UseSerilogRequestLogging();
 app.UseStaticFiles();
-
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
-app.Run();
+try
+{
+    Log.Information("Startingup application");
+    app.Run();
+}
+catch (Exception e)
+{
+    Log.Fatal(e, "Application startup fail");
+}

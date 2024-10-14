@@ -1,9 +1,10 @@
 networks:
   jared-network:
     driver: bridge
+
 services:
   jaredapi:
-    container_name: Jared_API
+    container_name: jared.api
     image: jared_api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -12,22 +13,36 @@ services:
       context: .
       dockerfile: src/Jared.Api/Dockerfile
     ports:
-      - "5000:80"
+      - 5000:80
     networks:
       - jared-network
     volumes:
       - ~/.aspnet/https:/https:ro
     restart: always
+
   jaredapp:
-    container_name: Jared_APP
+    container_name: jared.app
     image: jared_app
     build:
       context: .
       dockerfile: src/Jared.App/Dockerfile
     ports:
-      - "5001:80"
+      - 5001:80
     networks:
       - jared-network
     depends_on:
       - jaredapi
     restart: always
+
+  jaredseq:
+    networks:
+      - jared-network
+    container_name: jared.seq
+    image: datalust/seq:latest
+    depends_on:
+      - jaredapi
+    environment:
+      - ACCEPT_EULA=Y
+    ports:
+      - 5341:5341
+      - 5003:80
