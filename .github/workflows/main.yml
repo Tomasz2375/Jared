@@ -2,7 +2,7 @@ on:
   push:
     brancheds:
       - master-pipline
-  pull-request:
+  pull_request:
     branches:
       - master-pipline
   workflow_dispatch:
