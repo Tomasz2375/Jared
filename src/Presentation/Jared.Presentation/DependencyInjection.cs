@@ -1,4 +1,5 @@
 ﻿using Blazored.LocalStorage;
+using Jared.Presentation.Services;
 using Jared.Shared.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
@@ -17,6 +18,7 @@ public static class DependencyInjection
             config.AddOpenBehavior(typeof(RequestLogginPipelineBehaviour<,>));
         });
         services.AddBlazoredLocalStorage();
+        services.AddScoped<IUserService, UserService>();
 
         return services;
     }
