@@ -30,5 +30,6 @@ public static class BaseAdresses
     public const string USER_LOGIN = "user/login";
     public const string USER_REGISTER = "user/register";
     public const string USER_PASSWORD = "user/password";
+    public const string USER_UPDATE = "user/update";
     #endregion
 }

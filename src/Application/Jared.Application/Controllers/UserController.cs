@@ -5,6 +5,7 @@ using Jared.Application.Requests.Users.Register;
 using Jared.Shared.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Jared.Application.Requests.Users.Update;
 
 namespace Jared.Application.Controllers;
 
@@ -35,5 +36,11 @@ public class UserController
     public async Task<Result<bool>> UserPassword(UserPasswordDto dto)
     {
         return await mediator.Send(new UserPasswordCommand(dto));
+    }
+
+    [HttpPut("Update")]
+    public async Task<Result<bool>> UserUpdate(UserUpdateDto dto)
+    {
+        return await mediator.Send(new UserUpdateCommand(dto));
     }
 }

@@ -18,6 +18,12 @@
     background-color: var(--background-2);
     color: var(--font-color);
 }
+.dropdown-info {
+    color: var(--main-color);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 18px;
+}
 
 .dropdown-menu {
     background-color: var(--background-1);

@@ -1,42 +1,71 @@
 ﻿@page "/profile"
 @inject IMediator Mediator
+@inject IUserService UserService
 
 <div>
     <h4>Profile</h4>
 </div>
 
 <div style="max-width:500px">
-    <EditForm Model="@dto" OnValidSubmit="changePassword">
+    <EditForm Model="@userPasswordDto" OnValidSubmit="changePassword">
         <FluentValidationValidator />
         <h5>Change password</h5>
         <div>
             <InputPasswordField
-                @bind-Value="@dto.CurrentPassword"
+                @bind-Value="@userPasswordDto.CurrentPassword"
                 Id="password"
                 Label="Current password"
-                ValidationFor="(() => dto.CurrentPassword)" />
+                ValidationFor="(() => userPasswordDto.CurrentPassword)" />
         </div>
         <div>
             <InputPasswordField
-                @bind-Value="@dto.NewPassword"
+                @bind-Value="@userPasswordDto.NewPassword"
                 Id="new-password"
                 Label="New password"
-                ValidationFor="(() => dto.NewPassword)" />
+                ValidationFor="(() => userPasswordDto.NewPassword)" />
         </div>
         <div>
             <InputPasswordField
-                @bind-Value="@dto.ConfirmPassword"
+                @bind-Value="@userPasswordDto.ConfirmPassword"
                 Id="confirm-new-password"
                 Label="Confirm new password"
-                ValidationFor="(() => dto.ConfirmPassword)" />
+                ValidationFor="(() => userPasswordDto.ConfirmPassword)" />
         </div>
         <div>
             <button type="submit" class="btn btn-primary-dialog">Change password</button>
         </div>
+        <div class=@(isPasswordChanged ? "text-success" : "text-danger")>
+            <span>
+                @passwordMessage
+            </span>
+        </div>
     </EditForm>
-    <div class=@(isPasswordChanged ? "text-success" : "text-danger")>
+    <br />
+    <br />
+    <EditForm Model="@userUpdateDto" OnValidSubmit="updateUser">
+        <h5>Update user data</h5>
+        <InputTextField
+            @bind-Value="@userUpdateDto.FirstName"
+            Id="firstName"
+            Label="First name"
+            ValidationFor="(() => userUpdateDto.FirstName)" />
+        <InputTextField
+            @bind-Value="@userUpdateDto.LastName"
+            Id="lastName"
+            Label="Last name"
+            ValidationFor="(() => userUpdateDto.LastName)" />
+        <InputDateField
+            @bind-Value="@(userUpdateDto.DateOfBirth)"
+            Id="dateOfBirth"
+            Label="Date of birth"
+            ValidationFor="(() => userUpdateDto.DateOfBirth)" />
+        <div>
+            <button type="submit" class="btn btn-primary-dialog">Update</button>
+        </div>
+        <div class=@(isUpdateUser ? "text-success" : "text-danger")>
         <span>
-            @message
+            @updateMessage
         </span>
-    </div>
+        </div>
+    </EditForm>
 </div>
