@@ -1,4 +1,5 @@
 ﻿@inject ILocalStorageService LocalStorage
+@inject IUserService UserService
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
@@ -12,6 +13,7 @@
     <div class="dropdown-menu @userMenuCssClass">
         <AuthorizeView>
             <Authorized>
+                <span class="dropdown-info">@UserService.GetUserName()</span>
                 <a href="profile" class="dropdown-item">Profile</a>
                 <button onclick="@(async () => await logout())" class="dropdown-item">Logout</button>
             </Authorized>
