@@ -1,10 +1,10 @@
 on:
   push:
     brancheds:
-      - master-pipline
+      - feature/JAR-49-Continuous-integration
   pull_request:
     branches:
-      - master-pipline
+      - feature/JAR-49-Continuous-integration
   workflow_dispatch:
 
 jobs:
