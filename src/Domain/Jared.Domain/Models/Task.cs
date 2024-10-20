@@ -8,6 +8,8 @@ public class Task : Entity
     public int ProjectId { get; set; }
     public int? EpicId { get; set; }
     public int? ParentId { get; set; }
+    public int? CreatedById { get; set; }
+    public int? AssignedToId { get; set; }
 
     public string Title { get; set; } = default!;
     public string? Description { get; set; }
@@ -24,6 +26,8 @@ public class Task : Entity
     public Project? Project { get; set; }
     public Epic? Epic { get; set; }
     public Task? Parent { get; set; }
+    public User? CreatedBy { get; set; }
+    public User? AssignedTo { get; set; }
 
     public List<TaskHistory> TaskHistories { get; set; } = new();
 }
