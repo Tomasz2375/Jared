@@ -1,7 +1,7 @@
-﻿using Jared.Shared.Dtos.ProjectDtos;
+﻿using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -35,7 +35,7 @@ public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<
         }
         catch (Exception ex)
         {
-            return Result.Fail<List<ProjectListDto>> (ex.Message);
+            return Result.Fail<List<ProjectListDto>>(ex.Message);
         }
     }
 }
