@@ -13,9 +13,11 @@ using Jared.Application.Requests.Tasks.Details;
 using Jared.Application.Requests.Tasks.List;
 using Jared.Application.Requests.Tasks.Page;
 using Jared.Application.Requests.Tasks.Update;
+using Jared.Application.Requests.Users.List;
 using Jared.Application.Requests.Users.Login;
 using Jared.Application.Requests.Users.Password;
 using Jared.Application.Requests.Users.Register;
+using Jared.Application.Requests.Users.Update;
 using Jared.Application.Services.Filters;
 using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
@@ -24,6 +26,7 @@ using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Dtos.TaskDtos;
+using Jared.Shared.Dtos.UserDtos;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Task = Jared.Domain.Models.Task;
@@ -42,7 +45,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddApplication(services);
 
         // Assert
-        Assert.Equal(34, services.Count);
+        Assert.Equal(33, services.Count);
     }
 
     [Fact]
@@ -138,6 +141,11 @@ public class DependencyInjectionTests
 
         #region User
         Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserListQuery, Result<List<UserListDto>>>) &&
+            x.ImplementationType == typeof(UserListQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserLoginCommand, Result<string>>) &&
             x.ImplementationType == typeof(UserLoginCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
@@ -150,6 +158,11 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserRegisterCommand, Result<bool>>) &&
             x.ImplementationType == typeof(UserRegisterCommandHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserUpdateCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(UserUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
         #endregion
     }
