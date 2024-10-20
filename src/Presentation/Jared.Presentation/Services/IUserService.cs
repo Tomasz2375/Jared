@@ -4,6 +4,7 @@ namespace Jared.Presentation.Services;
 
 public interface IUserService
 {
+    int GetUserId();
     string GetUserName();
     UserUpdateDto GetUserData();
 }
