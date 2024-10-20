@@ -1,11 +1,12 @@
-﻿using Jared.Shared.Dtos.UserDtos;
+﻿using Jared.Application.Requests.Users.List;
 using Jared.Application.Requests.Users.Login;
 using Jared.Application.Requests.Users.Password;
 using Jared.Application.Requests.Users.Register;
+using Jared.Application.Requests.Users.Update;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.UserDtos;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Jared.Application.Requests.Users.Update;
 
 namespace Jared.Application.Controllers;
 
@@ -18,6 +19,12 @@ public class UserController
     public UserController(IMediator mediator)
     {
         this.mediator = mediator;
+    }
+
+    [HttpGet("List")]
+    public async Task<Result<List<UserListDto>>> UserListAsync()
+    {
+        return await mediator.Send(new UserListQuery());
     }
 
     [HttpPost("Register")]

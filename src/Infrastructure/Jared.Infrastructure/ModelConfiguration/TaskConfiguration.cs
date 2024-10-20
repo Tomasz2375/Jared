@@ -17,6 +17,16 @@ public class TaskConfiguration : IEntityTypeConfiguration<Domain.Models.Task>
             .HasForeignKey(t => t.ProjectId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        builder.HasOne(t => t.CreatedBy)
+            .WithMany(u => u.CreatedTask)
+            .HasForeignKey(t => t.CreatedById)
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(t => t.AssignedTo)
+            .WithMany(u => u.AssignedTask)
+            .HasForeignKey(t => t.AssignedToId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.Property(x => x.CreatedAt)
             .HasDefaultValueSql("getdate()");
 

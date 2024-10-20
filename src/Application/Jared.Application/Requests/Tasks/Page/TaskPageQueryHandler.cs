@@ -37,6 +37,8 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
                 .Set<Domain.Models.Task>()
                 .Include(x => x.Epic)
                 .Include(x => x.Project)
+                .Include(x => x.CreatedBy)
+                .Include(x => x.AssignedTo)
                 .AsNoTracking();
 
             tasksQuery = filterResult(tasksQuery, query);

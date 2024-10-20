@@ -1,9 +1,11 @@
 ﻿using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Projects.List;
 using Jared.Presentation.Requests.Tasks.List;
+using Jared.Presentation.Requests.User.List;
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Dtos.TaskDtos;
+using Jared.Shared.Dtos.UserDtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
@@ -16,12 +18,14 @@ public partial class TaskDetailsDetails
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();
+    private List<UserListDto> users = new();
 
     protected override async Task OnInitializedAsync()
     {
         await getTasksAsync();
         await getProjectsAsync();
         await getEpicsAsync();
+        await getUsersAsync();
     }
 
     private async Task getProjectsAsync()
@@ -61,5 +65,18 @@ public partial class TaskDetailsDetails
         }
 
         tasks = result.Data.ToList();
+    }
+
+    private async Task getUsersAsync()
+    {
+        var result = await Mediator.Send(new UserListQuery());
+
+        if (!result.Success)
+        {
+            Console.WriteLine("Error when get users list");
+            return;
+        }
+
+        users = result.Data.ToList();
     }
 }

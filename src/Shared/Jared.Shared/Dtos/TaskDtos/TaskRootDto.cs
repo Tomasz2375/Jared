@@ -10,6 +10,8 @@ public class TaskRootDto : EntityDto<int>
     public int ProjectId { get; set; }
     public string? Code { get; set; }
     public int? EpicId { get; set; }
+    public int? CreatedById { get; set; }
+    public int? AssignedToId { get; set; }
 
     public TaskStatus Status { get; set; }
     public Priority Priority { get; set; }

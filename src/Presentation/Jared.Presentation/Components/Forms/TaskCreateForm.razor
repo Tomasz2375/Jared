@@ -1,6 +1,7 @@
 ﻿@using Jared.Shared.Enums;
 @using Jared.Presentation.Components.Basic
 @inject IMediator Mediator
+@inject IUserService UserService
 
 <div class="form-modal-base">
     <div class="form-modal">
@@ -46,6 +47,23 @@
                             Label="Parent task"
                             Disabled=@(Dto.EpicId == 0 || Dto.EpicId is null || Dto.ProjectId == 0)
                             ValidationFor="@(() => Dto.ParentId)" />
+                    </div>
+                    <div class="form-modal-tabs">
+                        <InputSelectList
+                            @bind-Value="@Dto.CreatedById"
+                            Items="@users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}" )"
+                            TKey="int?"
+                            Id="created-by"
+                            Label="Created by"
+                            Disabled=true
+                            ValidationFor="@(() => Dto.CreatedById)" />
+                        <InputSelectList
+                            @bind-Value="@Dto.AssignedToId"
+                            Items="@users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}" )"
+                            TKey="int?"
+                            Id="assigned-to"
+                            Label="Assigned to"
+                            ValidationFor="@(() => Dto.AssignedToId)" />
                     </div>
                     <div class="form-modal-tabs">
                         <InputSelectEnum

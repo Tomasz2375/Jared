@@ -5,13 +5,66 @@ namespace Jared.Presentation.Services;
 
 public class UserService : IUserService
 {
+    private const string ID_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
     private const string NAME_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
     private const string BIRTHDAY_TYPE = "DateOfBirth";
+
     private readonly HttpClient httpClient;
 
     public UserService(HttpClient httpClient)
     {
         this.httpClient = httpClient;
+    }
+
+    public int GetUserId()
+    {
+        var token = httpClient.DefaultRequestHeaders.Authorization;
+
+        if (token is null)
+        {
+            return 0;
+        }
+
+        JwtSecurityTokenHandler handler = new();
+        var jwtToken = handler.ReadJwtToken(token.Parameter);
+
+        if (jwtToken is null)
+        {
+            return 0;
+        }
+
+        if (int.TryParse(jwtToken.Claims.FirstOrDefault(claim => claim.Type == ID_TYPE)?.Value, out int id))
+        {
+            return id;
+        }
+
+        return 0;
+    }
+
+    public string GetUserName()
+    {
+        var token = httpClient.DefaultRequestHeaders.Authorization;
+
+        if (token is null)
+        {
+            return string.Empty;
+        }
+
+        JwtSecurityTokenHandler handler = new();
+        var jwtToken = handler.ReadJwtToken(token.Parameter);
+
+        if (jwtToken is null)
+        {
+            return string.Empty;
+        }
+
+        var fullName = jwtToken.Claims.FirstOrDefault(claim => claim.Type == NAME_TYPE)?.Value;
+        if (fullName is null)
+        {
+            return string.Empty;
+        }
+
+        return fullName;
     }
 
     public UserUpdateDto GetUserData()
@@ -45,31 +98,5 @@ public class UserService : IUserService
         }
 
         return dto!;
-    }
-
-    public string GetUserName()
-    {
-        var token = httpClient.DefaultRequestHeaders.Authorization;
-
-        if (token is null)
-        {
-            return string.Empty;
-        }
-
-        JwtSecurityTokenHandler handler = new();
-        var jwtToken = handler.ReadJwtToken(token.Parameter);
-
-        if (jwtToken is null)
-        {
-            return string.Empty;
-        }
-
-        var fullName = jwtToken.Claims.FirstOrDefault(claim => claim.Type == NAME_TYPE)?.Value;
-        if (fullName is null)
-        {
-            return string.Empty;
-        }
-
-        return fullName;
     }
 }

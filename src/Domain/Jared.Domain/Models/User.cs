@@ -15,4 +15,6 @@ public class User : Entity
     public Role? Role { get; set; }
 
     public List<TaskHistory> TaskHistories { get; set; } = new();
+    public List<Task> CreatedTask { get; set; } = new();
+    public List<Task> AssignedTask { get; set; } = new();
 }

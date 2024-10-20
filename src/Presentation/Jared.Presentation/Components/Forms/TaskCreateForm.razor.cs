@@ -6,6 +6,8 @@ using Jared.Presentation.Requests.Projects.List;
 using Jared.Presentation.Requests.Tasks.Create;
 using Jared.Presentation.Requests.Tasks.List;
 using Microsoft.AspNetCore.Components;
+using Jared.Presentation.Requests.User.List;
+using Jared.Shared.Dtos.UserDtos;
 
 namespace Jared.Presentation.Components.Forms;
 
@@ -21,18 +23,21 @@ public partial class TaskCreateForm
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();
+    private List<UserListDto> users = new();
 
     protected override async Task OnInitializedAsync()
     {
         base.OnInitialized();
         await getProjectsAsync();
         await getEpicsAsync();
-        await getTaskAsync();
+        await getTasksAsync();
+        await getUsersAsync();
 
         Dto.Deadline = DateTime.Now.Date;
         Dto.Priority = Shared.Enums.Priority.Normal;
         Dto.Status = Shared.Enums.TaskStatus.Created;
         Dto.ParentId = null;
+        Dto.CreatedById = UserService.GetUserId();
     }
 
     private async Task getProjectsAsync()
@@ -54,24 +59,37 @@ public partial class TaskCreateForm
 
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            Console.WriteLine("Error when get epics list");
             return;
         }
 
         epics = result.Data.ToList();
     }
 
-    private async Task getTaskAsync()
+    private async Task getTasksAsync()
     {
         var result = await Mediator.Send(new TaskListQuery(Dto.ProjectId, Dto.EpicId));
 
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            Console.WriteLine("Error when get task list");
             return;
         }
 
         tasks = result.Data.ToList();
+    }
+
+    private async Task getUsersAsync()
+    {
+        var result = await Mediator.Send(new UserListQuery());
+
+        if (!result.Success)
+        {
+            Console.WriteLine("Error when get users list");
+            return;
+        }
+
+        users = result.Data.ToList();
     }
 
     private void cancel()
