@@ -41,4 +41,4 @@ jobs:
       run: dotnet restore
 
     - name: Run unit tests
-      run: dotnet test --no-restore --filter FullyQualifiedName~tests
+      run: dotnet test --no-restore --verbosity detailed FullyQualifiedName~tests
