@@ -41,6 +41,5 @@ jobs:
         run: dotnet restore
     
       - name: Run unit tests
-        run: |
-          cd tests
-          dotnet test --no-restore --verbosity detailed
+        run: dotnet test --no-restore --verbosity detailed
+        working-directory: ./tests
