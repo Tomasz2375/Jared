@@ -75,7 +75,7 @@ jobs:
         run: |
           echo "Waiting for SQL Server to be ready..."
           for i in {1..30}; do
-            if /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P ${{ secrets.JARED_DB_PASSWORD }} -Q "SELECT 1" &> /dev/null; then
+            if /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P ${{ secrets.JARED_DB_PASSWORD }} -Q "SELECT 1" &> /dev/null; then
               echo "SQL Server is up and running!"
               break
             fi
@@ -89,9 +89,4 @@ jobs:
           JARED_DB_USER: ${{ secrets.JARED_DB_USER }}
           JARED_DB_PASSWORD: ${{ secrets.JARED_DB_PASSWORD }}
           JARED_TEST_DB_NAME: ${{ secrets.JARED_TEST_DB_NAME }}
-        run: |
-          echo "JARED_DB_SERVER: $JARED_DB_SERVER"
-          echo "JARED_DB_USER: $JARED_DB_USER"
-          echo "JARED_DB_PASSWORD: $JARED_DB_PASSWORD"
-          echo "JARED_TEST_DB_NAME: $JARED_TEST_DB_NAME"
-          dotnet test --no-restore --filter 'FullyQualifiedName~integration'
+        run: dotnet test --no-restore --filter 'FullyQualifiedName~integration'
