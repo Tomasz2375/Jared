@@ -64,9 +64,15 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
+    - name: Wait for SQL Server to be ready
+      run: sleep 30
+
     - name: Verify database connection
       run: |
         sqlcmd -S localhost -U sa -P ${{ secrets.JARED_DB_PASSWORD }} -Q "SELECT 1"
+
+    - name: Check SQL Server logs
+      run: docker logs $(docker ps -q --filter "ancestor=mcr.microsoft.com/mssql/server:2019-latest")
 
     - name: Run integration tests
       env:
