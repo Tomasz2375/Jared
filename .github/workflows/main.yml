@@ -89,4 +89,9 @@ jobs:
           JARED_DB_USER: ${{ secrets.JARED_DB_USER }}
           JARED_DB_PASSWORD: ${{ secrets.JARED_DB_PASSWORD }}
           JARED_TEST_DB_NAME: ${{ secrets.JARED_TEST_DB_NAME }}
-        run: dotnet test --no-restore --filter 'FullyQualifiedName~integration'
+        run: |
+          echo "JARED_DB_SERVER: $JARED_DB_SERVER"
+          echo "JARED_DB_USER: $JARED_DB_USER"
+          echo "JARED_DB_PASSWORD: $JARED_DB_PASSWORD"
+          echo "JARED_TEST_DB_NAME: $JARED_TEST_DB_NAME"
+          dotnet test --no-restore --filter 'FullyQualifiedName~integration'
