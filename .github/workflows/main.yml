@@ -40,53 +40,41 @@ jobs:
   integration-tests:
     runs-on: ubuntu-latest
     needs: build
-  
+
     services:
-      sqlserver:
+      mssql:
         image: mcr.microsoft.com/mssql/server:2019-latest
         ports:
           - 1433:1433
         env:
           SA_PASSWORD: ${{ secrets.JARED_DB_PASSWORD }}
-          ACCEPT_EULA: Y
-        options: >-
-          --name sqlserver
-          --health-cmd "exit 0"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 3
-  
+          ACCEPT_EULA: "Y"
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-  
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: '6.0.x'
-  
-      - name: Restore dependencies
-        run: dotnet restore
-  
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-  
-      - name: Wait for SQL Server to be ready
-        run: |
-          echo "Waiting for SQL Server to be ready..."
-          for i in {1..30}; do
-            if /opt/mssql-tools/bin/sqlcmd -S sqlserver -U sa -P ${{ secrets.JARED_DB_PASSWORD }} -Q "SELECT 1" &> /dev/null; then
-              echo "SQL Server is up and running!"
-              break
-            fi
-            echo "Waiting for SQL Server to start..."
-            sleep 2
-          done
-  
-      - name: Run integration tests
-        env:
-          JARED_DB_SERVER: "sqlserver"
-          JARED_DB_USER: ${{ secrets.JARED_DB_USER }}
-          JARED_DB_PASSWORD: ${{ secrets.JARED_DB_PASSWORD }}
-          JARED_TEST_DB_NAME: ${{ secrets.JARED_TEST_DB_NAME }}
-        run: dotnet test --no-restore --filter 'FullyQualifiedName~integration'
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run database migrations and seed data
+      env:
+        ConnectionStrings__JaredConnectionString: "Server=${{ secrets.JARED_DB_SERVER }};Database=${{ secrets.JARED_TEST_DB_NAME }};User Id=${{ secrets.JARED_DB_USER }};Password=${{ secrets.JARED_DB_PASSWORD }};TrustServerCertificate=True;"
+      run: dotnet run --project YourProject -- --seed
+
+    - name: Run integration tests
+      run: dotnet test --logger trx --results-directory TestResults
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v2
+      with:
+        name: TestResults
+        path: TestResults
