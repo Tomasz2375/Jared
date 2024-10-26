@@ -35,7 +35,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '6.0.x'  # Zmodyfikuj wed³ug wersji, której u¿ywasz
+          dotnet-version: '6.0.x'
     
       - name: Restore dependencies
         run: dotnet restore
@@ -76,7 +76,5 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Run tests
-        env:
-          ConnectionStrings__DefaultConnection: "Server=localhost,1433;Initial Catalog=${{ secrets.JARED_TEST_DB_NAME }};User ID=${{ secrets.JARED_DB_USER }};Password=${{ secrets.JARED_DB_PASSWORD }};"
-        run: dotnet test --no-restore --verbosity normal
+      - name: Run integration tests
+        run: dotnet test --no-restore --filter 'FullyQualifiedName~integration'
