@@ -65,11 +65,6 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
-    - name: Run database migrations and seed data
-      env:
-        ConnectionStrings__JaredConnectionString: "Server=${{ secrets.JARED_DB_SERVER }};Database=${{ secrets.JARED_TEST_DB_NAME }};User Id=${{ secrets.JARED_DB_USER }};Password=${{ secrets.JARED_DB_PASSWORD }};TrustServerCertificate=True;"
-      run: dotnet run --project YourProject -- --seed
-
     - name: Run integration tests
       run: dotnet test --logger trx --results-directory TestResults
 
