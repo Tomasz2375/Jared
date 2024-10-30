@@ -5,104 +5,51 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using System.Data.Common;
+using Testcontainers.MsSql;
 
 namespace Jared.Api.Integration.Tests;
 
-public class JaredWebApplicationFactory : WebApplicationFactory<Program>, IDisposable
+public class JaredWebApplicationFactory : WebApplicationFactory<Program>, IAsyncLifetime
 {
-    private const string ENVIRONMENT = "Tests";
-    private string dbConnection = 
-        $"Server={Environment.GetEnvironmentVariable("JARED_DB_SERVER")!};Integrated Security=True;";
-    private string dbName = Environment.GetEnvironmentVariable("JARED_TEST_DB_NAME")!;
-    private string snapshotName = Environment.GetEnvironmentVariable("JARED_SNAPSHOT_NAME")!;
-    private string snapshotPath = Environment.GetEnvironmentVariable("JARED_SNAPSHOT_PATH")!;
+    private readonly MsSqlContainer msSqlContainer = new MsSqlBuilder()
+        .WithImage("mcr.microsoft.com/mssql/server:2019-latest")
+        .Build();
+
+    private DbConnection dbConnection = default!;
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
-        builder.UseEnvironment(ENVIRONMENT);
-
-        builder.ConfigureTestServices(async services =>
+        builder.ConfigureTestServices(services =>
         {
-            var descriptor = services.SingleOrDefault(
-                d => d.ServiceType == typeof(DbContextOptions<DataContext>));
-            if (descriptor != null)
-            {
-                services.Remove(descriptor);
-            }
-
-            var connectionString = services
-                .BuildServiceProvider()
-                .GetRequiredService<IConfiguration>()
-                .GetConnectionString("JaredConnectionString");
-
+            services.RemoveAll(typeof(DbContextOptions<DataContext>));
             services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(connectionString);
+                options.UseSqlServer(dbConnection);
             });
-
-            var serviceProvider = services.BuildServiceProvider();
-            using var scope = serviceProvider.CreateScope();
-            var dataContext = scope.ServiceProvider.GetRequiredService<IDataContext>();
-            DropSnapshot();
-            dataContext.Database.EnsureDeleted();
-            dataContext.Database.Migrate();
-            dataContext.Database.EnsureCreated();
-
-            await dataContext.Seed();
-
-            CreateSnapshot(dataContext);
         });
     }
 
-    public new void Dispose()
+    public async Task InitializeAsync()
+    {
+        await msSqlContainer.StartAsync();
+        dbConnection = new SqlConnection(msSqlContainer.GetConnectionString());
+        await seedDatabaseAsync();
+    }
+
+    public new async Task DisposeAsync()
+    {
+        await msSqlContainer.StopAsync();
+    }
+
+    private async Task seedDatabaseAsync()
     {
         using var scope = Services.CreateScope();
         var dataContext = scope.ServiceProvider.GetRequiredService<IDataContext>();
-        DropSnapshot();
-        dataContext.Database.EnsureDeleted();
-        base.Dispose();
-    }
-
-    public void CreateSnapshot(IDataContext dataContext)
-    {
-        var sql =
-            $@"CREATE DATABASE {snapshotName} ON 
-            (NAME = {dbName}, FILENAME = '{snapshotPath}')
-            AS SNAPSHOT OF {dbName}";
-
-        using SqlConnection connection = new(dbConnection);
-        connection.Open();
-        using SqlCommand command = new(sql, connection);
-        command.ExecuteNonQuery();
-    }
-
-    public void RestoreSnapshot()
-    {
-        var sql =
-            $"USE master; " +
-            $"ALTER DATABASE Jared_Tests SET SINGLE_USER WITH ROLLBACK IMMEDIATE; " +
-            $"RESTORE DATABASE {dbName} FROM DATABASE_SNAPSHOT = '{snapshotName}' " +
-            $"ALTER DATABASE Jared_Tests SET MULTI_USER; ";
-
-        using SqlConnection connection = new(dbConnection);
-        connection.Open();
-        using SqlCommand command = new(sql, connection);
-        command.ExecuteNonQuery();
-    }
-
-    public void DropSnapshot()
-    {
-        var sql = 
-            @$"IF EXISTS (SELECT * FROM sys.databases WHERE name = '{snapshotName}')
-            BEGIN
-            DROP DATABASE {snapshotName}
-            END";
-
-        using SqlConnection connection = new(dbConnection);
-        connection.Open();
-        using SqlCommand command = new(sql, connection);
-        command.ExecuteNonQuery();
+        await dataContext.Database.MigrateAsync();
+        dataContext.Database.EnsureCreated();
+        await dataContext.Seed();
     }
 }
