@@ -49,5 +49,5 @@ jobs:
           dotnet-version: "6.0.x"
       - name: Restore dependencies
         run: dotnet restore
-      - name: Run unit tests
+      - name: Run integration tests
         run: dotnet test --no-restore --filter 'FullyQualifiedName~integration'
