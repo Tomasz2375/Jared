@@ -60,6 +60,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests-integration", "tests-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.Api.Integration.Tests", "tests-integration\Jared.Api.Integration.Tests\Jared.Api.Integration.Tests.csproj", "{23C564AB-DAC0-4641-AD1A-D9B2B08EF3F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{2F299CC8-778C-47D6-A4E8-72CDDB680555}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{B788AAC4-D55C-41F3-8946-725CF3BB96A9}"
+	ProjectSection(SolutionItems) = preProject
+		main.yml = main.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +152,7 @@ Global
 		{1DBE5AC4-4815-41F6-9D48-DC83726B8586} = {D1D8F820-D34D-43B3-A2BA-B17680588BD7}
 		{088E8040-44D9-4F29-B449-FB5B159B59E4} = {1DBE5AC4-4815-41F6-9D48-DC83726B8586}
 		{23C564AB-DAC0-4641-AD1A-D9B2B08EF3F6} = {66C72575-A597-4DB9-89D3-1F39697B1313}
+		{B788AAC4-D55C-41F3-8946-725CF3BB96A9} = {2F299CC8-778C-47D6-A4E8-72CDDB680555}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC5AA28C-D0A6-47D5-BD33-30BFC6E5687C}
