@@ -25,6 +25,7 @@ public class UserListQueryHandler : IRequestHandler<UserListQuery, Result<List<U
         {
             var usersQuery = dataContext
                 .Set<User>()
+                .Include(x => x.Role)
                 .AsNoTracking();
 
             var users = await usersQuery.ToListAsync();
