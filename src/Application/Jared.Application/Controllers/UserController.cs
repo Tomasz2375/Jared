@@ -3,9 +3,11 @@ using Jared.Application.Requests.Users.Login;
 using Jared.Application.Requests.Users.Password;
 using Jared.Application.Requests.Users.Register;
 using Jared.Application.Requests.Users.Update;
+using Jared.Application.Requests.Users.UpdateRole;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.UserDtos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jared.Application.Controllers;
@@ -49,5 +51,12 @@ public class UserController
     public async Task<Result<bool>> UserUpdate(UserUpdateDto dto)
     {
         return await mediator.Send(new UserUpdateCommand(dto));
+    }
+
+    [Authorize]
+    [HttpPut("UpdateRole")]
+    public async Task<Result<bool>> UserRoleUpdate(UserRoleUpdateDto dto)
+    {
+        return await mediator.Send(new UserRoleUpdateCommand(dto));
     }
 }
