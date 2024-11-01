@@ -11,6 +11,8 @@ public partial class InputTextField
     public string? Id { get; set; }
     [Parameter]
     public string? Label { get; set; }
+    [Parameter]
+    public bool Disabled { get; set; }
 
     protected override bool TryParseValueFromString(string? value, out string result, out string validationErrorMessage)
     {

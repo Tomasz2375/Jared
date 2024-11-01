@@ -15,6 +15,10 @@
             <Authorized>
                 <span class="dropdown-info">@UserService.GetUserName()</span>
                 <a href="profile" class="dropdown-item">Profile</a>
+                @if(UserService.GetUserRole() == "Admin")
+                {
+                    <a href="users" class="dropdown-item">Users</a>
+                }
                 <button onclick="@(async () => await logout())" class="dropdown-item">Logout</button>
             </Authorized>
             <NotAuthorized>
