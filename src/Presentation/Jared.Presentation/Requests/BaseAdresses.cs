@@ -33,4 +33,8 @@ public static class BaseAdresses
     public const string USER_PASSWORD = "user/password";
     public const string USER_UPDATE = "user/update";
     #endregion
+
+    #region Roles
+    public const string ROLE_LIST = "role/list";
+    #endregion
 }
