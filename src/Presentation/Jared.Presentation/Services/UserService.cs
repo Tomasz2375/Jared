@@ -7,6 +7,7 @@ public class UserService : IUserService
 {
     private const string ID_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
     private const string NAME_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
+    private const string USER_ROLE = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
     private const string BIRTHDAY_TYPE = "DateOfBirth";
 
     private readonly HttpClient httpClient;
@@ -39,6 +40,27 @@ public class UserService : IUserService
         }
 
         return 0;
+    }
+
+
+    public string GetUserRole()
+    {
+        var token = httpClient.DefaultRequestHeaders.Authorization;
+
+        if (token is null)
+        {
+            return string.Empty;
+        }
+
+        JwtSecurityTokenHandler handler = new();
+        var jwtToken = handler.ReadJwtToken(token.Parameter);
+
+        if (jwtToken is null)
+        {
+            return string.Empty;
+        }
+        var role = jwtToken.Claims.FirstOrDefault(claim => claim.Type == USER_ROLE);
+        return role is null ? string.Empty : role.Value;
     }
 
     public string GetUserName()
