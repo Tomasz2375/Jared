@@ -27,14 +27,14 @@ public class UserRoleUpdateCommandHandler : IRequestHandler<UserRoleUpdateComman
             var user = await dataContext
                 .Set<User>()
                 .Include(x => x.Role)
-                .FirstOrDefaultAsync(x => x.Id == userService.GetUser().Id, cancellationToken);
+                .FirstOrDefaultAsync(x => x.Id == request.dto.Id, cancellationToken);
 
             if (user is null)
             {
                 return Result.Fail<bool>("User not found");
             }
 
-            if (user.Id == request.dto.Id && user.Role?.Name == "Admin")
+            if (user.Id == userService.GetUser().Id && user.Role?.Name == "Admin")
             {
                 return Result.Fail<bool>("You can't take away your admin rights");
             }
