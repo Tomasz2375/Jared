@@ -1,0 +1,39 @@
+﻿@page "/users"
+@inject IMediator Mediator
+@attribute [Authorize(Roles = "Admin")]
+<h4>Users</h4>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Save changes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in users)
+        {
+            <tr>
+                <td>@user.FirstName</td>
+                <td>@user.LastName</td>
+                <td>@user.Email</td>
+                <td>
+                    <EditForm Model="@user">
+                        <InputSelectList
+                            @bind-Value="@user.RoleId"
+                            Items="@roles"
+                            TKey="int"
+                            Id=@($"user-{user.Id}-role")
+                            ValidationFor="@(() => user.RoleId)" />
+                    </EditForm>
+                </td>
+                <td>
+                    <button @onclick="(() => save(user))" class="btn btn-primary">Save</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
