@@ -30,32 +30,32 @@ public class UserController
     }
 
     [HttpPost("Register")]
-    public async Task<Result<bool>> UserRegister(UserRegisterDto dto)
+    public async Task<Result<bool>> UserRegisterAsync(UserRegisterDto dto)
     {
         return await mediator.Send(new UserRegisterCommand(dto));
     }
 
     [HttpPost("Login")]
-    public async Task<Result<string>> UserLogin(UserLoginDto dto)
+    public async Task<Result<string>> UserLoginAsync(UserLoginDto dto)
     {
         return await mediator.Send(new UserLoginCommand(dto));
     }
 
     [HttpPut("Password")]
-    public async Task<Result<bool>> UserPassword(UserPasswordDto dto)
+    public async Task<Result<bool>> UserPasswordAsync(UserPasswordDto dto)
     {
         return await mediator.Send(new UserPasswordCommand(dto));
     }
 
     [HttpPut("Update")]
-    public async Task<Result<bool>> UserUpdate(UserUpdateDto dto)
+    public async Task<Result<bool>> UserUpdateAsync(UserUpdateDto dto)
     {
         return await mediator.Send(new UserUpdateCommand(dto));
     }
 
     [Authorize]
     [HttpPut("UpdateRole")]
-    public async Task<Result<bool>> UserRoleUpdate(UserRoleUpdateDto dto)
+    public async Task<Result<bool>> UserRoleUpdateAsync(UserRoleUpdateDto dto)
     {
         return await mediator.Send(new UserRoleUpdateCommand(dto));
     }
