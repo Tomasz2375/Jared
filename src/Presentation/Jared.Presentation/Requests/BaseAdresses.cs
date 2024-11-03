@@ -26,9 +26,16 @@ public static class BaseAdresses
     public const string PROJECT_PAGE = "project/page";
     #endregion
 
-    #region Authorization
+    #region Users
+    public const string USER_LIST = "user/list";
     public const string USER_LOGIN = "user/login";
     public const string USER_REGISTER = "user/register";
     public const string USER_PASSWORD = "user/password";
+    public const string USER_UPDATE = "user/update";
+    public const string USER_ROLE_UPDATE = "user/updateRole";
+    #endregion
+
+    #region Roles
+    public const string ROLE_LIST = "role/list";
     #endregion
 }

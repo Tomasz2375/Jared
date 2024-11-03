@@ -11,12 +11,24 @@
     vertical-align: middle !important;
 }
 
+.dropdown-item {
+    color: var(--font-color);
+}
 .dropdown-item:hover {
-    background-color: #DDDDDD;
+    background-color: var(--background-2);
+    color: var(--font-color);
+}
+.dropdown-info {
+    color: var(--main-color);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 18px;
 }
 
 .dropdown-menu {
+    background-color: var(--background-1);
     left: auto;
     right: -0.2rem;
     margin-top: 0.1rem;
+    border: 1px solid var(--main-color)
 }

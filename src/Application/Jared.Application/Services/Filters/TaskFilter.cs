@@ -34,6 +34,14 @@ public class TaskFilter : IFilterStrategy<Task>
             (tasks, value) => tasks.Where(x => x.Id.ToString().Contains(value))
         },
         {
+            nameof(TaskListDto.AssignedToId),
+            (tasks, value) => tasks.Where(x => x.AssignedToId.ToString() == value)
+        },
+        {
+            nameof(TaskListDto.CreatedById),
+            (tasks, value) => tasks.Where(x => x.CreatedById.ToString() == value)
+        },
+        {
             nameof(TaskListDto.Status),
             (tasks, value) =>
             {

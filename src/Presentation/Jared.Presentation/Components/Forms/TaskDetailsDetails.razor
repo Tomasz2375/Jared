@@ -1,69 +1,97 @@
 ﻿@inject IMediator Mediator
 
-<div class="blazor-modal-body-3">
-    <div class="right-border">
-        <InputTextField
-            @bind-Value="@Dto.Title"
-            Id="title"
-            Label="Title"
-            ValidationFor="(() => Dto.Title)" />
-        <InputTextAreaField
-            @bind-Value="@Dto.Description"
-            Id="description"
-            Label="Description"
-            Row="11"
-            ValidationFor="(() => Dto.Description)" />
-    </div>
-    <div class="right-border">
-        <InputSelectList
-            @bind-Value="@(Dto.ProjectId)"
-            Items="@projects.ToDictionary(x => x.Id, x => x.Title)"
-            TKey="int"
-            Id="project"
-            Label="Project"
-            ValidationFor="@(() => Dto.ProjectId)" />
-        <InputSelectList
-            @bind-Value="@Dto.EpicId"
-            Items="@epics.Where(x => x.ProjectId == Dto.ProjectId).ToDictionary(x => x.Id, x => x.Title)"
-            TKey="int?"
-            Id="epic"
-            Label="Epic"
-            Disabled=@(Dto.ProjectId == 0)
-            ValidationFor="@(() => Dto.EpicId)" />
-        <InputSelectList
-            @bind-Value="@Dto.ParentId"
-            Items="@tasks.Where(x => x.ProjectId == Dto.ProjectId && x.EpicId == Dto.EpicId).ToDictionary(x => x.Id, x => x.Title)"
-            TKey="int?"
-            Id="parent"
-            Label="Parent task"
-            Disabled=@(Dto.EpicId == 0 || Dto.EpicId is null || Dto.ProjectId == 0)
-            ValidationFor="@(() => Dto.ParentId)" />
-        <InputSelectEnum
-            @bind-Value="@(Dto.Priority)"
-            ValidationFor="(() => Dto.Priority)"
-            Id="priority"
-            Label="Priority" />
-        <InputSelectEnum
-            @bind-Value="@(Dto.Status)"
-            ValidationFor="(() => Dto.Status)"
-            Id="status"
-            Label="Status" />
-    </div>
-    <div>
-        <InputDateField
-            @bind-Value="@(Dto.Deadline)"
-            Label="Deadline"
-            Id="deadline"
-            ValidationFor="(() => Dto.Deadline)" />
-        <InputTimeSpanField
-            @bind-Value="@(Dto.EstimatedTime)"
-            Label="Estimated time"
-            Id="estimated-time"
-            ValidationFor="(() => Dto.EstimatedTime)" />
-        <InputTimeSpanField
-            @bind-Value="@(Dto.TotalWorkTime)"
-            Label="Total work time"
-            Id="total-work-time"
-            ValidationFor="(() => Dto.TotalWorkTime)" />
-    </div>
+<InputTextField
+    @bind-Value="@Dto.Title"
+    Id="title"
+    Label="Title"
+    ValidationFor="(() => Dto.Title)" />
+<InputTextAreaField
+    @bind-Value="@Dto.Description"
+    Id="description"
+    Label="Description"
+    Row="5"
+    ValidationFor="(() => Dto.Description)" />
+<div class="form-modal-tabs">
+    <InputSelectList
+        @bind-Value="@(Dto.ProjectId)"
+        Items="@projects.ToDictionary(x => x.Id, x => x.Title)"
+        TKey="int"
+        Id="project"
+        Label="Project"
+        ValidationFor="@(() => Dto.ProjectId)" />
+    <InputSelectList
+        @bind-Value="@Dto.EpicId"
+        Items="@epics.Where(x => x.ProjectId == Dto.ProjectId).ToDictionary(x => x.Id, x => x.Title)"
+        TKey="int?"
+        Id="epic"
+        Label="Epic"
+        Disabled=@(Dto.ProjectId == 0)
+        ValidationFor="@(() => Dto.EpicId)" />
+    <InputSelectList
+        @bind-Value="@Dto.ParentId"
+        Items="@tasks.Where(x => x.ProjectId == Dto.ProjectId && x.EpicId == Dto.EpicId).ToDictionary(x => x.Id, x => x.Title)"
+        TKey="int?"
+        Id="parent"
+        Label="Parent task"
+        Disabled=@(Dto.EpicId == 0 || Dto.EpicId is null || Dto.ProjectId == 0)
+        ValidationFor="@(() => Dto.ParentId)" />
+</div>
+<div class="form-modal-tabs">
+    <InputSelectEnum
+        @bind-Value="@(Dto.Priority)"
+        ValidationFor="(() => Dto.Priority)"
+        Id="priority"
+        Label="Priority" />
+    <InputSelectEnum
+        @bind-Value="@(Dto.Status)"
+        ValidationFor="(() => Dto.Status)"
+        Id="status"
+        Label="Status" />
+    <InputDateField
+        @bind-Value="@(Dto.Deadline)"
+        Label="Deadline"
+        Id="deadline"
+        ValidationFor="(() => Dto.Deadline)" />
+</div>
+<div class="form-modal-tabs">
+    <LabelValueDisplay
+        Id="created-at"
+        Label="Created at"
+        Value="@Dto.CreatedAt.ToString()" />
+    <LabelValueDisplay
+        Id="start-date"
+        Label="Start date"
+        Value="@Dto.StartDate.ToString()" />
+    <LabelValueDisplay
+        Id="end-date"
+        Label="End date"
+        Value="@Dto.EndDate.ToString()" />
+</div>
+<div class="form-modal-tabs">
+    <InputSelectList
+        @bind-Value="@Dto.CreatedById"
+        Items="@users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}" )"
+        TKey="int?"
+        Id="created-by"
+        Label="Created by"
+        ValidationFor="@(() => Dto.CreatedById)" />
+    <InputSelectList
+        @bind-Value="@Dto.AssignedToId"
+        Items="@users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}" )"
+        TKey="int?"
+        Id="assigned-to"
+        Label="Assigned to"
+        ValidationFor="@(() => Dto.AssignedToId)" />
+</div>
+<div class="form-modal-tabs">
+    <InputTimeSpanField
+        @bind-Value="@(Dto.EstimatedTime)"
+        Label="Estimated time"
+        Id="estimated-time"
+        ValidationFor="(() => Dto.EstimatedTime)" />
+    <InputTimeSpanField
+        @bind-Value="@(Dto.TotalWorkTime)"
+        Label="Total work time"
+        Id="total-work-time"
+        ValidationFor="(() => Dto.TotalWorkTime)" />
 </div>

@@ -9,18 +9,24 @@ using Jared.Presentation.Requests.Projects.Details;
 using Jared.Presentation.Requests.Projects.List;
 using Jared.Presentation.Requests.Projects.Page;
 using Jared.Presentation.Requests.Projects.Update;
+using Jared.Presentation.Requests.Roles.List;
 using Jared.Presentation.Requests.Tasks.Create;
 using Jared.Presentation.Requests.Tasks.Details;
 using Jared.Presentation.Requests.Tasks.List;
 using Jared.Presentation.Requests.Tasks.Page;
 using Jared.Presentation.Requests.Tasks.Update;
+using Jared.Presentation.Requests.User.List;
 using Jared.Presentation.Requests.User.Login;
 using Jared.Presentation.Requests.User.Password;
 using Jared.Presentation.Requests.User.Register;
+using Jared.Presentation.Requests.User.Update;
+using Jared.Presentation.Requests.User.UpdateRole;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Shared.Dtos.Role;
 using Jared.Shared.Dtos.TaskDtos;
+using Jared.Shared.Dtos.UserDtos;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
@@ -31,7 +37,7 @@ namespace Jared.Presentation.Tests;
 public class DependencyInjectionTests
 {
     [Fact]
-    public void AddApplication_ShouldRegisterAppropriateServicesCount()
+    public void AddPresentation_ShouldRegisterAppropriateServicesCount()
     {
         // Arrange
         ServiceCollection services = new();
@@ -40,11 +46,11 @@ public class DependencyInjectionTests
         DependencyInjection.AddPresentation(services);
 
         // Assert
-        Assert.Equal(36, services.Count);
+        Assert.Equal(38, services.Count);
     }
 
     [Fact]
-    public void AddApplication_ShouldAddExpectedHandlers()
+    public void AddPresentation_ShouldAddExpectedHandlers()
     {
         // Arrange
         ServiceCollection services = new();
@@ -136,6 +142,11 @@ public class DependencyInjectionTests
 
         #region User
         Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserListQuery, Result<List<UserListDto>>>) &&
+            x.ImplementationType == typeof(UserListQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserLoginCommand, Result<string>>) &&
             x.ImplementationType == typeof(UserLoginCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
@@ -149,11 +160,27 @@ public class DependencyInjectionTests
             x.ServiceType == typeof(IRequestHandler<UserRegisterCommand, Result<bool>>) &&
             x.ImplementationType == typeof(UserRegisterCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserUpdateCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(UserUpdateCommandHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserRoleUpdateCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(UserRoleUpdateCommandHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+        #endregion
+
+        #region Role
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>) &&
+            x.ImplementationType == typeof(RoleListQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
         #endregion
     }
 
     [Fact]
-    public void AddApplication_ShouldRegisterLocalStorageService()
+    public void AddPresentation_ShouldRegisterLocalStorageService()
     {
         // Arrange
         Mock<IJSRuntime> jsRuntimeMock = new();

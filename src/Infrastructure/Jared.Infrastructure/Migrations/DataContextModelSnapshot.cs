@@ -123,6 +123,9 @@ namespace Jared.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("AssignedToId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(10)
@@ -132,6 +135,9 @@ namespace Jared.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("getdate()");
+
+                    b.Property<int?>("CreatedById")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Deadline")
                         .HasColumnType("datetime2");
@@ -172,6 +178,10 @@ namespace Jared.Infrastructure.Migrations
                         .HasColumnType("time");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AssignedToId");
+
+                    b.HasIndex("CreatedById");
 
                     b.HasIndex("EpicId");
 
@@ -282,6 +292,16 @@ namespace Jared.Infrastructure.Migrations
 
             modelBuilder.Entity("Jared.Domain.Models.Task", b =>
                 {
+                    b.HasOne("Jared.Domain.Models.User", "AssignedTo")
+                        .WithMany("AssignedTask")
+                        .HasForeignKey("AssignedToId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("Jared.Domain.Models.User", "CreatedBy")
+                        .WithMany("CreatedTask")
+                        .HasForeignKey("CreatedById")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("Jared.Domain.Models.Epic", "Epic")
                         .WithMany("Tasks")
                         .HasForeignKey("EpicId")
@@ -296,6 +316,10 @@ namespace Jared.Infrastructure.Migrations
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AssignedTo");
+
+                    b.Navigation("CreatedBy");
 
                     b.Navigation("Epic");
 
@@ -357,6 +381,10 @@ namespace Jared.Infrastructure.Migrations
 
             modelBuilder.Entity("Jared.Domain.Models.User", b =>
                 {
+                    b.Navigation("AssignedTask");
+
+                    b.Navigation("CreatedTask");
+
                     b.Navigation("TaskHistories");
                 });
 #pragma warning restore 612, 618

@@ -52,6 +52,8 @@ public class TaskHistoryService : ITaskHistoryService
             nameof(TaskDetailsDto.Deadline),
             nameof(TaskDetailsDto.EstimatedTime),
             nameof(TaskDetailsDto.TotalWorkTime),
+            nameof(TaskDetailsDto.CreatedById),
+            nameof(TaskDetailsDto.AssignedToId),
         };
     }
 }

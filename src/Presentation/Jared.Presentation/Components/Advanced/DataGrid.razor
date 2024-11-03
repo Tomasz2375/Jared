@@ -16,7 +16,7 @@
                 <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width">
                     <div @onclick="(() => sortByColumn(column.ColumnName))">
                         @column.ColumnName
-                        <span class="@sortCssClass(column.ColumnName)"/>
+                        &nbsp;<span class="@sortCssClass(column.ColumnName)"/>
                     </div>
                     <div>
                         <DataGridFilter
@@ -53,7 +53,7 @@
 <div class="align-center">
     <EditForm Model="Query">
         <label id="page-size">Page size: </label>
-        <InputSelect DisplayName="Page size:" @bind-Value=@Query.PageSize>
+        <InputSelect class="form-control" style="width: 50px; display:inline" DisplayName="Page size:" @bind-Value=@Query.PageSize>
             @foreach (var item in pageSizes)
             {
                 <option value="@item" @onclick="pageSize">@item</option>
@@ -77,11 +77,11 @@
     }
 
     .data-grid-body {
-        border-top: solid 1px green;
+        border-top: solid 1px var(--main-color);
     }
 
     .data-grid-body:hover {
-        background-color: #DDDDDDDD;
+        background-color: var(--background-2);
         cursor: pointer;
     }
 
@@ -120,10 +120,10 @@
     }
 
     .arrow {
-        border: solid black;
+        border: solid var(--font-color);
         border-width: 0 3px 3px 0;
         display: inline-block;
-        padding: 3px;
+        padding: 4px;
     }
     .arrow-up {
         transform: rotate(-135deg);

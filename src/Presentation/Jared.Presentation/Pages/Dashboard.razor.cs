@@ -21,6 +21,7 @@ public partial class Dashboard
         {
             query.Filter!.Add("Status", "6");
         }
+        query.Filter.Add(nameof(TaskRootDto.AssignedToId), UserService.GetUserId().ToString());
 
         var result = await Mediator.Send(new TaskPageQuery(query));
 

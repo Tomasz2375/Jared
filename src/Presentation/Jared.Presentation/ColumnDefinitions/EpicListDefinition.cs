@@ -19,7 +19,7 @@ public class EpicListDefinition : ListDefinitionBase<EpicListDto>
         new ColumnDefinition<EpicListDto>("ProjectId", typeof(int), x => x.ProjectId, ColumnAlignment.Left, "1", null);
     
     public IColumnDefinition<EpicListDto> Status { get; } =
-        new ColumnDefinition<EpicListDto>("Status", typeof(EpicStatus), x => x.Status, ColumnAlignment.Left, "1", null);
+        new ColumnDefinition<EpicListDto>("Status", typeof(EpicStatus), x => x.Status, ColumnAlignment.Left, "2", null);
 
     public override IEnumerable<IColumnDefinition<EpicListDto>> GetColumns()
     {
