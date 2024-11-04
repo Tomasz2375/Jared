@@ -20,7 +20,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddInfrastructure(services, configurationMock.Object);
 
         // Assert
-        Assert.Equal(4, services.Count);
+        Assert.Equal(5, services.Count);
     }
 
     [Fact]
