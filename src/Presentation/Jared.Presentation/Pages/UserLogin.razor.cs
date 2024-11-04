@@ -16,7 +16,7 @@ public partial class UserLogin
 
         if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl", out var url))
         {
-            returnUrl = url;
+            returnUrl = url!;
         }
     }
 
