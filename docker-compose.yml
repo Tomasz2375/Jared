@@ -5,7 +5,7 @@ networks:
 services:
   jaredapi:
     container_name: jared.api
-    image: jared_api
+    image: jared_api:latest
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__JaredConnectionString=Server=host.docker.internal,1433;Database=${JARED_PROD_DB_NAME};User Id=${JARED_DB_USER};Password=${JARED_DB_PASSWORD};TrustServerCertificate=True;
@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: src/Jared.Api/Dockerfile
     ports:
-      - 5000:80
+      - 5000:8080
     networks:
       - jared-network
     volumes:
@@ -22,12 +22,12 @@ services:
 
   jaredapp:
     container_name: jared.app
-    image: jared_app
+    image: jared_app:latest
     build:
       context: .
       dockerfile: src/Jared.App/Dockerfile
     ports:
-      - 5001:80
+      - 5001:8080
     networks:
       - jared-network
     depends_on:
@@ -41,6 +41,7 @@ services:
     image: datalust/seq:latest
     depends_on:
       - jaredapi
+    restart: always
     environment:
       - ACCEPT_EULA=Y
     ports:
