@@ -6,4 +6,8 @@
     <ProjectReference Include="..\..\..\src\Presentation\Jared.Presentation\Jared.Presentation.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Moq" Version="4.20.72" />
+  </ItemGroup>
+
 </Project>
