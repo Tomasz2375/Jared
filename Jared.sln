@@ -27,9 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jared.App", "src\Jared.App\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{3F9CB067-D527-4F2E-BA7A-BE719A5794F7}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		.gitignore = .gitignore
-		docker-compose.yml = docker-compose.yml
 		Directory.Build.props = Directory.Build.props
+		docker-compose.yml = docker-compose.yml
 		README.md = README.md
 		tests.targets = tests.targets
 	EndProjectSection
