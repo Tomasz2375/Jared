@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Shared.Abstractions;
+﻿using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.ProjectDtos;
 using MediatR;
 using System.Net.Http.Json;
 

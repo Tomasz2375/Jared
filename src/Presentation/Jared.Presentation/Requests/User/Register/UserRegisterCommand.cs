@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Dtos.UserDtos;
-using Jared.Shared.Abstractions;
+﻿using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.UserDtos;
 using MediatR;
 
 namespace Jared.Presentation.Requests.User.Register;

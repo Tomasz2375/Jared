@@ -9,11 +9,10 @@ public class ColumnDefinition<T> : IColumnDefinition<T>
     public ColumnDefinition(
         string columnName,
         Type? type,
-        Expression<Func<T,object?>> valueSelector,
+        Expression<Func<T, object?>> valueSelector,
         ColumnAlignment alignment,
         string width,
-        string? format
-    )
+        string? format)
     {
         ColumnName = columnName;
         Type = type;
@@ -24,7 +23,7 @@ public class ColumnDefinition<T> : IColumnDefinition<T>
     }
 
     public Expression<Func<T, object?>> ValueSelector { get; set; }
-    public string ColumnName {get; set; }
+    public string ColumnName { get; set; }
     public Type? Type { get; set; }
     public bool IsNullable { get; set; }
     public string? ParentPath { get; set; }

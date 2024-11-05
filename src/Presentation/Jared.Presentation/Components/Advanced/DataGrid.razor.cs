@@ -1,13 +1,14 @@
-﻿using Jared.Shared.Dtos.Abstractions;
+﻿using Jared.Presentation.ColumnDefinitions;
+using Jared.Presentation.ColumnDefinitions.Abstraction;
+using Jared.Shared.Dtos.Abstractions;
 using Jared.Shared.Enums;
 using Jared.Shared.Interfaces;
-using Jared.Presentation.ColumnDefinitions;
-using Jared.Presentation.ColumnDefinitions.Abstraction;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Advanced;
 
-public partial class DataGrid<TItem> where TItem : class, IEntity
+public partial class DataGrid<TItem>
+    where TItem : class, IEntity
 {
     [Parameter]
     [EditorRequired]
@@ -32,6 +33,30 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
     [Parameter]
     public EventCallback<int> ShowDialog { get; set; }
 
+    private static object? showValue(TItem item, IColumnDefinition<TItem> column)
+    {
+        var property = item.GetType().GetProperty(column.ColumnName)!;
+        if (property.GetValue(item) is null)
+        {
+            return null;
+        }
+
+        if (column.Format is null)
+        {
+            return property.GetValue(item)!;
+        }
+
+        if (property.PropertyType == typeof(DateTime?) || property.PropertyType == typeof(DateTime))
+        {
+            var date = (DateTime)property.GetValue(item)!;
+            return date.ToString(column.Format);
+        }
+        else
+        {
+            return property.GetValue(item)!;
+        }
+    }
+
     private List<int> pageSizes = new()
     {
         5, 10, 20, 30, 50, 100,
@@ -47,6 +72,7 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
         Query.Page--;
         SendPageQuery.InvokeAsync(Query);
     }
+
     private void nextPage()
     {
         if (Query.Page == Pagination.PageCount)
@@ -57,6 +83,7 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
         Query.Page++;
         SendPageQuery.InvokeAsync(Query);
     }
+
     private void showFilterResult()
     {
         Query.Page = 1;
@@ -84,7 +111,7 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
         }
         else
         {
-            Query.SortingDirection = 
+            Query.SortingDirection =
                 Query.SortingDirection == SortingDirection.Ascending ?
                 SortingDirection.Descending :
                 SortingDirection.Ascending;
@@ -95,32 +122,9 @@ public partial class DataGrid<TItem> where TItem : class, IEntity
 
     private void pageSize()
     {
-        Query.Page = 1 + Pagination.ItemFrom / Query.PageSize;
+        Query.Page = 1 + (Pagination.ItemFrom / Query.PageSize);
 
         SendPageQuery.InvokeAsync(Query);
-    }
-
-    private object? showValue(TItem item, IColumnDefinition<TItem> column)
-    {
-        var property = item.GetType().GetProperty(column.ColumnName)!;
-        if (property.GetValue(item) is null)
-        {
-            return null;
-        }
-        if (column.Format is null)
-        {
-            return property.GetValue(item)!;
-        }
-
-        if (property.PropertyType == typeof(DateTime?) || property.PropertyType == typeof(DateTime))
-        {
-            var date = (DateTime)property.GetValue(item)!;
-            return date.ToString(column.Format);
-        }
-        else
-        {
-            return property.GetValue(item)!;
-        }
     }
 
     private string createDictionary(IColumnDefinition<TItem> column)

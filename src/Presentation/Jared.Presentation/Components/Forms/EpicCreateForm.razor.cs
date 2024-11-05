@@ -1,8 +1,8 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Presentation.Requests.Epics.Create;
+﻿using Jared.Presentation.Requests.Epics.Create;
 using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Projects.List;
+using Jared.Shared.Dtos.EpicDtos;
+using Jared.Shared.Dtos.ProjectDtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
@@ -29,7 +29,7 @@ public partial class EpicCreateForm
             if (Dto.ParentId != value)
             {
                 Dto.ParentId = value;
-                var epic = epics.FirstOrDefault(x => x.Id == value);
+                var epic = epics.Find(x => x.Id == value);
                 if (epic != null)
                 {
                     Dto.ProjectId = epic.ProjectId;
@@ -45,6 +45,7 @@ public partial class EpicCreateForm
             }
         }
     }
+
     public int ProjectId
     {
         get => Dto.ProjectId;
@@ -55,6 +56,7 @@ public partial class EpicCreateForm
                 Dto.ProjectId = value;
                 setEpics();
             }
+
             if (value == 0)
             {
                 epicsDictionary = epics
@@ -116,7 +118,7 @@ public partial class EpicCreateForm
     private void setEpics()
     {
         epicsDictionary = epics
-            .Where(x => x.ProjectId == Dto.ProjectId).ToList()
+            .Where(x => x.ProjectId == Dto.ProjectId)
             .ToDictionary(x => x.Id, x => x.Title);
     }
 }

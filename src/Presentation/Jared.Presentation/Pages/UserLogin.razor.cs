@@ -1,14 +1,15 @@
-﻿using Jared.Shared.Dtos.UserDtos;
-using Jared.Presentation.Requests.User.Login;
+﻿using Jared.Presentation.Requests.User.Login;
+using Jared.Shared.Dtos.UserDtos;
 using Microsoft.AspNetCore.WebUtilities;
 
 namespace Jared.Presentation.Pages;
 
 public partial class UserLogin
 {
-    public UserLoginDto Dto { get; set; } = new();
     private string errorMessage = string.Empty;
     private string returnUrl = string.Empty;
+
+    public UserLoginDto Dto { get; set; } = new();
 
     protected override void OnInitialized()
     {

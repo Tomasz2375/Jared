@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Presentation.ColumnDefinitions;
 using Jared.Shared.Abstractions;
-using Jared.Presentation.ColumnDefinitions;
+using Jared.Shared.Dtos.TaskDtos;
 using MediatR;
 
 namespace Jared.Presentation.Requests.Tasks.Page;

@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
+﻿using Jared.Presentation.ColumnDefinitions;
 using Jared.Shared.Abstractions;
-using Jared.Presentation.ColumnDefinitions;
+using Jared.Shared.Dtos.EpicDtos;
 using MediatR;
 
 namespace Jared.Presentation.Requests.Epics.Page;

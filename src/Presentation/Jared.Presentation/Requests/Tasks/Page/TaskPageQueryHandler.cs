@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Presentation.ColumnDefinitions;
 using Jared.Shared.Abstractions;
-using Jared.Presentation.ColumnDefinitions;
+using Jared.Shared.Dtos.TaskDtos;
 using MediatR;
 using System.Net.Http.Json;
 using System.Text;
@@ -33,7 +33,7 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         return response;
     }
 
-    private string createQueryUrl(Query query)
+    private static string createQueryUrl(Query query)
     {
         StringBuilder queryBuilder = new();
 
@@ -46,15 +46,17 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
             queryBuilder.Append("&sortingProperty=");
             queryBuilder.Append(query.SortingProperty);
         }
+
         if (query.SortingDirection is not null)
         {
             queryBuilder.Append("&sortingDirection=");
             queryBuilder.Append(query.SortingDirection);
         }
+
         if (query.Filter is not null)
         {
             var filters = query.Filter.Select(x => "&" + x.Key + "=" + x.Value);
-            queryBuilder.Append(string.Join("", filters));
+            queryBuilder.Append(string.Join(string.Empty, filters));
         }
 
         return queryBuilder.ToString();

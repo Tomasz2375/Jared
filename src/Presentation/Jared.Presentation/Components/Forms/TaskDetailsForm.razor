@@ -19,12 +19,12 @@
                         Id="0"
                         Label="Details"
                         ActiceTab=@tabNumber
-                        OnTabSelected=@(_ => tabNumber = _)/>
+                        OnTabSelected=@((x => tabNumber = x))/>
                     <TabForm
                         Id="1"
                         Label="History"
                         ActiceTab=@tabNumber
-                        OnTabSelected=@(_ => tabNumber = _)/>
+                        OnTabSelected=@((x => tabNumber = x))/>
                 </div>
                 <div class="form-modal-details">
                     @switch (tabNumber)

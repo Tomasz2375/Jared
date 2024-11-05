@@ -10,6 +10,12 @@ namespace Jared.Presentation.Components.Forms;
 
 public partial class EpicDetailsForm
 {
+    private List<ProjectListDto> projects = new();
+    private List<EpicListDto> epics = new();
+    private Dictionary<int, string> projectsDictionary = new();
+    private Dictionary<int, string> epicsDictionary = new();
+    private bool closeDialog;
+
     [Parameter]
     public EventCallback CloseDialog { get; set; }
 
@@ -17,11 +23,6 @@ public partial class EpicDetailsForm
     public int Id { get; set; }
 
     public EpicDetailsDto Dto { get; set; } = default!;
-    private List<ProjectListDto> projects = new();
-    private List<EpicListDto> epics = new();
-    private Dictionary<int, string> projectsDictionary = new();
-    private Dictionary<int, string> epicsDictionary = new();
-    private bool closeDialog;
 
     public int ProjectId
     {
@@ -52,6 +53,7 @@ public partial class EpicDetailsForm
                 {
                     value = null;
                 }
+
                 Dto.ParentId = value;
             }
         }

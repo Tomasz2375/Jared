@@ -42,7 +42,6 @@ public class UserService : IUserService
         return 0;
     }
 
-
     public string GetUserRole()
     {
         var token = httpClient.DefaultRequestHeaders.Authorization;
@@ -59,6 +58,7 @@ public class UserService : IUserService
         {
             return string.Empty;
         }
+
         var role = jwtToken.Claims.FirstOrDefault(claim => claim.Type == USER_ROLE);
         return role is null ? string.Empty : role.Value;
     }
@@ -113,6 +113,7 @@ public class UserService : IUserService
             dto.FirstName = fullName!.Split(" ")[0];
             dto.LastName = fullName.Split(" ")[1];
         }
+
         var claimDateOfBirth = jwtToken.Claims.FirstOrDefault(claim => claim.Type.Contains(BIRTHDAY_TYPE))?.Value;
         if (DateTime.TryParse(claimDateOfBirth, out DateTime dateOfBirth))
         {

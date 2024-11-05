@@ -20,7 +20,7 @@ public partial class InputSelectList<TKey>
 
     protected override bool TryParseValueFromString(string? value, out TKey result, out string validationErrorMessage)
     {
-        result = default(TKey)!;
+        result = default!;
         validationErrorMessage = null!;
         return true;
     }

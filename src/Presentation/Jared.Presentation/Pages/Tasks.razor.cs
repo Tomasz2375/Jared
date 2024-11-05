@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Presentation.ColumnDefinitions;
+﻿using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.Requests.Tasks.Page;
+using Jared.Shared.Dtos.TaskDtos;
 
 namespace Jared.Presentation.Pages;
 

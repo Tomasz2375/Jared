@@ -91,11 +91,12 @@ public partial class DataGridFilter
                     Filter = (int.Parse(Filter!) - int.Parse(value!)).ToString();
                 }
             }
+
             OnFilterChange.InvokeAsync(Filter);
         }
     }
 
-    private string createDateFilter(DateTime? dateFrom, DateTime? dateTo)
+    private static string createDateFilter(DateTime? dateFrom, DateTime? dateTo)
     {
         string from = string.Empty;
         string to = string.Empty;
@@ -104,6 +105,7 @@ public partial class DataGridFilter
         {
             from = ((DateTime)dateFrom).ToString();
         }
+
         if (dateTo is not null)
         {
             to = ((DateTime)dateTo).ToString();
@@ -118,6 +120,7 @@ public partial class DataGridFilter
         {
             Filter = "0";
         }
+
         foreach (var value in Type.GetEnumValues())
         {
             if (((int)item & int.Parse(Filter)) != 0)
@@ -125,6 +128,7 @@ public partial class DataGridFilter
                 return "edit-select";
             }
         }
+
         return string.Empty;
     }
 }
