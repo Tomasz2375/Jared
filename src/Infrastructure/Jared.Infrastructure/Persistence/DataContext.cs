@@ -9,11 +9,13 @@ public class DataContext : DbContext, IDataContext
     {
     }
 
-    public DataContext(DbContextOptions<DataContext> options) : base(options)
+    public DataContext(DbContextOptions<DataContext> options)
+        : base(options)
     {
     }
 
-    public new virtual DbSet<TEntity> Set<TEntity>() where TEntity : class, IEntity
+    public new virtual DbSet<TEntity> Set<TEntity>()
+        where TEntity : class, IEntity
     {
         return base.Set<TEntity>();
     }
