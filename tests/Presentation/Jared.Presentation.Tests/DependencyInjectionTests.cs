@@ -59,7 +59,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddPresentation(services);
 
         // Assert
-        #region Task
+        // Task
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<TaskCreateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(TaskCreateCommandHandler) &&
@@ -84,9 +84,8 @@ public class DependencyInjectionTests
             x.ServiceType == typeof(IRequestHandler<TaskUpdateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(TaskUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
-        #endregion
 
-        #region Epic
+        // Epic
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<EpicCreateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(EpicCreateCommandHandler) &&
@@ -111,9 +110,8 @@ public class DependencyInjectionTests
             x.ServiceType == typeof(IRequestHandler<EpicUpdateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(EpicUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
-        #endregion
 
-        #region Project
+        // Project
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<ProjectCreateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(ProjectCreateCommandHandler) &&
@@ -138,9 +136,8 @@ public class DependencyInjectionTests
             x.ServiceType == typeof(IRequestHandler<ProjectUpdateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(ProjectUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
-        #endregion
 
-        #region User
+        // User
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserListQuery, Result<List<UserListDto>>>) &&
             x.ImplementationType == typeof(UserListQueryHandler) &&
@@ -169,14 +166,12 @@ public class DependencyInjectionTests
             x.ServiceType == typeof(IRequestHandler<UserRoleUpdateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(UserRoleUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
-        #endregion
 
-        #region Role
+        // Role
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>) &&
             x.ImplementationType == typeof(RoleListQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
-        #endregion
     }
 
     [Fact]

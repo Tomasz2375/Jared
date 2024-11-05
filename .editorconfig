@@ -125,40 +125,6 @@ dotnet_style_prefer_simplified_interpolation = true:suggestion
 dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
 dotnet_style_namespace_match_folder = true:suggestion
 
-# IDE0027: Use expression body for accessor
-dotnet_diagnostic.IDE0027.severity = none
-
-# SA1000: Keywords should be spaced correctly
-dotnet_diagnostic.SA1000.severity = none
-
-# SA1101: Prefix local calls with this
-dotnet_diagnostic.SA1101.severity = none
-
-# SA1516: Elements should be separated by blank line
-dotnet_diagnostic.SA1516.severity = none
-
-# SA1600: Elements should be documented
-dotnet_diagnostic.SA1600.severity = none
-
-# SA1601: Partial elements should be documented
-dotnet_diagnostic.SA1601.severity = none
-dotnet_style_qualification_for_method = false:silent
-
-# SA1633: File should have header
-dotnet_diagnostic.SA1633.severity = none
-
-# S6562: Always set the "DateTimeKind" when creating new "DateTime" instances
-dotnet_diagnostic.S6562.severity = none
-
-# SA1200: Using directives should be placed correctly
-dotnet_diagnostic.SA1200.severity = none
-
-# SA1124: Do not use regions
-dotnet_diagnostic.SA1124.severity = none
-
-# SA1208: System using directives should be placed before other using directives
-dotnet_diagnostic.SA1208.severity = none
-
 # SA1201: Elements should appear in the correct order
 dotnet_diagnostic.SA1201.severity = none
 dotnet_style_predefined_type_for_member_access = true:silent
@@ -176,47 +142,82 @@ dotnet_style_qualification_for_field = false:silent
 dotnet_style_qualification_for_property = false:silent
 dotnet_style_qualification_for_event = false:silent
 
+# StyleCop
 # SA0001: XML comment analysis is disabled due to project configuration
 dotnet_diagnostic.SA0001.severity = none
 
-# SA1310: Field names should not contain underscore
-dotnet_diagnostic.SA1310.severity = none
+# IDE0027: Use expression body for accessor
+dotnet_diagnostic.IDE0027.severity = none
 
-# S2094: Classes should not be empty
-dotnet_diagnostic.S2094.severity = none
-
-# CA1848: Use the LoggerMessage delegates
-dotnet_diagnostic.CA1848.severity = none
-
-# S2629: Logging templates should be constant
-dotnet_diagnostic.S2629.severity = none
-
-# S6605: Collection-specific "Exists" method should be used instead of the "Any" extension
-dotnet_diagnostic.S6605.severity = none
-
-# S2743: Static fields should not be used in generic types
-dotnet_diagnostic.S2743.severity = none
-
-# S2326: Unused type parameters should be removed
-dotnet_diagnostic.S2326.severity = none
-
-# SA1202: Elements should be ordered by access
-dotnet_diagnostic.SA1202.severity = none
-
-# S6580: Use a format provider when parsing date and time
-dotnet_diagnostic.S6580.severity = none
+# SA1000: Keywords should be spaced correctly
+dotnet_diagnostic.SA1000.severity = none
 
 # SA1009: Closing parenthesis should be spaced correctly
 dotnet_diagnostic.SA1009.severity = none
 
-# SA1123: Do not place regions within elements
-dotnet_diagnostic.SA1123.severity = none
+# SA1101: Prefix local calls with this
+dotnet_diagnostic.SA1101.severity = none
 
-# S1118: Utility classes should not have public constructors
-dotnet_diagnostic.S1118.severity = none
+# SA1124: Do not use regions
+dotnet_diagnostic.SA1124.severity = none
 
-# IDE1006: Naming Styles
-dotnet_diagnostic.IDE1006.severity = none
+# SA1200: Using directives should be placed correctly
+dotnet_diagnostic.SA1200.severity = none
+
+# SA1202: Elements should be ordered by access
+dotnet_diagnostic.SA1202.severity = none
+
+# SA1208: System using directives should be placed before other using directives
+dotnet_diagnostic.SA1208.severity = none
+
+# SA1310: Field names should not contain underscore
+dotnet_diagnostic.SA1310.severity = none
+
+# SA1516: Elements should be separated by blank line
+dotnet_diagnostic.SA1516.severity = none
+
+# SA1600: Elements should be documented
+dotnet_diagnostic.SA1600.severity = none
+
+# SA1601: Partial elements should be documented
+dotnet_diagnostic.SA1601.severity = none
+dotnet_style_qualification_for_method = false:silent
+
+# SA1633: File should have header
+dotnet_diagnostic.SA1633.severity = none
 
 # SA1649: File name should match first type name
 dotnet_diagnostic.SA1649.severity = none
+
+# Sonar
+# S1118: Utility classes should not have public constructors
+dotnet_diagnostic.S1118.severity = none
+
+# S2094: Classes should not be empty
+dotnet_diagnostic.S2094.severity = none
+
+# S2326: Unused type parameters should be removed
+dotnet_diagnostic.S2326.severity = none
+
+# S2629: Logging templates should be constant
+dotnet_diagnostic.S2629.severity = none
+
+# S2743: Static fields should not be used in generic types
+dotnet_diagnostic.S2743.severity = none
+
+# S6562: Always set the "DateTimeKind" when creating new "DateTime" instances
+dotnet_diagnostic.S6562.severity = none
+
+# S6580: Use a format provider when parsing date and time
+dotnet_diagnostic.S6580.severity = none
+
+# S6605: Collection-specific "Exists" method should be used instead of the "Any" extension
+dotnet_diagnostic.S6605.severity = none
+
+# IDE
+# IDE1006: Naming Styles
+dotnet_diagnostic.IDE1006.severity = none
+
+# Code analysis
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
