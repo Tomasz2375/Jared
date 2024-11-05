@@ -11,6 +11,7 @@ public class Result
         {
             throw new InvalidOperationException();
         }
+
         if (!success && error == string.Empty)
         {
             throw new InvalidOperationException();
@@ -24,24 +25,27 @@ public class Result
     {
         return new Result(false, message);
     }
+
     public static Result<T> Fail<T>(string message)
     {
-        return new Result<T>(default(T)!, false, message);
+        return new Result<T>(default!, false, message);
     }
+
     public static Result Ok()
     {
         return new Result(true, string.Empty);
     }
+
     public static Result<T> Ok<T>(T value)
     {
         return new Result<T>(value, true, string.Empty);
     }
-
 }
 
 public class Result<T> : Result
 {
-    public Result(bool success, string error) : base(success, error)
+    public Result(bool success, string error)
+        : base(success, error)
     {
     }
 

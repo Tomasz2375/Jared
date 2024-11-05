@@ -18,6 +18,7 @@ public abstract class EntityDto<TKey> : IEntity<TKey>
             {
                 throw new ArgumentException("Wrong entity Id type");
             }
+
             Id = key;
         }
     }
