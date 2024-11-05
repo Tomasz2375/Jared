@@ -1,7 +1,7 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
+﻿using Jared.Domain.Models;
 using Jared.Domain.Options;
+using Jared.Shared.Abstractions;
+using Jared.Shared.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,8 +37,8 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
             var user = await dataContext
                 .Set<User>()
                 .Include(x => x.Role)
-                .FirstOrDefaultAsync(x =>
-                    x.Email.ToLower() == request.dto.Email.ToLower(),
+                .FirstOrDefaultAsync(
+                    x => x.Email.ToLower() == request.dto.Email.ToLower(),
                     cancellationToken);
 
             if (user is null)
@@ -73,7 +73,7 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
             new(ClaimTypes.Role, $"{user.Role!.Name}"),
-            new("DateOfBirth", user.DateOfBirth!.Value.ToString("dd-MM-yyyy"))
+            new("DateOfBirth", user.DateOfBirth!.Value.ToString("dd-MM-yyyy")),
         };
 
         SymmetricSecurityKey key =

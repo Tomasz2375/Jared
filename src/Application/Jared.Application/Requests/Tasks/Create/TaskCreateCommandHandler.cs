@@ -1,8 +1,8 @@
 ﻿using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
+using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -52,10 +52,9 @@ public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Resul
         {
             return Result.Fail<bool>(ex.Message);
         }
-
     }
 
-    private string createCode(Project project)
+    private static string createCode(Project project)
     {
         return project.Code + " - " + project.LastTaskNumber;
     }

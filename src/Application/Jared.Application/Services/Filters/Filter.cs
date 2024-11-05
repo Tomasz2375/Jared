@@ -2,7 +2,8 @@
 
 namespace Jared.Application.Services.Filters;
 
-public class Filter<T> : IFilter<T> where T : class, IEntity
+public class Filter<T> : IFilter<T>
+    where T : class, IEntity
 {
     private readonly IFilterStrategy<T> filter;
 

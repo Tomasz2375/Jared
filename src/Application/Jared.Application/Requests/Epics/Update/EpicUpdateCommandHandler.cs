@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Domain.Models;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

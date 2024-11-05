@@ -15,7 +15,7 @@ public class ProjectFilter : IFilterStrategy<Project>
         return query;
     }
 
-    private Dictionary<string, Func<IQueryable<Project>, string, IQueryable<Project>>> filters = new()
+    private readonly Dictionary<string, Func<IQueryable<Project>, string, IQueryable<Project>>> filters = new()
     {
         {
             nameof(ProjectListDto.Id),

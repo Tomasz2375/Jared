@@ -58,6 +58,39 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
         }
     }
 
+    private static IQueryable<Epic> sortResult(
+        IQueryable<Epic> epics,
+        EpicPageQuery query)
+    {
+        if (query.sortingProperty is null)
+        {
+            return epics.OrderBy(x => x.Id);
+        }
+
+        Dictionary<string, Expression<Func<Epic, object>>> columnSelector = new()
+        {
+            { nameof(EpicListDto.Id), x => x.Id },
+            { nameof(EpicListDto.Title), x => x.Title },
+            { nameof(EpicListDto.ParentId), x => x.ParentId! },
+            { nameof(EpicListDto.ProjectId), x => x.ProjectId },
+            { nameof(EpicListDto.Status), x => x.Status },
+        };
+
+        var sortByExpression = columnSelector[query.sortingProperty];
+
+        return query.sortingDirection == SortingDirection.Descending ?
+            epics.OrderByDescending(sortByExpression) :
+            epics.OrderBy(sortByExpression);
+    }
+
+    private static IQueryable<Epic> paginateResult(
+        IQueryable<Epic> epics,
+        EpicPageQuery query)
+    {
+        return epics
+            .Skip((query.page - 1) * query.pageSize)
+            .Take(query.pageSize);
+    }
 
     private IQueryable<Epic> filterResult(
         IQueryable<Epic> epics,
@@ -83,7 +116,7 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
         return new()
         {
             ItemsCount = epics.Count(),
-            ItemFrom = (query.page - 1) * query.pageSize + 1,
+            ItemFrom = ((query.page - 1) * query.pageSize) + 1,
             ItemTo = query.page * query.pageSize > epics.Count() ?
                 epics.Count() :
                 query.page * query.pageSize,
@@ -91,39 +124,5 @@ public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPa
             PageSize = query.pageSize,
             PageCount = (epics.Count() + query.pageSize - 1) / query.pageSize,
         };
-    }
-
-    private IQueryable<Epic> sortResult(
-        IQueryable<Epic> epics,
-        EpicPageQuery query)
-    {
-        if (query.sortingProperty is null)
-        {
-            return epics.OrderBy(x => x.Id);
-        }
-
-        Dictionary<string, Expression<Func<Epic, object>>> columnSelector = new()
-        {
-            { nameof(EpicListDto.Id), x => x.Id },
-            { nameof(EpicListDto.Title), x => x.Title },
-            { nameof(EpicListDto.ParentId), x => x.ParentId! },
-            { nameof(EpicListDto.ProjectId), x => x.ProjectId },
-            { nameof(EpicListDto.Status), x => x.Status },
-        };
-
-        var sortByExpression = columnSelector[query.sortingProperty];
-
-        return query.SortingDirection == SortingDirection.Descending ?
-            epics.OrderByDescending(sortByExpression) :
-            epics.OrderBy(sortByExpression);
-    }
-
-    private IQueryable<Epic> paginateResult(
-        IQueryable<Epic> epics,
-        EpicPageQuery query)
-    {
-        return epics
-            .Skip((query.page - 1) * query.pageSize)
-            .Take(query.pageSize);
     }
 }

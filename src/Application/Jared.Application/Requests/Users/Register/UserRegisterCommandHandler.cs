@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Domain.Models;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -16,13 +16,13 @@ public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, R
     public UserRegisterCommandHandler(
         IDataContext dataContext,
         IMapper mapper,
-        IPasswordHasher<User> passwordHasher
-    )
+        IPasswordHasher<User> passwordHasher)
     {
         this.dataContext = dataContext;
         this.mapper = mapper;
         this.passwordHasher = passwordHasher;
     }
+
     public async Task<Result<bool>> Handle(UserRegisterCommand command, CancellationToken cancellationToken)
     {
         try

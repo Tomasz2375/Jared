@@ -1,7 +1,7 @@
 ﻿using Jared.Application.Services.User;
+using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -12,18 +12,15 @@ namespace Jared.Application.Requests.Users.Password;
 public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, Result<bool>>
 {
     private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
     private readonly IPasswordHasher<User> passwordHasher;
     private readonly IUserService userService;
 
     public UserPasswordCommandHandler(
         IDataContext dataContext,
-        IMapper mapper,
         IPasswordHasher<User> passwordHasher,
         IUserService userService)
     {
         this.dataContext = dataContext;
-        this.mapper = mapper;
         this.passwordHasher = passwordHasher;
         this.userService = userService;
     }

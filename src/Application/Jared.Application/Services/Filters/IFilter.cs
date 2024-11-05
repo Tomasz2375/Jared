@@ -2,7 +2,8 @@
 
 namespace Jared.Application.Services.Filters;
 
-public interface IFilter<T> where T : class, IEntity
+public interface IFilter<T>
+    where T : class, IEntity
 {
     IQueryable<T> ApplyFilters(IQueryable<T> query, string key, string value);
 }

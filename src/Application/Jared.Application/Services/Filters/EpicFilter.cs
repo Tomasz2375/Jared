@@ -15,7 +15,7 @@ public class EpicFilter : IFilterStrategy<Epic>
         return query;
     }
 
-    private Dictionary<string, Func<IQueryable<Epic>, string, IQueryable<Epic>>> filters = new()
+    private readonly Dictionary<string, Func<IQueryable<Epic>, string, IQueryable<Epic>>> filters = new()
     {
         {
             nameof(EpicListDto.Id),
@@ -37,7 +37,11 @@ public class EpicFilter : IFilterStrategy<Epic>
             nameof(EpicListDto.Status),
             (epics, value) =>
             {
-                if (value == "0") return epics;
+                if (value == "0")
+                {
+                    return epics;
+                }
+
                 return epics.Where(x => ((int)x.Status & int.Parse(value)) != 0);
             }
         },

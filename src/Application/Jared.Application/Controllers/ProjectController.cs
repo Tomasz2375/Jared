@@ -1,10 +1,10 @@
-﻿using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Application.Requests.Projects.Create;
+﻿using Jared.Application.Requests.Projects.Create;
 using Jared.Application.Requests.Projects.Details;
 using Jared.Application.Requests.Projects.List;
 using Jared.Application.Requests.Projects.Page;
 using Jared.Application.Requests.Projects.Update;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
