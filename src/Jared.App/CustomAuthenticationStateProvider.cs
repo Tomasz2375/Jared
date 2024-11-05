@@ -31,7 +31,7 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
             {
                 identity = new ClaimsIdentity(parseClaimsFromJwt(authenticationToken), "jwt");
                 httpClient.DefaultRequestHeaders.Authorization =
-                    new("Bearer", authenticationToken.Replace("\"",""));
+                    new("Bearer", authenticationToken.Replace("\"", string.Empty));
             }
             catch (Exception e)
             {
@@ -49,17 +49,18 @@ public class CustomAuthenticationStateProvider : AuthenticationStateProvider
         return state;
     }
 
-    private byte[] parseBase64WithoutPadding(string base64)
+    private static byte[] parseBase64WithoutPadding(string base64)
     {
         switch (base64.Length % 4)
         {
             case 2: base64 += "=="; break;
             case 3: base64 += "="; break;
         }
+
         return Convert.FromBase64String(base64);
     }
 
-    private IEnumerable<Claim>? parseClaimsFromJwt(string jwt)
+    private static IEnumerable<Claim>? parseClaimsFromJwt(string jwt)
     {
         var payload = jwt.Split(".");
         var jsonBytes = parseBase64WithoutPadding(payload[1]);

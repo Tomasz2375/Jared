@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Logger
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
     .ReadFrom.Configuration(context.Configuration));
+
 // Add services to the container.
 builder.Services.AddShared();
 builder.Services.AddPresentation();
@@ -29,7 +30,7 @@ builder.Services.AddOptions();
 builder.Services.AddAuthorizationCore();
 builder.Services.AddScoped(client => new HttpClient
 {
-    BaseAddress = new Uri(Environment.GetEnvironmentVariable("JARED_API_URL")!)
+    BaseAddress = new Uri(Environment.GetEnvironmentVariable("JARED_API_URL")!),
 });
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 
@@ -39,6 +40,7 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -56,7 +58,7 @@ app.MapFallbackToPage("/_Host");
 try
 {
     Log.Information("Startingup application");
-    app.Run();
+    await app.RunAsync();
 }
 catch (Exception e)
 {
