@@ -27,6 +27,6 @@ public class TaskHistoryIntegrationFaker : BaseIntegrationFaker<TaskHistory>
         Property = nameof(Task.Title),
         OldValue = "FIRST_TASK_OLD_TITLE",
         NewValue = "FIRST_TASK_TITLE",
-        CreatedAt = new(2024, 3, 6, 12, 46, 3)
+        CreatedAt = new(2024, 3, 6, 12, 46, 3),
     };
 }

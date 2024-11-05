@@ -20,18 +20,6 @@ public class JaredWebApplicationFactory : WebApplicationFactory<Program>, IAsync
 
     private DbConnection dbConnection = default!;
 
-    protected override void ConfigureWebHost(IWebHostBuilder builder)
-    {
-        builder.ConfigureTestServices(services =>
-        {
-            services.RemoveAll(typeof(DbContextOptions<DataContext>));
-            services.AddDbContext<DataContext>(options =>
-            {
-                options.UseSqlServer(dbConnection);
-            });
-        });
-    }
-
     public async Task InitializeAsync()
     {
         await msSqlContainer.StartAsync();
@@ -44,12 +32,24 @@ public class JaredWebApplicationFactory : WebApplicationFactory<Program>, IAsync
         await msSqlContainer.StopAsync();
     }
 
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureTestServices(services =>
+        {
+            services.RemoveAll(typeof(DbContextOptions<DataContext>));
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(dbConnection);
+            });
+        });
+    }
+
     private async Task seedDatabaseAsync()
     {
         using var scope = Services.CreateScope();
         var dataContext = scope.ServiceProvider.GetRequiredService<IDataContext>();
         await dataContext.Database.MigrateAsync();
-        dataContext.Database.EnsureCreated();
+        await dataContext.Database.EnsureCreatedAsync();
         await dataContext.Seed();
     }
 }

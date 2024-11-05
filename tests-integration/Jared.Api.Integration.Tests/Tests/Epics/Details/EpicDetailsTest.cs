@@ -11,10 +11,10 @@ public class EpicDetailsTest : BaseIntegrationTest
 {
     protected override string URL => "Epic";
 
-    public EpicDetailsTest(JaredWebApplicationFactory factory) : base(factory)
+    public EpicDetailsTest(JaredWebApplicationFactory factory)
+        : base(factory)
     {
     }
-
 
     [Fact]
     public async Task DetailsEpic_WhenEpicExists_ShoutdBeSuccess()

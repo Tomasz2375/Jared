@@ -11,7 +11,8 @@ public class EpicPageTest : BaseIntegrationTest
 {
     protected override string URL => "Epic/Page";
 
-    public EpicPageTest(JaredWebApplicationFactory factory) : base(factory)
+    public EpicPageTest(JaredWebApplicationFactory factory)
+        : base(factory)
     {
     }
 
@@ -84,7 +85,6 @@ public class EpicPageTest : BaseIntegrationTest
             expectedResponse,
             options => options.WithStrictOrderingFor(x => x.Data.Epics));
     }
-
 
     [Fact]
     public async Task PageEpic_When_Page_1_PageSize_10_Fileter_Title_First_ShoutdBeSuccess()

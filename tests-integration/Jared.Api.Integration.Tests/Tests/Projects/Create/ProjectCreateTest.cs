@@ -9,7 +9,8 @@ public class ProjectCreateTest : BaseIntegrationTest
 {
     protected override string URL => "Project/Create";
 
-    public ProjectCreateTest(JaredWebApplicationFactory factory) : base(factory)
+    public ProjectCreateTest(JaredWebApplicationFactory factory)
+        : base(factory)
     {
     }
 

@@ -11,7 +11,8 @@ public class ProjectPageTest : BaseIntegrationTest
 {
     protected override string URL => "Project/Page";
 
-    public ProjectPageTest(JaredWebApplicationFactory factory) : base(factory)
+    public ProjectPageTest(JaredWebApplicationFactory factory)
+        : base(factory)
     {
     }
 
@@ -84,7 +85,6 @@ public class ProjectPageTest : BaseIntegrationTest
             expectedResponse,
             options => options.WithStrictOrderingFor(x => x.Data.Projects));
     }
-
 
     [Fact]
     public async Task PageProject_When_Page_1_PageSize_10_Fileter_Title_First_ShoutdBeSuccess()

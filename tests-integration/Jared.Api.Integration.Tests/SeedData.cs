@@ -43,6 +43,7 @@ public static class SeedData
                 var seedData = method!.Invoke(fakerInstance, null);
                 insertCommand.AppendLine(GenerateInsertCommand(properties, entityType.Name!, seedData!));
             }
+
             insertCommand.AppendLine($"SET IDENTITY_INSERT [{entityType.Name}] OFF;");
 
             await dataContext.Database.ExecuteSqlRawAsync(insertCommand.ToString());

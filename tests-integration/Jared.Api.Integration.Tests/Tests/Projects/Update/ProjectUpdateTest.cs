@@ -11,7 +11,8 @@ public class ProjectUpdateTest : BaseIntegrationTest
 {
     protected override string URL => "Project/Update";
 
-    public ProjectUpdateTest(JaredWebApplicationFactory factory) : base(factory)
+    public ProjectUpdateTest(JaredWebApplicationFactory factory)
+        : base(factory)
     {
     }
 
