@@ -12,22 +12,16 @@ using System.Linq.Expressions;
 
 namespace Jared.Application.Requests.Tasks.Page;
 
-public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPageDto>>
+public class TaskPageQueryHandler(
+    IDataContext dataContext,
+    IMapper mapper,
+    IFilterStrategy<Domain.Models.Task> strategy,
+    IFilterBuilder<Domain.Models.Task> filterBuilder)
+    : IRequestHandler<TaskPageQuery, Result<TaskPageDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-    private readonly IFilter<Domain.Models.Task> filter;
-
-    public TaskPageQueryHandler(
-        IDataContext dataContext,
-        IMapper mapper,
-        IFilterStrategy<Domain.Models.Task> strategy,
-        IFilterBuilder<Domain.Models.Task> filterBuilder)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-        filter = filterBuilder.Build(strategy);
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
+    private readonly IFilter<Domain.Models.Task> filter = filterBuilder.Build(strategy);
 
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery query, CancellationToken cancellationToken)
     {

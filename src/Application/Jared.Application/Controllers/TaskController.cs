@@ -14,14 +14,9 @@ namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TaskController : ControllerBase
+public class TaskController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public TaskController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
+    private readonly IMediator mediator = mediator;
 
     [HttpGet("{id}")]
     public async Task<Result<TaskDetailsDto>> TaskDetailsAsync([FromRoute] int id)

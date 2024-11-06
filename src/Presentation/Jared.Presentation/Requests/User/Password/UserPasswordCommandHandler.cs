@@ -4,14 +4,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.User.Password;
 
-public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, Result<bool>>
+public class UserPasswordCommandHandler(HttpClient httpClient)
+    : IRequestHandler<UserPasswordCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient;
-
-    public UserPasswordCommandHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<bool>> Handle(UserPasswordCommand request, CancellationToken cancellationToken)
     {

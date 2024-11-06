@@ -7,14 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Page;
 
-public class ProjectPageTest : BaseIntegrationTest
+public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Project/Page";
-
-    public ProjectPageTest(JaredWebApplicationFactory factory)
-        : base(factory)
-    {
-    }
 
     [Fact]
     public async Task PageProject_When_Page_1_PageSize_2_ShoutdBeSuccess()

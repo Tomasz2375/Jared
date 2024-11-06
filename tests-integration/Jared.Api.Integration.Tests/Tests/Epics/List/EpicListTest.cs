@@ -7,14 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.List;
 
-public class EpicListTest : BaseIntegrationTest
+public class EpicListTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Epic/List";
-
-    public EpicListTest(JaredWebApplicationFactory factory)
-        : base(factory)
-    {
-    }
 
     [Fact]
     public async Task ListEpics_WhenProjectIdIsSet_ShoutdReturnEpicWithProject()

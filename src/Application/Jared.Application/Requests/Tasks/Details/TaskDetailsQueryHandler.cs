@@ -7,16 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Tasks.Details;
 
-public class TaskDetailsQueryHandler : IRequestHandler<TaskDetailsQuery, Result<TaskDetailsDto>>
+public class TaskDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<TaskDetailsQuery, Result<TaskDetailsDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public TaskDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<TaskDetailsDto>> Handle(TaskDetailsQuery query, CancellationToken cancellationToken)
     {

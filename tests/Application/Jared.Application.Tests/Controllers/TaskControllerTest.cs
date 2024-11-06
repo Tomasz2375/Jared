@@ -18,10 +18,7 @@ namespace Jared.Application.Tests.Controllers
         private readonly TaskController controller;
         private readonly Mock<IMediator> mediatorMock = new();
 
-        public TaskControllerTest()
-        {
-            controller = new(mediatorMock.Object);
-        }
+        public TaskControllerTest() => controller = new(mediatorMock.Object);
 
         #region TaskDetailsAsync
         [Theory]

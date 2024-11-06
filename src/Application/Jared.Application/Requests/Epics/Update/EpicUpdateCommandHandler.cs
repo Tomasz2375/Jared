@@ -7,14 +7,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Epics.Update;
 
-public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Result<bool>>
+public class EpicUpdateCommandHandler(IDataContext dataContext)
+    : IRequestHandler<EpicUpdateCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-
-    public EpicUpdateCommandHandler(IDataContext dataContext)
-    {
-        this.dataContext = dataContext;
-    }
+    private readonly IDataContext dataContext = dataContext;
 
     public async Task<Result<bool>> Handle(EpicUpdateCommand command, CancellationToken cancellationToken)
     {

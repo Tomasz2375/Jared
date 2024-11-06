@@ -6,14 +6,10 @@ using System.Text;
 
 namespace Jared.Presentation.Requests.Tasks.List;
 
-public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<TaskListDto>>>
+public class TaskListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<TaskListQuery, Result<List<TaskListDto>>>
 {
-    private readonly HttpClient httpClient;
-
-    public TaskListQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<List<TaskListDto>>> Handle(TaskListQuery request, CancellationToken cancellationToken)
     {

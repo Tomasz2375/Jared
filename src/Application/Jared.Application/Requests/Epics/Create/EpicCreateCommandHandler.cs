@@ -6,16 +6,11 @@ using MediatR;
 
 namespace Jared.Application.Requests.Epics.Create;
 
-public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Result<bool>>
+public class EpicCreateCommandHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<EpicCreateCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public EpicCreateCommandHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<bool>> Handle(EpicCreateCommand command, CancellationToken cancellationToken)
     {

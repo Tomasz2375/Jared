@@ -14,14 +14,9 @@ namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class UserController
+public class UserController(IMediator mediator)
 {
-    private readonly IMediator mediator;
-
-    public UserController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
+    private readonly IMediator mediator = mediator;
 
     [HttpGet("List")]
     public async Task<Result<List<UserListDto>>> UserListAsync()

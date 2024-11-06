@@ -7,14 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Details;
 
-public class ProjectDetailsTest : BaseIntegrationTest
+public class ProjectDetailsTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Project";
-
-    public ProjectDetailsTest(JaredWebApplicationFactory factory)
-        : base(factory)
-    {
-    }
 
     [Fact]
     public async Task DetailsProject_WhenProjectExists_ShoutdBeSuccess()

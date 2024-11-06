@@ -8,16 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Roles.List;
 
-public class RoleListQueryHandler : IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>
+public class RoleListQueryHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public RoleListQueryHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<List<RoleListDto>>> Handle(RoleListQuery request, CancellationToken cancellationToken)
     {

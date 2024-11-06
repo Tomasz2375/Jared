@@ -5,14 +5,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.User.List;
 
-public class UserListQueryHandler : IRequestHandler<UserListQuery, Result<List<UserListDto>>>
+public class UserListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<UserListQuery, Result<List<UserListDto>>>
 {
-    private readonly HttpClient httpClient;
-
-    public UserListQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<List<UserListDto>>> Handle(UserListQuery request, CancellationToken cancellationToken)
     {

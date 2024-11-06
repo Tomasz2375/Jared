@@ -13,10 +13,7 @@ public class RoleControllerTest
     private readonly RoleController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public RoleControllerTest()
-    {
-        controller = new(mediatorMock.Object);
-    }
+    public RoleControllerTest() => controller = new(mediatorMock.Object);
 
     #region RoleListAsync
     [Theory]

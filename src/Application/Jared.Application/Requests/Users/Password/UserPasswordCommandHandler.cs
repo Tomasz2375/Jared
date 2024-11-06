@@ -2,28 +2,21 @@
 using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Users.Password;
 
-public class UserPasswordCommandHandler : IRequestHandler<UserPasswordCommand, Result<bool>>
+public class UserPasswordCommandHandler(
+    IDataContext dataContext,
+    IPasswordHasher<User> passwordHasher,
+    IUserService userService)
+    : IRequestHandler<UserPasswordCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IPasswordHasher<User> passwordHasher;
-    private readonly IUserService userService;
-
-    public UserPasswordCommandHandler(
-        IDataContext dataContext,
-        IPasswordHasher<User> passwordHasher,
-        IUserService userService)
-    {
-        this.dataContext = dataContext;
-        this.passwordHasher = passwordHasher;
-        this.userService = userService;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IPasswordHasher<User> passwordHasher = passwordHasher;
+    private readonly IUserService userService = userService;
 
     public async Task<Result<bool>> Handle(UserPasswordCommand command, CancellationToken cancellationToken)
     {

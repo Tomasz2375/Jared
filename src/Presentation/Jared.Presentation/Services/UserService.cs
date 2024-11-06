@@ -3,19 +3,14 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace Jared.Presentation.Services;
 
-public class UserService : IUserService
+public class UserService(HttpClient httpClient) : IUserService
 {
     private const string ID_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
     private const string NAME_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
     private const string USER_ROLE = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
     private const string BIRTHDAY_TYPE = "DateOfBirth";
 
-    private readonly HttpClient httpClient;
-
-    public UserService(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public int GetUserId()
     {

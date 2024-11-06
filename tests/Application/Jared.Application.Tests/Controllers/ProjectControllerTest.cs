@@ -18,10 +18,7 @@ public class ProjectControllerTest
     private readonly ProjectController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public ProjectControllerTest()
-    {
-        controller = new(mediatorMock.Object);
-    }
+    public ProjectControllerTest() => controller = new(mediatorMock.Object);
 
     #region ProjectDetailsAsync
     [Theory]

@@ -12,22 +12,16 @@ using System.Linq.Expressions;
 
 namespace Jared.Application.Requests.Epics.Page;
 
-public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPageDto>>
+public class EpicPageQueryHandler(
+    IDataContext dataContext,
+    IMapper mapper,
+    IFilterStrategy<Epic> strategy,
+    IFilterBuilder<Epic> filterBuilder)
+    : IRequestHandler<EpicPageQuery, Result<EpicPageDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-    private readonly IFilter<Epic> filter;
-
-    public EpicPageQueryHandler(
-        IDataContext dataContext,
-        IMapper mapper,
-        IFilterStrategy<Epic> strategy,
-        IFilterBuilder<Epic> filterBuilder)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-        filter = filterBuilder.Build(strategy);
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
+    private readonly IFilter<Epic> filter = filterBuilder.Build(strategy);
 
     public async Task<Result<EpicPageDto>> Handle(EpicPageQuery query, CancellationToken cancellationToken)
     {

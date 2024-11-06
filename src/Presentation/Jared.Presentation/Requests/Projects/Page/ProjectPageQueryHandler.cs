@@ -7,14 +7,10 @@ using System.Text;
 
 namespace Jared.Presentation.Requests.Projects.Page;
 
-public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
+public class ProjectPageQueryHandler(HttpClient httpClient)
+    : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
 {
-    private readonly HttpClient httpClient;
-
-    public ProjectPageQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery request, CancellationToken cancellationToken)
     {

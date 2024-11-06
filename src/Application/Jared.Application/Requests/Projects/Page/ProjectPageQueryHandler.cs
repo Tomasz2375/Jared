@@ -12,22 +12,16 @@ using System.Linq.Expressions;
 
 namespace Jared.Application.Requests.Projects.Page;
 
-public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
+public class ProjectPageQueryHandler(
+    IDataContext dataContext,
+    IMapper mapper,
+    IFilterStrategy<Project> strategy,
+    IFilterBuilder<Project> filterBuilder)
+    : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-    private readonly IFilter<Project> filter;
-
-    public ProjectPageQueryHandler(
-        IDataContext dataContext,
-        IMapper mapper,
-        IFilterStrategy<Project> strategy,
-        IFilterBuilder<Project> filterBuilder)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-        filter = filterBuilder.Build(strategy);
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
+    private readonly IFilter<Project> filter = filterBuilder.Build(strategy);
 
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery query, CancellationToken cancellationToken)
     {

@@ -5,14 +5,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Roles.List;
 
-public class RoleListQueryHandler : IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>
+public class RoleListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>
 {
-    private readonly HttpClient httpClient;
-
-    public RoleListQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<List<RoleListDto>>> Handle(RoleListQuery request, CancellationToken cancellationToken)
     {

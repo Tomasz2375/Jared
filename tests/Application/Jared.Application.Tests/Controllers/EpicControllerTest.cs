@@ -18,10 +18,7 @@ public class EpicControllerTest
     private readonly EpicController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public EpicControllerTest()
-    {
-        controller = new(mediatorMock.Object);
-    }
+    public EpicControllerTest() => controller = new(mediatorMock.Object);
 
     #region EpicDetailsAsync
     [Theory]

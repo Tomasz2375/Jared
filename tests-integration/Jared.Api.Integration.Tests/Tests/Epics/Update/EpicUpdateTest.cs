@@ -8,14 +8,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Update;
 
-public class EpicUpdateTest : BaseIntegrationTest
+public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Epic/Update";
-
-    public EpicUpdateTest(JaredWebApplicationFactory factory)
-        : base(factory)
-    {
-    }
 
     [Fact]
     public async Task UpdateEpic_WhenAllDataIsValid_ShouldBeSuccess()

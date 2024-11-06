@@ -7,14 +7,10 @@ using System.Text;
 
 namespace Jared.Presentation.Requests.Epics.Page;
 
-public class EpicPageQueryHandler : IRequestHandler<EpicPageQuery, Result<EpicPageDto>>
+public class EpicPageQueryHandler(HttpClient httpClient)
+    : IRequestHandler<EpicPageQuery, Result<EpicPageDto>>
 {
-    private readonly HttpClient httpClient;
-
-    public EpicPageQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<EpicPageDto>> Handle(EpicPageQuery request, CancellationToken cancellationToken)
     {

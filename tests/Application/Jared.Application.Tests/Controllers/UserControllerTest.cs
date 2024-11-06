@@ -18,10 +18,7 @@ public class UserControllerTest
     private readonly UserController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public UserControllerTest()
-    {
-        controller = new(mediatorMock.Object);
-    }
+    public UserControllerTest() => controller = new(mediatorMock.Object);
 
     #region UserListAsync
     [Theory]

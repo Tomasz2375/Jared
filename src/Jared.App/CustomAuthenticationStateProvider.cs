@@ -5,18 +5,13 @@ using System.Text.Json;
 
 namespace Jared.App;
 
-public class CustomAuthenticationStateProvider : AuthenticationStateProvider
+public class CustomAuthenticationStateProvider(
+    ILocalStorageService localStorageService,
+    HttpClient httpClient)
+    : AuthenticationStateProvider
 {
-    private readonly ILocalStorageService localStorageService;
-    private readonly HttpClient httpClient;
-
-    public CustomAuthenticationStateProvider(
-        ILocalStorageService localStorageService,
-        HttpClient httpClient)
-    {
-        this.localStorageService = localStorageService;
-        this.httpClient = httpClient;
-    }
+    private readonly ILocalStorageService localStorageService = localStorageService;
+    private readonly HttpClient httpClient = httpClient;
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {

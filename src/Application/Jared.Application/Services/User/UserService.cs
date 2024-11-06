@@ -3,14 +3,9 @@ using System.Security.Claims;
 
 namespace Jared.Application.Services.User;
 
-public class UserService : IUserService
+public class UserService(IHttpContextAccessor httpContextAccessor) : IUserService
 {
-    private readonly IHttpContextAccessor httpContextAccessor;
-
-    public UserService(IHttpContextAccessor httpContextAccessor)
-    {
-        this.httpContextAccessor = httpContextAccessor;
-    }
+    private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
 
     public Domain.Models.User GetUser()
     {

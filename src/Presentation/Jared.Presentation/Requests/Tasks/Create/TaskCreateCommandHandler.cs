@@ -4,14 +4,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Tasks.Create;
 
-public class TaskCreateCommandHandler : IRequestHandler<TaskCreateCommand, Result<bool>>
+public class TaskCreateCommandHandler(HttpClient httpClient)
+    : IRequestHandler<TaskCreateCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient;
-
-    public TaskCreateCommandHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<bool>> Handle(TaskCreateCommand request, CancellationToken cancellationToken)
     {

@@ -5,14 +5,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Create;
 
-public class ProjectCreateTest : BaseIntegrationTest
+public class ProjectCreateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Project/Create";
-
-    public ProjectCreateTest(JaredWebApplicationFactory factory)
-        : base(factory)
-    {
-    }
 
     [Fact]
     public async Task CreateProject_WhenAllDataIsValid_ShouldBeSuccess()

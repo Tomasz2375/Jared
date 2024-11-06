@@ -13,14 +13,9 @@ namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EpicController
+public class EpicController(IMediator mediator)
 {
-    private readonly IMediator mediator;
-
-    public EpicController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
+    private readonly IMediator mediator = mediator;
 
     [HttpGet("{id}")]
     public async Task<Result<EpicDetailsDto>> EpicDetailsAsync([FromRoute] int id)

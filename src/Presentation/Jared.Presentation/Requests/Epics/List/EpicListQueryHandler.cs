@@ -5,14 +5,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Epics.List;
 
-public class EpicListQueryHandler : IRequestHandler<EpicListQuery, Result<List<EpicListDto>>>
+public class EpicListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<EpicListQuery, Result<List<EpicListDto>>>
 {
-    private readonly HttpClient httpClient;
-
-    public EpicListQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<List<EpicListDto>>> Handle(EpicListQuery request, CancellationToken cancellationToken)
     {

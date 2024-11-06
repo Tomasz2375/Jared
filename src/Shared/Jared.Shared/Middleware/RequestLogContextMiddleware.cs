@@ -3,14 +3,9 @@ using Serilog.Context;
 
 namespace Jared.Shared.Middleware;
 
-public class RequestLogContextMiddleware
+public class RequestLogContextMiddleware(RequestDelegate requestDelegate)
 {
-    private readonly RequestDelegate requestDelegate;
-
-    public RequestLogContextMiddleware(RequestDelegate requestDelegate)
-    {
-        this.requestDelegate = requestDelegate;
-    }
+    private readonly RequestDelegate requestDelegate = requestDelegate;
 
     public Task Invoke(HttpContext httpContext)
     {

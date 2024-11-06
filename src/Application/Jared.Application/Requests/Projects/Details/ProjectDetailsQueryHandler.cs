@@ -8,16 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Projects.Details;
 
-public class ProjectDetailsQueryHandler : IRequestHandler<ProjectDetailsQuery, Result<ProjectDetailsDto>>
+public class ProjectDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<ProjectDetailsQuery, Result<ProjectDetailsDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public ProjectDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<ProjectDetailsDto>> Handle(ProjectDetailsQuery query, CancellationToken cancellationToken)
     {

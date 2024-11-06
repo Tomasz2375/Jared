@@ -12,21 +12,15 @@ using System.Text;
 
 namespace Jared.Application.Requests.Users.Login;
 
-public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<string>>
+public class UserLoginCommandHandler(
+    IDataContext dataContext,
+    IPasswordHasher<User> passwordHasher,
+    AuthenticationOptions authenticationOptions)
+    : IRequestHandler<UserLoginCommand, Result<string>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IPasswordHasher<User> passwordHasher;
-    private readonly AuthenticationOptions authenticationOptions;
-
-    public UserLoginCommandHandler(
-        IDataContext dataContext,
-        IPasswordHasher<User> passwordHasher,
-        AuthenticationOptions authenticationOptions)
-    {
-        this.dataContext = dataContext;
-        this.passwordHasher = passwordHasher;
-        this.authenticationOptions = authenticationOptions;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IPasswordHasher<User> passwordHasher = passwordHasher;
+    private readonly AuthenticationOptions authenticationOptions = authenticationOptions;
 
     public async Task<Result<string>> Handle(
         UserLoginCommand request,

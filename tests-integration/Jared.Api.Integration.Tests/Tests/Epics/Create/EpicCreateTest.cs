@@ -7,14 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Create;
 
-public class EpicCreateTest : BaseIntegrationTest
+public class EpicCreateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Epic/Create";
-
-    public EpicCreateTest(JaredWebApplicationFactory factory)
-        : base(factory)
-    {
-    }
 
     [Fact]
     public async Task CreateEpic_WhenAllDataIsValid_ShouldBeSuccess()
