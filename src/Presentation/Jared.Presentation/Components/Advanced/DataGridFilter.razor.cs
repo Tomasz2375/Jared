@@ -121,12 +121,9 @@ public partial class DataGridFilter
             Filter = "0";
         }
 
-        foreach (var value in Type.GetEnumValues())
+        if (((int)item & int.Parse(Filter)) != 0)
         {
-            if (((int)item & int.Parse(Filter)) != 0)
-            {
-                return "edit-select";
-            }
+            return "edit-select";
         }
 
         return string.Empty;

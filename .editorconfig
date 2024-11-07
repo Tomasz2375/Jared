@@ -183,6 +183,9 @@ dotnet_diagnostic.SA1600.severity = none
 dotnet_diagnostic.SA1601.severity = none
 dotnet_style_qualification_for_method = false:silent
 
+# SA1602: Enumeration items should be documented
+dotnet_diagnostic.SA1602.severity = none
+
 # SA1633: File should have header
 dotnet_diagnostic.SA1633.severity = none
 
