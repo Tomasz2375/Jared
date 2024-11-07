@@ -1,10 +1,10 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Application.Requests.Tasks.Create;
+﻿using Jared.Application.Requests.Tasks.Create;
 using Jared.Application.Requests.Tasks.Details;
 using Jared.Application.Requests.Tasks.List;
 using Jared.Application.Requests.Tasks.Page;
 using Jared.Application.Requests.Tasks.Update;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -14,14 +14,9 @@ namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TaskController : ControllerBase
+public class TaskController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator;
-
-    public TaskController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
+    private readonly IMediator mediator = mediator;
 
     [HttpGet("{id}")]
     public async Task<Result<TaskDetailsDto>> TaskDetailsAsync([FromRoute] int id)

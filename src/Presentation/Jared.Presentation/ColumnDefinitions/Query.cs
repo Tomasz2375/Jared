@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Enums;
-using Jared.Presentation.ColumnDefinitions.Abstraction;
+﻿using Jared.Presentation.ColumnDefinitions.Abstraction;
+using Jared.Shared.Enums;
 
 namespace Jared.Presentation.ColumnDefinitions;
 

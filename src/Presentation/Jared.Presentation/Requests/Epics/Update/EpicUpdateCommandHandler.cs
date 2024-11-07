@@ -4,14 +4,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Epics.Update;
 
-public class EpicUpdateCommandHandler : IRequestHandler<EpicUpdateCommand, Result<bool>>
+public class EpicUpdateCommandHandler(HttpClient httpClient)
+    : IRequestHandler<EpicUpdateCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient;
-
-    public EpicUpdateCommandHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<bool>> Handle(EpicUpdateCommand request, CancellationToken cancellationToken)
     {

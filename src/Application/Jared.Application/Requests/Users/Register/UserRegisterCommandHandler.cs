@@ -1,28 +1,22 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Domain.Models;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
 namespace Jared.Application.Requests.Users.Register;
 
-public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, Result<bool>>
+public class UserRegisterCommandHandler(
+    IDataContext dataContext,
+    IMapper mapper,
+    IPasswordHasher<User> passwordHasher)
+    : IRequestHandler<UserRegisterCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-    private readonly IPasswordHasher<User> passwordHasher;
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
+    private readonly IPasswordHasher<User> passwordHasher = passwordHasher;
 
-    public UserRegisterCommandHandler(
-        IDataContext dataContext,
-        IMapper mapper,
-        IPasswordHasher<User> passwordHasher
-    )
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-        this.passwordHasher = passwordHasher;
-    }
     public async Task<Result<bool>> Handle(UserRegisterCommand command, CancellationToken cancellationToken)
     {
         try

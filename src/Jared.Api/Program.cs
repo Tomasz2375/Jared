@@ -1,3 +1,5 @@
+using System.Globalization;
+using System.Text;
 using ConfigurationSubstitution;
 using FluentValidation.AspNetCore;
 using Jared.Application;
@@ -12,14 +14,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
-using System.Globalization;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Logger
 builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
     .ReadFrom.Configuration(context.Configuration));
+
 // Culture
 var cultureInfo = new CultureInfo("en-US");
 cultureInfo.DateTimeFormat.ShortTimePattern = "HH:mm";
@@ -63,8 +64,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.RegisterMappingConfigurations();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
 // CORS
-var corsSettings = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>(); ;
+var corsSettings = builder.Configuration.GetSection("Cors:AllowedOrigins").Get<string[]>();
 if (corsSettings is not null)
 {
     builder.Services.AddCors(options =>
@@ -75,17 +77,20 @@ if (corsSettings is not null)
         });
     });
 }
+
 builder.Configuration.EnableSubstitutions("{%", "%}");
 
 var app = builder.Build();
 
 using var scope = app.Services.CreateScope();
 var dataContext = scope.ServiceProvider.GetService<IDataContext>();
+#pragma warning disable S6966 // Awaitable method should be used
 var pendingMigrations = dataContext!.Database.GetPendingMigrations();
 if (pendingMigrations.Any())
 {
     dataContext.Database.Migrate();
 }
+#pragma warning restore S6966 // Awaitable method should be used
 
 // Configure the HTTP request pipeline.
 app.UseHttpsRedirection();
@@ -93,6 +98,7 @@ app.UseHttpsRedirection();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
+
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
     app.UseCors("Jared.App");
@@ -111,7 +117,7 @@ app.MapControllers();
 try
 {
     Log.Information("Startingup application");
-    app.Run();
+    await app.RunAsync();
 }
 catch (Exception e)
 {

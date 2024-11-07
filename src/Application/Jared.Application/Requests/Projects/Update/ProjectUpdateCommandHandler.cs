@@ -1,20 +1,16 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Domain.Models;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Projects.Update;
 
-public class ProjectUpdateCommandHandler : IRequestHandler<ProjectUpdateCommand, Result<bool>>
+public class ProjectUpdateCommandHandler(IDataContext dataContext)
+    : IRequestHandler<ProjectUpdateCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-
-    public ProjectUpdateCommandHandler(IDataContext dataContext)
-    {
-        this.dataContext = dataContext;
-    }
+    private readonly IDataContext dataContext = dataContext;
 
     public async Task<Result<bool>> Handle(ProjectUpdateCommand command, CancellationToken cancellationToken)
     {

@@ -4,14 +4,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Epics.Create;
 
-public class EpicCreateCommandHandler : IRequestHandler<EpicCreateCommand, Result<bool>>
+public class EpicCreateCommandHandler(HttpClient httpClient)
+    : IRequestHandler<EpicCreateCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient;
-
-    public EpicCreateCommandHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<bool>> Handle(EpicCreateCommand request, CancellationToken cancellationToken)
     {

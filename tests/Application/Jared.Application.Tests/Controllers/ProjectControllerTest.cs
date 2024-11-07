@@ -18,10 +18,7 @@ public class ProjectControllerTest
     private readonly ProjectController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public ProjectControllerTest()
-    {
-        controller = new(mediatorMock.Object);
-    }
+    public ProjectControllerTest() => controller = new(mediatorMock.Object);
 
     #region ProjectDetailsAsync
     [Theory]
@@ -121,8 +118,9 @@ public class ProjectControllerTest
         Assert.True(result.Success);
         Assert.Equal(dto, result.Data);
         Assert.Equal(string.Empty, result.Error);
-        mediatorMock.Verify(x => x.Send(
-            new ProjectPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default), Times.Once);
+        mediatorMock.Verify(
+            x => x.Send(new ProjectPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default),
+            Times.Once);
     }
 
     [Theory]
@@ -146,8 +144,9 @@ public class ProjectControllerTest
         Assert.False(result.Success);
         Assert.Null(result.Data);
         Assert.Equal(errorMessage, result.Error);
-        mediatorMock.Verify(x => x.Send(
-            new ProjectPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default), Times.Once);
+        mediatorMock.Verify(
+            x => x.Send(new ProjectPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default),
+            Times.Once);
     }
     #endregion
 

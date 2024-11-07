@@ -7,13 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Create;
 
-public class EpicCreateTest : BaseIntegrationTest
+public class EpicCreateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Epic/Create";
-
-    public EpicCreateTest(JaredWebApplicationFactory factory) : base(factory)
-    {
-    }
 
     [Fact]
     public async Task CreateEpic_WhenAllDataIsValid_ShouldBeSuccess()
@@ -46,8 +42,8 @@ public class EpicCreateTest : BaseIntegrationTest
             Status = 400,
             Errors = new Dictionary<string, string[]>
             {
-                { "Title", new[] { "'Title' must not be empty." } }
-            }
+                { "Title", new[] { "'Title' must not be empty." } },
+            },
         };
 
         // Act
@@ -70,8 +66,8 @@ public class EpicCreateTest : BaseIntegrationTest
             Status = 400,
             Errors = new Dictionary<string, string[]>
             {
-                { "Title", new[] { "The length of 'Title' must be 100 characters or fewer. You entered 101 characters." } }
-            }
+                { "Title", new[] { "The length of 'Title' must be 100 characters or fewer. You entered 101 characters." } },
+            },
         };
 
         // Act
@@ -94,8 +90,8 @@ public class EpicCreateTest : BaseIntegrationTest
             Status = 400,
             Errors = new Dictionary<string, string[]>
             {
-                { "ProjectId", new[] { "'Project Id' must not be empty." } }
-            }
+                { "ProjectId", new[] { "'Project Id' must not be empty." } },
+            },
         };
 
         // Act
@@ -118,8 +114,8 @@ public class EpicCreateTest : BaseIntegrationTest
             Status = 400,
             Errors = new Dictionary<string, string[]>
             {
-                { "Status", new[] { "'Status' has a range of values which does not include '100'." } }
-            }
+                { "Status", new[] { "'Status' has a range of values which does not include '100'." } },
+            },
         };
 
         // Act
@@ -144,8 +140,8 @@ public class EpicCreateTest : BaseIntegrationTest
             Status = 400,
             Errors = new Dictionary<string, string[]>
             {
-                { "ParentId", new[] { "The specified condition was not met for 'Parent Id'." } }
-            }
+                { "ParentId", new[] { "The specified condition was not met for 'Parent Id'." } },
+            },
         };
 
         // Act
@@ -156,7 +152,7 @@ public class EpicCreateTest : BaseIntegrationTest
         response.Should().BeEquivalentTo(expectedResponse);
     }
 
-    private EpicDetailsDto validDto() => new()
+    private static EpicDetailsDto validDto() => new()
     {
         Title = "Test epic",
         ProjectId = ProjectIntegrationFaker.FirstProject.Id,

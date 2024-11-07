@@ -7,14 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Details;
 
-public class EpicDetailsTest : BaseIntegrationTest
+public class EpicDetailsTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Epic";
-
-    public EpicDetailsTest(JaredWebApplicationFactory factory) : base(factory)
-    {
-    }
-
 
     [Fact]
     public async Task DetailsEpic_WhenEpicExists_ShoutdBeSuccess()

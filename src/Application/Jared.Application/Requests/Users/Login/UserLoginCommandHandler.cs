@@ -1,7 +1,7 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
+﻿using Jared.Domain.Models;
 using Jared.Domain.Options;
+using Jared.Shared.Abstractions;
+using Jared.Shared.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,21 +12,15 @@ using System.Text;
 
 namespace Jared.Application.Requests.Users.Login;
 
-public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<string>>
+public class UserLoginCommandHandler(
+    IDataContext dataContext,
+    IPasswordHasher<User> passwordHasher,
+    AuthenticationOptions authenticationOptions)
+    : IRequestHandler<UserLoginCommand, Result<string>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IPasswordHasher<User> passwordHasher;
-    private readonly AuthenticationOptions authenticationOptions;
-
-    public UserLoginCommandHandler(
-        IDataContext dataContext,
-        IPasswordHasher<User> passwordHasher,
-        AuthenticationOptions authenticationOptions)
-    {
-        this.dataContext = dataContext;
-        this.passwordHasher = passwordHasher;
-        this.authenticationOptions = authenticationOptions;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IPasswordHasher<User> passwordHasher = passwordHasher;
+    private readonly AuthenticationOptions authenticationOptions = authenticationOptions;
 
     public async Task<Result<string>> Handle(
         UserLoginCommand request,
@@ -37,8 +31,8 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
             var user = await dataContext
                 .Set<User>()
                 .Include(x => x.Role)
-                .FirstOrDefaultAsync(x =>
-                    x.Email.ToLower() == request.dto.Email.ToLower(),
+                .FirstOrDefaultAsync(
+                    x => x.Email.ToLower() == request.dto.Email.ToLower(),
                     cancellationToken);
 
             if (user is null)
@@ -73,7 +67,7 @@ public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
             new(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
             new(ClaimTypes.Role, $"{user.Role!.Name}"),
-            new("DateOfBirth", user.DateOfBirth!.Value.ToString("dd-MM-yyyy"))
+            new("DateOfBirth", user.DateOfBirth!.Value.ToString("dd-MM-yyyy")),
         };
 
         SymmetricSecurityKey key =

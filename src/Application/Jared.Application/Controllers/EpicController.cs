@@ -1,10 +1,10 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
-using Jared.Application.Requests.Epics.Create;
+﻿using Jared.Application.Requests.Epics.Create;
 using Jared.Application.Requests.Epics.Details;
 using Jared.Application.Requests.Epics.List;
 using Jared.Application.Requests.Epics.Page;
 using Jared.Application.Requests.Epics.Update;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +13,9 @@ namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EpicController
+public class EpicController(IMediator mediator)
 {
-    private readonly IMediator mediator;
-
-    public EpicController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
+    private readonly IMediator mediator = mediator;
 
     [HttpGet("{id}")]
     public async Task<Result<EpicDetailsDto>> EpicDetailsAsync([FromRoute] int id)
@@ -42,7 +37,7 @@ public class EpicController
         [FromQuery] int pageSize,
         [FromQuery] string? sortingProperty,
         [FromQuery] SortingDirection sortingDirection,
-        [FromQuery]  IDictionary<string, string?>? filter)
+        [FromQuery] IDictionary<string, string?>? filter)
     {
         return await mediator.Send(new EpicPageQuery(
             page,

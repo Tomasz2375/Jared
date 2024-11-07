@@ -18,7 +18,7 @@ namespace Jared.Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastTaskNumber = table.Column<int>(type: "int", nullable: false)
+                    LastTaskNumber = table.Column<int>(type: "int", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -34,7 +34,7 @@ namespace Jared.Infrastructure.Migrations
                     ParentId = table.Column<int>(type: "int", nullable: true),
                     ProjectId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -70,7 +70,7 @@ namespace Jared.Infrastructure.Migrations
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Deadline = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EstimatedTime = table.Column<TimeSpan>(type: "time", nullable: false),
-                    TotalWorkTime = table.Column<TimeSpan>(type: "time", nullable: false)
+                    TotalWorkTime = table.Column<TimeSpan>(type: "time", nullable: false),
                 },
                 constraints: table =>
                 {

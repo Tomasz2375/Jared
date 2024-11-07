@@ -7,18 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Users.UpdateRole;
 
-public class UserRoleUpdateCommandHandler : IRequestHandler<UserRoleUpdateCommand, Result<bool>>
+public class UserRoleUpdateCommandHandler(
+    IDataContext dataContext,
+    IUserService userService)
+    : IRequestHandler<UserRoleUpdateCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IUserService userService;
-
-    public UserRoleUpdateCommandHandler(
-        IDataContext dataContext,
-        IUserService userService)
-    {
-        this.dataContext = dataContext;
-        this.userService = userService;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IUserService userService = userService;
 
     public async Task<Result<bool>> Handle(UserRoleUpdateCommand request, CancellationToken cancellationToken)
     {

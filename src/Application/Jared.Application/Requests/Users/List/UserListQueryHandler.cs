@@ -8,16 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Users.List;
 
-public class UserListQueryHandler : IRequestHandler<UserListQuery, Result<List<UserListDto>>>
+public class UserListQueryHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<UserListQuery, Result<List<UserListDto>>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public UserListQueryHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<List<UserListDto>>> Handle(UserListQuery request, CancellationToken cancellationToken)
     {

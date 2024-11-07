@@ -8,14 +8,9 @@ namespace Jared.Application.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RoleController
+public class RoleController(IMediator mediator)
 {
-    private readonly IMediator mediator;
-
-    public RoleController(IMediator mediator)
-    {
-        this.mediator = mediator;
-    }
+    private readonly IMediator mediator = mediator;
 
     [HttpGet("List")]
     public async Task<Result<List<RoleListDto>>> RoleListAsync()

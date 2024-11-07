@@ -5,17 +5,13 @@ using Serilog.Context;
 
 namespace Jared.Shared.Behaviours;
 
-public sealed class RequestLogginPipelineBehaviour<TRequest, TResponse>
+public sealed class RequestLogginPipelineBehaviour<TRequest, TResponse>(
+    ILogger<RequestLogginPipelineBehaviour<TRequest, TResponse>> logger)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
     where TResponse : Result
 {
-    private readonly ILogger<RequestLogginPipelineBehaviour<TRequest, TResponse>> logger;
-
-    public RequestLogginPipelineBehaviour(ILogger<RequestLogginPipelineBehaviour<TRequest, TResponse>> logger)
-    {
-        this.logger = logger;
-    }
+    private readonly ILogger<RequestLogginPipelineBehaviour<TRequest, TResponse>> logger = logger;
 
     public async Task<TResponse> Handle(
         TRequest request,

@@ -1,19 +1,15 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Shared.Abstractions;
+﻿using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.TaskDtos;
 using MediatR;
 using System.Net.Http.Json;
 using System.Text;
 
 namespace Jared.Presentation.Requests.Tasks.List;
 
-public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<TaskListDto>>>
+public class TaskListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<TaskListQuery, Result<List<TaskListDto>>>
 {
-    private readonly HttpClient httpClient;
-
-    public TaskListQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<List<TaskListDto>>> Handle(TaskListQuery request, CancellationToken cancellationToken)
     {
@@ -31,10 +27,8 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
         return response;
     }
 
-    private string createQueryUrl(int? projectId, int? epicId)
+    private static string createQueryUrl(int? projectId, int? epicId)
     {
-        StringBuilder queryBuilder = new();
-
         if (projectId is null && epicId is null)
         {
             return string.Empty;
@@ -45,6 +39,7 @@ public class TaskListQueryHandler : IRequestHandler<TaskListQuery, Result<List<T
         {
             queries.Add($"projectId={projectId}");
         }
+
         if (projectId is not null)
         {
             queries.Add($"epicId={epicId}");

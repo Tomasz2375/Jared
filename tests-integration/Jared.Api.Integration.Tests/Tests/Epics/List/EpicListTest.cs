@@ -2,19 +2,14 @@
 using Jared.Api.Integration.Tests.Data;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
 using Mapster;
 using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.List;
 
-public class EpicListTest : BaseIntegrationTest
+public class EpicListTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Epic/List";
-
-    public EpicListTest(JaredWebApplicationFactory factory) : base(factory)
-    {
-    }
 
     [Fact]
     public async Task ListEpics_WhenProjectIdIsSet_ShoutdReturnEpicWithProject()

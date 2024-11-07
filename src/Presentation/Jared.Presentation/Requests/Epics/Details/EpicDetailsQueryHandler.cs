@@ -1,18 +1,14 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Abstractions;
+﻿using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.EpicDtos;
 using MediatR;
 using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Epics.Details;
 
-public class EpicDetailsQueryHandler : IRequestHandler<EpicDetailsQuery, Result<EpicDetailsDto>>
+public class EpicDetailsQueryHandler(HttpClient httpClient)
+    : IRequestHandler<EpicDetailsQuery, Result<EpicDetailsDto>>
 {
-    private readonly HttpClient httpClient;
-
-    public EpicDetailsQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<EpicDetailsDto>> Handle(EpicDetailsQuery request, CancellationToken cancellationToken)
     {

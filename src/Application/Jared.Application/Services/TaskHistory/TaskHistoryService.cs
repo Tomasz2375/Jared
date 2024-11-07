@@ -26,7 +26,7 @@ public class TaskHistoryService : ITaskHistoryService
                     Property = property,
                     OldValue = oldValue,
                     NewValue = newValue!,
-                    UserId = userId
+                    UserId = userId,
                 });
             }
         }
@@ -34,7 +34,7 @@ public class TaskHistoryService : ITaskHistoryService
         return changed;
     }
 
-    private List<string> getProperties()
+    private static List<string> getProperties()
     {
         return new()
         {

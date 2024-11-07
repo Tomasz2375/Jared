@@ -1,23 +1,18 @@
-﻿using Jared.Shared.Dtos.ProjectDtos;
+﻿using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Projects.Details;
 
-public class ProjectDetailsQueryHandler : IRequestHandler<ProjectDetailsQuery, Result<ProjectDetailsDto>>
+public class ProjectDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<ProjectDetailsQuery, Result<ProjectDetailsDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public ProjectDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<ProjectDetailsDto>> Handle(ProjectDetailsQuery query, CancellationToken cancellationToken)
     {

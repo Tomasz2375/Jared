@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Presentation.ColumnDefinitions;
+﻿using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.Requests.Tasks.Page;
+using Jared.Shared.Dtos.TaskDtos;
 
 namespace Jared.Presentation.Pages;
 
@@ -21,6 +21,7 @@ public partial class Dashboard
         {
             query.Filter!.Add("Status", "6");
         }
+
         query.Filter.Add(nameof(TaskRootDto.AssignedToId), UserService.GetUserId().ToString());
 
         var result = await Mediator.Send(new TaskPageQuery(query));

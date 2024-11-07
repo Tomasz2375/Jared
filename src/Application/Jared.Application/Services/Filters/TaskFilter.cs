@@ -15,7 +15,7 @@ public class TaskFilter : IFilterStrategy<Task>
         return query;
     }
 
-    private Dictionary<string, Func<IQueryable<Task>, string, IQueryable<Task>>> filters = new()
+    private readonly Dictionary<string, Func<IQueryable<Task>, string, IQueryable<Task>>> filters = new()
     {
         {
             nameof(TaskListDto.Id),
@@ -45,7 +45,11 @@ public class TaskFilter : IFilterStrategy<Task>
             nameof(TaskListDto.Status),
             (tasks, value) =>
             {
-                if (value == "0") return tasks;
+                if (value == "0")
+                {
+                    return tasks;
+                }
+
                 return tasks.Where(x => ((int)x.Status & int.Parse(value)) != 0);
             }
         },
@@ -53,7 +57,11 @@ public class TaskFilter : IFilterStrategy<Task>
             nameof(TaskListDto.Priority),
             (tasks, value) =>
             {
-                if (value == "0") return tasks;
+                if (value == "0")
+                {
+                    return tasks;
+                }
+
                 return tasks.Where(x => ((int)x.Priority & int.Parse(value)) != 0);
             }
         },
@@ -84,6 +92,6 @@ public class TaskFilter : IFilterStrategy<Task>
 
                 return tasks;
             }
-        }
+        },
     };
 }

@@ -7,13 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Update;
 
-public class ProjectUpdateTest : BaseIntegrationTest
+public class ProjectUpdateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Project/Update";
-
-    public ProjectUpdateTest(JaredWebApplicationFactory factory) : base(factory)
-    {
-    }
 
     [Fact]
     public async Task UpdateProject_WhenAllDataIsValid_ShouldBeSuccess()

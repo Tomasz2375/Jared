@@ -7,13 +7,9 @@ using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Page;
 
-public class EpicPageTest : BaseIntegrationTest
+public class EpicPageTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
     protected override string URL => "Epic/Page";
-
-    public EpicPageTest(JaredWebApplicationFactory factory) : base(factory)
-    {
-    }
 
     [Fact]
     public async Task PageEpic_When_Page_1_PageSize_2_ShoutdBeSuccess()
@@ -84,7 +80,6 @@ public class EpicPageTest : BaseIntegrationTest
             expectedResponse,
             options => options.WithStrictOrderingFor(x => x.Data.Epics));
     }
-
 
     [Fact]
     public async Task PageEpic_When_Page_1_PageSize_10_Fileter_Title_First_ShoutdBeSuccess()

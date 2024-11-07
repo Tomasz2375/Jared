@@ -1,20 +1,16 @@
-﻿using Jared.Shared.Dtos.ProjectDtos;
+﻿using Jared.Presentation.ColumnDefinitions;
 using Jared.Shared.Abstractions;
-using Jared.Presentation.ColumnDefinitions;
+using Jared.Shared.Dtos.ProjectDtos;
 using MediatR;
 using System.Net.Http.Json;
 using System.Text;
 
 namespace Jared.Presentation.Requests.Projects.Page;
 
-public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
+public class ProjectPageQueryHandler(HttpClient httpClient)
+    : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
 {
-    private readonly HttpClient httpClient;
-
-    public ProjectPageQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery request, CancellationToken cancellationToken)
     {
@@ -33,7 +29,7 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
         return response;
     }
 
-    private string createQueryUrl(Query query)
+    private static string createQueryUrl(Query query)
     {
         StringBuilder queryBuilder = new();
 
@@ -46,15 +42,17 @@ public class ProjectPageQueryHandler : IRequestHandler<ProjectPageQuery, Result<
             queryBuilder.Append("&sortingProperty=");
             queryBuilder.Append(query.SortingProperty);
         }
+
         if (query.SortingDirection is not null)
         {
             queryBuilder.Append("&sortingDirection=");
             queryBuilder.Append(query.SortingDirection);
         }
+
         if (query.Filter is not null)
         {
             var filters = query.Filter.Select(x => "&" + x.Key + "=" + x.Value);
-            queryBuilder.Append(string.Join("", filters));
+            queryBuilder.Append(string.Join(string.Empty, filters));
         }
 
         return queryBuilder.ToString();

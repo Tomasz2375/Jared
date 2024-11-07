@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Shared.Abstractions;
+﻿using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Enums;
 using MediatR;
 
@@ -9,6 +9,6 @@ public sealed record ProjectPageQuery(
     int page,
     int pageSize,
     string? sortingProperty,
-    SortingDirection? SortingDirection,
+    SortingDirection? sortingDirection,
     IDictionary<string, string?>? filters)
     : IRequest<Result<ProjectPageDto>>;

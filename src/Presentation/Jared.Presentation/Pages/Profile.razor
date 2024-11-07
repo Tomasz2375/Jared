@@ -34,7 +34,7 @@
         <div>
             <button type="submit" class="btn btn-primary-dialog">Change password</button>
         </div>
-        <div class=@(isPasswordChanged ? "text-success" : "text-danger")>
+        <div class=@((isPasswordChanged ? "text-success" : "text-danger"))>
             <span>
                 @passwordMessage
             </span>
@@ -62,7 +62,7 @@
         <div>
             <button type="submit" class="btn btn-primary-dialog">Update</button>
         </div>
-        <div class=@(isUpdateUser ? "text-success" : "text-danger")>
+        <div class=@((isUpdateUser ? "text-success" : "text-danger"))>
         <span>
             @updateMessage
         </span>

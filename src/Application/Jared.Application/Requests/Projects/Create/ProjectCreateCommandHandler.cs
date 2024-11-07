@@ -1,21 +1,16 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Domain.Models;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 
 namespace Jared.Application.Requests.Projects.Create;
 
-public class ProjectCreateCommandHandler : IRequestHandler<ProjectCreateCommand, Result<bool>>
+public class ProjectCreateCommandHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<ProjectCreateCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public ProjectCreateCommandHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<bool>> Handle(ProjectCreateCommand command, CancellationToken cancellationToken)
     {

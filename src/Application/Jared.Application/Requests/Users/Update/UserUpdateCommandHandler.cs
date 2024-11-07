@@ -3,27 +3,18 @@ using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Interfaces;
 using Mapster;
-using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Users.Update;
 
-public class UserUpdateCommandHandler : IRequestHandler<UserUpdateCommand, Result<bool>>
+public class UserUpdateCommandHandler(
+    IDataContext dataContext,
+    IUserService userService)
+    : IRequestHandler<UserUpdateCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-    private readonly IUserService userService;
-
-    public UserUpdateCommandHandler(
-        IDataContext dataContext,
-        IMapper mapper,
-        IUserService userService)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-        this.userService = userService;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IUserService userService = userService;
 
     public async Task<Result<bool>> Handle(UserUpdateCommand request, CancellationToken cancellationToken)
     {
@@ -38,7 +29,8 @@ public class UserUpdateCommandHandler : IRequestHandler<UserUpdateCommand, Resul
             {
                 return Result.Fail<bool>("User not found");
             }
-            user = request.dto.Adapt(user);
+
+            request.dto.Adapt(user);
 
             await dataContext.SaveChangesAsync(cancellationToken);
 

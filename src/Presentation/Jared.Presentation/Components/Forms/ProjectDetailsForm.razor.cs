@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Presentation.Requests.Projects.Details;
+﻿using Jared.Presentation.Requests.Projects.Details;
 using Jared.Presentation.Requests.Projects.Update;
+using Jared.Shared.Dtos.ProjectDtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
@@ -34,15 +34,6 @@ public partial class ProjectDetailsForm
         }
 
         await CloseDialog.InvokeAsync();
-    }
-
-    private async Task saveAndStay()
-    {
-        var result = await Mediator.Send(new ProjectUpdateCommand(Dto));
-        if (!result.Success)
-        {
-            Console.WriteLine("Save project failed");
-        }
     }
 
     private async Task getDetails(int id)

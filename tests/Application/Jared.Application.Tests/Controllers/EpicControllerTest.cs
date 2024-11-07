@@ -18,10 +18,7 @@ public class EpicControllerTest
     private readonly EpicController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public EpicControllerTest()
-    {
-        controller = new(mediatorMock.Object);
-    }
+    public EpicControllerTest() => controller = new(mediatorMock.Object);
 
     #region EpicDetailsAsync
     [Theory]
@@ -121,8 +118,9 @@ public class EpicControllerTest
         Assert.True(result.Success);
         Assert.Equal(dto, result.Data);
         Assert.Equal(string.Empty, result.Error);
-        mediatorMock.Verify(x => x.Send(
-            new EpicPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default), Times.Once);
+        mediatorMock.Verify(
+            x => x.Send(new EpicPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default),
+            Times.Once);
     }
 
     [Theory]
@@ -146,8 +144,9 @@ public class EpicControllerTest
         Assert.False(result.Success);
         Assert.Null(result.Data);
         Assert.Equal(errorMessage, result.Error);
-        mediatorMock.Verify(x => x.Send(
-            new EpicPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default), Times.Once);
+        mediatorMock.Verify(
+            x => x.Send(new EpicPageQuery(page, pageSize, sortingProperty, sortingDirection, filter), default),
+            Times.Once);
     }
     #endregion
 

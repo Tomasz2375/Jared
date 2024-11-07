@@ -4,14 +4,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.User.UpdateRole;
 
-public class UserRoleUpdateCommandHandler : IRequestHandler<UserRoleUpdateCommand, Result<bool>>
+public class UserRoleUpdateCommandHandler(HttpClient httpClient)
+    : IRequestHandler<UserRoleUpdateCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient;
-
-    public UserRoleUpdateCommandHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<bool>> Handle(UserRoleUpdateCommand request, CancellationToken cancellationToken)
     {

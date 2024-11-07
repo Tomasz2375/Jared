@@ -4,14 +4,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.User.Register;
 
-public class UserRegisterCommandHandler : IRequestHandler<UserRegisterCommand, Result<bool>>
+public class UserRegisterCommandHandler(HttpClient httpClient)
+    : IRequestHandler<UserRegisterCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient;
-
-    public UserRegisterCommandHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<bool>> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
     {

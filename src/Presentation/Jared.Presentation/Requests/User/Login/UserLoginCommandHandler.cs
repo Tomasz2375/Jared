@@ -4,14 +4,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.User.Login;
 
-public class UserLoginCommandHandler : IRequestHandler<UserLoginCommand, Result<string>>
+public class UserLoginCommandHandler(HttpClient httpClient)
+    : IRequestHandler<UserLoginCommand, Result<string>>
 {
-    private readonly HttpClient httpClient;
-
-    public UserLoginCommandHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<string>> Handle(UserLoginCommand request, CancellationToken cancellationToken)
     {

@@ -5,14 +5,10 @@ using System.Net.Http.Json;
 
 namespace Jared.Presentation.Requests.Projects.List;
 
-public class ProjectListQueryHandler : IRequestHandler<ProjectListQuery, Result<List<ProjectListDto>>>
+public class ProjectListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<ProjectListQuery, Result<List<ProjectListDto>>>
 {
-    private readonly HttpClient httpClient;
-
-    public ProjectListQueryHandler(HttpClient httpClient)
-    {
-        this.httpClient = httpClient;
-    }
+    private readonly HttpClient httpClient = httpClient;
 
     public async Task<Result<List<ProjectListDto>>> Handle(ProjectListQuery request, CancellationToken cancellationToken)
     {

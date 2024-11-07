@@ -9,7 +9,7 @@ using Task = Jared.Domain.Models.Task;
 
 namespace Jared.Application;
 
-public static class DependencyInjection 
+public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(this IServiceCollection services)
     {

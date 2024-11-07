@@ -1,23 +1,18 @@
-﻿using Jared.Shared.Dtos.EpicDtos;
+﻿using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Interfaces;
-using Jared.Domain.Models;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Epics.Details;
 
-public class EpicDetailsQueryHandler : IRequestHandler<EpicDetailsQuery, Result<EpicDetailsDto>>
+public class EpicDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<EpicDetailsQuery, Result<EpicDetailsDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-
-    public EpicDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
 
     public async Task<Result<EpicDetailsDto>> Handle(EpicDetailsQuery query, CancellationToken cancellationToken)
     {

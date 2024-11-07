@@ -12,22 +12,16 @@ using System.Linq.Expressions;
 
 namespace Jared.Application.Requests.Tasks.Page;
 
-public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPageDto>>
+public class TaskPageQueryHandler(
+    IDataContext dataContext,
+    IMapper mapper,
+    IFilterStrategy<Domain.Models.Task> strategy,
+    IFilterBuilder<Domain.Models.Task> filterBuilder)
+    : IRequestHandler<TaskPageQuery, Result<TaskPageDto>>
 {
-    private readonly IDataContext dataContext;
-    private readonly IMapper mapper;
-    private readonly IFilter<Domain.Models.Task> filter;
-
-    public TaskPageQueryHandler(
-        IDataContext dataContext,
-        IMapper mapper,
-        IFilterStrategy<Domain.Models.Task> strategy,
-        IFilterBuilder<Domain.Models.Task> filterBuilder)
-    {
-        this.dataContext = dataContext;
-        this.mapper = mapper;
-        filter = filterBuilder.Build(strategy);
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
+    private readonly IFilter<Domain.Models.Task> filter = filterBuilder.Build(strategy);
 
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery query, CancellationToken cancellationToken)
     {
@@ -61,6 +55,42 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         }
     }
 
+    private static IQueryable<Domain.Models.Task> sortResult(
+        IQueryable<Domain.Models.Task> tasks,
+        TaskPageQuery query)
+    {
+        if (query.sortingProperty is null)
+        {
+            return tasks.OrderBy(x => x.Id);
+        }
+
+        Dictionary<string, Expression<Func<Domain.Models.Task, object>>> columnSelector = new()
+        {
+            { nameof(TaskListDto.Id), x => x.Id },
+            { nameof(TaskListDto.Title), x => x.Title },
+            { nameof(TaskListDto.Code), x => x.Code! },
+            { nameof(TaskListDto.Status), x => x.Status },
+            { nameof(TaskListDto.Priority), x => x.Priority },
+            { nameof(TaskListDto.CreatedAt), x => x.CreatedAt },
+            { nameof(TaskListDto.Deadline), x => x.Deadline! },
+        };
+
+        var sortByExpression = columnSelector[query.sortingProperty];
+
+        return query.sortingDirection == SortingDirection.Descending ?
+            tasks.OrderByDescending(sortByExpression) :
+            tasks.OrderBy(sortByExpression);
+    }
+
+    private static IQueryable<Domain.Models.Task> paginateResult(
+        IQueryable<Domain.Models.Task> tasks,
+        TaskPageQuery query)
+    {
+        return tasks
+            .Skip((query.page - 1) * query.pageSize)
+            .Take(query.pageSize);
+    }
+
     private IQueryable<Domain.Models.Task> filterResult(
         IQueryable<Domain.Models.Task> tasks,
         TaskPageQuery query)
@@ -85,7 +115,7 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
         return new()
         {
             ItemsCount = tasks.Count(),
-            ItemFrom = (query.page - 1) * query.pageSize + 1,
+            ItemFrom = ((query.page - 1) * query.pageSize) + 1,
             ItemTo = query.page * query.pageSize > tasks.Count() ?
                 tasks.Count() :
                 query.page * query.pageSize,
@@ -93,41 +123,5 @@ public class TaskPageQueryHandler : IRequestHandler<TaskPageQuery, Result<TaskPa
             PageSize = query.pageSize,
             PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
         };
-    }
-
-    private IQueryable<Domain.Models.Task> sortResult(
-        IQueryable<Domain.Models.Task> tasks,
-        TaskPageQuery query)
-    {
-        if (query.sortingProperty is null)
-        {
-            return tasks.OrderBy(x => x.Id);
-        }
-
-        Dictionary<string, Expression<Func<Domain.Models.Task, object>>> columnSelector = new()
-        {
-            { nameof(TaskListDto.Id), x => x.Id },
-            { nameof(TaskListDto.Title), x => x.Title },
-            { nameof(TaskListDto.Code), x => x.Code! },
-            { nameof(TaskListDto.Status), x => x.Status },
-            { nameof(TaskListDto.Priority), x => x.Priority },
-            { nameof(TaskListDto.CreatedAt), x => x.CreatedAt },
-            { nameof(TaskListDto.Deadline), x => x.Deadline! },
-        };
-
-        var sortByExpression = columnSelector[query.sortingProperty];
-
-        return query.SortingDirection == SortingDirection.Descending ?
-            tasks.OrderByDescending(sortByExpression) :
-            tasks.OrderBy(sortByExpression);
-    }
-
-    private IQueryable<Domain.Models.Task> paginateResult(
-        IQueryable<Domain.Models.Task> tasks,
-        TaskPageQuery query)
-    {
-        return tasks
-            .Skip((query.page - 1) * query.pageSize)
-            .Take(query.pageSize);
     }
 }

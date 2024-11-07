@@ -1,7 +1,7 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Application.Services.TaskHistory;
+﻿using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
 using Jared.Shared.Abstractions;
+using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Interfaces;
 using Mapster;
 using MapsterMapper;
@@ -10,24 +10,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Application.Requests.Tasks.Update;
 
-public class TaskUpdateCommandHandler : IRequestHandler<TaskUpdateCommand, Result<bool>>
+public class TaskUpdateCommandHandler(
+    IDataContext dataContext,
+    ITaskHistoryService taskHistoryService,
+    IMapper mapper,
+    IUserService userService)
+    : IRequestHandler<TaskUpdateCommand, Result<bool>>
 {
-    private readonly IDataContext dataContext;
-    private readonly ITaskHistoryService taskHistoryService;
-    private readonly IMapper mapper;
-    private readonly IUserService userService;
-
-    public TaskUpdateCommandHandler(
-        IDataContext dataContext,
-        ITaskHistoryService taskHistoryService,
-        IMapper mapper,
-        IUserService userService)
-    {
-        this.dataContext = dataContext;
-        this.taskHistoryService = taskHistoryService;
-        this.mapper = mapper;
-        this.userService = userService;
-    }
+    private readonly IDataContext dataContext = dataContext;
+    private readonly ITaskHistoryService taskHistoryService = taskHistoryService;
+    private readonly IMapper mapper = mapper;
+    private readonly IUserService userService = userService;
 
     public async Task<Result<bool>> Handle(TaskUpdateCommand command, CancellationToken cancellationToken)
     {

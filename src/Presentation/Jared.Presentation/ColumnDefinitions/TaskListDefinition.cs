@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Presentation.ColumnDefinitions.Abstraction;
+using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Enums;
-using Jared.Presentation.ColumnDefinitions.Abstraction;
 
 namespace Jared.Presentation.ColumnDefinitions;
 

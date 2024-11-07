@@ -17,5 +17,6 @@ public interface IDataContext : IDisposable
     DatabaseFacade Database { get; }
     ChangeTracker ChangeTracker { get; }
     Task<int> SaveChangesAsync(CancellationToken token);
-    DbSet<TEntity> Set<TEntity>() where TEntity : class, IEntity;
+    DbSet<TEntity> Set<TEntity>()
+        where TEntity : class, IEntity;
 }
