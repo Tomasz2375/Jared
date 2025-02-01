@@ -1,4 +1,5 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Domain.Model;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Enums;
 
 namespace Jared.Domain.Models;
@@ -30,4 +31,5 @@ public class Task : Entity
     public User? AssignedTo { get; set; }
 
     public List<TaskHistory> TaskHistories { get; set; } = new();
+    public List<WorkLog> WorkLogs { get; set; } = new();
 }
