@@ -365,3 +365,5 @@ FodyWeavers.xsd
 # appsettings
 # appsettings.Development.json
 # appsettings.Production.json
+/src/Jared.Api/appsettings.Development.json
+/src/Jared.App/appsettings.Development.json
