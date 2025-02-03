@@ -1,4 +1,5 @@
 ﻿using Jared.Shared.Dtos.TaskHistoryDtos;
+using Jared.Shared.Dtos.WorkLogDtos;
 
 namespace Jared.Shared.Dtos.TaskDtos;
 
@@ -13,4 +14,5 @@ public class TaskDetailsDto : TaskRootDto
     public TimeSpan TotalWorkTime { get; set; }
 
     public List<TaskHistoryDto> TaskHistories { get; set; } = new();
+    public List<WorkLogListDto> WorkLogs { get; set; } = new();
 }
