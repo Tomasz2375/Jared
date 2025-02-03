@@ -6,6 +6,7 @@ using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Dtos.UserDtos;
+using Jared.Shared.Dtos.WorkLogDtos;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
@@ -14,6 +15,7 @@ public partial class TaskDetailsDetails
 {
     [Parameter]
     public TaskDetailsDto Dto { get; set; } = default!;
+    private bool showWorkLogDialog;
 
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
@@ -78,5 +80,28 @@ public partial class TaskDetailsDetails
         }
 
         users = result.Data.ToList();
+    }
+
+    private void addWorkLog(WorkLogAddDto dto)
+    {
+        showWorkLogDialog = false;
+
+        if (dto is null)
+        {
+            return;
+        }
+
+        WorkLogListDto workLog = new()
+        {
+            Time = new(dto.Hours, dto.Minutes, 0),
+            WorkDate = dto.WorkDate is null
+                ? DateTime.Now.Date
+                : (DateTime)dto.WorkDate,
+            TaskId = Dto.Id,
+            UserId = UserService.GetUserId(),
+        };
+
+        Dto.TotalWorkTime += workLog.Time;
+        Dto.WorkLogs.Add(workLog);
     }
 }

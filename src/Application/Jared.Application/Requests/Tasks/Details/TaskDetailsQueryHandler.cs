@@ -22,6 +22,7 @@ public class TaskDetailsQueryHandler(IDataContext dataContext, IMapper mapper)
                 .Include(x => x.Project)
                 .Include(x => x.Epic)
                 .Include(x => x.TaskHistories)
+                .Include(x => x.WorkLogs)
                 .FirstAsync(x => x.Id == query.id, cancellationToken);
 
             var result = mapper.Map<TaskDetailsDto>(task);

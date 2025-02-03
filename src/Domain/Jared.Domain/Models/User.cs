@@ -1,4 +1,5 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Domain.Model;
+using Jared.Shared.Abstractions;
 
 namespace Jared.Domain.Models;
 
@@ -15,6 +16,7 @@ public class User : Entity
     public Role? Role { get; set; }
 
     public List<TaskHistory> TaskHistories { get; set; } = new();
+    public List<WorkLog> WorkLogs { get; set; } = new();
     public List<Task> CreatedTask { get; set; } = new();
     public List<Task> AssignedTask { get; set; } = new();
 }
