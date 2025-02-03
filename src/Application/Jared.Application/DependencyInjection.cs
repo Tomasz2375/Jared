@@ -1,10 +1,10 @@
-﻿using Jared.Application.Services.Filters;
+﻿using System.Reflection;
+using Jared.Application.Services.Filters;
 using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
 using Jared.Domain.Models;
 using Jared.Shared.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 using Task = Jared.Domain.Models.Task;
 
 namespace Jared.Application;
