@@ -10,7 +10,7 @@ public class EpicRootDtoValidatorTest
     private readonly EpicRootDtoValidator validator = new();
 
     [Fact]
-    public void Validation_WhenDtoIsValid_ShouldNotReturnValidationError()
+    public void Validation_WhenDtoIsValid_ShouldNotHaveAnyValidationErrors()
     {
         // Arrange
         var dto = validDto();

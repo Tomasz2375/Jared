@@ -29,5 +29,5 @@ public class WorkLogAddDtoValidator : AbstractValidator<WorkLogAddDto>
         date <= DateTime.Now;
 
     private static bool notOlderThanMonth(DateTime? date) =>
-        date >= DateTime.Now.AddMonths(-1);
+        date > DateTime.Now.AddMonths(-1);
 }

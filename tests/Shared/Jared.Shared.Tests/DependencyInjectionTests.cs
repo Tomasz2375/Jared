@@ -2,9 +2,11 @@
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Dtos.UserDtos;
+using Jared.Shared.Dtos.WorkLogDtos;
 using Jared.Shared.Validators.Epic;
 using Jared.Shared.Validators.Task;
 using Jared.Shared.Validators.User;
+using Jared.Shared.Validators.WorkLog;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Jared.Shared.Tests;
@@ -21,7 +23,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddShared(services);
 
         // Assert
-        Assert.Equal(5, services.Count);
+        Assert.Equal(6, services.Count);
     }
 
     [Fact]
@@ -57,6 +59,11 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IValidator<UserPasswordDto>) &&
             x.ImplementationType == typeof(UserPasswordDtoValidator) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IValidator<WorkLogAddDto>) &&
+            x.ImplementationType == typeof(WorkLogAddDtoValidator) &&
             x.Lifetime == ServiceLifetime.Scoped));
     }
 }

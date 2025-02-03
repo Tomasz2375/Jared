@@ -94,7 +94,9 @@ public partial class TaskDetailsDetails
         WorkLogListDto workLog = new()
         {
             Time = new(dto.Hours, dto.Minutes, 0),
-            WorkDate = dto.WorkDate,
+            WorkDate = dto.WorkDate is null
+                ? DateTime.Now.Date
+                : (DateTime)dto.WorkDate,
             TaskId = Dto.Id,
             UserId = UserService.GetUserId(),
         };
