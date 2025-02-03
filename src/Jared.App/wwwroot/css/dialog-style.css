@@ -66,7 +66,17 @@
     margin-top: 4.8rem;
     background-color: var(--background-1);
     width: 98%;
-    max-width: 700px;
+    max-width: 800px;
+    border-radius: 10px;
+    border: 1px solid var(--main-color);
+}
+
+.form-modal-small {
+    margin: auto;
+    margin-top: 20%;
+    background-color: var(--background-1);
+    width: 96%;
+    max-width: 500px;
     border-radius: 10px;
     border: 1px solid var(--main-color);
 }
@@ -84,8 +94,18 @@
     overflow-y: auto;
 }
 
+.form-modal-content-small {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
 .form-modal-tabs {
     display: flex;
+    flex-direction: revert-layer;
+    align-items: center;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .form-modal-details {
@@ -144,6 +164,21 @@
 
 .btn-primary-dialog:hover {
     color: #fff;
+    border-color: var(--main-color);
+}
+
+.btn-simple-dialog {
+    font-weight: 900;
+    font-size: 16px;
+    color: var(--font-color);
+    background-color: var(--background-2);
+    border-color: var(--font-color);
+    float: right;
+    margin-right: 10px;
+}
+
+.btn-simple-dialog:hover {
+    color: var(--main-color);
     border-color: var(--main-color);
 }
 
