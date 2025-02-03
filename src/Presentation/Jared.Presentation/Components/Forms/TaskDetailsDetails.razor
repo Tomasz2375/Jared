@@ -1,4 +1,11 @@
-﻿@inject IMediator Mediator
+﻿@using Jared.Presentation.Components.Dialog
+@inject IMediator Mediator
+@inject IUserService UserService
+
+@if(showWorkLogDialog)
+{
+    <WorkLogDialog CloseDialog="(worklog => addWorkLog(worklog))"/>
+}
 
 <InputTextField
     @bind-Value="@Dto.Title"
@@ -84,14 +91,21 @@
         ValidationFor="@(() => Dto.AssignedToId)" />
 </div>
 <div class="form-modal-tabs">
+    <div style="width:50%">
+
     <InputTimeSpanField
         @bind-Value="@(Dto.EstimatedTime)"
         Label="Estimated time"
         Id="estimated-time"
         ValidationFor="(() => Dto.EstimatedTime)" />
+    </div>
     <InputTimeSpanField
         @bind-Value="@(Dto.TotalWorkTime)"
         Label="Total work time"
         Id="total-work-time"
+        Disabled="true"
         ValidationFor="(() => Dto.TotalWorkTime)" />
+    <div style="position:relative; bottom: -12px;">
+            <button type="button" class="btn btn-simple-dialog" @onclick="@(() => showWorkLogDialog = !showWorkLogDialog)">+</button>
+    </div>
 </div>
