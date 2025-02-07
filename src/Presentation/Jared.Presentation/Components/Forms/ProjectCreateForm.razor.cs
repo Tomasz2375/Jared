@@ -24,7 +24,7 @@ public partial class ProjectCreateForm
         var result = await Mediator.Send(new ProjectCreateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Create task failed");
+            Console.WriteLine("Create project failed");
         }
 
         await CloseDialog.InvokeAsync();

@@ -14,6 +14,7 @@ public partial class ProjectDetailsForm
     public int Id { get; set; }
 
     public ProjectDetailsDto Dto { get; set; } = default!;
+    private bool closeDialog;
 
     protected override async Task OnInitializedAsync()
     {
@@ -33,7 +34,10 @@ public partial class ProjectDetailsForm
             Console.WriteLine("Save project failed");
         }
 
-        await CloseDialog.InvokeAsync();
+        if (closeDialog)
+        {
+            await CloseDialog.InvokeAsync();
+        }
     }
 
     private async Task getDetails(int id)
