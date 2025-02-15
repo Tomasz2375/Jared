@@ -29,6 +29,6 @@ public class WorkLogStatisticsQueryHandler(HttpClient httpClient)
 
     private static string createQueryUrl(WorkLogStatisticsQuery query)
     {
-        return $"?userId={query.userId}&mounth={query.month}&year={query.year}";
+        return $"?userId={query.userId}&month={query.month}&year={query.year}";
     }
 }
