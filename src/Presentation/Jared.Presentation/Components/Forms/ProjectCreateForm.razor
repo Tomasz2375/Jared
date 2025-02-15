@@ -22,11 +22,18 @@
                         Id="title"
                         Label="Title"
                         ValidationFor="(() => Dto.Title)" />
-                    <InputTextField 
-                        @bind-Value="@Dto.Code"
-                        Id="code"
-                        Label="Code"
-                        ValidationFor="(() => Dto.Code)" />
+                    <div class="form-modal-tabs">
+                        <InputTextField 
+                            @bind-Value="@Dto.Code"
+                            Id="code"
+                            Label="Code"
+                            ValidationFor="(() => Dto.Code)" />
+                        <InputTextField 
+                            @bind-Value="@Dto.Color"
+                            Id="color"
+                            Label="Color"
+                            ValidationFor="(() => Dto.Color)" />
+                    </div>
                     <InputTextAreaField
                         @bind-Value="@Dto.Description"
                         Id="description"
