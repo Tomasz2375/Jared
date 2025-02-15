@@ -1,0 +1,52 @@
+﻿@page "/statistics"
+@inject ILocalStorageService LocalStorage
+@inject IUserService UserService
+@inject IMediator Mediator
+
+<h4>Statistics</h4>
+    <EditForm Model="@month" OnValidSubmit="@(() => getWorkLogs(user, (int)month, year))">
+    <div class="form-modal-tabs">
+            <InputSelectList
+                @bind-Value="@user"
+                Items="@getUsersDictionary()"
+                ValidationFor="(() => user)"
+                ShowDefault="false"
+                Disabled="@(userRole == "User")"
+                Id="user"
+                Label="User" />
+            <InputSelectList
+                @bind-Value="@year"
+                Items="@getYearDictionary()"
+                ValidationFor="(() => year)"
+                ShowDefault="false"
+                Id="year"
+                Label="Year" />
+            <InputSelectEnum
+                @bind-Value="@(month)"
+                ValidationFor="(() => month)"
+                Id="month"
+                Label="Month" />
+            <div style="position:relative; bottom: -12px;">
+                <button type="submit" class="btn btn-primary-dialog">Show</button>
+            </div>
+        </div>
+    </EditForm>
+<RadzenStack class="rz-p-0 rz-p-md-6 rz-p-lg-12">
+    <RadzenRow>
+        <RadzenColumn Size="12">
+            <RadzenChart >
+                @foreach(var project in statistics)
+                {
+                    <RadzenStackedColumnSeries Data="@project.WorkPerDay" Fill="@project.Color" CategoryProperty="Day" Title="@project.ProjectTitle" LineType="LineType.Solid" ValueProperty="Time">
+                    </RadzenStackedColumnSeries>
+                }
+                <RadzenColumnOptions Radius="1" Width="15" />
+                <RadzenCategoryAxis Padding="10" />
+                <RadzenValueAxis Min="0" Step="1">
+                    <RadzenGridLines Visible="true" />
+                    <RadzenAxisTitle Text="Time" />
+                </RadzenValueAxis>
+            </RadzenChart>
+        </RadzenColumn>
+    </RadzenRow>
+</RadzenStack>
