@@ -21,12 +21,14 @@ using Jared.Presentation.Requests.User.Password;
 using Jared.Presentation.Requests.User.Register;
 using Jared.Presentation.Requests.User.Update;
 using Jared.Presentation.Requests.User.UpdateRole;
+using Jared.Presentation.Requests.WorkLogs.Statistics;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Dtos.Role;
 using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Dtos.UserDtos;
+using Jared.Shared.Dtos.WorkLogDtos;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.JSInterop;
@@ -46,7 +48,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddPresentation(services);
 
         // Assert
-        Assert.Equal(38, services.Count);
+        Assert.Equal(39, services.Count);
     }
 
     [Fact]
@@ -171,6 +173,12 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>) &&
             x.ImplementationType == typeof(RoleListQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        // WorkLog
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<WorkLogStatisticsQuery, Result<List<WorkLogStatisticsDto>>>) &&
+            x.ImplementationType == typeof(WorkLogStatisticsQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
     }
 

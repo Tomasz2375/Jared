@@ -15,6 +15,7 @@
             <Authorized>
                 <span class="dropdown-info">@UserService.GetUserName()</span>
                 <a href="profile" class="dropdown-item">Profile</a>
+                <a href="statistics" class="dropdown-item">Statistics</a>
                 @if(UserService.GetUserRole() == "Admin")
                 {
                     <a href="users" class="dropdown-item">Users</a>

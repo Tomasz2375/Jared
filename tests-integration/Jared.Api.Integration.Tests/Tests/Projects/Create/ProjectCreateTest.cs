@@ -17,6 +17,7 @@ public class ProjectCreateTest(JaredWebApplicationFactory factory) : BaseIntegra
         {
             Title = "Test project",
             Code = "TP",
+            Color = "#FFBB99",
             Description = "Project description",
         };
 

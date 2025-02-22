@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
+using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Basic;
 
@@ -13,6 +13,8 @@ public partial class InputSelectList<TKey>
     public string? Label { get; set; }
     [Parameter]
     public bool Disabled { get; set; }
+    [Parameter]
+    public bool ShowDefault { get; set; }
     [Parameter]
     public Expression<Func<TKey>> ValidationFor { get; set; } = default!;
     [Parameter]

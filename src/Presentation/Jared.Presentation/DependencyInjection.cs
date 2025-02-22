@@ -1,8 +1,9 @@
-﻿using Blazored.LocalStorage;
+﻿using System.Reflection;
+using Blazored.LocalStorage;
 using Jared.Presentation.Services;
 using Jared.Shared.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+using Radzen;
 
 namespace Jared.Presentation;
 

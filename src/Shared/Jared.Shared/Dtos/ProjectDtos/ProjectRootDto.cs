@@ -6,4 +6,5 @@ public class ProjectRootDto : EntityDto<int>
 {
     public string Title { get; set; } = default!;
     public string Code { get; set; } = default!;
+    public string Color { get; set; } = default!;
 }

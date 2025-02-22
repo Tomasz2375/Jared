@@ -38,4 +38,8 @@ public static class BaseAdresses
     #region Roles
     public const string ROLE_LIST = "role/list";
     #endregion
+
+    #region WorkLogs
+    public const string WORK_LOG_STATISTICS = "worklog/statistics";
+    #endregion
 }

@@ -20,6 +20,7 @@ using Jared.Application.Requests.Users.Password;
 using Jared.Application.Requests.Users.Register;
 using Jared.Application.Requests.Users.Update;
 using Jared.Application.Requests.Users.UpdateRole;
+using Jared.Application.Requests.WorkLogs.Statistics;
 using Jared.Application.Services.Filters;
 using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
@@ -30,6 +31,7 @@ using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Dtos.Role;
 using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Dtos.UserDtos;
+using Jared.Shared.Dtos.WorkLogDtos;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Task = Jared.Domain.Models.Task;
@@ -48,7 +50,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddApplication(services);
 
         // Assert
-        Assert.Equal(35, services.Count);
+        Assert.Equal(36, services.Count);
     }
 
     [Fact]
@@ -174,6 +176,12 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>) &&
             x.ImplementationType == typeof(RoleListQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        // WorkLog
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<WorkLogStatisticsQuery, Result<List<WorkLogStatisticsDto>>>) &&
+            x.ImplementationType == typeof(WorkLogStatisticsQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
     }
 

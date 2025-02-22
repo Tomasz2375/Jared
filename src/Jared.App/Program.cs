@@ -4,6 +4,7 @@ using Jared.Shared;
 using Jared.Shared.Middleware;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
+using Radzen;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
 builder.Services.AddShared();
 builder.Services.AddPresentation();
 builder.Services.AddRazorPages();
+builder.Services.AddRazorComponents();
+builder.Services.AddRadzenComponents();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(x =>
