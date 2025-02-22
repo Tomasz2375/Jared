@@ -11,6 +11,7 @@ public partial class Statistics
     private List<WorkLogStatisticsDto> workLogsStatistics = new();
     private List<MonthWork> monthWorks = new();
     private List<ProjectWork> projectWorks = new();
+    private List<TaskWork> taskWorks = new();
     private List<UserListDto> users = new();
 
     private Month month { get; set; } = (Month)DateTime.Now.Month;
@@ -91,6 +92,7 @@ public partial class Statistics
     {
         monthWorks.Clear();
         projectWorks.Clear();
+        taskWorks.Clear();
         var daysInMonth = DateTime.DaysInMonth(year, (int)month);
 
         foreach (var workLog in workLogsStatistics.GroupBy(x => new { x.ProjectId, x.ProjectTitle, x.Color }))
@@ -128,8 +130,21 @@ public partial class Statistics
             projectWorks.Add(workPerProject);
         }
 
+        foreach (var workLog in workLogsStatistics.GroupBy(x => new { x.TaskId, x.TaskCode, x.TaskTitle, x.ProjectTitle }))
+        {
+            taskWorks.Add(new()
+            {
+                TaskId = workLog.Key.TaskId,
+                TaskCode = workLog.Key.TaskCode,
+                TaskTitle = workLog.Key.TaskTitle,
+                ProjectTitle = workLog.Key.ProjectTitle,
+                Time = new TimeSpan(workLog.Sum(x => x.Time.Ticks)),
+            });
+        }
+
         projectWorks = projectWorks.OrderBy(x => x.ProjectTitle).ToList();
         monthWorks = monthWorks.OrderBy(x => x.ProjectId).ToList();
+        taskWorks = taskWorks.OrderByDescending(x => x.Time).ToList();
     }
 
     private sealed class MonthWork
@@ -151,5 +166,14 @@ public partial class Statistics
         public string ProjectTitle { get; set; } = default!;
         public double Time { get; set; }
         public string Color { get; set; } = default!;
+    }
+
+    private sealed class TaskWork
+    {
+        public int TaskId { get; set; }
+        public string TaskCode { get; set; } = default!;
+        public string TaskTitle { get; set; } = default!;
+        public string ProjectTitle { get; set; } = default!;
+        public TimeSpan Time { get; set; } = default!;
     }
 }
