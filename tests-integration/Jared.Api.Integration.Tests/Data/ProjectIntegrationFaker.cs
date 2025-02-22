@@ -12,6 +12,7 @@ public class ProjectIntegrationFaker : BaseIntegrationFaker<Project>
         Title = "FIRST_PROJECT_TITLE",
         Description = "FIRST_PROJECT_DESCRIPTION",
         Code = "FP",
+        Color = "#AA2244",
         LastTaskNumber = 1,
     };
 
@@ -21,6 +22,7 @@ public class ProjectIntegrationFaker : BaseIntegrationFaker<Project>
         Title = "SECOND_PROJECT_TITLE",
         Description = "SECOND_PROJECT_DESCRIPTION",
         Code = "SP",
+        Color = "#44AA22",
         LastTaskNumber = 5,
     };
 
@@ -30,6 +32,7 @@ public class ProjectIntegrationFaker : BaseIntegrationFaker<Project>
         Title = "THIRD_PROJECT_TITLE",
         Description = "THIRD_PROJECT_DESCRIPTION",
         Code = "TP",
+        Color = "#44AA22",
         LastTaskNumber = 10,
     };
 }
