@@ -4,11 +4,6 @@
 @inject IMediator Mediator
 
 <h4>Statistics</h4>
-@if (!monthWorks.Any() || !projectWorks.Any())
-{
-    return;
-}
-
 <EditForm Model="@month" OnValidSubmit="@(() => getWorkLogs(user, (int)month, year))">
 <div class="form-modal-tabs">
         <InputSelectList
@@ -36,6 +31,12 @@
         </div>
     </div>
 </EditForm>
+
+@if (!monthWorks.Any() || !projectWorks.Any())
+{
+    return;
+}
+
 <RadzenStack class="rz-p-0 rz-p-md-6 rz-p-lg-12" AlignItems="AlignItems.Center">
     <RadzenStack Style="width: 100%; max-width: 600px; height: 200px">
         <RadzenChart Style="--rz-text-title-color: var(--font-color)">
