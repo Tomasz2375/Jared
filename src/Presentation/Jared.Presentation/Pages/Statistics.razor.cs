@@ -9,7 +9,8 @@ namespace Jared.Presentation.Pages;
 public partial class Statistics
 {
     private List<WorkLogStatisticsDto> workLogsStatistics = new();
-    private List<ProjectWorkLog> statistics = new();
+    private List<MonthWork> monthWorks = new();
+    private List<ProjectWork> projectWorks = new();
     private List<UserListDto> users = new();
 
     private Month month { get; set; } = (Month)DateTime.Now.Month;
@@ -88,15 +89,16 @@ public partial class Statistics
 
     private void prepareWorkTimeStatistics()
     {
-        statistics.Clear();
+        monthWorks.Clear();
+        projectWorks.Clear();
         var daysInMonth = DateTime.DaysInMonth(year, (int)month);
 
-        foreach (var wl in workLogsStatistics.GroupBy(x => x.ProjectId))
+        foreach (var workLog in workLogsStatistics.GroupBy(x => new { x.ProjectId, x.ProjectTitle, x.Color }))
         {
-            List<WorkPerDay> workPerDays = new();
+            List<DayWork> workPerDays = new();
             for (int i = 1; i <= daysInMonth; i++)
             {
-                var ticks = wl.Where(x => x.WorkDate.Day == i).Sum(x => x.Time.Ticks);
+                var ticks = workLog.Where(x => x.WorkDate.Day == i).Sum(x => x.Time.Ticks);
 
                 workPerDays.Add(new()
                 {
@@ -105,31 +107,49 @@ public partial class Statistics
                 });
             }
 
-            ProjectWorkLog stat = new()
+            MonthWork monthWork = new()
             {
-                ProjectId = wl.First().ProjectId,
-                Color = wl.First().Color,
-                ProjectTitle = wl.First().ProjectTitle,
+                ProjectId = workLog.First().ProjectId,
+                Color = workLog.First().Color,
+                ProjectTitle = workLog.First().ProjectTitle,
                 WorkPerDay = workPerDays,
             };
 
-            statistics.Add(stat);
+            monthWorks.Add(monthWork);
+
+            TimeSpan totalProjectTime = new TimeSpan(workLog.Sum(x => x.Time.Ticks));
+            ProjectWork workPerProject = new()
+            {
+                ProjectTitle = $"{workLog.Key.ProjectTitle} [{totalProjectTime.Hours}h {totalProjectTime.Minutes}min]",
+                Color = workLog.Key.Color,
+                Time = totalProjectTime.TotalHours,
+            };
+
+            projectWorks.Add(workPerProject);
         }
 
-        statistics = statistics.OrderBy(x => x.ProjectId).ToList();
+        projectWorks = projectWorks.OrderBy(x => x.ProjectTitle).ToList();
+        monthWorks = monthWorks.OrderBy(x => x.ProjectId).ToList();
     }
 
-    private sealed class ProjectWorkLog
+    private sealed class MonthWork
     {
         public int ProjectId { get; set; }
         public string ProjectTitle { get; set; } = default!;
         public string Color { get; set; } = default!;
-        public List<WorkPerDay> WorkPerDay { get; set; } = new();
+        public List<DayWork> WorkPerDay { get; set; } = new();
     }
 
-    private sealed class WorkPerDay
+    private sealed class DayWork
     {
         public string Day { get; set; } = default!;
         public double Time { get; set; }
+    }
+
+    private sealed class ProjectWork
+    {
+        public string ProjectTitle { get; set; } = default!;
+        public double Time { get; set; }
+        public string Color { get; set; } = default!;
     }
 }
