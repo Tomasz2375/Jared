@@ -1,5 +1,5 @@
 ﻿@using Blazored.LocalStorage
-@using Jared.Presentation.Components.Advanced
+@using Jared.Presentation.Components.Menu
 @using Jared.Presentation.Components.Basic
 @using Jared.Presentation.Components.Forms
 @inherits LayoutComponentBase
@@ -9,46 +9,30 @@
 <PageTitle>Jared.Presentation</PageTitle>
 
 <div class="page @selectedTheme">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
-        <div class="top-row px-4">
-            <CreateButton
-                OpenTaskDialog="@showCreateTaskDialog"
-                OpenEpicDialog="@showCreateEpicDialog"
-                OpenProjectDialog="@showCreateProjectDialog"/>
-            <UserButton />
-            <ToggleButton
-                IsToggled="@(selectedTheme == "dark-mode")"
-                Color="@selectedColor"
-                IsToggledChanged="(x => setTheme(x))"
-                OnColorChange="setColor"/>
+        <div class="top-row px-4" style="">
+                <MyBoard />
+                <Tasks />
+                <Epics />
+                <Projects />
+                <UserButton />
+            <div class="top-row-right">
+                <ToggleButton
+                    IsToggled="@(selectedTheme == "dark-mode")"
+                    Color="@selectedColor"
+                    IsToggledChanged="(x => setTheme(x))"
+                    OnColorChange="setColor"/>
+            </div>
         </div>
+        
 
-        <article class="content px-4">
-            @if (isActiveTaskCreateDialog)
-            {
-                <TaskCreateForm Title="Create new task" CloseDialog="showCreateTaskDialog"/>
-            }
-            else if (isActiveEpicCreateDialog)
-            {
-                <EpicCreateForm title="Create new epic" CloseDialog="showCreateEpicDialog" />
-            }
-            else if (isActiveProjectCreateDialog)
-            {
-                <ProjectCreateForm title="Create new project" CloseDialog="showCreateProjectDialog" />
-            }
+        <article class="content px-4" style="height:calc(100vh - 40px);">
             @Body
         </article>
     </main>
 </div>
 
 @code {
-    private bool isActiveTaskCreateDialog;
-    private bool isActiveEpicCreateDialog;
-    private bool isActiveProjectCreateDialog;
     private string selectedTheme = string.Empty;
     private string selectedColor = string.Empty;
 
@@ -77,38 +61,5 @@
     {
         await LocalStorage.SetItemAsync("color", color);
         await JSRuntime.InvokeVoidAsync("setMainColor", color);
-    }
-
-    private void showCreateTaskDialog()
-    {
-        isActiveTaskCreateDialog = !isActiveTaskCreateDialog;
-
-        if (isActiveTaskCreateDialog)
-        {
-            isActiveEpicCreateDialog = false;
-            isActiveProjectCreateDialog = false;
-        }
-    }
-
-    private void showCreateEpicDialog()
-    {
-        isActiveEpicCreateDialog = !isActiveEpicCreateDialog;
-
-        if (isActiveEpicCreateDialog)
-        {
-            isActiveTaskCreateDialog = false;
-            isActiveProjectCreateDialog = false;
-        }
-    }
-
-    private void showCreateProjectDialog()
-    {
-        isActiveProjectCreateDialog = !isActiveProjectCreateDialog;
-
-        if (isActiveProjectCreateDialog)
-        {
-            isActiveTaskCreateDialog = false;
-            isActiveEpicCreateDialog = false;
-        }
     }
 }
