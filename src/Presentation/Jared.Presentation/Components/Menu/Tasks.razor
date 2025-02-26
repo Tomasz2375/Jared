@@ -1,0 +1,19 @@
+﻿<div class="dropdown">
+    <button @onclick="toggleUserMenu"
+            @onfocusout="hideUserMemu"
+            class="btn dropdown-btn dropdown-toggle">
+        Tasks
+    </button>
+    <div class="dropdown-menu @userMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <button class="dropdown-item" @onclick="(() => showCreateDialog = true)">Create task</button>
+                <a href="tasks" class="dropdown-item">All task</a>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</div>
+@if (showCreateDialog)
+{
+    <TaskCreateForm Title="Create task" CloseDialog="(() => showCreateDialog = false)" />
+}

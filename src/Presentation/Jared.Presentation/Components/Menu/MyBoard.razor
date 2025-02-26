@@ -1,0 +1,14 @@
+﻿<div class="dropdown">
+    <button @onclick="toggleUserMenu"
+            @onfocusout="hideUserMemu"
+            class="btn dropdown-btn dropdown-toggle">
+        My board
+    </button>
+    <div class="dropdown-menu @userMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <a href="" class="dropdown-item">Dashboard</a>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</div>
