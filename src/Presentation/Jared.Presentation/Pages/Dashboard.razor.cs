@@ -17,7 +17,7 @@ public partial class Dashboard
 
     private async Task sendPageQuery(Query query)
     {
-        if (!query.Filter!.ContainsKey("Status"))
+        if (!query.Filter.ContainsKey("Status"))
         {
             query.Filter!.Add("Status", "6");
         }

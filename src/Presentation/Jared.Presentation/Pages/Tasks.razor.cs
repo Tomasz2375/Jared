@@ -17,7 +17,7 @@ public partial class Tasks
 
     private async Task sendPageQuery(Query query)
     {
-        if (!query.Filter!.ContainsKey("Status"))
+        if (!query.Filter.ContainsKey("Status"))
         {
             query.Filter!.Add("Status", "7");
         }

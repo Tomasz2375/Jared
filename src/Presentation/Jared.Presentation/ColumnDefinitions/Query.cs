@@ -9,5 +9,5 @@ public class Query : IQuery
     public int PageSize { get; set; } = 20;
     public string? SortingProperty { get; set; }
     public SortingDirection? SortingDirection { get; set; }
-    public Dictionary<string, string?>? Filter { get; set; } = new();
+    public Dictionary<string, string?> Filter { get; set; } = new();
 }
