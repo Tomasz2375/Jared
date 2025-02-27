@@ -28,7 +28,8 @@
 .dropdown-menu {
     background-color: var(--background-1);
     margin-top: 0.0rem;
-    border: 1px solid var(--main-color)
+    border: 1px solid var(--main-color);
+    border-radius: 0;
 }
 
 .dropdown-btn {
