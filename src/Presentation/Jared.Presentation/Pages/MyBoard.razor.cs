@@ -10,8 +10,6 @@ public partial class MyBoard
 {
     [Parameter]
     public string Page { get; set; } = default!;
-    [Parameter]
-    public Dictionary<string, string?> Filter { get; set; } = new();
 
     public TaskPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
