@@ -7,10 +7,10 @@
     <button
         @onclick="toggleUserMenu"
         @onfocusout="hideUserMemu"
-        class="btn btn-secondary dropdown-toggle user-button">
+        class="btn dropdown-btn-2 dropdown-toggle">
         <i class="oi oi-person" />
     </button>
-    <div class="dropdown-menu @userMenuCssClass">
+    <div class="dropdown-menu dropdown-menu-2 @userMenuCssClass">
         <AuthorizeView>
             <Authorized>
                 <span class="dropdown-info">@UserService.GetUserName()</span>

@@ -1,6 +1,6 @@
-﻿namespace Jared.Presentation.Components.Advanced;
+﻿namespace Jared.Presentation.Components.Menu;
 
-public partial class UserButton
+public partial class MyBoard
 {
     private bool showUserMenu = false;
 
@@ -15,13 +15,5 @@ public partial class UserButton
     {
         await Task.Delay(100);
         showUserMenu = false;
-    }
-
-    private async Task logout()
-    {
-        await LocalStorage.RemoveItemAsync("authToken");
-        await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
-        NavigationManager.NavigateTo(string.Empty);
     }
 }

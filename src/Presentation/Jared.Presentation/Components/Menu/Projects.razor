@@ -1,0 +1,19 @@
+﻿<div class="dropdown">
+    <button @onclick="toggleUserMenu"
+            @onfocusout="hideUserMemu"
+            class="btn dropdown-btn dropdown-toggle">
+        Projects
+    </button>
+    <div class="dropdown-menu @userMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <button class="dropdown-item" @onclick="(() => showCreateDialog = true)">Create project</button>
+                <a href="projects" class="dropdown-item">All projects</a>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</div>
+@if (showCreateDialog)
+{
+    <ProjectCreateForm Title="Create project" CloseDialog="(() => showCreateDialog = false)" />
+}

@@ -21,7 +21,7 @@
                     <div>
                         <DataGridFilter
                             Id="@createDictionary(column)"
-                            Filter="@Query.Filter![column.ColumnName]"
+                            Filter="@Query.Filter[column.ColumnName]"
                             Type="@column.Type"
                             Size="@column.Width"
                             OnFilterChange="(value => updateFilters(column.ColumnName, value))"/>

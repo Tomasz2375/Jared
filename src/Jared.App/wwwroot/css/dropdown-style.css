@@ -17,18 +17,70 @@
 .dropdown-item:hover {
     background-color: var(--background-2);
     color: var(--font-color);
+    cursor: pointer;
 }
 .dropdown-info {
     color: var(--main-color);
     margin-left: 1rem;
     margin-right: 1rem;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .dropdown-menu {
     background-color: var(--background-1);
-    left: auto;
-    right: -0.2rem;
-    margin-top: 0.1rem;
-    border: 1px solid var(--main-color)
+    margin-top: 0.0rem;
+    border: 1px solid var(--main-color);
+    border-radius: 0;
 }
+.dropdown-menu-2 {
+    background-color: var(--background-1);
+    margin-top: 0.0rem;
+    border: 1px solid var(--main-color);
+    border-radius: 0;
+    position: absolute;
+    right: 0;
+}
+
+.dropdown-btn {
+    width: 120px;
+    border-radius: 0;
+    height: 49px;
+    color: var(--font-color);
+    background-color: var(--background-2);
+}
+
+    .dropdown-btn:hover {
+        color: var(--font-color);
+        background-color: var(--background-1);
+    }
+
+    .dropdown-btn:focus {
+        color: var(--font-color);
+        background-color: var(--background-1);
+        box-shadow: initial;
+        border-left: 1px solid var(--main-color);
+        border-right: 1px solid var(--main-color);
+        border-top: 1px solid var(--main-color);
+    }
+
+.dropdown-btn-2 {
+    width: 60px;
+    border-radius: 0;
+    height: 49px;
+    color: var(--font-color);
+    background-color: var(--background-2);
+}
+
+    .dropdown-btn-2:hover {
+        color: var(--font-color);
+        background-color: var(--background-1);
+    }
+
+    .dropdown-btn-2:focus {
+        color: var(--font-color);
+        background-color: var(--background-1);
+        box-shadow: initial;
+        border-left: 1px solid var(--main-color);
+        border-right: 1px solid var(--main-color);
+        border-top: 1px solid var(--main-color);
+    }

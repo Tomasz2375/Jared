@@ -1,0 +1,17 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="dropdown">
+    <button @onclick="toggleUserMenu"
+            @onfocusout="hideUserMemu"
+            class="btn dropdown-btn dropdown-toggle">
+        My board
+    </button>
+    <div class="dropdown-menu @userMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <a @onclick="@(() => NavigationManager.NavigateTo($"MyBoards/{Dashboard.Created}", true))" class="dropdown-item">Created</a>
+                <a @onclick="@(() => NavigationManager.NavigateTo($"MyBoards/{Dashboard.Assigned}", true))" class="dropdown-item">Assigned</a>
+            </Authorized>
+        </AuthorizeView>
+    </div>
+</div>

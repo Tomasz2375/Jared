@@ -1,6 +1,7 @@
-﻿@page "/"
+﻿@page "/MyBoards/{Page}"
 @inject IMediator Mediator
 @inject IUserService UserService
+@inject NavigationManager Navigation
 
 @if (Model is null)
 {
@@ -8,7 +9,7 @@
 }
 
 <DataGrid
-    Title="Dashboard"
+    Title="My board"
     TItem="TaskListDto"
     Items="Model.Tasks"
     ItemsDefinition="new TaskListDefinition().GetColumns()"
