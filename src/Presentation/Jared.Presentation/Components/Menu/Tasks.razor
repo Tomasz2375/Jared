@@ -1,14 +1,21 @@
-﻿<div class="dropdown">
+﻿@inject IMediator Mediator
+@inject NavigationManager NavigationManager
+
+<div class="dropdown">
     <button @onclick="toggleUserMenu"
-            @onfocusout="hideUserMemu"
-            class="btn dropdown-btn dropdown-toggle">
+    @onfocusout="hideUserMemu"
+    class="btn dropdown-btn dropdown-toggle">
         Tasks
     </button>
     <div class="dropdown-menu @userMenuCssClass">
         <AuthorizeView>
             <Authorized>
                 <button class="dropdown-item" @onclick="(() => showCreateDialog = true)">Create task</button>
-                <a href="tasks" class="dropdown-item">All task</a>
+                <a @onclick="@(() => NavigationManager.NavigateTo($"Tasks", true))" class="dropdown-item">All tasks</a>
+                @foreach (var project in projects)
+                {
+                    <a @onclick="@(() => NavigationManager.NavigateTo($"Tasks/{project.Key}", true))" class="dropdown-item">@project.Value</a>
+                }
             </Authorized>
         </AuthorizeView>
     </div>

@@ -1,7 +1,19 @@
-﻿namespace Jared.Presentation.Components.Menu;
+﻿using Jared.Presentation.Pages;
+using Jared.Presentation.Requests.Projects.List;
+using Jared.Shared.Dtos.ProjectDtos;
+using MediatR;
+
+namespace Jared.Presentation.Components.Menu;
 
 public partial class Tasks
 {
+    private Dictionary<string, string> projects = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await getProjectsAsync();
+    }
+
     private bool showUserMenu;
     private bool showCreateDialog;
 
@@ -16,5 +28,18 @@ public partial class Tasks
     {
         await Task.Delay(100);
         showUserMenu = false;
+    }
+
+    private async Task getProjectsAsync()
+    {
+        var result = await Mediator.Send(new ProjectListQuery());
+
+        if (!result.Success)
+        {
+            Console.WriteLine("Error when get project list");
+            return;
+        }
+
+        projects = result.Data.ToDictionary(x => x.Id.ToString(), x => x.Title);
     }
 }
