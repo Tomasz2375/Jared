@@ -11,12 +11,12 @@
 <div class="page @selectedTheme">
     <main>
         <div class="top-row px-4" style="">
-                <MyBoard />
-                <Tasks />
-                <Epics />
-                <Projects />
+            <MyBoard />
+            <Tasks />
+            <Epics />
+            <Projects />
+            <div style="margin-left: auto; display:flex; align-items:center">
                 <UserButton />
-            <div class="top-row-right">
                 <ToggleButton
                     IsToggled="@(selectedTheme == "dark-mode")"
                     Color="@selectedColor"
@@ -24,7 +24,6 @@
                     OnColorChange="setColor"/>
             </div>
         </div>
-        
 
         <article class="content px-4" style="height:calc(100vh - 40px);">
             @Body
