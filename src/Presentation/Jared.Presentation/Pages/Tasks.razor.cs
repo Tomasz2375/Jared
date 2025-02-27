@@ -1,27 +1,28 @@
 ﻿using Jared.Presentation.ColumnDefinitions;
 using Jared.Presentation.Requests.Tasks.Page;
 using Jared.Shared.Dtos.TaskDtos;
+using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Pages;
 
 public partial class Tasks
 {
+    [Parameter]
+    public string ProjectId { get; set; } = default!;
     public TaskPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
     private int showDialogWithId;
 
     protected override async Task OnInitializedAsync()
     {
+        Query.Filter["Status"] = "7";
+        Query.Filter["ProjectId"] = ProjectId;
+
         await sendPageQuery(Query);
     }
 
     private async Task sendPageQuery(Query query)
     {
-        if (!query.Filter.ContainsKey("Status"))
-        {
-            query.Filter!.Add("Status", "7");
-        }
-
         var result = await Mediator.Send(new TaskPageQuery(query));
 
         if (!result.Success)

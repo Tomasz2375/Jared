@@ -1,7 +1,4 @@
-﻿using Jared.Presentation.Pages;
-using Jared.Presentation.Requests.Projects.List;
-using Jared.Shared.Dtos.ProjectDtos;
-using MediatR;
+﻿using Jared.Presentation.Requests.Projects.List;
 
 namespace Jared.Presentation.Components.Menu;
 
