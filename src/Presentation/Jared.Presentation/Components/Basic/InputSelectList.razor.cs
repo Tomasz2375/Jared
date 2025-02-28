@@ -14,7 +14,7 @@ public partial class InputSelectList<TKey>
     [Parameter]
     public bool Disabled { get; set; }
     [Parameter]
-    public bool ShowDefault { get; set; }
+    public bool ShowDefault { get; set; } = true;
     [Parameter]
     public Expression<Func<TKey>> ValidationFor { get; set; } = default!;
     [Parameter]
