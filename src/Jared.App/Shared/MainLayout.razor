@@ -10,7 +10,7 @@
 
 <div class="page @selectedTheme">
     <main>
-        <div class="top-row px-4" style="">
+        <div class="top-row px-4">
             <MyBoard />
             <Tasks />
             <Epics />
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <article class="content px-4" style="height:calc(100vh - 40px);">
+        <article class="content px-4" style="height:100vh; overflow: auto;">
             @Body
         </article>
     </main>
