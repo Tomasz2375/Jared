@@ -13,5 +13,9 @@ public class WorkLogMapperConfiguration : IRegister
             .Map(d => d.ProjectId, s => s.Task!.ProjectId)
             .Map(d => d.ProjectTitle, s => s.Task!.Project!.Title)
             .Map(d => d.Color, s => s.Task!.Project!.Color);
+
+        config
+            .NewConfig<WorkLog, WorkLogListDto>()
+            .Map(d => d.UserFullName, s => $"{s.User!.FirstName} {s.User.LastName}");
     }
 }
