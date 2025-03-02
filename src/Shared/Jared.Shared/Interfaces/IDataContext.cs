@@ -9,9 +9,9 @@ public interface IDataContext : IDisposable
 {
     EntityEntry Entry(object entity);
     EntityEntry Add(object entities);
-    void AddRange(params object[] entities);
+    void AddRange(IEnumerable<object> entities);
     EntityEntry Remove(object entity);
-    void RemoveRange(params object[] entities);
+    void RemoveRange(IEnumerable<object> entities);
 
     IModel Model { get; }
     DatabaseFacade Database { get; }
