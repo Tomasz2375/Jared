@@ -14,7 +14,7 @@
                 <button class="btn form-close" @onclick="cancel">✖</button>
             </div>
             <div class="form-modal-content">
-                <div class="form-modal-tabs">
+                <div class="form-modal-tabs" style="position:sticky; top:0;">
                     <TabForm
                         Id="0"
                         Label="Details"
@@ -25,12 +25,20 @@
                         Label="History"
                         ActiceTab=@tabNumber
                         OnTabSelected=@((x => tabNumber = x))/>
+                    <TabForm
+                        Id="2"
+                        Label="Worklogs"
+                        ActiceTab=@tabNumber
+                        OnTabSelected=@((x => tabNumber = x))/>
                 </div>
                 <div class="form-modal-details">
                     @switch (tabNumber)
                     {
                         case 1:
                             <TaskDetailsHistory TaskHistoryDtos="@Dto.TaskHistories" />
+                            break;
+                        case 2:
+                            <TaskDetailsWorkLog Dto="@Dto" />
                             break;
                         default:
                             <TaskDetailsDetails Dto="@Dto" />

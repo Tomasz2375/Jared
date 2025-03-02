@@ -38,7 +38,10 @@ public partial class TaskDetailsForm
         if (closeDialog)
         {
             await CloseDialog.InvokeAsync();
+            return;
         }
+
+        await getDetails(Id);
     }
 
     private async Task getDetails(int id)

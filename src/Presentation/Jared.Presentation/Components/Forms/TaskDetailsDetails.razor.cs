@@ -99,6 +99,7 @@ public partial class TaskDetailsDetails
                 : (DateTime)dto.WorkDate,
             TaskId = Dto.Id,
             UserId = UserService.GetUserId(),
+            UserFullName = UserService.GetUserName(),
         };
 
         Dto.TotalWorkTime += workLog.Time;
