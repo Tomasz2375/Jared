@@ -1,16 +1,19 @@
-﻿@if (Dto.WorkLogs is null)
+﻿@inject IUserService UserService
+
+@if (Dto.WorkLogs is null)
 {
     return;
 }
 
 <div style="overflow-y: scroll; max-height: 500px">
-<table class="table">
+    <table class="table">
         <thead style="position: sticky; top:0; background-color:var(--background-1)">
             <tr>
                 <th>Logged</th>
                 <th>Work date</th>
                 <th>User</th>
                 <th>Time</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -21,6 +24,21 @@
                     <td>@worklog.WorkDate.ToString("dd.MM.yyyy")</td>
                     <td>@worklog.UserFullName</td>
                     <td>@($"{worklog.Time.Hours}h {worklog.Time.Minutes}m")</td>
+                    @if (worklog.UserId == userId)
+                    {
+                        @if (worklog.Delete)
+                        {
+                            <td><button type="button" class="btn btn-undo" @onclick="(() => restoreWorkLog(worklog))">Undo</button></td>
+                        }
+                        else
+                        {
+                            <td><button type="button" class="btn btn-delete" @onclick="(() => deleteWorkLog(worklog))">Delete</button></td>
+                        }
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
                 </tr>
             }
         </tbody>
