@@ -92,7 +92,14 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
             Status = 400,
             Errors = new Dictionary<string, string[]>
             {
-                { "ProjectId", new[] { "'Project Id' must not be empty." } },
+                {
+                    "ProjectId",
+                    new[]
+                    {
+                        "'Project Id' must not be empty.",
+                        "'Project Id' must be greater than '0'.",
+                    }
+                },
             },
         };
 
