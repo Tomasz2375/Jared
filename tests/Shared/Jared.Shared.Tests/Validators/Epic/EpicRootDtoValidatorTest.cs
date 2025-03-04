@@ -37,12 +37,13 @@ public class EpicRootDtoValidatorTest
         result.ShouldHaveValidationErrorFor(x => x.Title);
     }
 
-    [Fact]
-    public void Validation_WhenProjectNotSet_ShouldReturnValidationError()
+    [Theory]
+    [MemberData(nameof(ProjectMemberData))]
+    public void Validation_WhenProjectIdIsNotValidEnumValue_ShouldReturnValidationError(int projectId)
     {
         // Arrange
         var dto = validDto();
-        dto.ProjectId = 0;
+        dto.ProjectId = projectId;
 
         // Act
         var result = validator.TestValidate(dto);
@@ -68,7 +69,7 @@ public class EpicRootDtoValidatorTest
 
     [Theory]
     [MemberData(nameof(ParentIdMemberData))]
-    public void Validation_WhenParentIdIsNotValid_ShouldReturnValidationError(int? parentId)
+    public void Validation_WhenParentIdIsNotValid_ShouldReturnValidationError(int parentId)
     {
         // Arrange
         var dto = validDto();
@@ -92,8 +93,16 @@ public class EpicRootDtoValidatorTest
 
     public static IEnumerable<object[]> TitleMemberData()
     {
+        yield return new object[] { null! };
         yield return new object[] { string.Empty };
         yield return new object[] { string.Concat(Enumerable.Repeat(".", 101)) };
+    }
+
+    public static IEnumerable<object[]> ProjectMemberData()
+    {
+        yield return new object[] { null! };
+        yield return new object[] { 0 };
+        yield return new object[] { -1 };
     }
 
     public static IEnumerable<object[]> StatusMemberData()
