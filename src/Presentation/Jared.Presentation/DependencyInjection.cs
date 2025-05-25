@@ -3,7 +3,7 @@ using Blazored.LocalStorage;
 using Jared.Presentation.Services;
 using Jared.Shared.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
-using Radzen;
+using NotificationService = Jared.Presentation.Services.NotificationService;
 
 namespace Jared.Presentation;
 
@@ -20,6 +20,7 @@ public static class DependencyInjection
         });
         services.AddBlazoredLocalStorage();
         services.AddScoped<IUserService, UserService>();
+        services.AddSingleton<INotificationService, NotificationService>();
         services.AddSingleton<CustomDispatcher>();
 
         return services;
