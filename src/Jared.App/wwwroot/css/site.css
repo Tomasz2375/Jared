@@ -9,6 +9,10 @@
     --button-primary: #1b6ec2;
     --button-danger: #dc3545;
     --main-color: #aa6622;
+    --success-color: #28a745;
+    --information-color: #007bff;
+    --warning-color: #ffc107;
+    --error-color: #dc3545;
 }
 
 .dark-mode {
