@@ -23,6 +23,18 @@ public partial class Notification
         }
     }
 
+    private static string getIconClass(string type)
+    {
+        return type switch
+        {
+            "success" => "bi bi-check-circle",
+            "information" => "bi bi-info-circle",
+            "warning" => "bi bi-exclamation-triangle",
+            "error" => "bi bi-exclamation-octagon",
+            _ => "bi bi-question-circle"
+        };
+    }
+
     private async void handleChange()
     {
         await InvokeAsync(StateHasChanged);

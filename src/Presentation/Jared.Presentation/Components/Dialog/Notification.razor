@@ -1,13 +1,12 @@
-﻿@inject Services.INotificationService NotificationService
+﻿@inject INotificationService NotificationService
 @implements IDisposable
 
 <div class="notification-container">
     @foreach (var notification in NotificationService.Messages)
     {
         <div class="notification @notification.CssClass">
-            <span style="width:90%">
-                @notification.Message
-            </span>
+            <i class="@getIconClass(notification.CssClass) notification-icon"></i>
+            <span class="notification-text">@notification.Message</span>
             <button class="btn notification-close" @onclick="() => NotificationService.RemoveNotification(notification)">✖</button>
         </div>
     }
