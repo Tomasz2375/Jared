@@ -1,4 +1,5 @@
-﻿using Jared.Presentation.Requests.Epics.Details;
+﻿using Jared.Presentation.Commons;
+using Jared.Presentation.Requests.Epics.Details;
 using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Epics.Update;
 using Jared.Presentation.Requests.Projects.List;
@@ -68,6 +69,7 @@ public partial class EpicDetailsForm
 
     private void cancel()
     {
+        NotificationService.Information(NotificationHelper.EPIC_UPDATE_CANCELED);
         CloseDialog.InvokeAsync();
     }
 
@@ -76,13 +78,15 @@ public partial class EpicDetailsForm
         var result = await Mediator.Send(new EpicUpdateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Save epic failed");
+            await NotificationService.Error(NotificationHelper.EPIC_UPDATE_FAILED);
         }
 
         if (closeDialog)
         {
             await CloseDialog.InvokeAsync();
         }
+
+        NotificationService.Success(NotificationHelper.EPIC_UPDATE_SUCCESS).GetAwaiter();
     }
 
     private async Task getDetails(int id)

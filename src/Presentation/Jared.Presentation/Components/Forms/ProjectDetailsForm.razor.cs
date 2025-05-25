@@ -1,4 +1,5 @@
-﻿using Jared.Presentation.Requests.Projects.Details;
+﻿using Jared.Presentation.Commons;
+using Jared.Presentation.Requests.Projects.Details;
 using Jared.Presentation.Requests.Projects.Update;
 using Jared.Shared.Dtos.ProjectDtos;
 using Microsoft.AspNetCore.Components;
@@ -23,6 +24,7 @@ public partial class ProjectDetailsForm
 
     private void cancel()
     {
+        NotificationService.Information(NotificationHelper.PROJECT_UPDATE_CANCELED);
         CloseDialog.InvokeAsync();
     }
 
@@ -31,13 +33,15 @@ public partial class ProjectDetailsForm
         var result = await Mediator.Send(new ProjectUpdateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Save project failed");
+            await NotificationService.Error(NotificationHelper.PROJECT_UPDATE_FAILED);
         }
 
         if (closeDialog)
         {
             await CloseDialog.InvokeAsync();
         }
+
+        await NotificationService.Success(NotificationHelper.PROJECT_UPDATE_SUCCESS);
     }
 
     private async Task getDetails(int id)

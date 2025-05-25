@@ -1,4 +1,5 @@
-﻿using Jared.Presentation.Requests.Epics.List;
+﻿using Jared.Presentation.Commons;
+using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Projects.List;
 using Jared.Presentation.Requests.Tasks.Create;
 using Jared.Presentation.Requests.Tasks.List;
@@ -94,6 +95,7 @@ public partial class TaskCreateForm
 
     private void cancel()
     {
+        NotificationService.Information(NotificationHelper.TASK_CREATION_CANCELED);
         CloseDialog.InvokeAsync();
     }
 
@@ -102,9 +104,10 @@ public partial class TaskCreateForm
         var result = await Mediator.Send(new TaskCreateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Create task failed");
+            await NotificationService.Error(NotificationHelper.TASK_CREATION_FAILED);
         }
 
         await CloseDialog.InvokeAsync();
+        await NotificationService.Success(NotificationHelper.TASK_CREATION_SUCCESS);
     }
 }
