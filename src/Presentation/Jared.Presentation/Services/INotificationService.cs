@@ -6,9 +6,9 @@ public interface INotificationService
 {
     event Action OnChange;
     public List<NotificationMessage> Messages { get; set; }
-    Task RemoveNotification(NotificationMessage notification);
-    Task Success(string message);
-    Task Information(string message);
-    Task Warning(string message);
-    Task Error(string message);
+    void RemoveNotification(NotificationMessage notification);
+    void Success(string message);
+    void Information(string message);
+    void Warning(string message);
+    void Error(string message);
 }

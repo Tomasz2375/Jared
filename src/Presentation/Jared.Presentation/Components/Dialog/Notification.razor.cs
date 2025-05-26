@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
-
-namespace Jared.Presentation.Components.Dialog;
+﻿namespace Jared.Presentation.Components.Dialog;
 
 public partial class Notification
 {

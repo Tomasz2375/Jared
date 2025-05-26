@@ -3,50 +3,50 @@ using Jared.Shared.Enums;
 
 namespace Jared.Presentation.Services;
 
-public class NotificationService(CustomDispatcher dispatcher) : INotificationService
+public class NotificationService : INotificationService
 {
     public event Action OnChange = default!;
 
     public List<NotificationMessage> Messages { get; set; } = new();
 
-    public async Task Success(string message)
+    public void Success(string message)
     {
-        await addNotification(message, NotificationType.Success);
+        addNotification(message, NotificationType.Success);
     }
 
-    public async Task Information(string message)
+    public void Information(string message)
     {
-        await addNotification(message, NotificationType.Information);
+        addNotification(message, NotificationType.Information);
     }
 
-    public async Task Warning(string message)
+    public void Warning(string message)
     {
-        await addNotification(message, NotificationType.Warning);
+        addNotification(message, NotificationType.Warning);
     }
 
-    public async Task Error(string message)
+    public void Error(string message)
     {
-        await addNotification(message, NotificationType.Error);
+        addNotification(message, NotificationType.Error);
     }
 
-    public async Task RemoveNotification(NotificationMessage notification)
+    public void RemoveNotification(NotificationMessage notification)
     {
-        await dispatcher.InvokeAsync(() =>
-        {
-            Messages.Remove(notification);
-            OnChange?.Invoke();
-        });
+        Messages.Remove(notification);
+        OnChange?.Invoke();
     }
 
-    private async Task addNotification(string message, NotificationType type)
+    private void addNotification(string message, NotificationType type)
     {
         var cssClass = Enum.GetName(typeof(NotificationType), type)?.ToLower() ?? string.Empty;
         NotificationMessage notification = new(message, cssClass);
 
         Messages.Add(notification);
-        await dispatcher.InvokeAsync(OnChange.Invoke);
 
-        await Task.Delay(5000);
-        await RemoveNotification(notification);
+        OnChange.Invoke();
+        Task.Run(async () =>
+        {
+            await Task.Delay(5000);
+            RemoveNotification(notification);
+        });
     }
 }
