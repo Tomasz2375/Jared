@@ -83,11 +83,11 @@ public partial class EpicCreateForm
         var result = await Mediator.Send(new EpicCreateCommand(Dto));
         if (!result.Success)
         {
-            await NotificationService.Error(NotificationHelper.EPIC_CREATION_FAILED);
+            NotificationService.Error(NotificationHelper.EPIC_CREATION_FAILED);
         }
 
         await CloseDialog.InvokeAsync();
-        await NotificationService.Success(NotificationHelper.EPIC_CREATION_SUCCESS);
+        NotificationService.Success(NotificationHelper.EPIC_CREATION_SUCCESS);
     }
 
     private async Task getProjectsAsync()

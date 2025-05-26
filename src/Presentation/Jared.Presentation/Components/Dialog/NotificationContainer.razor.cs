@@ -1,6 +1,6 @@
 ﻿namespace Jared.Presentation.Components.Dialog;
 
-public partial class Notification
+public partial class NotificationContainer
 {
     protected override void OnInitialized()
     {
@@ -9,16 +9,8 @@ public partial class Notification
 
     public void Dispose()
     {
-        Dispose(true);
+        NotificationService.OnChange -= handleChange;
         GC.SuppressFinalize(this);
-    }
-
-    protected virtual void Dispose(bool disposing)
-    {
-        if (disposing)
-        {
-            NotificationService.OnChange -= handleChange;
-        }
     }
 
     private static string getIconClass(string type)
@@ -36,10 +28,5 @@ public partial class Notification
     private async void handleChange()
     {
         await InvokeAsync(StateHasChanged);
-    }
-
-    ~Notification()
-    {
-        Dispose(false);
     }
 }

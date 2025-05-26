@@ -34,10 +34,10 @@ public partial class TaskDetailsForm
         var result = await Mediator.Send(new TaskUpdateCommand(Dto));
         if (!result.Success)
         {
-            await NotificationService.Error(NotificationHelper.TASK_UPDATE_FAILED);
+            NotificationService.Error(NotificationHelper.TASK_UPDATE_FAILED);
         }
 
-        NotificationService.Success(NotificationHelper.TASK_UPDATE_SUCCESS).GetAwaiter();
+        NotificationService.Success(NotificationHelper.TASK_UPDATE_SUCCESS);
         if (closeDialog)
         {
             await CloseDialog.InvokeAsync();

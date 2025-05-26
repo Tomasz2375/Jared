@@ -78,7 +78,7 @@ public partial class EpicDetailsForm
         var result = await Mediator.Send(new EpicUpdateCommand(Dto));
         if (!result.Success)
         {
-            await NotificationService.Error(NotificationHelper.EPIC_UPDATE_FAILED);
+            NotificationService.Error(NotificationHelper.EPIC_UPDATE_FAILED);
         }
 
         if (closeDialog)
@@ -86,7 +86,7 @@ public partial class EpicDetailsForm
             await CloseDialog.InvokeAsync();
         }
 
-        NotificationService.Success(NotificationHelper.EPIC_UPDATE_SUCCESS).GetAwaiter();
+        NotificationService.Success(NotificationHelper.EPIC_UPDATE_SUCCESS);
     }
 
     private async Task getDetails(int id)

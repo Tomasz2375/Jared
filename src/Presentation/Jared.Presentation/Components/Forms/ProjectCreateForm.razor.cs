@@ -26,10 +26,10 @@ public partial class ProjectCreateForm
         var result = await Mediator.Send(new ProjectCreateCommand(Dto));
         if (!result.Success)
         {
-            await NotificationService.Error(NotificationHelper.PROJECT_CREATION_FAILED);
+            NotificationService.Error(NotificationHelper.PROJECT_CREATION_FAILED);
         }
 
-        NotificationService.Success(NotificationHelper.PROJECT_CREATION_SUCCESS).GetAwaiter();
+        NotificationService.Success(NotificationHelper.PROJECT_CREATION_SUCCESS);
         await CloseDialog.InvokeAsync();
     }
 }

@@ -104,10 +104,10 @@ public partial class TaskCreateForm
         var result = await Mediator.Send(new TaskCreateCommand(Dto));
         if (!result.Success)
         {
-            await NotificationService.Error(NotificationHelper.TASK_CREATION_FAILED);
+            NotificationService.Error(NotificationHelper.TASK_CREATION_FAILED);
         }
 
         await CloseDialog.InvokeAsync();
-        await NotificationService.Success(NotificationHelper.TASK_CREATION_SUCCESS);
+        NotificationService.Success(NotificationHelper.TASK_CREATION_SUCCESS);
     }
 }

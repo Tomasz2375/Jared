@@ -33,7 +33,7 @@ public partial class ProjectDetailsForm
         var result = await Mediator.Send(new ProjectUpdateCommand(Dto));
         if (!result.Success)
         {
-            await NotificationService.Error(NotificationHelper.PROJECT_UPDATE_FAILED);
+            NotificationService.Error(NotificationHelper.PROJECT_UPDATE_FAILED);
         }
 
         if (closeDialog)
@@ -41,7 +41,7 @@ public partial class ProjectDetailsForm
             await CloseDialog.InvokeAsync();
         }
 
-        await NotificationService.Success(NotificationHelper.PROJECT_UPDATE_SUCCESS);
+        NotificationService.Success(NotificationHelper.PROJECT_UPDATE_SUCCESS);
     }
 
     private async Task getDetails(int id)
