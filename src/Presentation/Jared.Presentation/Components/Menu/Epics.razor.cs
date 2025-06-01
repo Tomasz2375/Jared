@@ -1,9 +1,11 @@
-﻿namespace Jared.Presentation.Components.Menu;
+﻿using Jared.Presentation.Components.Forms;
+using Jared.Shared.Dtos.EpicDtos;
+
+namespace Jared.Presentation.Components.Menu;
 
 public partial class Epics
 {
     private bool showUserMenu;
-    private bool showCreateDialog;
 
     private string userMenuCssClass => showUserMenu ? "show-menu" : string.Empty;
 
@@ -16,5 +18,10 @@ public partial class Epics
     {
         await Task.Delay(100);
         showUserMenu = false;
+    }
+
+    private void createEpic()
+    {
+        DialogService.Create<EpicCreateForm>();
     }
 }

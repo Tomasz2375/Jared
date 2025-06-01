@@ -18,9 +18,6 @@ public partial class EpicDetailsForm
     private bool closeDialog;
 
     [Parameter]
-    public EventCallback CloseDialog { get; set; }
-
-    [Parameter]
     public int Id { get; set; }
 
     public EpicDetailsDto Dto { get; set; } = default!;
@@ -70,7 +67,7 @@ public partial class EpicDetailsForm
     private void cancel()
     {
         NotificationService.Information(NotificationHelper.EPIC_UPDATE_CANCELED);
-        CloseDialog.InvokeAsync();
+        Close();
     }
 
     private async Task save()
@@ -81,12 +78,11 @@ public partial class EpicDetailsForm
             NotificationService.Error(NotificationHelper.EPIC_UPDATE_FAILED);
         }
 
+        NotificationService.Success(NotificationHelper.EPIC_UPDATE_SUCCESS);
         if (closeDialog)
         {
-            await CloseDialog.InvokeAsync();
+            Close();
         }
-
-        NotificationService.Success(NotificationHelper.EPIC_UPDATE_SUCCESS);
     }
 
     private async Task getDetails(int id)

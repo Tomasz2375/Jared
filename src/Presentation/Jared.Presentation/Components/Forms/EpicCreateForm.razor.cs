@@ -10,12 +10,6 @@ namespace Jared.Presentation.Components.Forms;
 
 public partial class EpicCreateForm
 {
-    [Parameter]
-    public EventCallback CloseDialog { get; set; }
-
-    [Parameter]
-    public string? Title { get; set; }
-
     public EpicDetailsDto Dto { get; set; } = new();
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
@@ -75,7 +69,7 @@ public partial class EpicCreateForm
     private void cancel()
     {
         NotificationService.Information(NotificationHelper.EPIC_CREATION_CANCELED);
-        CloseDialog.InvokeAsync();
+        Close();
     }
 
     private async Task save()
@@ -86,8 +80,8 @@ public partial class EpicCreateForm
             NotificationService.Error(NotificationHelper.EPIC_CREATION_FAILED);
         }
 
-        await CloseDialog.InvokeAsync();
         NotificationService.Success(NotificationHelper.EPIC_CREATION_SUCCESS);
+        Close();
     }
 
     private async Task getProjectsAsync()

@@ -1,6 +1,6 @@
 ﻿using Jared.Presentation.Components.Entities;
 
-namespace Jared.Presentation.Services;
+namespace Jared.Presentation.Components.Abstractions;
 
 public interface INotificationService
 {

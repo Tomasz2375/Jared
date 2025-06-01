@@ -17,9 +17,5 @@
     SwitchPagination="true"
     Query="Query"
     SendPageQuery="sendPageQuery"
-    ShowDialog="(id => showDialogWithId = id)" />
+    DetailsDialog="@typeof(TaskDetailsForm)" />
 
-@if (showDialogWithId > 0)
-{
-    <TaskDetailsForm Id="@showDialogWithId" CloseDialog="(() => showDialogWithId = 0)" />
-}

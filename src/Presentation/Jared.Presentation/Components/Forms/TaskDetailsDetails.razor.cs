@@ -1,4 +1,5 @@
-﻿using Jared.Presentation.Requests.Epics.List;
+﻿using Jared.Presentation.Components.Dialog;
+using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Projects.List;
 using Jared.Presentation.Requests.Tasks.List;
 using Jared.Presentation.Requests.User.List;
@@ -15,7 +16,6 @@ public partial class TaskDetailsDetails
 {
     [Parameter]
     public TaskDetailsDto Dto { get; set; } = default!;
-    private bool showWorkLogDialog;
 
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
@@ -82,10 +82,9 @@ public partial class TaskDetailsDetails
         users = result.Data.ToList();
     }
 
-    private void addWorkLog(WorkLogAddDto dto)
+    private async Task addWorkLog()
     {
-        showWorkLogDialog = false;
-
+        var dto = await DialogService.Add<WorkLogDialog, WorkLogAddDto>();
         if (dto is null)
         {
             return;

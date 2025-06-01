@@ -7,18 +7,12 @@ namespace Jared.Presentation.Components.Forms;
 
 public partial class ProjectCreateForm
 {
-    [Parameter]
-    public EventCallback CloseDialog { get; set; }
-
-    [Parameter]
-    public string? Title { get; set; }
-
     public ProjectDetailsDto Dto { get; set; } = new();
 
     private void cancel()
     {
         NotificationService.Information(NotificationHelper.PROJECT_CREATION_CANCELED);
-        CloseDialog.InvokeAsync();
+        Close();
     }
 
     private async Task save()
@@ -30,6 +24,6 @@ public partial class ProjectCreateForm
         }
 
         NotificationService.Success(NotificationHelper.PROJECT_CREATION_SUCCESS);
-        await CloseDialog.InvokeAsync();
+        Close();
     }
 }

@@ -1,13 +1,14 @@
 ﻿@inject IMediator Mediator
 @inject IUserService UserService
 @inject INotificationService NotificationService
+@inherits DialogBase
 
 <div class="form-modal-base">
     <div class="form-modal">
         <EditForm Model="@Dto"  OnValidSubmit="save">
             <FluentValidationValidator />
             <div class="form-modal-header">
-                <h4 class="form-modal-title">@Title</h4>
+                <h4 class="form-modal-title">Create task</h4>
                 <button class="btn form-close" @onclick="cancel">✖</button>
             </div>
             <div class="form-modal-content">

@@ -15,9 +15,5 @@
     SwitchPagination="false"
     Query="Query"
     SendPageQuery="sendPageQuery"
-    ShowDialog="(id => showDialogWithId = id)" />
+    DetailsDialog="@typeof(ProjectDetailsForm)" />
 
-@if (showDialogWithId > 0)
-{
-    <ProjectDetailsForm Id="@showDialogWithId" CloseDialog="(() => showDialogWithId = 0)" />
-}
