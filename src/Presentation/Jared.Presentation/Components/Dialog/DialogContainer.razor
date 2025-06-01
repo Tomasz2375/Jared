@@ -1,0 +1,9 @@
+﻿@inject IDialogService DialogService
+@implements IDisposable
+
+@foreach (var dialog in DialogService.Current)
+{
+    <div class="modal-layer">
+        <DynamicComponent Type="@dialog.ComponentType" Parameters="@dialog.Parameters" />
+    </div>
+}
