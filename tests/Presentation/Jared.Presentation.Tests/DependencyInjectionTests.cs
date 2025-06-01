@@ -22,6 +22,7 @@ using Jared.Presentation.Requests.User.Register;
 using Jared.Presentation.Requests.User.Update;
 using Jared.Presentation.Requests.User.UpdateRole;
 using Jared.Presentation.Requests.WorkLogs.Statistics;
+using Jared.Presentation.Services;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
@@ -48,7 +49,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddPresentation(services);
 
         // Assert
-        Assert.Equal(39, services.Count);
+        Assert.Equal(40, services.Count);
     }
 
     [Fact]
@@ -199,5 +200,26 @@ public class DependencyInjectionTests
         var syncLocalStorageService = serviceProvider.GetService<ISyncLocalStorageService>();
         Assert.NotNull(localStorageService);
         Assert.NotNull(syncLocalStorageService);
+    }
+
+    [Fact]
+    public void AddPresentation_ShouldRegisterReguiredServices()
+    {
+        // Arrange
+        ServiceCollection services = new();
+
+        // Act
+        DependencyInjection.AddPresentation(services);
+
+        // Assert
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IUserService) &&
+            x.ImplementationType == typeof(UserService) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(INotificationService) &&
+            x.ImplementationType == typeof(NotificationService) &&
+            x.Lifetime == ServiceLifetime.Scoped));
     }
 }

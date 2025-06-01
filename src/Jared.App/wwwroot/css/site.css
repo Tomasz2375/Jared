@@ -9,6 +9,10 @@
     --button-primary: #1b6ec2;
     --button-danger: #dc3545;
     --main-color: #aa6622;
+    --success-color: #28a745;
+    --information-color: #007bff;
+    --warning-color: #ffc107;
+    --error-color: #dc3545;
 }
 
 .dark-mode {
@@ -75,19 +79,19 @@ div.main {
 .btn-delete {
     width: 72px;
     color: var(--font-color);
-    background-color: var(--background-2);
+    background-color: var(--background-1);
     border-color: red;
 }
 
     .btn-delete:hover {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: red;
     }
 
     .btn-delete:focus {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: red;
         box-shadow: none;
     }
@@ -95,19 +99,19 @@ div.main {
 .btn-undo {
     width: 72px;
     color: var(--font-color);
-    background-color: var(--background-2);
+    background-color: var(--background-1);
     border-color: var(--main-color);
 }
 
     .btn-undo:hover {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: var(--main-color);
     }
 
     .btn-undo:focus {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: var(--main-color);
         box-shadow: none;
     }

@@ -1,8 +1,4 @@
-﻿@using Blazored.LocalStorage
-@using Jared.Presentation.Components.Menu
-@using Jared.Presentation.Components.Basic
-@using Jared.Presentation.Components.Forms
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 @inject IJSRuntime JSRuntime
 @inject ILocalStorageService LocalStorage
 
@@ -24,6 +20,8 @@
                     OnColorChange="setColor"/>
             </div>
         </div>
+
+        <NotificationContainer />
 
         <article class="content px-4" style="height:100vh; overflow: auto;">
             @Body

@@ -1,4 +1,5 @@
-﻿using Jared.Presentation.Requests.Epics.Create;
+﻿using Jared.Presentation.Commons;
+using Jared.Presentation.Requests.Epics.Create;
 using Jared.Presentation.Requests.Epics.List;
 using Jared.Presentation.Requests.Projects.List;
 using Jared.Shared.Dtos.EpicDtos;
@@ -73,6 +74,7 @@ public partial class EpicCreateForm
 
     private void cancel()
     {
+        NotificationService.Information(NotificationHelper.EPIC_CREATION_CANCELED);
         CloseDialog.InvokeAsync();
     }
 
@@ -81,10 +83,11 @@ public partial class EpicCreateForm
         var result = await Mediator.Send(new EpicCreateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Create epic failed");
+            NotificationService.Error(NotificationHelper.EPIC_CREATION_FAILED);
         }
 
         await CloseDialog.InvokeAsync();
+        NotificationService.Success(NotificationHelper.EPIC_CREATION_SUCCESS);
     }
 
     private async Task getProjectsAsync()

@@ -1,4 +1,5 @@
-﻿using Jared.Presentation.Requests.Projects.Create;
+﻿using Jared.Presentation.Commons;
+using Jared.Presentation.Requests.Projects.Create;
 using Jared.Shared.Dtos.ProjectDtos;
 using Microsoft.AspNetCore.Components;
 
@@ -16,6 +17,7 @@ public partial class ProjectCreateForm
 
     private void cancel()
     {
+        NotificationService.Information(NotificationHelper.PROJECT_CREATION_CANCELED);
         CloseDialog.InvokeAsync();
     }
 
@@ -24,9 +26,10 @@ public partial class ProjectCreateForm
         var result = await Mediator.Send(new ProjectCreateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Create project failed");
+            NotificationService.Error(NotificationHelper.PROJECT_CREATION_FAILED);
         }
 
+        NotificationService.Success(NotificationHelper.PROJECT_CREATION_SUCCESS);
         await CloseDialog.InvokeAsync();
     }
 }

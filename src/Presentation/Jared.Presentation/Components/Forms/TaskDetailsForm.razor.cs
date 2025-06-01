@@ -1,4 +1,5 @@
-﻿using Jared.Presentation.Requests.Tasks.Details;
+﻿using Jared.Presentation.Commons;
+using Jared.Presentation.Requests.Tasks.Details;
 using Jared.Presentation.Requests.Tasks.Update;
 using Jared.Shared.Dtos.TaskDtos;
 using Microsoft.AspNetCore.Components;
@@ -24,6 +25,7 @@ public partial class TaskDetailsForm
 
     private void cancel()
     {
+        NotificationService.Information(NotificationHelper.TASK_UPDATE_CANCELED);
         CloseDialog.InvokeAsync();
     }
 
@@ -32,9 +34,10 @@ public partial class TaskDetailsForm
         var result = await Mediator.Send(new TaskUpdateCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine("Save task failed");
+            NotificationService.Error(NotificationHelper.TASK_UPDATE_FAILED);
         }
 
+        NotificationService.Success(NotificationHelper.TASK_UPDATE_SUCCESS);
         if (closeDialog)
         {
             await CloseDialog.InvokeAsync();

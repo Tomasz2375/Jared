@@ -1,0 +1,85 @@
+﻿.notification-container {
+    position: fixed;
+    right: 30px;
+    top: 50px;
+    width: 400px;
+    z-index: 1000;
+}
+
+.notification {
+    display: flex;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    justify-content: flex-start;
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+    transition: opacity 0.5s ease-in-out;
+    color: var(--font-color);
+    background-color: var(--background-1);
+}
+
+.notification-icon {
+    width: 40px;
+    font-size: 24px;
+    padding: 10px;
+}
+
+.notification span {
+    width:100%;
+    padding: 10px;
+    overflow: hidden;
+    margin-top: 3px;
+}
+
+.notification-close {
+    border: none;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    width: 10%;
+    height: 100%;
+    float: right;
+    color: var(--font-color);
+}
+
+.notification-close:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.success {
+    border: 2px solid var(--success-color);
+}
+
+.error {
+    border: 2px solid var(--error-color);
+}
+
+.information {
+    border: 2px solid var(--information-color);
+}
+
+.warning {
+    border: 2px solid var(--warning-color);
+}
+
+.success .notification-close:hover,
+.success .notification-icon {
+    color: var(--success-color);
+}
+
+.information .notification-close:hover,
+.information .notification-icon {
+    color: var(--information-color);
+}
+
+.warning .notification-close:hover,
+.warning .notification-icon {
+    color: var(--warning-color);
+}
+
+.error .notification-close:hover,
+.error .notification-icon {
+    color: var(--error-color);
+}
