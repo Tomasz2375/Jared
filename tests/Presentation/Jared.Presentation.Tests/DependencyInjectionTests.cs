@@ -50,7 +50,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddPresentation(services);
 
         // Assert
-        Assert.Equal(40, services.Count);
+        Assert.Equal(41, services.Count);
     }
 
     [Fact]
@@ -221,6 +221,11 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(INotificationService) &&
             x.ImplementationType == typeof(NotificationService) &&
+            x.Lifetime == ServiceLifetime.Scoped));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IDialogService) &&
+            x.ImplementationType == typeof(DialogService) &&
             x.Lifetime == ServiceLifetime.Scoped));
     }
 }
