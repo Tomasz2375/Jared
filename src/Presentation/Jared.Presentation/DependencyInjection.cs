@@ -20,7 +20,7 @@ public static class DependencyInjection
         });
         services.AddBlazoredLocalStorage();
         services.AddScoped<IUserService, UserService>();
-        services.AddSingleton<INotificationService, NotificationService>();
+        services.AddScoped<INotificationService, NotificationService>();
 
         return services;
     }

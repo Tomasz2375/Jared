@@ -79,19 +79,19 @@ div.main {
 .btn-delete {
     width: 72px;
     color: var(--font-color);
-    background-color: var(--background-2);
+    background-color: var(--background-1);
     border-color: red;
 }
 
     .btn-delete:hover {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: red;
     }
 
     .btn-delete:focus {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: red;
         box-shadow: none;
     }
@@ -99,19 +99,19 @@ div.main {
 .btn-undo {
     width: 72px;
     color: var(--font-color);
-    background-color: var(--background-2);
+    background-color: var(--background-1);
     border-color: var(--main-color);
 }
 
     .btn-undo:hover {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: var(--main-color);
     }
 
     .btn-undo:focus {
         color: var(--font-color);
-        background-color: var(--background-1);
+        background-color: var(--background-2);
         border-color: var(--main-color);
         box-shadow: none;
     }
