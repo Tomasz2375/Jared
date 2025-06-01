@@ -14,6 +14,8 @@ public interface IDialogService
     void Update<TDialog>(int id, Dictionary<string, object>? parameters = null)
         where TDialog : DialogBase;
 
+    public void Update(Type dialogType, int id, Dictionary<string, object>? parameters = null);
+
     Task<TResult?> Add<TDialog, TResult>(Dictionary<string, object>? parameters = null)
         where TDialog : DialogBase<TResult>;
 }

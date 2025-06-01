@@ -35,6 +35,23 @@ public class DialogService : IDialogService
         addDialog(typeof(TDialog), parameters);
     }
 
+    public void Update(Type dialogType, int id, Dictionary<string, object>? parameters = null)
+    {
+        if (!typeof(DialogBase).IsAssignableFrom(dialogType))
+        {
+            throw new ArgumentException($"Type must inherit from DialogBase. Got: {dialogType.FullName}", nameof(dialogType));
+        }
+
+        parameters ??= new();
+        parameters["Id"] = id;
+        parameters[nameof(DialogBase.OnClose)] = EventCallback.Factory.Create(this, () =>
+        {
+            removeDialog(dialogType);
+        });
+
+        addDialog(dialogType, parameters);
+    }
+
     public Task<TResult?> Add<TDialog, TResult>(
             Dictionary<string, object>? parameters = null)
             where TDialog : DialogBase<TResult>
