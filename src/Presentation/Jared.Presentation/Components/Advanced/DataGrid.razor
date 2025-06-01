@@ -1,4 +1,5 @@
-﻿@typeparam TItem
+﻿@inject IDialogService DialogService
+@typeparam TItem
 
 @if (Pagination is null || Items is null)
 {
@@ -33,7 +34,7 @@
     <tbody>
         @foreach (var item in Items)
         {
-            <tr class="data-grid-body" @onclick="@(() => ShowDialog.InvokeAsync((int)item.Id))">
+            <tr class="data-grid-body" @onclick="@(() => showDialog((int)item.Id))">
                 @foreach (var column in ItemsDefinition)
                 {
                     <td class="align-@column.Alignment.ToString().ToLower()">

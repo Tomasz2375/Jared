@@ -28,10 +28,11 @@ public partial class DataGrid<TItem>
     [Parameter]
     [EditorRequired]
     public EventCallback<Query> SendPageQuery { get; set; }
+    [EditorRequired]
+    [Parameter]
+    public Type DetailsDialog { get; set; } = default!;
     [Parameter]
     public bool SwitchPagination { get; set; }
-    [Parameter]
-    public EventCallback<int> ShowDialog { get; set; }
 
     private static object? showValue(TItem item, IColumnDefinition<TItem> column)
     {
@@ -155,5 +156,10 @@ public partial class DataGrid<TItem>
 
         Query.Filter[key] = value;
         showFilterResult();
+    }
+
+    private void showDialog(int id)
+    {
+        DialogService.Update(DetailsDialog, id);
     }
 }

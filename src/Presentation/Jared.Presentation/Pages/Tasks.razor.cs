@@ -11,7 +11,6 @@ public partial class Tasks
     public string ProjectId { get; set; } = default!;
     public TaskPageDto Model { get; set; } = new();
     public Query Query { get; set; } = new();
-    private int showDialogWithId;
 
     protected override async Task OnInitializedAsync()
     {
