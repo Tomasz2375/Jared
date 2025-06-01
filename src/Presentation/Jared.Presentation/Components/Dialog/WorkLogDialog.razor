@@ -1,5 +1,6 @@
-﻿<h3>Add work time</h3>
+﻿@inherits DialogBase<WorkLogAddDto>
 
+<h3>Add work time</h3>
 <div class="form-modal-base">
     <div class="form-modal-small">
         <EditForm Model="@WorkLog" OnValidSubmit="save">

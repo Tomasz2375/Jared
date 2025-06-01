@@ -1,11 +1,7 @@
 ﻿@using Jared.Presentation.Components.Dialog
 @inject IMediator Mediator
 @inject IUserService UserService
-
-@if(showWorkLogDialog)
-{
-    <WorkLogDialog CloseDialog="(worklog => addWorkLog(worklog))"/>
-}
+@inject IDialogService DialogService
 
 <InputTextField
     @bind-Value="@Dto.Title"
@@ -106,6 +102,6 @@
         Disabled="true"
         ValidationFor="(() => Dto.TotalWorkTime)" />
     <div style="position:relative; bottom: -12px;">
-            <button type="button" class="btn btn-simple-dialog" @onclick="@(() => showWorkLogDialog = !showWorkLogDialog)">+</button>
+            <button type="button" class="btn btn-simple-dialog" @onclick="addWorkLog">+</button>
     </div>
 </div>

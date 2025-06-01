@@ -1,6 +1,5 @@
 ﻿using Jared.Presentation.Components.Forms;
 using Jared.Presentation.Requests.Projects.List;
-using Jared.Shared.Dtos.ProjectDtos;
 
 namespace Jared.Presentation.Components.Menu;
 
@@ -43,6 +42,6 @@ public partial class Tasks
 
     private void createTask()
     {
-        DialogService.Create<ProjectCreateForm>();
+        DialogService.Create<TaskCreateForm>();
     }
 }
