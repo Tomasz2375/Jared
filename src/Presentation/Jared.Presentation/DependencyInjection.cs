@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using Blazored.LocalStorage;
+using Jared.Presentation.Components.Abstractions;
 using Jared.Presentation.Services;
 using Jared.Shared.Behaviours;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,8 +21,8 @@ public static class DependencyInjection
         });
         services.AddBlazoredLocalStorage();
         services.AddScoped<IUserService, UserService>();
-        services.AddScoped<INotificationService, NotificationService>();
-
+        services.AddSingleton<INotificationService, NotificationService>();
+        services.AddSingleton<IDialogService, DialogService>();
         return services;
     }
 }
