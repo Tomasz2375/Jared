@@ -1,4 +1,6 @@
-﻿<div class="dropdown">
+﻿@inject IDialogService DialogService
+
+<div class="dropdown">
     <button @onclick="toggleUserMenu"
             @onfocusout="hideUserMemu"
             class="btn dropdown-btn dropdown-toggle">
@@ -7,13 +9,9 @@
     <div class="dropdown-menu @userMenuCssClass">
         <AuthorizeView>
             <Authorized>
-                <button class="dropdown-item" @onclick="(() => showCreateDialog = true)">Create epic</button>
+                <button class="dropdown-item" @onclick="(createEpic)">Create epic</button>
                 <a href="epics" class="dropdown-item">All epics</a>
             </Authorized>
         </AuthorizeView>
     </div>
 </div>
-@if (showCreateDialog)
-{
-    <EpicCreateForm Title="Create epic" CloseDialog="(() => showCreateDialog = false)" />
-}

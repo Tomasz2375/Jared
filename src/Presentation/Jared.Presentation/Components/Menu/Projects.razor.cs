@@ -1,9 +1,11 @@
-﻿namespace Jared.Presentation.Components.Menu;
+﻿using Jared.Presentation.Components.Forms;
+using Jared.Shared.Dtos.ProjectDtos;
+
+namespace Jared.Presentation.Components.Menu;
 
 public partial class Projects
 {
     private bool showUserMenu;
-    private bool showCreateDialog;
 
     private string userMenuCssClass => showUserMenu ? "show-menu" : string.Empty;
 
@@ -16,5 +18,10 @@ public partial class Projects
     {
         await Task.Delay(100);
         showUserMenu = false;
+    }
+
+    private void createProject()
+    {
+        DialogService.Create<ProjectCreateForm>();
     }
 }

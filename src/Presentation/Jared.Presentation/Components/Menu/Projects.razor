@@ -1,4 +1,6 @@
-﻿<div class="dropdown">
+﻿@inject IDialogService DialogService
+
+<div class="dropdown">
     <button @onclick="toggleUserMenu"
             @onfocusout="hideUserMemu"
             class="btn dropdown-btn dropdown-toggle">
@@ -7,13 +9,9 @@
     <div class="dropdown-menu @userMenuCssClass">
         <AuthorizeView>
             <Authorized>
-                <button class="dropdown-item" @onclick="(() => showCreateDialog = true)">Create project</button>
+                <button class="dropdown-item" @onclick="(createProject)">Create project</button>
                 <a href="projects" class="dropdown-item">All projects</a>
             </Authorized>
         </AuthorizeView>
     </div>
 </div>
-@if (showCreateDialog)
-{
-    <ProjectCreateForm Title="Create project" CloseDialog="(() => showCreateDialog = false)" />
-}

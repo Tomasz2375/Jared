@@ -1,14 +1,13 @@
-﻿@using Jared.Shared.Enums;
-@using Jared.Presentation.Components.Basic
-@inject IMediator Mediator
+﻿@inject IMediator Mediator
 @inject INotificationService NotificationService
+@inherits DialogBase
 
 <div class="form-modal-base">
     <div class="form-modal">
         <EditForm Model="@Dto" OnValidSubmit="save">
             <FluentValidationValidator />
             <div class="form-modal-header">
-                <h4 class="form-modal-title">@Title</h4>
+                <h4 class="form-modal-title">Create epic</h4>
                 <button class="btn form-close" @onclick="cancel">✖</button>
             </div>
             <div class="form-modal-content">

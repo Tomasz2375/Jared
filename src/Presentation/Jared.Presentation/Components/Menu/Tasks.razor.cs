@@ -1,4 +1,6 @@
-﻿using Jared.Presentation.Requests.Projects.List;
+﻿using Jared.Presentation.Components.Forms;
+using Jared.Presentation.Requests.Projects.List;
+using Jared.Shared.Dtos.ProjectDtos;
 
 namespace Jared.Presentation.Components.Menu;
 
@@ -12,7 +14,6 @@ public partial class Tasks
     }
 
     private bool showUserMenu;
-    private bool showCreateDialog;
 
     private string userMenuCssClass => showUserMenu ? "show-menu" : string.Empty;
 
@@ -38,5 +39,10 @@ public partial class Tasks
         }
 
         projects = result.Data.ToDictionary(x => x.Id.ToString(), x => x.Title);
+    }
+
+    private void createTask()
+    {
+        DialogService.Create<ProjectCreateForm>();
     }
 }

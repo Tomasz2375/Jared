@@ -8,18 +8,11 @@ using Jared.Shared.Dtos.EpicDtos;
 using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Dtos.TaskDtos;
 using Jared.Shared.Dtos.UserDtos;
-using Microsoft.AspNetCore.Components;
 
 namespace Jared.Presentation.Components.Forms;
 
 public partial class TaskCreateForm
 {
-    [Parameter]
-    public EventCallback CloseDialog { get; set; }
-
-    [Parameter]
-    public string? Title { get; set; }
-
     public TaskDetailsDto Dto { get; set; } = new();
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
@@ -96,7 +89,7 @@ public partial class TaskCreateForm
     private void cancel()
     {
         NotificationService.Information(NotificationHelper.TASK_CREATION_CANCELED);
-        CloseDialog.InvokeAsync();
+        Close();
     }
 
     private async Task save()
@@ -107,7 +100,7 @@ public partial class TaskCreateForm
             NotificationService.Error(NotificationHelper.TASK_CREATION_FAILED);
         }
 
-        await CloseDialog.InvokeAsync();
         NotificationService.Success(NotificationHelper.TASK_CREATION_SUCCESS);
+        Close();
     }
 }

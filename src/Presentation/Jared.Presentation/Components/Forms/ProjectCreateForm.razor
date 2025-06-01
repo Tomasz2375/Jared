@@ -1,5 +1,6 @@
 ﻿@inject IMediator Mediator
 @inject INotificationService NotificationService
+@inherits DialogBase
 
 @if (Dto is null)
 {
@@ -11,7 +12,7 @@
         <EditForm Model="@Dto" OnValidSubmit="save">
             <FluentValidationValidator />
             <div class="form-modal-header">
-                <h4 class="form-modal-title">@Title</h4>
+                <h4 class="form-modal-title">Create project</h4>
                 <button class="btn form-close" @onclick="cancel">✖</button>
             </div>
             <div class="form-modal-content">
