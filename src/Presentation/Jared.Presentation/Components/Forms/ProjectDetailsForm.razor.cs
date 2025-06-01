@@ -9,9 +9,6 @@ namespace Jared.Presentation.Components.Forms;
 public partial class ProjectDetailsForm
 {
     [Parameter]
-    public EventCallback CloseDialog { get; set; }
-
-    [Parameter]
     public int Id { get; set; }
 
     public ProjectDetailsDto Dto { get; set; } = default!;
@@ -25,7 +22,7 @@ public partial class ProjectDetailsForm
     private void cancel()
     {
         NotificationService.Information(NotificationHelper.PROJECT_UPDATE_CANCELED);
-        CloseDialog.InvokeAsync();
+        Close();
     }
 
     private async Task save()
@@ -36,12 +33,12 @@ public partial class ProjectDetailsForm
             NotificationService.Error(NotificationHelper.PROJECT_UPDATE_FAILED);
         }
 
+        NotificationService.Success(NotificationHelper.PROJECT_UPDATE_SUCCESS);
+
         if (closeDialog)
         {
-            await CloseDialog.InvokeAsync();
+            Close();
         }
-
-        NotificationService.Success(NotificationHelper.PROJECT_UPDATE_SUCCESS);
     }
 
     private async Task getDetails(int id)
