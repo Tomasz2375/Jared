@@ -4,12 +4,17 @@ public partial class DialogContainer
 {
     protected override void OnInitialized()
     {
-        DialogService.OnDialogsUpdated += StateHasChanged;
+        DialogService.OnDialogsUpdated += handleChange;
     }
 
     public void Dispose()
     {
-        DialogService.OnDialogsUpdated -= StateHasChanged;
+        DialogService.OnDialogsUpdated -= handleChange;
         GC.SuppressFinalize(this);
+    }
+
+    private async void handleChange()
+    {
+        await InvokeAsync(StateHasChanged);
     }
 }

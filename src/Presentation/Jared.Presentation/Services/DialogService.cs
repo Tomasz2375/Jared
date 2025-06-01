@@ -6,25 +6,20 @@ namespace Jared.Presentation.Services;
 public class DialogService : IDialogService
 {
     public event Action? OnDialogsUpdated;
-
     private readonly List<DialogDefinition> dialogs = new();
     public IReadOnlyList<DialogDefinition> Current => dialogs;
 
-    public Task<TResult?> Create<TDialog, TResult>(
-        Dictionary<string, object>? parameters = null)
-        where TDialog : DialogBase<TResult>
+    public void Create<TDialog>(
+    Dictionary<string, object>? parameters = null)
+    where TDialog : DialogBase
     {
-        var tcs = new TaskCompletionSource<TResult?>();
-
         parameters ??= new();
-        parameters[nameof(DialogBase<TResult>.OnClose)] = EventCallback.Factory.Create<TResult?>(this, (result) =>
+        parameters[nameof(DialogBase.OnClose)] = EventCallback.Factory.Create(this, () =>
         {
             removeDialog(typeof(TDialog));
-            tcs.SetResult(result);
         });
 
         addDialog(typeof(TDialog), parameters);
-        return tcs.Task;
     }
 
     public void Update<TDialog>(int id, Dictionary<string, object>? parameters = null)
@@ -38,6 +33,24 @@ public class DialogService : IDialogService
         });
 
         addDialog(typeof(TDialog), parameters);
+    }
+
+    public Task<TResult?> Add<TDialog, TResult>(
+            Dictionary<string, object>? parameters = null)
+            where TDialog : DialogBase<TResult>
+    {
+        TaskCompletionSource<TResult?> taskCompletionSource = new();
+
+        parameters ??= new();
+        parameters[nameof(DialogBase<TResult>.OnClose)] = EventCallback.Factory.Create<TResult?>(this, (result) =>
+        {
+            removeDialog(typeof(TDialog));
+            taskCompletionSource.SetResult(result);
+        });
+
+        addDialog(typeof(TDialog), parameters);
+
+        return taskCompletionSource.Task;
     }
 
     private void addDialog(Type type, Dictionary<string, object> parameters)
