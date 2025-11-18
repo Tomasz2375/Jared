@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="$(JaredRoot)\tests.targets" />
+
+    <ItemGroup>
+        <PackageReference Include="AutoFixture.Xunit2" Version="4.18.1" />
+        <PackageReference Include="Moq" Version="4.20.72" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\src\api\Jared.Application\Jared.Application.csproj" />
+    </ItemGroup>
+
+</Project>

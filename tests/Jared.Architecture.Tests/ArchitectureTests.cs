@@ -9,7 +9,7 @@ public class ArchitectureTests
     private const string DOMAIN_NAMESPACE = "Jared.Domain";
     private const string APPLICATION_NAMESPACE = "Jared.Application";
     private const string INFRASTRUCTURE_NAMESPACE = "Jared.Infrastructure";
-    private const string PRESENTATION_NAMESPACE = "Jared.Presentation";
+    private const string PRESENTATION_NAMESPACE = "Jared.Client";
     private const string API_NAMESPACE = "Jared.Api";
     private const string APP_NAMESPACE = "Jared.App";
     #endregion

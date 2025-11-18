@@ -3,13 +3,15 @@
   <Import Project="$(JaredRoot)\tests.targets" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Application\Jared.Application\Jared.Application.csproj" />
-    <ProjectReference Include="..\..\src\Domain\Jared.Domain\Jared.Domain.csproj" />
-    <ProjectReference Include="..\..\src\Infrastructure\Jared.Infrastructure\Jared.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\shared\Jared.Shared\Jared.Shared.csproj" />
+    <ProjectReference Include="..\..\src\api\Jared.Domain\Jared.Domain.csproj" />
+    <ProjectReference Include="..\..\src\api\Jared.Application\Jared.Application.csproj" />
+    <ProjectReference Include="..\..\src\api\Jared.Infrastructure\Jared.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\api\Jared.Presentation\Jared.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\app\Jared.Client\Jared.Client.csproj" />
+    <ProjectReference Include="..\..\src\app\Jared.UI\Jared.UI.csproj" />
     <ProjectReference Include="..\..\src\Jared.Api\Jared.Api.csproj" />
     <ProjectReference Include="..\..\src\Jared.App\Jared.App.csproj" />
-    <ProjectReference Include="..\..\src\Presentation\Jared.Presentation\Jared.Presentation.csproj" />
-    <ProjectReference Include="..\..\src\Shared\Jared.Shared\Jared.Shared.csproj" />
   </ItemGroup>
 
 </Project>

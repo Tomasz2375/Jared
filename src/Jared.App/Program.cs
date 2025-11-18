@@ -1,5 +1,5 @@
 using Jared.App;
-using Jared.Presentation;
+using Jared.Client;
 using Jared.Shared;
 using Jared.Shared.Middleware;
 using Microsoft.AspNetCore.Authentication.Cookies;

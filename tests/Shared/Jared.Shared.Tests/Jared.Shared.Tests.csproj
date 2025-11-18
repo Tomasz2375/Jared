@@ -3,7 +3,7 @@
   <Import Project="$(JaredRoot)\tests.targets" />
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Shared\Jared.Shared\Jared.Shared.csproj" />
+    <ProjectReference Include="..\..\..\src\shared\Jared.Shared\Jared.Shared.csproj" />
   </ItemGroup>
 
 </Project>
