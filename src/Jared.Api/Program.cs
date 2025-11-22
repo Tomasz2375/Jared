@@ -9,6 +9,7 @@ using Jared.Domain.Models;
 using Jared.Domain.Options;
 using Jared.Infrastructure;
 using Jared.Shared.Middleware;
+using Jared.Validators;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -53,6 +54,7 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
+builder.Services.AddValidators();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddControllers();
