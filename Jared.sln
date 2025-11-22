@@ -67,6 +67,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Infrastructure.Tests"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Presentation.Tests", "tests\api\Jared.Presentation.Tests\Jared.Presentation.Tests.csproj", "{487258D9-7FC7-430C-BA31-4F628BA1C3DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Contracts", "src\shared\Jared.Contracts\Jared.Contracts.csproj", "{6B5F6FA2-E24A-4CAA-9A29-42B19C567F3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -145,6 +147,10 @@ Global
 		{487258D9-7FC7-430C-BA31-4F628BA1C3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{487258D9-7FC7-430C-BA31-4F628BA1C3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{487258D9-7FC7-430C-BA31-4F628BA1C3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B5F6FA2-E24A-4CAA-9A29-42B19C567F3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B5F6FA2-E24A-4CAA-9A29-42B19C567F3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B5F6FA2-E24A-4CAA-9A29-42B19C567F3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B5F6FA2-E24A-4CAA-9A29-42B19C567F3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -174,6 +180,7 @@ Global
 		{FD47F248-047C-4EBF-8654-065761AB19B5} = {B18974FF-0804-4D1E-BB28-5583173489E5}
 		{24F12ABB-858F-4F85-8216-4BEC6A6D812D} = {6BA990D4-995B-44BB-9D37-FCE3D169F768}
 		{487258D9-7FC7-430C-BA31-4F628BA1C3DB} = {6BA990D4-995B-44BB-9D37-FCE3D169F768}
+		{6B5F6FA2-E24A-4CAA-9A29-42B19C567F3E} = {28BF256E-E80F-41E7-B00F-1E4886FD6099}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC5AA28C-D0A6-47D5-BD33-30BFC6E5687C}

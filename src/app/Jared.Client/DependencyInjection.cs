@@ -2,7 +2,7 @@
 using Blazored.LocalStorage;
 using Jared.Client.Abstractions;
 using Jared.Client.Services;
-using Jared.Shared.Behaviours;
+using Jared.Contracts.Middleware;
 using Microsoft.Extensions.DependencyInjection;
 using NotificationService = Jared.Client.Services.NotificationService;
 

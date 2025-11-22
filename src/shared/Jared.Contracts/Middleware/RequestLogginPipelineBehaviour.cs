@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;
 
-namespace Jared.Shared.Behaviours;
+namespace Jared.Contracts.Middleware;
 
 public sealed class RequestLogginPipelineBehaviour<TRequest, TResponse>(
     ILogger<RequestLogginPipelineBehaviour<TRequest, TResponse>> logger)

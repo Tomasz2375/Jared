@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Serilog.Context;
 
-namespace Jared.Shared.Middleware;
+namespace Jared.Contracts.Middleware;
 
 public class RequestLogContextMiddleware(RequestDelegate requestDelegate)
 {
