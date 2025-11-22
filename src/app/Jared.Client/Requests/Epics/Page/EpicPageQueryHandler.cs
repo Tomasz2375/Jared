@@ -1,9 +1,9 @@
-﻿using Jared.Client.ColumnDefinitions;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.EpicDtos;
-using MediatR;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
 using System.Text;
+using Jared.Client.ColumnDefinitions;
+using Jared.Dtos.Epics;
+using Jared.Shared.Abstractions;
+using MediatR;
 
 namespace Jared.Client.Requests.Epics.Page;
 

@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Dtos.Tasks;
+using Jared.Shared.Abstractions;
 using MediatR;
 
 namespace Jared.Application.Requests.Tasks.Update;

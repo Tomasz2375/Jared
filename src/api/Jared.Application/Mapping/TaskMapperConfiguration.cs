@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Dtos.Tasks;
 using Mapster;
 using Task = Jared.Domain.Models.Task;
 
@@ -10,6 +10,8 @@ public class TaskMapperConfiguration : IRegister
     {
         config
             .NewConfig<Task, TaskDetailsDto>()
-            .Map(d => d.TotalWorkTime, s => new TimeSpan(s.WorkLogs.Sum(x => x.Time.Ticks)));
+            .Map(
+                d => d.TotalWorkTime,
+                s => new TimeSpan(s.WorkLogs.Sum(x => x.Time.Ticks)));
     }
 }

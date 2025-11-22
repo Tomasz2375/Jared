@@ -1,5 +1,5 @@
-﻿using Jared.Domain.Model;
-using Jared.Shared.Dtos.WorkLogDtos;
+﻿using Jared.Domain.Models;
+using Jared.Dtos.WorkLogs;
 using Mapster;
 
 namespace Jared.Application.Mapping;

@@ -1,5 +1,5 @@
-﻿using Jared.Infrastructure.Persistence;
-using Jared.Shared.Interfaces;
+﻿using Jared.Domain.Abstractions;
+using Jared.Infrastructure.Persistence;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;

@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Dtos.Tasks;
 using Task = Jared.Domain.Models.Task;
 
 namespace Jared.Application.Services.Filters;

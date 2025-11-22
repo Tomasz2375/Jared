@@ -1,5 +1,5 @@
 ﻿using Jared.Domain.Models;
-using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Dtos.Projects;
 
 namespace Jared.Application.Services.Filters;
 

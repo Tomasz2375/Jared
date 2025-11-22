@@ -1,5 +1,5 @@
 ﻿using Jared.Client.ColumnDefinitions.Abstraction;
-using Jared.Shared.Dtos.TaskDtos;
+using Jared.Dtos.Tasks;
 using Jared.Shared.Enums;
 
 namespace Jared.Client.ColumnDefinitions;

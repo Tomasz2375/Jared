@@ -1,9 +1,9 @@
-﻿using Jared.Shared.Interfaces;
+﻿using Jared.Domain.Abstractions;
 
 namespace Jared.Application.Services.Filters;
 
 public class FilterBuilder<T> : IFilterBuilder<T>
-    where T : class, IEntity
+    where T : Entity
 {
     public IFilter<T> Build(IFilterStrategy<T> strategy)
     {

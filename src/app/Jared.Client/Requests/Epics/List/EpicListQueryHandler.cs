@@ -1,7 +1,7 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.EpicDtos;
+﻿using System.Net.Http.Json;
+using Jared.Dtos.Epics;
+using Jared.Shared.Abstractions;
 using MediatR;
-using System.Net.Http.Json;
 
 namespace Jared.Client.Requests.Epics.List;
 

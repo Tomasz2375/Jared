@@ -1,7 +1,7 @@
 ﻿using Jared.Client.Requests.User.List;
 using Jared.Client.Requests.WorkLogs.Statistics;
-using Jared.Shared.Dtos.UserDtos;
-using Jared.Shared.Dtos.WorkLogDtos;
+using Jared.Dtos.Users;
+using Jared.Dtos.WorkLogs;
 using Jared.Shared.Enums;
 
 namespace Jared.UI.Pages;

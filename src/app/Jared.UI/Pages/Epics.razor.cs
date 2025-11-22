@@ -1,6 +1,6 @@
 ﻿using Jared.Client.ColumnDefinitions;
 using Jared.Client.Requests.Epics.Page;
-using Jared.Shared.Dtos.EpicDtos;
+using Jared.Dtos.Epics;
 
 namespace Jared.UI.Pages;
 

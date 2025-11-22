@@ -1,5 +1,5 @@
 ﻿using Jared.Domain.Models;
-using Jared.Shared.Dtos.EpicDtos;
+using Jared.Dtos.Epics;
 
 namespace Jared.Application.Services.Filters;
 

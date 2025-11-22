@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\shared\Jared.Shared\Jared.Shared.csproj" />
+    <ProjectReference Include="..\..\shared\Jared.Validators\Jared.Validators.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Dtos.WorkLogDtos;
+﻿using Jared.Dtos.WorkLogs;
 
 namespace Jared.UI.Components.Dialog;
 

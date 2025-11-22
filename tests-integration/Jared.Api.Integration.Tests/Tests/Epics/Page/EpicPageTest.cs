@@ -1,9 +1,9 @@
-﻿using FluentAssertions;
+﻿using System.Net.Http.Json;
+using FluentAssertions;
 using Jared.Api.Integration.Tests.Data;
+using Jared.Dtos.Epics;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.EpicDtos;
 using Mapster;
-using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Page;
 

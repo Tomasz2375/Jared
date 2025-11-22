@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Dtos.UserDtos;
+﻿using Jared.Dtos.Users;
 
 namespace Jared.Client.Services;
 

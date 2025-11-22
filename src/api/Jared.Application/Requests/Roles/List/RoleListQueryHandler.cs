@@ -1,7 +1,7 @@
-﻿using Jared.Domain.Models;
+﻿using Jared.Domain.Abstractions;
+using Jared.Domain.Models;
+using Jared.Dtos.Roles;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.Role;
-using Jared.Shared.Interfaces;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

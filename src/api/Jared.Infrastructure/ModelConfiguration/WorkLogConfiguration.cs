@@ -1,4 +1,4 @@
-﻿using Jared.Domain.Model;
+﻿using Jared.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

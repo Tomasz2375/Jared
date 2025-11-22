@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Interfaces;
+﻿using Jared.Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Jared.Infrastructure.Persistence;
@@ -15,7 +15,7 @@ public class DataContext : DbContext, IDataContext
     }
 
     public new virtual DbSet<TEntity> Set<TEntity>()
-        where TEntity : class, IEntity
+        where TEntity : Entity
     {
         return base.Set<TEntity>();
     }

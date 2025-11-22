@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Dtos.TaskHistoryDtos;
+﻿using Jared.Dtos.TaskHistories;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Components.Forms;

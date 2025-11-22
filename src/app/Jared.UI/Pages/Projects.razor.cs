@@ -1,6 +1,6 @@
 ﻿using Jared.Client.ColumnDefinitions;
 using Jared.Client.Requests.Projects.Page;
-using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Dtos.Projects;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Pages;

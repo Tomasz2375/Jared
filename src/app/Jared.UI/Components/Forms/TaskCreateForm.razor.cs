@@ -4,10 +4,10 @@ using Jared.Client.Requests.Projects.List;
 using Jared.Client.Requests.Tasks.Create;
 using Jared.Client.Requests.Tasks.List;
 using Jared.Client.Requests.User.List;
-using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Shared.Dtos.TaskDtos;
-using Jared.Shared.Dtos.UserDtos;
+using Jared.Dtos.Epics;
+using Jared.Dtos.Projects;
+using Jared.Dtos.Tasks;
+using Jared.Dtos.Users;
 
 namespace Jared.UI.Components.Forms;
 

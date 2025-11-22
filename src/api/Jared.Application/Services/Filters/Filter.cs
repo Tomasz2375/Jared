@@ -1,9 +1,9 @@
-﻿using Jared.Shared.Interfaces;
+﻿using Jared.Domain.Abstractions;
 
 namespace Jared.Application.Services.Filters;
 
 public class Filter<T>(IFilterStrategy<T> filter) : IFilter<T>
-    where T : class, IEntity
+    where T : Entity
 {
     private readonly IFilterStrategy<T> filter = filter;
 

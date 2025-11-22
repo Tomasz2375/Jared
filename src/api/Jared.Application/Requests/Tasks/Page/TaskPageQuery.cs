@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.TaskDtos;
+﻿using Jared.Dtos.Tasks;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Enums;
 using MediatR;
 

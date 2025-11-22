@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
+using Jared.Dtos.WorkLogs;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.WorkLogDtos;
 using MediatR;
 
 namespace Jared.Client.Requests.WorkLogs.Statistics;

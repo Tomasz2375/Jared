@@ -2,8 +2,8 @@
 using Jared.Client.Requests.Epics.Create;
 using Jared.Client.Requests.Epics.List;
 using Jared.Client.Requests.Projects.List;
-using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Dtos.Epics;
+using Jared.Dtos.Projects;
 
 namespace Jared.UI.Components.Forms;
 

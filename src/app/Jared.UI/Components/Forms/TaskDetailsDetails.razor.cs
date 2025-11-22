@@ -2,11 +2,11 @@
 using Jared.Client.Requests.Projects.List;
 using Jared.Client.Requests.Tasks.List;
 using Jared.Client.Requests.User.List;
-using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
-using Jared.Shared.Dtos.TaskDtos;
-using Jared.Shared.Dtos.UserDtos;
-using Jared.Shared.Dtos.WorkLogDtos;
+using Jared.Dtos.Epics;
+using Jared.Dtos.Projects;
+using Jared.Dtos.Tasks;
+using Jared.Dtos.Users;
+using Jared.Dtos.WorkLogs;
 using Jared.UI.Components.Dialog;
 using Microsoft.AspNetCore.Components;
 

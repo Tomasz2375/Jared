@@ -1,7 +1,7 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.TaskDtos;
+﻿using System.Net.Http.Json;
+using Jared.Dtos.Tasks;
+using Jared.Shared.Abstractions;
 using MediatR;
-using System.Net.Http.Json;
 
 namespace Jared.Client.Requests.Tasks.Details;
 

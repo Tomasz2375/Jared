@@ -1,6 +1,6 @@
 ﻿using Jared.Client.ColumnDefinitions;
 using Jared.Client.Requests.Tasks.Page;
-using Jared.Shared.Dtos.TaskDtos;
+using Jared.Dtos.Tasks;
 using Jared.Shared.Enums;
 using Microsoft.AspNetCore.Components;
 

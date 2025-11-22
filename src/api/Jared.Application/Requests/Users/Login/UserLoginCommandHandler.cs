@@ -1,14 +1,14 @@
-﻿using Jared.Domain.Models;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Jared.Domain.Abstractions;
+using Jared.Domain.Models;
 using Jared.Domain.Options;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace Jared.Application.Requests.Users.Login;
 

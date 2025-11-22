@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.EpicDtos;
+﻿using Jared.Dtos.Epics;
+using Jared.Shared.Abstractions;
 using Jared.Shared.Enums;
 using MediatR;
 

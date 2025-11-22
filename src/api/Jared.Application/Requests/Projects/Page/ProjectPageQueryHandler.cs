@@ -1,14 +1,14 @@
-﻿using Jared.Application.Services.Filters;
+﻿using System.Linq.Expressions;
+using Jared.Application.Services.Filters;
+using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
+using Jared.Dtos.Projects;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Dtos.PageDtos;
-using Jared.Shared.Dtos.ProjectDtos;
 using Jared.Shared.Enums;
-using Jared.Shared.Interfaces;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace Jared.Application.Requests.Projects.Page;
 

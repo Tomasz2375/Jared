@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Dtos.UserDtos;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
+using Jared.Dtos.Users;
 
 namespace Jared.Client.Services;
 

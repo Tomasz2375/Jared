@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\shared\Jared.Shared\Jared.Shared.csproj" />
+    <ProjectReference Include="..\..\shared\Jared.Validators\Jared.Validators.csproj" />
   </ItemGroup>
 </Project>

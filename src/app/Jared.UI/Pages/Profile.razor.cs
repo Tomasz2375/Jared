@@ -1,6 +1,6 @@
 ﻿using Jared.Client.Requests.User.Password;
 using Jared.Client.Requests.User.Update;
-using Jared.Shared.Dtos.UserDtos;
+using Jared.Dtos.Users;
 
 namespace Jared.UI.Pages;
 

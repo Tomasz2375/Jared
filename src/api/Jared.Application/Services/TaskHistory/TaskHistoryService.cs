@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Shared.Dtos.TaskHistoryDtos;
+﻿using Jared.Dtos.TaskHistories;
+using Jared.Dtos.Tasks;
 
 namespace Jared.Application.Services.TaskHistory;
 

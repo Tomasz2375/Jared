@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Dtos.TaskDtos;
-using Jared.Shared.Dtos.WorkLogDtos;
+﻿using Jared.Dtos.Tasks;
+using Jared.Dtos.WorkLogs;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Components.Forms;

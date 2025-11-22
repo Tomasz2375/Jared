@@ -1,7 +1,7 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.UserDtos;
+﻿using System.Net.Http.Json;
+using Jared.Dtos.Users;
+using Jared.Shared.Abstractions;
 using MediatR;
-using System.Net.Http.Json;
 
 namespace Jared.Client.Requests.User.List;
 

@@ -1,14 +1,14 @@
 ﻿using Jared.Client.ColumnDefinitions;
 using Jared.Client.ColumnDefinitions.Abstraction;
+using Jared.Dtos;
 using Jared.Shared.Dtos.Abstractions;
 using Jared.Shared.Enums;
-using Jared.Shared.Interfaces;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Components.Advanced;
 
 public partial class DataGrid<TItem>
-    where TItem : class, IEntity
+    where TItem : BaseDto
 {
     [Parameter]
     [EditorRequired]

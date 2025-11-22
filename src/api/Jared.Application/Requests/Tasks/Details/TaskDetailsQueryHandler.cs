@@ -1,6 +1,6 @@
-﻿using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.TaskDtos;
-using Jared.Shared.Interfaces;
+﻿using Jared.Domain.Abstractions;
+using Jared.Dtos.Tasks;
+using Jared.Shared.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

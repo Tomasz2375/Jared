@@ -1,7 +1,7 @@
 using Jared.App;
 using Jared.Client;
-using Jared.Shared;
 using Jared.Shared.Middleware;
+using Jared.Validators;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Radzen;
@@ -14,7 +14,7 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
     .ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
-builder.Services.AddShared();
+builder.Services.AddValidators();
 builder.Services.AddPresentation();
 builder.Services.AddRazorPages();
 builder.Services.AddRazorComponents();

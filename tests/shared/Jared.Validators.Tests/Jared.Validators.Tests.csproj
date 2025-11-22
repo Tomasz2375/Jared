@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <Import Project="$(JaredRoot)\tests.targets" />
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\src\shared\Jared.Validators\Jared.Validators.csproj" />
+    </ItemGroup>
+
+</Project>

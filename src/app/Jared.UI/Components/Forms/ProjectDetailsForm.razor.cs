@@ -1,7 +1,7 @@
 ﻿using Jared.Client.Commons;
 using Jared.Client.Requests.Projects.Details;
 using Jared.Client.Requests.Projects.Update;
-using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Dtos.Projects;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Components.Forms;

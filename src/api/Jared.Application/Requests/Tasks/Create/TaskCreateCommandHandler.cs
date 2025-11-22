@@ -1,8 +1,8 @@
 ﻿using Jared.Application.Services.TaskHistory;
 using Jared.Application.Services.User;
+using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Interfaces;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

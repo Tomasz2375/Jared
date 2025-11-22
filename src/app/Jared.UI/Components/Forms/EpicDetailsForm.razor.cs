@@ -3,8 +3,8 @@ using Jared.Client.Requests.Epics.Details;
 using Jared.Client.Requests.Epics.List;
 using Jared.Client.Requests.Epics.Update;
 using Jared.Client.Requests.Projects.List;
-using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Dtos.Epics;
+using Jared.Dtos.Projects;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Components.Forms;

@@ -1,8 +1,6 @@
-﻿using Jared.Domain.Models;
-using Jared.Shared.Abstractions;
-using Task = Jared.Domain.Models.Task;
+﻿using Jared.Domain.Abstractions;
 
-namespace Jared.Domain.Model;
+namespace Jared.Domain.Models;
 
 public class WorkLog : Entity
 {
