@@ -2,7 +2,7 @@
 using Jared.Dtos.WorkLogs;
 using Jared.Validators.WorkLog;
 
-namespace Jared.Validators.Tests.WorkLogs;
+namespace Jared.Validators.Tests.WorkLog;
 
 public class WorkLogAddDtoValidatorTest
 {

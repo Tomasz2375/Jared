@@ -4,7 +4,6 @@ using Jared.Dtos.Projects;
 using Jared.Dtos.Tasks;
 using Jared.Dtos.Users;
 using Jared.Dtos.WorkLogs;
-using Jared.Validators;
 using Jared.Validators.Epic;
 using Jared.Validators.Project;
 using Jared.Validators.Task;

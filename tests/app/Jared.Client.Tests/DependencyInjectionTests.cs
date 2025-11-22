@@ -47,7 +47,7 @@ public class DependencyInjectionTests
         ServiceCollection services = new();
 
         // Act
-        DependencyInjection.AddPresentation(services);
+        DependencyInjection.AddClient(services);
 
         // Assert
         Assert.Equal(41, services.Count);
@@ -60,7 +60,7 @@ public class DependencyInjectionTests
         ServiceCollection services = new();
 
         // Act
-        DependencyInjection.AddPresentation(services);
+        DependencyInjection.AddClient(services);
 
         // Assert
         // Task
@@ -193,7 +193,7 @@ public class DependencyInjectionTests
         services.AddSingleton(jsRuntimeMock.Object);
 
         // Act
-        DependencyInjection.AddPresentation(services);
+        DependencyInjection.AddClient(services);
         var serviceProvider = services.BuildServiceProvider();
 
         // Assert
@@ -210,7 +210,7 @@ public class DependencyInjectionTests
         ServiceCollection services = new();
 
         // Act
-        DependencyInjection.AddPresentation(services);
+        DependencyInjection.AddClient(services);
 
         // Assert
         Assert.NotNull(services.FirstOrDefault(x =>

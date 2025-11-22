@@ -4,7 +4,7 @@ using Jared.Shared.Enums;
 using Jared.Validators.Task;
 using TaskStatus = Jared.Shared.Enums.TaskStatus;
 
-namespace Jared.Shared.Tests.Validators.Task;
+namespace Jared.Validators.Tests.Task;
 
 public class TaskDetailsDtoValidatorTest
 {

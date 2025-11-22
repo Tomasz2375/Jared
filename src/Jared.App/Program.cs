@@ -15,7 +15,7 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
 
 // Add services to the container.
 builder.Services.AddValidators();
-builder.Services.AddPresentation();
+builder.Services.AddClient();
 builder.Services.AddRazorPages();
 builder.Services.AddRazorComponents();
 builder.Services.AddRadzenComponents();

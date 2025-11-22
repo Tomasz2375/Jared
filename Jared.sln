@@ -55,13 +55,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{6BA990D4-995
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Application.Tests", "tests\api\Jared.Application.Tests\Jared.Application.Tests.csproj", "{FF513C16-9A60-4444-90C8-C4EBD1871528}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Client.Tests", "Jared.Client.Tests\Jared.Client.Tests.csproj", "{BDFB2D40-98A8-4335-9AD7-4A7F29D6EEDB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Client.Tests", "tests\app\Jared.Client.Tests\Jared.Client.Tests.csproj", "{BDFB2D40-98A8-4335-9AD7-4A7F29D6EEDB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Dtos", "src\shared\Jared.Dtos\Jared.Dtos.csproj", "{41356DE2-36EA-49A0-98C9-380F5BA3F722}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Validators", "src\shared\Jared.Validators\Jared.Validators.csproj", "{D9624535-C197-46FB-BA10-2F078A853110}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Validators.Tests", "tests\shared\Jared.Validators.Tests\Jared.Validators.Tests.csproj", "{FD47F248-047C-4EBF-8654-065761AB19B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Infrastructure.Tests", "tests\api\Jared.Infrastructure.Tests\Jared.Infrastructure.Tests.csproj", "{24F12ABB-858F-4F85-8216-4BEC6A6D812D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jared.Presentation.Tests", "tests\api\Jared.Presentation.Tests\Jared.Presentation.Tests.csproj", "{487258D9-7FC7-430C-BA31-4F628BA1C3DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,6 +137,14 @@ Global
 		{FD47F248-047C-4EBF-8654-065761AB19B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD47F248-047C-4EBF-8654-065761AB19B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD47F248-047C-4EBF-8654-065761AB19B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F12ABB-858F-4F85-8216-4BEC6A6D812D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F12ABB-858F-4F85-8216-4BEC6A6D812D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F12ABB-858F-4F85-8216-4BEC6A6D812D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F12ABB-858F-4F85-8216-4BEC6A6D812D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{487258D9-7FC7-430C-BA31-4F628BA1C3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{487258D9-7FC7-430C-BA31-4F628BA1C3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{487258D9-7FC7-430C-BA31-4F628BA1C3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{487258D9-7FC7-430C-BA31-4F628BA1C3DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -160,6 +172,8 @@ Global
 		{41356DE2-36EA-49A0-98C9-380F5BA3F722} = {28BF256E-E80F-41E7-B00F-1E4886FD6099}
 		{D9624535-C197-46FB-BA10-2F078A853110} = {28BF256E-E80F-41E7-B00F-1E4886FD6099}
 		{FD47F248-047C-4EBF-8654-065761AB19B5} = {B18974FF-0804-4D1E-BB28-5583173489E5}
+		{24F12ABB-858F-4F85-8216-4BEC6A6D812D} = {6BA990D4-995B-44BB-9D37-FCE3D169F768}
+		{487258D9-7FC7-430C-BA31-4F628BA1C3DB} = {6BA990D4-995B-44BB-9D37-FCE3D169F768}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FC5AA28C-D0A6-47D5-BD33-30BFC6E5687C}

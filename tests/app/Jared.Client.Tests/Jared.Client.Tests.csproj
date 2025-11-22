@@ -7,7 +7,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\src\app\Jared.Client\Jared.Client.csproj" />
+      <ProjectReference Include="..\..\..\src\app\Jared.Client\Jared.Client.csproj" />
     </ItemGroup>
 
 </Project>

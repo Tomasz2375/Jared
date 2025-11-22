@@ -1,5 +1,4 @@
 ﻿using AutoFixture.Xunit2;
-using Jared.Application.Controllers;
 using Jared.Application.Requests.Users.List;
 using Jared.Application.Requests.Users.Login;
 using Jared.Application.Requests.Users.Password;
@@ -7,6 +6,7 @@ using Jared.Application.Requests.Users.Register;
 using Jared.Application.Requests.Users.Update;
 using Jared.Application.Requests.Users.UpdateRole;
 using Jared.Dtos.Users;
+using Jared.Presentation.Controllers;
 using Jared.Shared.Abstractions;
 using MediatR;
 using Moq;

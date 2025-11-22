@@ -1,14 +1,13 @@
 ﻿using FluentValidation.TestHelper;
-using Jared.Dtos.Tasks;
+using Jared.Dtos.Epics;
 using Jared.Shared.Enums;
-using Jared.Validators.Task;
-using TaskStatus = Jared.Shared.Enums.TaskStatus;
+using Jared.Validators.Epic;
 
-namespace Jared.Shared.Tests.Validators.Task;
+namespace Jared.Validators.Tests.Epic;
 
-public class TaskRootDtoValidatorTest
+public class EpicRootDtoValidatorTest
 {
-    private readonly TaskRootDtoValidator validator = new();
+    private readonly EpicRootDtoValidator validator = new();
 
     [Fact]
     public void Validation_WhenDtoIsValid_ShouldNotHaveAnyValidationErrors()
@@ -55,7 +54,7 @@ public class TaskRootDtoValidatorTest
 
     [Theory]
     [MemberData(nameof(StatusMemberData))]
-    public void Validation_WhenStatusIsNotValidEnumValue_ShouldReturnValidationError(TaskStatus status)
+    public void Validation_WhenStatusIsNotValidEnumValue_ShouldReturnValidationError(EpicStatus status)
     {
         // Arrange
         var dto = validDto();
@@ -69,33 +68,27 @@ public class TaskRootDtoValidatorTest
     }
 
     [Theory]
-    [MemberData(nameof(PriorityMemberData))]
-    public void Validation_WhenPriorityIsNotValidEnumValue_ShouldReturnValidationError(Priority priority)
+    [MemberData(nameof(ParentIdMemberData))]
+    public void Validation_WhenParentIdIsNotValid_ShouldReturnValidationError(int parentId)
     {
         // Arrange
         var dto = validDto();
-        dto.Priority = priority;
+        dto.ParentId = parentId;
 
         // Act
         var result = validator.TestValidate(dto);
 
         // Assert
-        result.ShouldHaveValidationErrorFor(x => x.Priority);
+        result.ShouldHaveValidationErrorFor(x => x.ParentId);
     }
 
-    private TaskRootDto validDto() => new()
+    private EpicRootDto validDto() => new()
     {
         Id = 1,
-        Title = "Task title",
-        ProjectId = 2,
-        Code = "CD-1",
-        EpicId = 3,
-        CreatedById = 10,
-        AssignedToId = 11,
-        Status = TaskStatus.Done,
-        Priority = Priority.Normal,
-        CreatedAt = new(2025, 3, 4, 19, 57, 22),
-        Deadline = new(2025, 3, 31),
+        Title = "Valid epic",
+        ParentId = null,
+        ProjectId = 1,
+        Status = EpicStatus.Created,
     };
 
     public static IEnumerable<object[]> TitleMemberData()
@@ -118,11 +111,9 @@ public class TaskRootDtoValidatorTest
         yield return new object[] { 64 };
     }
 
-#pragma warning disable S4144 // Methods should not have identical implementations
-    public static IEnumerable<object[]> PriorityMemberData()
-#pragma warning restore S4144 // Methods should not have identical implementations
+    public static IEnumerable<object[]> ParentIdMemberData()
     {
         yield return new object[] { -1 };
-        yield return new object[] { 64 };
+        yield return new object[] { 0 };
     }
 }

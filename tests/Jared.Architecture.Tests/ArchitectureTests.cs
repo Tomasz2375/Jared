@@ -78,7 +78,7 @@ public class ArchitectureTests
     public void Validators_ShouldNotHaveDependencyOnOtherProject()
     {
         // Arrange
-        var assembly = Assembly.Load(DTOS_NAMESPACE);
+        var assembly = Assembly.Load(VALIDATORS_NAMESPACE);
         var assemblyName = assembly.GetReferencedAssemblies();
 
         var otherProjects = new[]
@@ -225,7 +225,7 @@ public class ArchitectureTests
     public void Client_ShouldNotHaveDependencyOnOtherProject()
     {
         // Arrange
-        var assembly = Assembly.Load(PRESENTATION_NAMESPACE);
+        var assembly = Assembly.Load(CLIENT_NAMESPACE);
         var assemblyName = assembly.GetReferencedAssemblies();
 
         var otherProjects = new[]
@@ -250,7 +250,7 @@ public class ArchitectureTests
     public void UI_ShouldNotHaveDependencyOnOtherProject()
     {
         // Arrange
-        var assembly = Assembly.Load(PRESENTATION_NAMESPACE);
+        var assembly = Assembly.Load(UI_NAMESPACE);
         var assemblyName = assembly.GetReferencedAssemblies();
 
         var otherProjects = new[]
@@ -274,7 +274,7 @@ public class ArchitectureTests
     public void App_ShouldNotHaveDependencyOnOtherProject()
     {
         // Arrange
-        var assembly = Assembly.Load(PRESENTATION_NAMESPACE);
+        var assembly = Assembly.Load(APP_NAMESPACE);
         var assemblyName = assembly.GetReferencedAssemblies();
 
         var otherProjects = new[]

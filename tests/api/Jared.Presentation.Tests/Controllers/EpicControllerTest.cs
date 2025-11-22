@@ -1,11 +1,11 @@
 ﻿using AutoFixture.Xunit2;
-using Jared.Application.Controllers;
 using Jared.Application.Requests.Epics.Create;
 using Jared.Application.Requests.Epics.Details;
 using Jared.Application.Requests.Epics.List;
 using Jared.Application.Requests.Epics.Page;
 using Jared.Application.Requests.Epics.Update;
 using Jared.Dtos.Epics;
+using Jared.Presentation.Controllers;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Enums;
 using MediatR;
