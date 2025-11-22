@@ -1,7 +1,6 @@
 ﻿using Jared.Client.Commons;
-using Jared.Client.Requests.Epics.Create;
-using Jared.Client.Requests.Epics.List;
-using Jared.Client.Requests.Projects.List;
+using Jared.Contracts.Epics;
+using Jared.Contracts.Projects;
 using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 

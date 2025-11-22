@@ -1,4 +1,4 @@
-﻿using Jared.Application.Requests.WorkLogs.Statistics;
+﻿using Jared.Contracts.Worklogs;
 using Jared.Dtos.WorkLogs;
 using Jared.Shared.Abstractions;
 using MediatR;

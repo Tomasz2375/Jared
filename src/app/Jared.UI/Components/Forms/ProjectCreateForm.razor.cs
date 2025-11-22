@@ -1,5 +1,5 @@
 ﻿using Jared.Client.Commons;
-using Jared.Client.Requests.Projects.Create;
+using Jared.Contracts.Projects;
 using Jared.Dtos.Projects;
 
 namespace Jared.UI.Components.Forms;

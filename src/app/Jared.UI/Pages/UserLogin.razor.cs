@@ -1,4 +1,4 @@
-﻿using Jared.Client.Requests.User.Login;
+﻿using Jared.Contracts.Users;
 using Jared.Dtos.Users;
 using Microsoft.AspNetCore.WebUtilities;
 

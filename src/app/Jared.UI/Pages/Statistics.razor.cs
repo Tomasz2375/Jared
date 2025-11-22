@@ -1,5 +1,5 @@
-﻿using Jared.Client.Requests.User.List;
-using Jared.Client.Requests.WorkLogs.Statistics;
+﻿using Jared.Contracts.Users;
+using Jared.Contracts.Worklogs;
 using Jared.Dtos.Users;
 using Jared.Dtos.WorkLogs;
 using Jared.Shared.Enums;

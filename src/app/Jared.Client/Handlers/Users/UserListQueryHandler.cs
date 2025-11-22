@@ -1,0 +1,28 @@
+﻿using System.Net.Http.Json;
+using Jared.Client.Handlers;
+using Jared.Contracts.Users;
+using Jared.Dtos.Users;
+using Jared.Shared.Abstractions;
+using MediatR;
+
+namespace Jared.Client.Requests.Users;
+
+public class UserListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<UserListQuery, Result<List<UserListDto>>>
+{
+    private readonly HttpClient httpClient = httpClient;
+
+    public async Task<Result<List<UserListDto>>> Handle(UserListQuery request, CancellationToken cancellationToken)
+    {
+        string baseUrl = BaseAdresses.USER_LIST;
+
+        var response = await httpClient.GetFromJsonAsync<Result<List<UserListDto>>>(baseUrl, cancellationToken);
+
+        if (response is null)
+        {
+            return Result.Fail<List<UserListDto>>("Invalid response type");
+        }
+
+        return response;
+    }
+}

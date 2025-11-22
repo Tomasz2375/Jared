@@ -1,5 +1,5 @@
 ﻿using AutoFixture.Xunit2;
-using Jared.Application.Requests.Roles.List;
+using Jared.Contracts.Roles;
 using Jared.Dtos.Roles;
 using Jared.Presentation.Controllers;
 using Jared.Shared.Abstractions;

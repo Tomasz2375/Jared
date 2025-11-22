@@ -1,6 +1,5 @@
-﻿using Jared.Client.Requests.Roles.List;
-using Jared.Client.Requests.User.List;
-using Jared.Client.Requests.User.UpdateRole;
+﻿using Jared.Contracts.Roles;
+using Jared.Contracts.Users;
 using Jared.Dtos.Users;
 
 namespace Jared.UI.Pages;

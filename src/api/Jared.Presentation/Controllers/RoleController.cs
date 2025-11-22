@@ -1,4 +1,4 @@
-﻿using Jared.Application.Requests.Roles.List;
+﻿using Jared.Contracts.Roles;
 using Jared.Dtos.Roles;
 using Jared.Shared.Abstractions;
 using MediatR;

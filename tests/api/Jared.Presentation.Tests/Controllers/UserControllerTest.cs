@@ -1,10 +1,5 @@
 ﻿using AutoFixture.Xunit2;
-using Jared.Application.Requests.Users.List;
-using Jared.Application.Requests.Users.Login;
-using Jared.Application.Requests.Users.Password;
-using Jared.Application.Requests.Users.Register;
-using Jared.Application.Requests.Users.Update;
-using Jared.Application.Requests.Users.UpdateRole;
+using Jared.Contracts.Users;
 using Jared.Dtos.Users;
 using Jared.Presentation.Controllers;
 using Jared.Shared.Abstractions;

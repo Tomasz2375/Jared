@@ -1,6 +1,5 @@
 ﻿using Jared.Client.Commons;
-using Jared.Client.Requests.Projects.Details;
-using Jared.Client.Requests.Projects.Update;
+using Jared.Contracts.Projects;
 using Jared.Dtos.Projects;
 using Microsoft.AspNetCore.Components;
 

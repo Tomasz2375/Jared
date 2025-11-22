@@ -1,9 +1,8 @@
 ﻿using Jared.Client.Commons;
-using Jared.Client.Requests.Epics.List;
-using Jared.Client.Requests.Projects.List;
-using Jared.Client.Requests.Tasks.Create;
-using Jared.Client.Requests.Tasks.List;
-using Jared.Client.Requests.User.List;
+using Jared.Contracts.Epics;
+using Jared.Contracts.Projects;
+using Jared.Contracts.Tasks;
+using Jared.Contracts.Users;
 using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Tasks;

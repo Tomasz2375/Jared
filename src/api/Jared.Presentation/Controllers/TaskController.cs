@@ -1,8 +1,4 @@
-﻿using Jared.Application.Requests.Tasks.Create;
-using Jared.Application.Requests.Tasks.Details;
-using Jared.Application.Requests.Tasks.List;
-using Jared.Application.Requests.Tasks.Page;
-using Jared.Application.Requests.Tasks.Update;
+﻿using Jared.Contracts.Tasks;
 using Jared.Dtos.Tasks;
 using Jared.Shared.Abstractions;
 using Jared.Shared.Enums;

@@ -1,6 +1,5 @@
 ﻿using Jared.Client.Commons;
-using Jared.Client.Requests.Tasks.Details;
-using Jared.Client.Requests.Tasks.Update;
+using Jared.Contracts.Tasks;
 using Jared.Dtos.Tasks;
 using Microsoft.AspNetCore.Components;
 

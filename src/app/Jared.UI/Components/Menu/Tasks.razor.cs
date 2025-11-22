@@ -1,4 +1,4 @@
-﻿using Jared.Client.Requests.Projects.List;
+﻿using Jared.Contracts.Projects;
 using Jared.UI.Components.Forms;
 
 namespace Jared.UI.Components.Menu;

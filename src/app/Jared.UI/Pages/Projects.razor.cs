@@ -1,5 +1,5 @@
 ﻿using Jared.Client.ColumnDefinitions;
-using Jared.Client.Requests.Projects.Page;
+using Jared.Contracts.Projects;
 using Jared.Dtos.Projects;
 using Microsoft.AspNetCore.Components;
 
@@ -17,7 +17,12 @@ public partial class Projects : ComponentBase
 
     private async Task sendPageQuery(Query query)
     {
-        var result = await Mediator.Send(new ProjectPageQuery(query));
+        var result = await Mediator.Send(new ProjectPageQuery(
+            query.Page,
+            query.PageSize,
+            query.SortingProperty,
+            query.SortingDirection,
+            query.Filter));
 
         if (!result.Success)
         {

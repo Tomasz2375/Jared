@@ -1,5 +1,5 @@
 ﻿using Jared.Client.ColumnDefinitions;
-using Jared.Client.Requests.Epics.Page;
+using Jared.Contracts.Epics;
 using Jared.Dtos.Epics;
 
 namespace Jared.UI.Pages;
@@ -16,7 +16,12 @@ public partial class Epics
 
     private async Task sendPageQuery(Query query)
     {
-        var result = await Mediator.Send(new EpicPageQuery(query));
+        var result = await Mediator.Send(new EpicPageQuery(
+            query.Page,
+            query.PageSize,
+            query.SortingProperty,
+            query.SortingDirection,
+            query.Filter));
 
         if (!result.Success)
         {

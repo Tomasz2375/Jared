@@ -1,0 +1,31 @@
+﻿using System.Net.Http.Json;
+using Jared.Contracts.Epics;
+using Jared.Dtos.Epics;
+using Jared.Shared.Abstractions;
+using MediatR;
+
+namespace Jared.Client.Handlers.Epics;
+
+public class EpicListQueryHandler(HttpClient httpClient)
+    : IRequestHandler<EpicListQuery, Result<List<EpicListDto>>>
+{
+    private readonly HttpClient httpClient = httpClient;
+
+    public async Task<Result<List<EpicListDto>>> Handle(EpicListQuery request, CancellationToken cancellationToken)
+    {
+        string baseUrl = BaseAdresses.EPIC_LIST;
+        string queryUrl = request.projectId is null
+            ? string.Empty
+            : $"?projectId={request.projectId}";
+        string url = baseUrl + queryUrl;
+
+        var response = await httpClient.GetFromJsonAsync<Result<List<EpicListDto>>>(url, cancellationToken);
+
+        if (response is null)
+        {
+            return Result.Fail<List<EpicListDto>>("Invalid response type");
+        }
+
+        return response;
+    }
+}

@@ -1,5 +1,5 @@
 ﻿using Jared.Client.ColumnDefinitions;
-using Jared.Client.Requests.Tasks.Page;
+using Jared.Contracts.Tasks;
 using Jared.Dtos.Tasks;
 using Microsoft.AspNetCore.Components;
 
@@ -22,7 +22,12 @@ public partial class Tasks
 
     private async Task sendPageQuery(Query query)
     {
-        var result = await Mediator.Send(new TaskPageQuery(query));
+        var result = await Mediator.Send(new TaskPageQuery(
+            query.Page,
+            query.PageSize,
+            query.SortingProperty,
+            query.SortingDirection,
+            query.Filter));
 
         if (!result.Success)
         {

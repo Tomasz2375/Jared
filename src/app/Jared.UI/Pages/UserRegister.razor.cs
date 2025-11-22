@@ -1,4 +1,4 @@
-﻿using Jared.Client.Requests.User.Register;
+﻿using Jared.Contracts.Users;
 using Jared.Dtos.Users;
 using Microsoft.AspNetCore.Components;
 
