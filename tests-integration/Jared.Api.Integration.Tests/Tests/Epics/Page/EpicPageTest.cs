@@ -20,16 +20,11 @@ public class EpicPageTest(JaredWebApplicationFactory factory) : BaseIntegrationT
         {
             Data = new()
             {
-                Pagination = new()
-                {
-                    CurrentPage = 1,
-                    ItemFrom = 1,
-                    ItemTo = 2,
-                    ItemsCount = 4,
-                    PageCount = 2,
-                    PageSize = 2,
-                },
-                Epics = new()
+                Page = 1,
+                PageSize = 2,
+                TotalItems = 4,
+                TotalPages = 2,
+                Items = new()
                 {
                     EpicIntegrationFaker.FirstEpic.Adapt<EpicListDto>(),
                     EpicIntegrationFaker.SecondEpic.Adapt<EpicListDto>(),
@@ -43,7 +38,7 @@ public class EpicPageTest(JaredWebApplicationFactory factory) : BaseIntegrationT
         // Assert
         response.Should().BeEquivalentTo(
             expectedResponse,
-            options => options.WithStrictOrderingFor(x => x.Data.Epics));
+            options => options.WithStrictOrderingFor(x => x.Data.Items));
     }
 
     [Fact]
@@ -55,16 +50,11 @@ public class EpicPageTest(JaredWebApplicationFactory factory) : BaseIntegrationT
         {
             Data = new()
             {
-                Pagination = new()
-                {
-                    CurrentPage = 1,
-                    ItemFrom = 1,
-                    ItemTo = 2,
-                    ItemsCount = 4,
-                    PageCount = 2,
-                    PageSize = 2,
-                },
-                Epics = new()
+                Page = 1,
+                PageSize = 2,
+                TotalItems = 4,
+                TotalPages = 2,
+                Items = new()
                 {
                     EpicIntegrationFaker.FourthEpic.Adapt<EpicListDto>(),
                     EpicIntegrationFaker.ThirdEpic.Adapt<EpicListDto>(),
@@ -78,7 +68,7 @@ public class EpicPageTest(JaredWebApplicationFactory factory) : BaseIntegrationT
         // Assert
         response.Should().BeEquivalentTo(
             expectedResponse,
-            options => options.WithStrictOrderingFor(x => x.Data.Epics));
+            options => options.WithStrictOrderingFor(x => x.Data.Items));
     }
 
     [Fact]
@@ -90,16 +80,11 @@ public class EpicPageTest(JaredWebApplicationFactory factory) : BaseIntegrationT
         {
             Data = new()
             {
-                Pagination = new()
-                {
-                    CurrentPage = 1,
-                    ItemFrom = 1,
-                    ItemTo = 1,
-                    ItemsCount = 1,
-                    PageCount = 1,
-                    PageSize = 10,
-                },
-                Epics = new()
+                Page = 1,
+                PageSize = 10,
+                TotalItems = 1,
+                TotalPages = 1,
+                Items = new()
                 {
                     EpicIntegrationFaker.FirstEpic.Adapt<EpicListDto>(),
                 },
