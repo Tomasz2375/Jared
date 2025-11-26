@@ -50,9 +50,9 @@ public class EpicPageQueryHandler(HttpClient httpClient)
             queryBuilder.Append(query.sortingDirection);
         }
 
-        if (query.filter is not null)
+        if (query.filters is not null)
         {
-            var filters = query.filter.Select(x => "&" + x.Key + "=" + x.Value);
+            var filters = query.filters.Select(x => "&" + x.Key + "=" + x.Value);
             queryBuilder.Append(string.Join(string.Empty, filters));
         }
 
