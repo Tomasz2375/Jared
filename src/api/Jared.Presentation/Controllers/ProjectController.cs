@@ -19,12 +19,6 @@ public class ProjectController(IMediator mediator)
         return await mediator.Send(new ProjectDetailsQuery(id));
     }
 
-    [HttpGet("List")]
-    public async Task<Result<List<ProjectListDto>>> ProjectListAsync()
-    {
-        return await mediator.Send(new ProjectListQuery());
-    }
-
     [HttpGet("Page")]
     public async Task<Result<ProjectPageDto>> ProjectPageAsync(
         [FromQuery] int page,

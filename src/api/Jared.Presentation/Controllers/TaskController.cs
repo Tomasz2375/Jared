@@ -20,12 +20,6 @@ public class TaskController(IMediator mediator) : ControllerBase
         return await mediator.Send(new TaskDetailsQuery(id));
     }
 
-    [HttpGet("List")]
-    public async Task<Result<List<TaskListDto>>> TaskListAsync([FromQuery] int? projectId, [FromQuery] int? epicId)
-    {
-        return await mediator.Send(new TaskListQuery(projectId, epicId));
-    }
-
     [HttpGet("Page")]
     public async Task<Result<TaskPageDto>> TaskPageAsync(
         [FromQuery] int page,

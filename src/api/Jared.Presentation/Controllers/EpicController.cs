@@ -20,13 +20,6 @@ public class EpicController(IMediator mediator)
     }
 
     [HttpGet]
-    [Route("List")]
-    public async Task<Result<List<EpicListDto>>> EpicListAsync([FromQuery] int? projectId)
-    {
-        return await mediator.Send(new EpicListQuery(projectId));
-    }
-
-    [HttpGet]
     [Route("Page")]
     public async Task<Result<EpicPageDto>> EpicPageAsync(
         [FromQuery] int page,
