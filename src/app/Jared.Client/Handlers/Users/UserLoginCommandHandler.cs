@@ -1,6 +1,6 @@
 ﻿using Jared.Client.Handlers;
 using Jared.Contracts.Users;
-using Jared.Shared.Abstractions;
+using Jared.Core.Abstractions;
 using MediatR;
 using System.Net.Http.Json;
 

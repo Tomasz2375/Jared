@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using Jared.Contracts.Roles;
+using Jared.Core.Abstractions;
 using Jared.Dtos.Roles;
-using Jared.Shared.Abstractions;
 using MediatR;
 
 namespace Jared.Client.Handlers.Roles;

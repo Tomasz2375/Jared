@@ -1,8 +1,8 @@
 ﻿using Jared.Contracts.Projects;
+using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
 using Jared.Dtos.Projects;
-using Jared.Shared.Abstractions;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

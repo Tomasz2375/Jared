@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
 using Jared.Application.Services.Filters;
 using Jared.Contracts.Projects;
+using Jared.Core.Abstractions;
+using Jared.Core.Enums;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
 using Jared.Dtos.Projects;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Enums;
 using MapsterMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

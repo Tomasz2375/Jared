@@ -15,7 +15,7 @@ COPY ["src/api/Jared.Presentation/Jared.Presentation.csproj", "src/api/Jared.Pre
 COPY ["src/api/Jared.Infrastructure/Jared.Infrastructure.csproj", "src/api/Jared.Infrastructure/"]
 COPY ["src/api/Jared.Application/Jared.Application.csproj", "src/api/Jared.Application/"]
 COPY ["src/api/Jared.Domain/Jared.Domain.csproj", "src/api/Jared.Domain/"]
-COPY ["src/shared/Jared.Shared/Jared.Shared.csproj", "src/shared/Jared.Shared/"]
+COPY ["src/shared/Jared.Core/Jared.Core.csproj", "src/shared/Jared.Core/"]
 COPY ["src/shared/Jared.Dtos/Jared.Dtos.csproj", "src/shared/Jared.Dtos/"]
 COPY ["src/shared/Jared.Validators/Jared.Validators.csproj", "src/shared/Jared.Validators/"]
 COPY ["src/shared/Jared.Contracts/Jared.Contracts.csproj", "src/shared/Jared.Contracts/"]

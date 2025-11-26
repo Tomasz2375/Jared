@@ -1,5 +1,5 @@
-﻿using Jared.Dtos.Roles;
-using Jared.Shared.Abstractions;
+﻿using Jared.Core.Abstractions;
+using Jared.Dtos.Roles;
 using MediatR;
 
 namespace Jared.Contracts.Roles;

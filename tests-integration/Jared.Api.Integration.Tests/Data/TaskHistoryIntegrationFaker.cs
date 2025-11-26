@@ -1,5 +1,5 @@
-﻿using Jared.Domain.Models;
-using Jared.Shared.Enums;
+﻿using Jared.Core.Enums;
+using Jared.Domain.Models;
 using Task = Jared.Domain.Models.Task;
 
 namespace Jared.Api.Integration.Tests.Data;

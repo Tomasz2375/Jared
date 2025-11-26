@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Abstractions;
+﻿using Jared.Core.Abstractions;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Serilog.Context;

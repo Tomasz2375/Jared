@@ -1,8 +1,8 @@
 ﻿using Jared.Application.Services.User;
 using Jared.Contracts.Users;
+using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
-using Jared.Shared.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

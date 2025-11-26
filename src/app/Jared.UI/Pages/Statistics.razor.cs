@@ -1,8 +1,8 @@
 ﻿using Jared.Contracts.Users;
 using Jared.Contracts.Worklogs;
+using Jared.Core.Enums;
 using Jared.Dtos.Users;
 using Jared.Dtos.WorkLogs;
-using Jared.Shared.Enums;
 
 namespace Jared.UI.Pages;
 

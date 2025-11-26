@@ -1,5 +1,5 @@
-﻿using Jared.Dtos.Projects;
-using Jared.Shared.Abstractions;
+﻿using Jared.Core.Abstractions;
+using Jared.Dtos.Projects;
 using MediatR;
 
 namespace Jared.Contracts.Projects;

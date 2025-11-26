@@ -1,6 +1,6 @@
 ﻿using Jared.Contracts.Worklogs;
+using Jared.Core.Abstractions;
 using Jared.Dtos.WorkLogs;
-using Jared.Shared.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

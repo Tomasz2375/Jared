@@ -1,8 +1,8 @@
 ﻿using FluentValidation.TestHelper;
+using Jared.Core.Enums;
 using Jared.Dtos.Tasks;
-using Jared.Shared.Enums;
 using Jared.Validators.Task;
-using TaskStatus = Jared.Shared.Enums.TaskStatus;
+using TaskStatus = Jared.Core.Enums.TaskStatus;
 
 namespace Jared.Validators.Tests.Task;
 

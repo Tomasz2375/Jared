@@ -1,6 +1,6 @@
 ﻿using Jared.Contracts.Users;
+using Jared.Core.Abstractions;
 using Jared.Dtos.Users;
-using Jared.Shared.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

@@ -27,8 +27,8 @@ public partial class TaskCreateForm
         await getUsersAsync();
 
         Dto.Deadline = DateTime.Now.Date;
-        Dto.Priority = Shared.Enums.Priority.Normal;
-        Dto.Status = Shared.Enums.TaskStatus.Created;
+        Dto.Priority = Core.Enums.Priority.Normal;
+        Dto.Status = Core.Enums.TaskStatus.Created;
         Dto.ParentId = null;
         Dto.CreatedById = UserService.GetUserId();
     }

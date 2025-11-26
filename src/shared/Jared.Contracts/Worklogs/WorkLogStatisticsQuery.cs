@@ -1,5 +1,5 @@
-﻿using Jared.Dtos.WorkLogs;
-using Jared.Shared.Abstractions;
+﻿using Jared.Core.Abstractions;
+using Jared.Dtos.WorkLogs;
 using MediatR;
 
 namespace Jared.Contracts.Worklogs;

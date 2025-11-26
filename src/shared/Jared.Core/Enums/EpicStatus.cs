@@ -1,7 +1,7 @@
-﻿namespace Jared.Shared.Enums;
+﻿namespace Jared.Core.Enums;
 
 [Flags]
-public enum TaskStatus
+public enum EpicStatus
 {
     None = 0,
     Created = 1,

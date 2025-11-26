@@ -1,10 +1,9 @@
 ﻿using System.Net.Http.Json;
 using System.Text;
-using Jared.Client.ColumnDefinitions;
 using Jared.Client.Handlers;
 using Jared.Contracts.Tasks;
+using Jared.Core.Abstractions;
 using Jared.Dtos.Tasks;
-using Jared.Shared.Abstractions;
 using MediatR;
 
 namespace Jared.Client.Requests.Tasks;

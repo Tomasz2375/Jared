@@ -1,5 +1,5 @@
-﻿using Jared.Shared.Enums;
-using TaskStatus = Jared.Shared.Enums.TaskStatus;
+﻿using Jared.Core.Enums;
+using TaskStatus = Jared.Core.Enums.TaskStatus;
 
 namespace Jared.Dtos.Tasks;
 

@@ -1,4 +1,4 @@
-﻿using Jared.Shared.Enums;
+﻿using Jared.Core.Enums;
 using System.Linq.Expressions;
 
 namespace Jared.Client.ColumnDefinitions.Abstraction;

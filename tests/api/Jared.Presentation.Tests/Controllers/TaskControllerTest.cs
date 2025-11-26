@@ -1,9 +1,9 @@
 ﻿using AutoFixture.Xunit2;
 using Jared.Contracts.Tasks;
+using Jared.Core.Abstractions;
+using Jared.Core.Enums;
 using Jared.Dtos.Tasks;
 using Jared.Presentation.Controllers;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Enums;
 using MediatR;
 using Moq;
 

@@ -1,6 +1,6 @@
 ﻿using Jared.Client.ColumnDefinitions.Abstraction;
+using Jared.Core.Enums;
 using Jared.Dtos.Projects;
-using Jared.Shared.Enums;
 
 namespace Jared.Client.ColumnDefinitions;
 

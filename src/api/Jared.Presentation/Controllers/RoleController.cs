@@ -1,6 +1,6 @@
 ﻿using Jared.Contracts.Roles;
+using Jared.Core.Abstractions;
 using Jared.Dtos.Roles;
-using Jared.Shared.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

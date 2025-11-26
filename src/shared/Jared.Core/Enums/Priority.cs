@@ -1,4 +1,4 @@
-﻿namespace Jared.Shared.Enums;
+﻿namespace Jared.Core.Enums;
 
 [Flags]
 public enum Priority

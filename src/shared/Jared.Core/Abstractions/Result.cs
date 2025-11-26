@@ -1,4 +1,4 @@
-﻿namespace Jared.Shared.Abstractions;
+﻿namespace Jared.Core.Abstractions;
 
 public class Result
 {

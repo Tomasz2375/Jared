@@ -1,8 +1,8 @@
 ﻿using System.Net.Http.Json;
 using FluentAssertions;
 using Jared.Api.Integration.Tests.Data;
+using Jared.Core.Abstractions;
 using Jared.Dtos.Epics;
-using Jared.Shared.Abstractions;
 using Mapster;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Details;

@@ -1,5 +1,5 @@
-﻿using Jared.Dtos.Users;
-using Jared.Shared.Abstractions;
+﻿using Jared.Core.Abstractions;
+using Jared.Dtos.Users;
 using MediatR;
 
 namespace Jared.Contracts.Users;

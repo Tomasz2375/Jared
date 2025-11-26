@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using Jared.Contracts.Epics;
-using Jared.Shared.Abstractions;
+using Jared.Core.Abstractions;
 using MediatR;
 
 namespace Jared.Client.Handlers.Epics;

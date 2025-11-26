@@ -1,7 +1,7 @@
 ﻿using Jared.Contracts.Epics;
+using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
-using Jared.Shared.Abstractions;
 using MapsterMapper;
 using MediatR;
 

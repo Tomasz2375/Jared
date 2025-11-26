@@ -1,6 +1,6 @@
 ﻿using Jared.Client.Abstractions;
 using Jared.Client.Entities;
-using Jared.Shared.Enums;
+using Jared.Core.Enums;
 
 namespace Jared.Client.Services;
 

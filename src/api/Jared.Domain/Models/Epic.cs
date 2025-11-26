@@ -1,5 +1,5 @@
-﻿using Jared.Domain.Abstractions;
-using Jared.Shared.Enums;
+﻿using Jared.Core.Enums;
+using Jared.Domain.Abstractions;
 
 namespace Jared.Domain.Models;
 

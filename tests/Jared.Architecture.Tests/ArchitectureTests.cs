@@ -5,7 +5,7 @@ namespace Jared.Architecture.Tests;
 public class ArchitectureTests
 {
     #region const
-    private const string SHARED_NAMESPACE = "Jared.Shared";
+    private const string CORE_NAMESPACE = "Jared.Core";
     private const string DTOS_NAMESPACE = "Jared.Dtos";
     private const string VALIDATORS_NAMESPACE = "Jared.Validators";
     private const string DOMAIN_NAMESPACE = "Jared.Domain";
@@ -18,12 +18,12 @@ public class ArchitectureTests
     private const string APP_NAMESPACE = "Jared.App";
     #endregion
 
-    #region shared
+    #region core
     [Fact]
-    public void Shared_ShouldNotHaveDependencyOnOtherProject()
+    public void Core_ShouldNotHaveDependencyOnOtherProject()
     {
         // Arrange
-        var assembly = Assembly.Load(SHARED_NAMESPACE);
+        var assembly = Assembly.Load(CORE_NAMESPACE);
         var assemblyName = assembly.GetReferencedAssemblies();
 
         var otherProjects = new[]

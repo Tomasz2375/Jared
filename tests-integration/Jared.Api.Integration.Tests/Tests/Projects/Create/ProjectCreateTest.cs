@@ -1,7 +1,7 @@
 ﻿using System.Net.Http.Json;
 using FluentAssertions;
+using Jared.Core.Abstractions;
 using Jared.Dtos.Projects;
-using Jared.Shared.Abstractions;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Create;
 

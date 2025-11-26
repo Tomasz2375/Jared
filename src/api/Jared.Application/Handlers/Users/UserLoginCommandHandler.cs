@@ -2,10 +2,10 @@
 using System.Security.Claims;
 using System.Text;
 using Jared.Contracts.Users;
+using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
 using Jared.Domain.Options;
-using Jared.Shared.Abstractions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

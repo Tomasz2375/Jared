@@ -1,7 +1,7 @@
 ﻿using Jared.Contracts.Tasks;
+using Jared.Core.Abstractions;
+using Jared.Core.Enums;
 using Jared.Dtos.Tasks;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

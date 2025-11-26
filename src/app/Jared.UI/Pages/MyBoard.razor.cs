@@ -1,7 +1,7 @@
 ﻿using Jared.Client.ColumnDefinitions;
 using Jared.Contracts.Tasks;
+using Jared.Core.Enums;
 using Jared.Dtos.Tasks;
-using Jared.Shared.Enums;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Pages;

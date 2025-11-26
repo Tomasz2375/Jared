@@ -1,8 +1,8 @@
 ﻿using AutoFixture.Xunit2;
 using Jared.Contracts.Roles;
+using Jared.Core.Abstractions;
 using Jared.Dtos.Roles;
 using Jared.Presentation.Controllers;
-using Jared.Shared.Abstractions;
 using MediatR;
 using Moq;
 

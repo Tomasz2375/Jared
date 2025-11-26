@@ -1,7 +1,7 @@
 ﻿using Jared.Client.ColumnDefinitions;
 using Jared.Client.ColumnDefinitions.Abstraction;
+using Jared.Core.Enums;
 using Jared.Dtos;
-using Jared.Shared.Enums;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Components.Advanced;

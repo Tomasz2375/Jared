@@ -1,6 +1,6 @@
 ﻿using FluentValidation.TestHelper;
+using Jared.Core.Enums;
 using Jared.Dtos.Epics;
-using Jared.Shared.Enums;
 using Jared.Validators.Epic;
 
 namespace Jared.Validators.Tests.Epic;
