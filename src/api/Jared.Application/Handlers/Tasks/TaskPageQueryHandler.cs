@@ -5,7 +5,6 @@ using Jared.Contracts.Tasks;
 using Jared.Domain.Abstractions;
 using Jared.Dtos.Tasks;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.PageDtos;
 using Jared.Shared.Enums;
 using MapsterMapper;
 using MediatR;
@@ -35,17 +34,18 @@ public class TaskPageQueryHandler(
                 .Include(x => x.CreatedBy)
                 .Include(x => x.AssignedTo)
                 .AsNoTracking();
-
-            tasksQuery = filterResult(tasksQuery, query);
-            var pagination = createPagination(tasksQuery, query);
-            tasksQuery = sortResult(tasksQuery, query);
-            tasksQuery = paginateResult(tasksQuery, query);
-            var tasks = await tasksQuery.ToListAsync();
-
+            var filteredQuery = applyFilters(tasksQuery, query);
+            var totalCount = await filteredQuery.CountAsync();
+            var sortedQuery = applySorting(filteredQuery, query);
+            var paginatedQuery = applyPagination(sortedQuery, query);
+            var tasks = await paginatedQuery.ToListAsync();
             TaskPageDto result = new()
             {
-                Pagination = pagination,
-                Tasks = mapper.Map<List<TaskListDto>>(tasks),
+                Items = mapper.Map<List<TaskListDto>>(tasks),
+                Page = query.page,
+                PageSize = query.pageSize,
+                TotalItems = totalCount,
+                TotalPages = (totalCount + query.pageSize - 1) / query.pageSize,
             };
 
             return Result.Ok(result);
@@ -56,7 +56,7 @@ public class TaskPageQueryHandler(
         }
     }
 
-    private static IQueryable<Domain.Models.Task> sortResult(
+    private static IQueryable<Domain.Models.Task> applySorting(
         IQueryable<Domain.Models.Task> tasks,
         TaskPageQuery query)
     {
@@ -83,7 +83,7 @@ public class TaskPageQueryHandler(
             tasks.OrderBy(sortByExpression);
     }
 
-    private static IQueryable<Domain.Models.Task> paginateResult(
+    private static IQueryable<Domain.Models.Task> applyPagination(
         IQueryable<Domain.Models.Task> tasks,
         TaskPageQuery query)
     {
@@ -92,7 +92,7 @@ public class TaskPageQueryHandler(
             .Take(query.pageSize);
     }
 
-    private IQueryable<Domain.Models.Task> filterResult(
+    private IQueryable<Domain.Models.Task> applyFilters(
         IQueryable<Domain.Models.Task> tasks,
         TaskPageQuery query)
     {
@@ -107,22 +107,5 @@ public class TaskPageQueryHandler(
         }
 
         return tasks;
-    }
-
-    private PaginationDto createPagination(
-        IQueryable<Domain.Models.Task> tasks,
-        TaskPageQuery query)
-    {
-        return new()
-        {
-            ItemsCount = tasks.Count(),
-            ItemFrom = ((query.page - 1) * query.pageSize) + 1,
-            ItemTo = query.page * query.pageSize > tasks.Count() ?
-                tasks.Count() :
-                query.page * query.pageSize,
-            CurrentPage = query.page,
-            PageSize = query.pageSize,
-            PageCount = (tasks.Count() + query.pageSize - 1) / query.pageSize,
-        };
     }
 }

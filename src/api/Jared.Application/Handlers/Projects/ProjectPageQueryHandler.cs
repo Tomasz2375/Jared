@@ -5,7 +5,6 @@ using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
 using Jared.Dtos.Projects;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.PageDtos;
 using Jared.Shared.Enums;
 using MapsterMapper;
 using MediatR;
@@ -31,17 +30,18 @@ public class ProjectPageQueryHandler(
             var projectsQuery = dataContext
                 .Set<Project>()
                 .AsNoTracking();
-
-            projectsQuery = filterResult(projectsQuery, query);
-            var pagination = createPagination(projectsQuery, query);
-            projectsQuery = sortResult(projectsQuery, query);
-            projectsQuery = paginateResult(projectsQuery, query);
-            var projects = await projectsQuery.ToListAsync();
-
+            var filteredQuery = applyFilters(projectsQuery, query);
+            var totalCount = await filteredQuery.CountAsync();
+            var sortedQuery = applySorting(filteredQuery, query);
+            var paginatedQuery = applyPagination(sortedQuery, query);
+            var projects = await paginatedQuery.ToListAsync();
             ProjectPageDto result = new()
             {
-                Pagination = pagination,
-                Projects = mapper.Map<List<ProjectListDto>>(projects),
+                Items = mapper.Map<List<ProjectListDto>>(projects),
+                Page = query.page,
+                PageSize = query.pageSize,
+                TotalItems = totalCount,
+                TotalPages = (totalCount + query.pageSize - 1) / query.pageSize,
             };
 
             return Result.Ok(result);
@@ -52,7 +52,7 @@ public class ProjectPageQueryHandler(
         }
     }
 
-    private static IQueryable<Project> sortResult(
+    private static IQueryable<Project> applySorting(
         IQueryable<Project> projects,
         ProjectPageQuery query)
     {
@@ -75,7 +75,7 @@ public class ProjectPageQueryHandler(
             projects.OrderBy(sortByExpression);
     }
 
-    private static IQueryable<Project> paginateResult(
+    private static IQueryable<Project> applyPagination(
         IQueryable<Project> projects,
         ProjectPageQuery query)
     {
@@ -84,7 +84,7 @@ public class ProjectPageQueryHandler(
             .Take(query.pageSize);
     }
 
-    private IQueryable<Project> filterResult(
+    private IQueryable<Project> applyFilters(
         IQueryable<Project> projects,
         ProjectPageQuery query)
     {
@@ -99,22 +99,5 @@ public class ProjectPageQueryHandler(
         }
 
         return projects;
-    }
-
-    private PaginationDto createPagination(
-        IQueryable<Project> projects,
-        ProjectPageQuery query)
-    {
-        return new()
-        {
-            ItemsCount = projects.Count(),
-            ItemFrom = ((query.page - 1) * query.pageSize) + 1,
-            ItemTo = query.page * query.pageSize > projects.Count() ?
-                projects.Count() :
-                query.page * query.pageSize,
-            CurrentPage = query.page,
-            PageSize = query.pageSize,
-            PageCount = (projects.Count() + query.pageSize - 1) / query.pageSize,
-        };
     }
 }

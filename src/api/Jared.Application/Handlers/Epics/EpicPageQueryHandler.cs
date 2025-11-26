@@ -5,7 +5,6 @@ using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
 using Jared.Dtos.Epics;
 using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.PageDtos;
 using Jared.Shared.Enums;
 using MapsterMapper;
 using MediatR;
@@ -32,17 +31,18 @@ public class EpicPageQueryHandler(
                 .Set<Epic>()
                 .Include(x => x.Project)
                 .AsNoTracking();
-
-            epicsQuery = filterResult(epicsQuery, query);
-            var pagination = createPagination(epicsQuery, query);
-            epicsQuery = sortResult(epicsQuery, query);
-            epicsQuery = paginateResult(epicsQuery, query);
-            var epics = await epicsQuery.ToListAsync();
-
+            var filteredQuery = applyFilters(epicsQuery, query);
+            var totalCount = await filteredQuery.CountAsync();
+            var sortedQuery = applySorting(filteredQuery, query);
+            var paginatedQuery = applyPagination(sortedQuery, query);
+            var epics = await paginatedQuery.ToListAsync();
             EpicPageDto result = new()
             {
-                Pagination = pagination,
-                Epics = mapper.Map<List<EpicListDto>>(epics),
+                Items = mapper.Map<List<EpicListDto>>(epics),
+                Page = query.page,
+                PageSize = query.pageSize,
+                TotalItems = totalCount,
+                TotalPages = (totalCount + query.pageSize - 1) / query.pageSize,
             };
 
             return Result.Ok(result);
@@ -53,7 +53,7 @@ public class EpicPageQueryHandler(
         }
     }
 
-    private static IQueryable<Epic> sortResult(
+    private static IQueryable<Epic> applySorting(
         IQueryable<Epic> epics,
         EpicPageQuery query)
     {
@@ -78,7 +78,7 @@ public class EpicPageQueryHandler(
             epics.OrderBy(sortByExpression);
     }
 
-    private static IQueryable<Epic> paginateResult(
+    private static IQueryable<Epic> applyPagination(
         IQueryable<Epic> epics,
         EpicPageQuery query)
     {
@@ -87,11 +87,11 @@ public class EpicPageQueryHandler(
             .Take(query.pageSize);
     }
 
-    private IQueryable<Epic> filterResult(
+    private IQueryable<Epic> applyFilters(
         IQueryable<Epic> epics,
         EpicPageQuery query)
     {
-        foreach (var (key, value) in query.filter!)
+        foreach (var (key, value) in query.filters!)
         {
             if (string.IsNullOrEmpty(value))
             {
@@ -102,22 +102,5 @@ public class EpicPageQueryHandler(
         }
 
         return epics;
-    }
-
-    private PaginationDto createPagination(
-        IQueryable<Epic> epics,
-        EpicPageQuery query)
-    {
-        return new()
-        {
-            ItemsCount = epics.Count(),
-            ItemFrom = ((query.page - 1) * query.pageSize) + 1,
-            ItemTo = query.page * query.pageSize > epics.Count() ?
-                epics.Count() :
-                query.page * query.pageSize,
-            CurrentPage = query.page,
-            PageSize = query.pageSize,
-            PageCount = (epics.Count() + query.pageSize - 1) / query.pageSize,
-        };
     }
 }
