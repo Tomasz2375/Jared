@@ -6,7 +6,7 @@ using Jared.Shared.Abstractions;
 using MediatR;
 using Moq;
 
-namespace Jared.Application.Tests.Controllers;
+namespace Jared.Presentation.Tests.Controllers;
 
 public class RoleControllerTest
 {

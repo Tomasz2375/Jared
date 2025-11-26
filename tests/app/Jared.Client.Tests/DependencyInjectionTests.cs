@@ -40,7 +40,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddClient(services);
 
         // Assert
-        Assert.Equal(41, services.Count);
+        Assert.Equal(38, services.Count);
     }
 
     [Fact]
@@ -65,11 +65,6 @@ public class DependencyInjectionTests
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<TaskListQuery, Result<List<TaskListDto>>>) &&
-            x.ImplementationType == typeof(TaskListQueryHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<TaskPageQuery, Result<TaskPageDto>>) &&
             x.ImplementationType == typeof(TaskPageQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
@@ -91,11 +86,6 @@ public class DependencyInjectionTests
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicListQuery, Result<List<EpicListDto>>>) &&
-            x.ImplementationType == typeof(EpicListQueryHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<EpicPageQuery, Result<EpicPageDto>>) &&
             x.ImplementationType == typeof(EpicPageQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
@@ -114,11 +104,6 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<ProjectDetailsQuery, Result<ProjectDetailsDto>>) &&
             x.ImplementationType == typeof(ProjectDetailsQueryHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<ProjectListQuery, Result<List<ProjectListDto>>>) &&
-            x.ImplementationType == typeof(ProjectListQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>

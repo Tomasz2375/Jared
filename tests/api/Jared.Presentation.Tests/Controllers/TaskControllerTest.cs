@@ -54,44 +54,6 @@ namespace Jared.Application.Tests.Controllers
         }
         #endregion
 
-        #region TaskListAsync
-        [Theory]
-        [AutoData]
-        public async Task TaskListAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(List<TaskListDto> dtos)
-        {
-            // Arrange
-            mediatorMock.Setup(x => x.Send(It.IsAny<TaskListQuery>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(Result.Ok(dtos)));
-
-            // Act
-            var result = await controller.TaskListAsync(null, null);
-
-            // Assert
-            Assert.True(result.Success);
-            Assert.Equal(dtos, result.Data);
-            Assert.Equal(string.Empty, result.Error);
-            mediatorMock.Verify(x => x.Send(new TaskListQuery(null, null), default), Times.Once);
-        }
-
-        [Theory]
-        [AutoData]
-        public async Task TaskListAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
-        {
-            // Arrange
-            mediatorMock.Setup(x => x.Send(It.IsAny<TaskListQuery>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(Result.Fail<List<TaskListDto>>(errorMessage)));
-
-            // Act
-            var result = await controller.TaskListAsync(null, null);
-
-            // Assert
-            Assert.False(result.Success);
-            Assert.Null(result.Data);
-            Assert.Equal(errorMessage, result.Error);
-            mediatorMock.Verify(x => x.Send(new TaskListQuery(null, null), default), Times.Once);
-        }
-        #endregion
-
         #region TaskPageAsync
         [Theory]
         [AutoData]

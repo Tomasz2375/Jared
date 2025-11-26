@@ -54,44 +54,6 @@ public class ProjectControllerTest
     }
     #endregion
 
-    #region ProjectListAsync
-    [Theory]
-    [AutoData]
-    public async Task ProjectListAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(List<ProjectListDto> dtos)
-    {
-        // Arrange
-        mediatorMock.Setup(x => x.Send(It.IsAny<ProjectListQuery>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.FromResult(Result.Ok(dtos)));
-
-        // Act
-        var result = await controller.ProjectListAsync();
-
-        // Assert
-        Assert.True(result.Success);
-        Assert.Equal(dtos, result.Data);
-        Assert.Equal(string.Empty, result.Error);
-        mediatorMock.Verify(x => x.Send(new ProjectListQuery(), default), Times.Once);
-    }
-
-    [Theory]
-    [AutoData]
-    public async Task ProjectListAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
-    {
-        // Arrange
-        mediatorMock.Setup(x => x.Send(It.IsAny<ProjectListQuery>(), It.IsAny<CancellationToken>()))
-            .Returns(Task.FromResult(Result.Fail<List<ProjectListDto>>(errorMessage)));
-
-        // Act
-        var result = await controller.ProjectListAsync();
-
-        // Assert
-        Assert.False(result.Success);
-        Assert.Null(result.Data);
-        Assert.Equal(errorMessage, result.Error);
-        mediatorMock.Verify(x => x.Send(new ProjectListQuery(), default), Times.Once);
-    }
-    #endregion
-
     #region ProjectPageAsync
     [Theory]
     [AutoData]
