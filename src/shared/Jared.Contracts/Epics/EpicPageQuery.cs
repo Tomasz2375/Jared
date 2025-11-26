@@ -6,9 +6,9 @@ using MediatR;
 namespace Jared.Contracts.Epics;
 
 public sealed record EpicPageQuery(
-    int page,
-    int pageSize,
-    string? sortingProperty,
-    SortingDirection? sortingDirection,
-    IDictionary<string, string?>? filter)
+    int page = 1,
+    int pageSize = 100,
+    string? sortingProperty = null,
+    SortingDirection? sortingDirection = null,
+    IDictionary<string, string?>? filters = null)
     : IRequest<Result<EpicPageDto>>;
