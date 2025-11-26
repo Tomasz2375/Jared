@@ -1,6 +1,4 @@
-﻿using Jared.Shared.Dtos.Abstractions;
-
-namespace Jared.Dtos.Projects;
+﻿namespace Jared.Dtos.Projects;
 
 public class ProjectRootDto : BaseDto
 {

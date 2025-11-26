@@ -1,6 +1,4 @@
-﻿using Jared.Shared.Dtos.Abstractions;
-
-namespace Jared.Dtos.WorkLogs;
+﻿namespace Jared.Dtos.WorkLogs;
 
 public class WorkLogRootDto : BaseDto
 {

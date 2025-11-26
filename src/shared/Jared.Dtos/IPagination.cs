@@ -1,10 +1,11 @@
-﻿namespace Jared.Dtos.Epics;
+﻿namespace Jared.Dtos;
 
-public class EpicPageDto : IPagination<EpicListDto>
+public interface IPagination<T>
+    where T : BaseDto
 {
+    public List<T> Items { get; set; }
     public int Page { get; set; }
     public int PageSize { get; set; }
     public int TotalItems { get; set; }
     public int TotalPages { get; set; }
-    public List<EpicListDto> Items { get; set; } = new();
 }

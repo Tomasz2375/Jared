@@ -1,6 +1,4 @@
-﻿using Jared.Shared.Dtos.Abstractions;
-
-namespace Jared.Dtos.TaskHistories;
+﻿namespace Jared.Dtos.TaskHistories;
 
 public class TaskHistoryDto : BaseDto
 {

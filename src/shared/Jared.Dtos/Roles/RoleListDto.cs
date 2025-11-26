@@ -1,6 +1,4 @@
-﻿using Jared.Shared.Dtos.Abstractions;
-
-namespace Jared.Dtos.Roles;
+﻿namespace Jared.Dtos.Roles;
 
 public class RoleListDto : BaseDto
 {
