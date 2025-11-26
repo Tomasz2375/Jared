@@ -9,9 +9,8 @@
 <DataGrid
     Title="Projects"
     TItem="ProjectListDto"
-    Items="Model.Projects"
     ItemsDefinition="new ProjectListDefinition().GetColumns()"
-    Pagination="Model.Pagination"
+    Page="Model"
     SwitchPagination="false"
     Query="Query"
     SendPageQuery="sendPageQuery"

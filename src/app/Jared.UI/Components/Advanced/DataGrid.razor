@@ -1,7 +1,7 @@
 ﻿@inject IDialogService DialogService
 @typeparam TItem
 
-@if (Pagination is null || Items is null)
+@if (Page is null || Page.Items is null)
 {
     return;
 }
@@ -32,7 +32,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Items)
+        @foreach (var item in Page.Items)
         {
             <tr class="data-grid-body" @onclick="@(() => showDialog((int)item.Id))">
                 @foreach (var column in ItemsDefinition)
@@ -48,8 +48,8 @@
 
 <div class="align-center">
     <button type="button" class="btn nav-button@(Query.Page == 1 ? "-disable" : "")" @onclick="previousPage">&lt;&lt;</button>
-    <span style="font-size:16px">@($"{Query.Page} / {Pagination.PageCount}")</span>
-    <button type="button" class="btn nav-button@(Query.Page == Pagination.PageCount ? "-disable" : "")" @onclick="nextPage">&gt;&gt;</button>
+    <span style="font-size:16px">@($"{Query.Page} / {Page.TotalPages}")</span>
+    <button type="button" class="btn nav-button@(Query.Page == Page.TotalPages ? "-disable" : "")" @onclick="nextPage">&gt;&gt;</button>
 </div>
 <div class="align-center">
     <EditForm Model="Query">
@@ -64,7 +64,7 @@
 </div>
 <div class="align-center">
     <span class="align-center">
-        @($"{Pagination.ItemFrom} - {Pagination.ItemTo} from {Pagination.ItemsCount}")
+        @($"{getItemFrom()} - {getItemTo()} from {Page.TotalItems}")
     </span>
 </div>
 

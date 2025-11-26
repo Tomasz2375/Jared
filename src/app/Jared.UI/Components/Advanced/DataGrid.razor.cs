@@ -1,7 +1,6 @@
 ﻿using Jared.Client.ColumnDefinitions;
 using Jared.Client.ColumnDefinitions.Abstraction;
 using Jared.Dtos;
-using Jared.Shared.Dtos.Abstractions;
 using Jared.Shared.Enums;
 using Microsoft.AspNetCore.Components;
 
@@ -15,13 +14,10 @@ public partial class DataGrid<TItem>
     public string Title { get; set; } = default!;
     [Parameter]
     [EditorRequired]
-    public IEnumerable<TItem> Items { get; set; } = default!;
+    public IPagination<TItem> Page { get; set; } = default!;
     [Parameter]
     [EditorRequired]
     public IEnumerable<IColumnDefinition<TItem>> ItemsDefinition { get; set; } = default!;
-    [Parameter]
-    [EditorRequired]
-    public IPagination Pagination { get; set; } = default!;
     [Parameter]
     [EditorRequired]
     public Query Query { get; set; } = default!;
@@ -76,7 +72,7 @@ public partial class DataGrid<TItem>
 
     private void nextPage()
     {
-        if (Query.Page == Pagination.PageCount)
+        if (Query.Page == Page.TotalPages)
         {
             return;
         }
@@ -123,9 +119,21 @@ public partial class DataGrid<TItem>
 
     private void pageSize()
     {
-        Query.Page = 1 + (Pagination.ItemFrom / Query.PageSize);
+        Query.Page = 1 + (getItemFrom() / Query.PageSize);
 
         SendPageQuery.InvokeAsync(Query);
+    }
+
+    private int getItemFrom()
+    {
+        return ((Page.Page - 1) * Page.PageSize) + 1;
+    }
+
+    private int getItemTo()
+    {
+        var lastItem = Page.Page * Page.PageSize;
+
+        return lastItem > Page.TotalItems ? Page.TotalItems : lastItem;
     }
 
     private string createDictionary(IColumnDefinition<TItem> column)

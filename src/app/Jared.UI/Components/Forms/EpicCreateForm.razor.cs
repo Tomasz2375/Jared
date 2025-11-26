@@ -84,29 +84,30 @@ public partial class EpicCreateForm
 
     private async Task getProjectsAsync()
     {
-        var result = await Mediator.Send(new ProjectListQuery());
-
+        var result = await Mediator.Send(new ProjectPageQuery());
         if (!result.Success)
         {
             Console.WriteLine("Error when get project list");
             return;
         }
 
-        projects = result.Data;
+        projects = result.Data.Items;
         projectsDictionary = projects.ToDictionary(x => x.Id, x => x.Title);
     }
 
     private async Task getEpicsAsync()
     {
-        var result = await Mediator.Send(new EpicListQuery(Dto.ProjectId));
-
+        Dictionary<string, string?> filters = new()
+        {
+            { nameof(EpicListDto.ProjectId), Dto.ProjectId.ToString() },
+        };
+        var result = await Mediator.Send(new EpicPageQuery(filters: filters));
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            Console.WriteLine("Error when get epics list");
             return;
         }
 
-        epics = result.Data.ToList();
         epicsDictionary = epics.ToDictionary(x => x.Id, x => x.Title);
     }
 

@@ -11,9 +11,8 @@
 <DataGrid
     Title="My board"
     TItem="TaskListDto"
-    Items="Model.Tasks"
     ItemsDefinition="new TaskListDefinition().GetColumns()"
-    Pagination="Model.Pagination"
+    Page="Model"
     SwitchPagination="true"
     Query="Query"
     SendPageQuery="sendPageQuery"

@@ -5,7 +5,7 @@ namespace Jared.UI.Components.Menu;
 
 public partial class Tasks
 {
-    private Dictionary<string, string> projects = new();
+    private Dictionary<string, string> projectsDictionary = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -29,7 +29,7 @@ public partial class Tasks
 
     private async Task getProjectsAsync()
     {
-        var result = await Mediator.Send(new ProjectListQuery());
+        var result = await Mediator.Send(new ProjectPageQuery());
 
         if (!result.Success)
         {
@@ -37,7 +37,8 @@ public partial class Tasks
             return;
         }
 
-        projects = result.Data.ToDictionary(x => x.Id.ToString(), x => x.Title);
+        var projects = result.Data.Items;
+        projectsDictionary = projects.ToDictionary(x => x.Id.ToString(), x => x.Title);
     }
 
     private void createTask()

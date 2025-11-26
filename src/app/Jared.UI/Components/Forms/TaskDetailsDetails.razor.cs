@@ -32,41 +32,47 @@ public partial class TaskDetailsDetails
 
     private async Task getProjectsAsync()
     {
-        var result = await Mediator.Send(new ProjectListQuery());
-
+        var result = await Mediator.Send(new ProjectPageQuery());
         if (!result.Success)
         {
             Console.WriteLine("Error when get project list");
             return;
         }
 
-        projects = result.Data;
+        projects = result.Data.Items;
     }
 
     private async Task getEpicsAsync()
     {
-        var result = await Mediator.Send(new EpicListQuery(Dto.ProjectId));
-
+        Dictionary<string, string?> filters = new()
+        {
+            { nameof(EpicListDto.ProjectId), Dto.ProjectId.ToString() },
+        };
+        var result = await Mediator.Send(new EpicPageQuery(filters: filters));
         if (!result.Success)
         {
-            Console.WriteLine("Error when get epic list");
+            Console.WriteLine("Error when get epics list");
             return;
         }
 
-        epics = result.Data.ToList();
+        epics = result.Data.Items;
     }
 
     private async Task getTasksAsync()
     {
-        var result = await Mediator.Send(new TaskListQuery(Dto.ProjectId, Dto.EpicId));
-
+        Dictionary<string, string?> filters = new()
+        {
+            { nameof(TaskListDto.ProjectId), Dto.ProjectId.ToString() },
+            { nameof(TaskListDto.EpicId), Dto.EpicId.ToString() },
+        };
+        var result = await Mediator.Send(new TaskPageQuery(filters: filters));
         if (!result.Success)
         {
             Console.WriteLine("Error when get task list");
             return;
         }
 
-        tasks = result.Data.ToList();
+        tasks = result.Data.Items;
     }
 
     private async Task getUsersAsync()

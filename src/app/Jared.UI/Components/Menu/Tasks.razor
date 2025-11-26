@@ -13,7 +13,7 @@
             <Authorized>
                 <button class="dropdown-item" @onclick="(createTask)">Create task</button>
                 <a @onclick="@(() => NavigationManager.NavigateTo($"Tasks", true))" class="dropdown-item">All tasks</a>
-                @foreach (var project in projects)
+                @foreach (var project in projectsDictionary)
                 {
                     <a @onclick="@(() => NavigationManager.NavigateTo($"Tasks/{project.Key}", true))" class="dropdown-item">@project.Value</a>
                 }
