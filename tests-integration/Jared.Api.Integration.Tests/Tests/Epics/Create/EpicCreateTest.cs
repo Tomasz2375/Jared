@@ -1,15 +1,15 @@
-﻿using FluentAssertions;
+﻿using System.Net.Http.Json;
+using FluentAssertions;
 using Jared.Api.Integration.Tests.Data;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Enums;
-using System.Net.Http.Json;
+using Jared.Core.Abstractions;
+using Jared.Core.Enums;
+using Jared.Dtos.Epics;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Create;
 
 public class EpicCreateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Epic/Create";
+    protected override string URL => "epics";
 
     [Fact]
     public async Task CreateEpic_WhenAllDataIsValid_ShouldBeSuccess()

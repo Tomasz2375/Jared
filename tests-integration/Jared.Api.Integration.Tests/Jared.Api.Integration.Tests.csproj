@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Jared.Api\Jared.Api.csproj" />
-    <ProjectReference Include="..\..\src\Presentation\Jared.Presentation\Jared.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,12 +4,12 @@ using ConfigurationSubstitution;
 using FluentValidation.AspNetCore;
 using Jared.Application;
 using Jared.Application.Mapping;
+using Jared.Contracts.Middleware;
+using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
 using Jared.Domain.Options;
 using Jared.Infrastructure;
-using Jared.Shared;
-using Jared.Shared.Interfaces;
-using Jared.Shared.Middleware;
+using Jared.Validators;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -54,9 +54,9 @@ builder.Services.AddAuthentication(option =>
     };
 });
 
+builder.Services.AddValidators();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
-builder.Services.AddShared();
 builder.Services.AddControllers();
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddSwaggerGen();

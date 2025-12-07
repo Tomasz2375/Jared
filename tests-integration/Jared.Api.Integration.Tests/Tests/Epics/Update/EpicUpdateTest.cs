@@ -1,16 +1,16 @@
-﻿using FluentAssertions;
+﻿using System.Net.Http.Json;
+using FluentAssertions;
 using Jared.Api.Integration.Tests.Data;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.EpicDtos;
-using Jared.Shared.Enums;
+using Jared.Core.Abstractions;
+using Jared.Core.Enums;
+using Jared.Dtos.Epics;
 using Mapster;
-using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Epics.Update;
 
 public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Epic/Update";
+    protected override string URL => "epics";
 
     [Fact]
     public async Task UpdateEpic_WhenAllDataIsValid_ShouldBeSuccess()
@@ -18,6 +18,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         // Arrange
         var dto = EpicIntegrationFaker.FirstEpic.Adapt<EpicDetailsDto>();
         dto.Description = "New description";
+        var path = $"{URL}/{dto.Id}";
 
         Result<bool> expectedResponse = new(true, string.Empty)
         {
@@ -25,7 +26,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         };
 
         // Act
-        var result = await Client.PutAsJsonAsync(URL, dto, default);
+        var result = await Client.PutAsJsonAsync(path, dto, default);
         var response = await result.Content.ReadFromJsonAsync<Result<bool>>();
 
         // Assert
@@ -38,6 +39,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         // Arrange
         var dto = EpicIntegrationFaker.FirstEpic.Adapt<EpicDetailsDto>();
         dto.Title = string.Empty;
+        var path = $"{URL}/{dto.Id}";
 
         ErrorResponse expectedResponse = new()
         {
@@ -49,7 +51,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         };
 
         // Act
-        var result = await Client.PutAsJsonAsync(URL, dto, default);
+        var result = await Client.PutAsJsonAsync(path, dto, default);
         var response = await result.Content.ReadFromJsonAsync<ErrorResponse>();
 
         // Assert
@@ -62,6 +64,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         // Arrange
         var dto = EpicIntegrationFaker.FirstEpic.Adapt<EpicDetailsDto>();
         dto.Title = string.Concat(Enumerable.Repeat(".", 101));
+        var path = $"{URL}/{dto.Id}";
 
         ErrorResponse expectedResponse = new()
         {
@@ -73,7 +76,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         };
 
         // Act
-        var result = await Client.PutAsJsonAsync(URL, dto, default);
+        var result = await Client.PutAsJsonAsync(path, dto, default);
         var response = await result.Content.ReadFromJsonAsync<ErrorResponse>();
 
         // Assert
@@ -86,6 +89,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         // Arrange
         var dto = EpicIntegrationFaker.FirstEpic.Adapt<EpicDetailsDto>();
         dto.ProjectId = 0;
+        var path = $"{URL}/{dto.Id}";
 
         ErrorResponse expectedResponse = new()
         {
@@ -104,7 +108,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         };
 
         // Act
-        var result = await Client.PutAsJsonAsync(URL, dto, default);
+        var result = await Client.PutAsJsonAsync(path, dto, default);
         var response = await result.Content.ReadFromJsonAsync<ErrorResponse>();
 
         // Assert
@@ -117,6 +121,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         // Arrange
         var dto = EpicIntegrationFaker.FirstEpic.Adapt<EpicDetailsDto>();
         dto.Status = (EpicStatus)100;
+        var path = $"{URL}/{dto.Id}";
 
         ErrorResponse expectedResponse = new()
         {
@@ -128,7 +133,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         };
 
         // Act
-        var result = await Client.PutAsJsonAsync(URL, dto, default);
+        var result = await Client.PutAsJsonAsync(path, dto, default);
         var response = await result.Content.ReadFromJsonAsync<ErrorResponse>();
 
         // Assert
@@ -143,6 +148,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         // Arrange
         var dto = EpicIntegrationFaker.FirstEpic.Adapt<EpicDetailsDto>();
         dto.ParentId = parentId;
+        var path = $"{URL}/{dto.Id}";
 
         ErrorResponse expectedResponse = new()
         {
@@ -154,7 +160,7 @@ public class EpicUpdateTest(JaredWebApplicationFactory factory) : BaseIntegratio
         };
 
         // Act
-        var result = await Client.PutAsJsonAsync(URL, dto, default);
+        var result = await Client.PutAsJsonAsync(path, dto, default);
         var response = await result.Content.ReadFromJsonAsync<ErrorResponse>();
 
         // Assert

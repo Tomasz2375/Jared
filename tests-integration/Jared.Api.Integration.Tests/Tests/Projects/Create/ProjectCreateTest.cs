@@ -1,13 +1,13 @@
-﻿using FluentAssertions;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.ProjectDtos;
-using System.Net.Http.Json;
+﻿using System.Net.Http.Json;
+using FluentAssertions;
+using Jared.Core.Abstractions;
+using Jared.Dtos.Projects;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Create;
 
 public class ProjectCreateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Project/Create";
+    protected override string URL => "projects";
 
     [Fact]
     public async Task CreateProject_WhenAllDataIsValid_ShouldBeSuccess()

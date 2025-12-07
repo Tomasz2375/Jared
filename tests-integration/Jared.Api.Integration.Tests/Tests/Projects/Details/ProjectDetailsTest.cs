@@ -1,15 +1,15 @@
-﻿using FluentAssertions;
+﻿using System.Net.Http.Json;
+using FluentAssertions;
 using Jared.Api.Integration.Tests.Data;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Core.Abstractions;
+using Jared.Dtos.Projects;
 using Mapster;
-using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Details;
 
 public class ProjectDetailsTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Project";
+    protected override string URL => "projects";
 
     [Fact]
     public async Task DetailsProject_WhenProjectExists_ShoutdBeSuccess()

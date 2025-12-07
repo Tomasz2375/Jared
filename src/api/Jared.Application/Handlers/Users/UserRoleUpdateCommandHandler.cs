@@ -1,0 +1,49 @@
+﻿using Jared.Application.Services.User;
+using Jared.Contracts.Users;
+using Jared.Core.Abstractions;
+using Jared.Domain.Abstractions;
+using Jared.Domain.Models;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace Jared.Application.Handlers.Users;
+
+public class UserRoleUpdateCommandHandler(
+    IDataContext dataContext,
+    IUserService userService)
+    : IRequestHandler<UserRoleUpdateCommand, Result<bool>>
+{
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IUserService userService = userService;
+
+    public async Task<Result<bool>> Handle(UserRoleUpdateCommand request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var user = await dataContext
+                .Set<User>()
+                .Include(x => x.Role)
+                .FirstOrDefaultAsync(x => x.Id == request.dto.Id, cancellationToken);
+
+            if (user is null)
+            {
+                return Result.Fail<bool>("User not found");
+            }
+
+            if (user.Id == userService.GetUser().Id && user.Role?.Name == "Admin")
+            {
+                return Result.Fail<bool>("You can't take away your admin rights");
+            }
+
+            user.RoleId = request.dto.RoleId;
+
+            await dataContext.SaveChangesAsync(cancellationToken);
+
+            return Result.Ok(true);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<bool>(ex.Message);
+        }
+    }
+}

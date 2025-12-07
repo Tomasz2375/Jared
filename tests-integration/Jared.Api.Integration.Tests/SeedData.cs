@@ -1,8 +1,8 @@
-﻿using Jared.Shared.Interfaces;
+﻿using System.Reflection;
+using System.Text;
+using Jared.Domain.Abstractions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.Reflection;
-using System.Text;
 
 namespace Jared.Api.Integration.Tests;
 
@@ -29,7 +29,7 @@ public static class SeedData
             var fakerInstance = Activator.CreateInstance(fakerType);
             var methods = fakerType
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
-                .Where(m => m.ReturnType.GetInterfaces().Contains(typeof(IEntity)));
+                .Where(m => typeof(Entity).IsAssignableFrom(m.ReturnType));
 
             var entityType = fakerType.BaseType!.GetGenericArguments()[0];
             var entity = dataContext.Model.FindEntityType(entityType)

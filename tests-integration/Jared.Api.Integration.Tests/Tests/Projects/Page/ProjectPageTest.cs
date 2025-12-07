@@ -1,15 +1,15 @@
-﻿using FluentAssertions;
+﻿using System.Net.Http.Json;
+using FluentAssertions;
 using Jared.Api.Integration.Tests.Data;
-using Jared.Shared.Abstractions;
-using Jared.Shared.Dtos.ProjectDtos;
+using Jared.Core.Abstractions;
+using Jared.Dtos.Projects;
 using Mapster;
-using System.Net.Http.Json;
 
 namespace Jared.Api.Integration.Tests.Tests.Projects.Page;
 
 public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Project/Page";
+    protected override string URL => "projects";
 
     [Fact]
     public async Task PageProject_When_Page_1_PageSize_2_ShoutdBeSuccess()
@@ -20,16 +20,11 @@ public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrati
         {
             Data = new()
             {
-                Pagination = new()
-                {
-                    CurrentPage = 1,
-                    ItemFrom = 1,
-                    ItemTo = 2,
-                    ItemsCount = 3,
-                    PageCount = 2,
-                    PageSize = 2,
-                },
-                Projects = new()
+                Page = 1,
+                PageSize = 2,
+                TotalItems = 3,
+                TotalPages = 2,
+                Items = new()
                 {
                     ProjectIntegrationFaker.FirstProject.Adapt<ProjectListDto>(),
                     ProjectIntegrationFaker.SecondProject.Adapt<ProjectListDto>(),
@@ -43,7 +38,7 @@ public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrati
         // Assert
         response.Should().BeEquivalentTo(
             expectedResponse,
-            options => options.WithStrictOrderingFor(x => x.Data.Projects));
+            options => options.WithStrictOrderingFor(x => x.Data.Items));
     }
 
     [Fact]
@@ -55,16 +50,11 @@ public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrati
         {
             Data = new()
             {
-                Pagination = new()
-                {
-                    CurrentPage = 1,
-                    ItemFrom = 1,
-                    ItemTo = 2,
-                    ItemsCount = 3,
-                    PageCount = 2,
-                    PageSize = 2,
-                },
-                Projects = new()
+                Page = 1,
+                PageSize = 2,
+                TotalItems = 3,
+                TotalPages = 2,
+                Items = new()
                 {
                     ProjectIntegrationFaker.ThirdProject.Adapt<ProjectListDto>(),
                     ProjectIntegrationFaker.SecondProject.Adapt<ProjectListDto>(),
@@ -78,7 +68,7 @@ public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrati
         // Assert
         response.Should().BeEquivalentTo(
             expectedResponse,
-            options => options.WithStrictOrderingFor(x => x.Data.Projects));
+            options => options.WithStrictOrderingFor(x => x.Data.Items));
     }
 
     [Fact]
@@ -90,16 +80,11 @@ public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrati
         {
             Data = new()
             {
-                Pagination = new()
-                {
-                    CurrentPage = 1,
-                    ItemFrom = 1,
-                    ItemTo = 1,
-                    ItemsCount = 1,
-                    PageCount = 1,
-                    PageSize = 10,
-                },
-                Projects = new()
+                Page = 1,
+                PageSize = 10,
+                TotalItems = 1,
+                TotalPages = 1,
+                Items = new()
                 {
                     ProjectIntegrationFaker.FirstProject.Adapt<ProjectListDto>(),
                 },

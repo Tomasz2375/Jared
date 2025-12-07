@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="Mapster" Version="7.4.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.10" />
+        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.10" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\shared\Jared.Contracts\Jared.Contracts.csproj" />
+      <ProjectReference Include="..\Jared.Domain\Jared.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

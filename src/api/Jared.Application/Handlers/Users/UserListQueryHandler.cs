@@ -1,0 +1,38 @@
+﻿using Jared.Contracts.Users;
+using Jared.Core.Abstractions;
+using Jared.Domain.Abstractions;
+using Jared.Domain.Models;
+using Jared.Dtos.Users;
+using MapsterMapper;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+
+namespace Jared.Application.Handlers.Users;
+
+public class UserListQueryHandler(IDataContext dataContext, IMapper mapper)
+    : IRequestHandler<UserListQuery, Result<List<UserListDto>>>
+{
+    private readonly IDataContext dataContext = dataContext;
+    private readonly IMapper mapper = mapper;
+
+    public async Task<Result<List<UserListDto>>> Handle(UserListQuery request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var usersQuery = dataContext
+                .Set<User>()
+                .Include(x => x.Role)
+                .AsNoTracking();
+
+            var users = await usersQuery.ToListAsync();
+
+            var result = mapper.Map<List<UserListDto>>(users);
+
+            return Result.Ok(result);
+        }
+        catch (Exception ex)
+        {
+            return Result.Fail<List<UserListDto>>(ex.Message);
+        }
+    }
+}

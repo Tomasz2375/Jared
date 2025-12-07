@@ -1,0 +1,20 @@
+﻿@page "/MyBoards/{Page}"
+@inject IMediator Mediator
+@inject IUserService UserService
+@inject NavigationManager Navigation
+
+@if (Model is null)
+{
+    return;
+}
+
+<DataGrid
+    Title="My board"
+    TItem="TaskListDto"
+    ItemsDefinition="new TaskListDefinition().GetColumns()"
+    Page="Model"
+    SwitchPagination="true"
+    Query="Query"
+    SendPageQuery="sendPageQuery"
+    DetailsDialog="@typeof(TaskDetailsForm)" />
+

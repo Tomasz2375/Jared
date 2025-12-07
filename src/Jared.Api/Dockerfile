@@ -11,10 +11,14 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["Directory.Build.props", "./"]
 COPY ["src/Jared.Api/Jared.Api.csproj", "src/Jared.Api/"]
-COPY ["src/Infrastructure/Jared.Infrastructure/Jared.Infrastructure.csproj", "src/Infrastructure/Jared.Infrastructure/"]
-COPY ["src/Application/Jared.Application/Jared.Application.csproj", "src/Application/Jared.Application/"]
-COPY ["src/Domain/Jared.Domain/Jared.Domain.csproj", "src/Domain/Jared.Domain/"]
-COPY ["src/Shared/Jared.Shared/Jared.Shared.csproj", "src/Shared/Jared.Shared/"]
+COPY ["src/api/Jared.Presentation/Jared.Presentation.csproj", "src/api/Jared.Presentation/"]
+COPY ["src/api/Jared.Infrastructure/Jared.Infrastructure.csproj", "src/api/Jared.Infrastructure/"]
+COPY ["src/api/Jared.Application/Jared.Application.csproj", "src/api/Jared.Application/"]
+COPY ["src/api/Jared.Domain/Jared.Domain.csproj", "src/api/Jared.Domain/"]
+COPY ["src/shared/Jared.Core/Jared.Core.csproj", "src/shared/Jared.Core/"]
+COPY ["src/shared/Jared.Dtos/Jared.Dtos.csproj", "src/shared/Jared.Dtos/"]
+COPY ["src/shared/Jared.Validators/Jared.Validators.csproj", "src/shared/Jared.Validators/"]
+COPY ["src/shared/Jared.Contracts/Jared.Contracts.csproj", "src/shared/Jared.Contracts/"]
 RUN dotnet restore "./src/Jared.Api/Jared.Api.csproj"
 COPY . .
 WORKDIR "/src/src/Jared.Api"

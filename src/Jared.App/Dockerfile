@@ -13,8 +13,12 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 COPY ["Directory.Build.props", "./"]
 COPY ["src/Jared.App/Jared.App.csproj", "src/Jared.App/"]
-COPY ["src/Presentation/Jared.Presentation/Jared.Presentation.csproj", "src/Presentation/Jared.Presentation/"]
-COPY ["src/Shared/Jared.Shared/Jared.Shared.csproj", "src/Shared/Jared.Shared/"]
+COPY ["src/app/Jared.Client/Jared.Client.csproj", "src/app/Jared.Client/"]
+COPY ["src/app/Jared.UI/Jared.UI.csproj", "src/app/Jared.UI/"]
+COPY ["src/shared/Jared.Core/Jared.Core.csproj", "src/shared/Jared.Core/"]
+COPY ["src/shared/Jared.Dtos/Jared.Dtos.csproj", "src/shared/Jared.Dtos/"]
+COPY ["src/shared/Jared.Validators/Jared.Validators.csproj", "src/shared/Jared.Validators/"]
+COPY ["src/shared/Jared.Contracts/Jared.Contracts.csproj", "src/shared/Jared.Contracts/"]
 RUN dotnet restore "./src/Jared.App/Jared.App.csproj"
 COPY . .
 WORKDIR "/src/src/Jared.App"

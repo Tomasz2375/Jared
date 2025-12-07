@@ -1,0 +1,31 @@
+﻿@inject ILocalStorageService LocalStorage
+@inject IUserService UserService
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+<div class="dropdown">
+    <button
+        @onclick="toggleUserMenu"
+        @onfocusout="hideUserMemu"
+        class="btn dropdown-btn-2 dropdown-toggle">
+        <i class="oi oi-person" />
+    </button>
+    <div class="dropdown-menu dropdown-menu-2 @userMenuCssClass">
+        <AuthorizeView>
+            <Authorized>
+                <span class="dropdown-info">@UserService.GetUserName()</span>
+                <a href="profile/@UserService.GetUserId()" class="dropdown-item">Profile</a>
+                <a href="statistics" class="dropdown-item">Statistics</a>
+                @if(UserService.GetUserRole() == "Admin")
+                {
+                    <a href="users" class="dropdown-item">Users</a>
+                }
+                <button onclick="@(async () => await logout())" class="dropdown-item">Logout</button>
+            </Authorized>
+            <NotAuthorized>
+                <a href="login?returnUrl=@NavigationManager.ToBaseRelativePath(NavigationManager.Uri)" class="dropdown-item">Login</a>
+                <a href="register" class="dropdown-item">Register</a>
+            </NotAuthorized>
+        </AuthorizeView>
+    </div>
+</div>

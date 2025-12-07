@@ -1,0 +1,152 @@
+﻿@inject IDialogService DialogService
+@typeparam TItem
+
+@if (Page is null || Page.Items is null)
+{
+    return;
+}
+
+<div>
+    <h3>@Title</h3>
+</div>
+<table class="data-grid">
+    <thead>
+        <tr>
+            @foreach(var column in ItemsDefinition)
+            {
+                <th class="align-@column.Alignment.ToString().ToLower() column-width-@column.Width">
+                    <div @onclick="(() => sortByColumn(column.ColumnName))">
+                        @column.ColumnName
+                        &nbsp;<span class="@sortCssClass(column.ColumnName)"/>
+                    </div>
+                    <div>
+                        <DataGridFilter
+                            Id="@createDictionary(column)"
+                            Filter="@Query.Filter[column.ColumnName]"
+                            Type="@column.Type"
+                            Size="@column.Width"
+                            OnFilterChange="(value => updateFilters(column.ColumnName, value))"/>
+                    </div>
+                </th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Page.Items)
+        {
+            <tr class="data-grid-body" @onclick="@(() => showDialog((int)item.Id))">
+                @foreach (var column in ItemsDefinition)
+                {
+                    <td class="align-@column.Alignment.ToString().ToLower()">
+                        @showValue(item, column)
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="align-center">
+    <button type="button" class="btn nav-button@(Query.Page == 1 ? "-disable" : "")" @onclick="previousPage">&lt;&lt;</button>
+    <span style="font-size:16px">@($"{Query.Page} / {Page.TotalPages}")</span>
+    <button type="button" class="btn nav-button@(Query.Page == Page.TotalPages ? "-disable" : "")" @onclick="nextPage">&gt;&gt;</button>
+</div>
+<div class="align-center">
+    <EditForm Model="Query">
+        <label id="page-size">Page size: </label>
+        <InputSelect class="form-control" style="width: 50px; display:inline" DisplayName="Page size:" @bind-Value=@Query.PageSize>
+            @foreach (var item in pageSizes)
+            {
+                <option value="@item" @onclick="pageSize">@item</option>
+            }
+        </InputSelect>
+    </EditForm>
+</div>
+<div class="align-center">
+    <span class="align-center">
+        @($"{getItemFrom()} - {getItemTo()} from {Page.TotalItems}")
+    </span>
+</div>
+
+<style>
+    .data-grid {
+        width: 100%;
+    }
+
+    .data-grid-header {
+        font-weight: bold;
+    }
+
+    .data-grid-body {
+        border-top: solid 1px var(--main-color);
+    }
+
+    .data-grid-body:hover {
+        background-color: var(--background-2);
+        cursor: pointer;
+    }
+
+    .align-left{
+        cursor: pointer;
+        text-align: left !important;
+    }
+    .align-center{
+        cursor: pointer;
+        text-align: center !important;
+    }
+    .align-right{
+        cursor: pointer;
+        text-align: right !important;
+    }
+
+    .column-width-1 {
+        width: 10rem;
+        min-width:2rem;
+    }
+    .column-width-2 {
+        width: 20rem;
+        min-width:4rem;
+    }
+    .column-width-3 {
+        width: 30rem;
+        min-width:6rem;
+    }
+    .column-width-4 {
+        width: 40rem;
+        min-width:8rem;
+    }
+    .column-width-5 {
+        width: 50rem;
+        min-width:10rem;
+    }
+
+    .arrow {
+        border: solid var(--font-color);
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 4px;
+    }
+    .arrow-up {
+        transform: rotate(-135deg);
+        -webkit-transform: rotate(-135deg);
+    }
+    .arrow-down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+    .nav-button {
+        color: #fff;
+        background-color: #1b6ec2;
+        border-color: #1861ac;
+    }
+    .nav-button-disable {
+        color: #fff;
+        background-color: #083b90;
+        border-color: #06408a;
+    }
+    .nav-button:hover {
+        color: #eee;
+        background-color: #0a5db1;
+        border-color: #07509b;
+    }
+</style>

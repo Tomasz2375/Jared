@@ -1,0 +1,17 @@
+﻿@page "/epics"
+@inject IMediator Mediator
+
+@if (Model is null)
+{
+    return;
+}
+
+<DataGrid
+    Title="Epics"
+    TItem="EpicListDto"
+    ItemsDefinition="new EpicListDefinition().GetColumns()"
+    Page="Model"
+    SwitchPagination="true"
+    Query="Query"
+    SendPageQuery="sendPageQuery"
+    DetailsDialog="@typeof(EpicDetailsForm)" />

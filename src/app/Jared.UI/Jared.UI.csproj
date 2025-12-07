@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+    <PropertyGroup>
+        <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Jared.Client\Jared.Client.csproj" />
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+﻿@page "/"
+@page "/tasks"
+@page "/tasks/{ProjectId}"
+@inject IMediator Mediator
+
+@if (Model is null)
+{
+    return;
+}
+
+<DataGrid
+    Title="Tasks"
+    TItem="TaskListDto"
+    ItemsDefinition="new TaskListDefinition().GetColumns()"
+    Page="Model"
+    SwitchPagination="true"
+    Query="Query"
+    SendPageQuery="sendPageQuery"
+    DetailsDialog="@typeof(TaskDetailsForm)" />
