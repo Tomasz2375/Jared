@@ -12,7 +12,7 @@ public class EpicUpdateCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(EpicUpdateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.EPIC_UPDATE;
+        string baseUrl = $"{BaseAdresses.EPICS}/{request.dto.Id}";
 
         var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

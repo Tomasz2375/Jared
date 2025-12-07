@@ -13,7 +13,7 @@ public class WorkLogStatisticsQueryHandler(HttpClient httpClient)
 
     public async Task<Result<List<WorkLogStatisticsDto>>> Handle(WorkLogStatisticsQuery request, CancellationToken cancellationToken)
     {
-        var baseUrl = BaseAdresses.WORK_LOG_STATISTICS;
+        var baseUrl = BaseAdresses.WORK_LOGS;
         var queryUrl = createQueryUrl(request);
         var url = baseUrl + queryUrl;
 

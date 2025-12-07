@@ -14,7 +14,7 @@ public class EpicPageQueryHandler(HttpClient httpClient)
 
     public async Task<Result<EpicPageDto>> Handle(EpicPageQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.EPIC_PAGE;
+        string baseUrl = BaseAdresses.EPICS;
         string queryUrl = createQueryUrl(request);
 
         string url = baseUrl + queryUrl;

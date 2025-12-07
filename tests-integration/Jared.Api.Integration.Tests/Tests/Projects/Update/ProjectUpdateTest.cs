@@ -9,7 +9,7 @@ namespace Jared.Api.Integration.Tests.Tests.Projects.Update;
 
 public class ProjectUpdateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Project/Update";
+    protected override string URL => "projects";
 
     [Fact]
     public async Task UpdateProject_WhenAllDataIsValid_ShouldBeSuccess()
@@ -17,6 +17,7 @@ public class ProjectUpdateTest(JaredWebApplicationFactory factory) : BaseIntegra
         // Arrange
         var dto = ProjectIntegrationFaker.FirstProject.Adapt<ProjectDetailsDto>();
         dto.Description = "New description";
+        var path = $"{URL}/{dto.Id}";
 
         Result<bool> expectedResponse = new(true, string.Empty)
         {
@@ -24,7 +25,7 @@ public class ProjectUpdateTest(JaredWebApplicationFactory factory) : BaseIntegra
         };
 
         // Act
-        var result = await Client.PutAsJsonAsync(URL, dto, default);
+        var result = await Client.PutAsJsonAsync(path, dto, default);
         var response = await result.Content.ReadFromJsonAsync<Result<bool>>();
 
         // Assert

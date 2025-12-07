@@ -8,24 +8,24 @@ using Moq;
 
 namespace Jared.Presentation.Tests.Controllers;
 
-public class RoleControllerTest
+public class RolesControllerTest
 {
-    private readonly RoleController controller;
+    private readonly RolesController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public RoleControllerTest() => controller = new(mediatorMock.Object);
+    public RolesControllerTest() => controller = new(mediatorMock.Object);
 
-    #region RoleListAsync
+    #region GetAll
     [Theory]
     [AutoData]
-    public async Task RoleListAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(List<RoleListDto> dtos)
+    public async Task GetAll_WnenMediatrReturnsOk_ShouldReturnSuccessResult(List<RoleListDto> dtos)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<RoleListQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Ok(dtos)));
 
         // Act
-        var result = await controller.RoleListAsync();
+        var result = await controller.GetAll();
 
         // Assert
         Assert.True(result.Success);
@@ -36,14 +36,14 @@ public class RoleControllerTest
 
     [Theory]
     [AutoData]
-    public async Task RoleListAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
+    public async Task GetAll_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<RoleListQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Fail<List<RoleListDto>>(errorMessage)));
 
         // Act
-        var result = await controller.RoleListAsync();
+        var result = await controller.GetAll();
 
         // Assert
         Assert.False(result.Success);

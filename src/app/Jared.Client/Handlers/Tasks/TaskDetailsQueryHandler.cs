@@ -14,7 +14,7 @@ public class TaskDetailsQueryHandler(HttpClient httpClient)
 
     public async Task<Result<TaskDetailsDto>> Handle(TaskDetailsQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = $"{BaseAdresses.TASK_DETAILS}/{request.id}";
+        string baseUrl = $"{BaseAdresses.TASKS}/{request.id}";
 
         var response = await httpClient.GetFromJsonAsync<Result<TaskDetailsDto>>(baseUrl, cancellationToken);
 

@@ -9,7 +9,7 @@ namespace Jared.Api.Integration.Tests.Tests.Projects.Page;
 
 public class ProjectPageTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Project/Page";
+    protected override string URL => "projects";
 
     [Fact]
     public async Task PageProject_When_Page_1_PageSize_2_ShoutdBeSuccess()

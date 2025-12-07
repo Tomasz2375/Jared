@@ -13,7 +13,7 @@ public class ProjectDetailsQueryHandler(HttpClient httpClient)
 
     public async Task<Result<ProjectDetailsDto>> Handle(ProjectDetailsQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = $"{BaseAdresses.PROJECT_DETAILS}/{request.id}";
+        string baseUrl = $"{BaseAdresses.PROJECTS}/{request.id}";
 
         var response = await httpClient.GetFromJsonAsync<Result<ProjectDetailsDto>>(baseUrl, cancellationToken);
 

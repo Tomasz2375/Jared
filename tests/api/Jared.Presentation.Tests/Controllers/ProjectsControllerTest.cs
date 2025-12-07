@@ -9,24 +9,24 @@ using Moq;
 
 namespace Jared.Application.Tests.Controllers;
 
-public class ProjectControllerTest
+public class ProjectsControllerTest
 {
-    private readonly ProjectController controller;
+    private readonly ProjectsController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public ProjectControllerTest() => controller = new(mediatorMock.Object);
+    public ProjectsControllerTest() => controller = new(mediatorMock.Object);
 
-    #region ProjectDetailsAsync
+    #region GetById
     [Theory]
     [AutoData]
-    public async Task ProjectDetailsAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(ProjectDetailsDto dto)
+    public async Task GetById_WnenMediatrReturnsOk_ShouldReturnSuccessResult(ProjectDetailsDto dto)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<ProjectDetailsQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Ok(dto)));
 
         // Act
-        var result = await controller.ProjectDetailsAsync(dto.Id);
+        var result = await controller.GetById(dto.Id);
 
         // Assert
         Assert.True(result.Success);
@@ -37,14 +37,14 @@ public class ProjectControllerTest
 
     [Theory]
     [AutoData]
-    public async Task ProjectDetailsAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
+    public async Task GetById_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<ProjectDetailsQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Fail<ProjectDetailsDto>(errorMessage)));
 
         // Act
-        var result = await controller.ProjectDetailsAsync(1);
+        var result = await controller.GetById(1);
 
         // Assert
         Assert.False(result.Success);
@@ -54,10 +54,10 @@ public class ProjectControllerTest
     }
     #endregion
 
-    #region ProjectPageAsync
+    #region GetAll
     [Theory]
     [AutoData]
-    public async Task ProjectPageAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(
+    public async Task GetAll_WnenMediatrReturnsOk_ShouldReturnSuccessResult(
         ProjectPageDto dto,
         int page,
         int pageSize,
@@ -70,7 +70,7 @@ public class ProjectControllerTest
             .Returns(Task.FromResult(Result.Ok(dto)));
 
         // Act
-        var result = await controller.ProjectPageAsync(page, pageSize, sortingProperty, sortingDirection, filter);
+        var result = await controller.GetAll(page, pageSize, sortingProperty, sortingDirection, filter);
 
         // Assert
         Assert.True(result.Success);
@@ -83,7 +83,7 @@ public class ProjectControllerTest
 
     [Theory]
     [AutoData]
-    public async Task ProjectPageAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+    public async Task GetAll_WnenMediatrReturnsFail_ShouldReturnFailureResult(
         string errorMessage,
         int page,
         int pageSize,
@@ -96,7 +96,7 @@ public class ProjectControllerTest
             .Returns(Task.FromResult(Result.Fail<ProjectPageDto>(errorMessage)));
 
         // Act
-        var result = await controller.ProjectPageAsync(page, pageSize, sortingProperty, sortingDirection, filter);
+        var result = await controller.GetAll(page, pageSize, sortingProperty, sortingDirection, filter);
 
         // Assert
         Assert.False(result.Success);
@@ -108,17 +108,17 @@ public class ProjectControllerTest
     }
     #endregion
 
-    #region ProjectUpdateAsync
+    #region Update
     [Theory]
     [AutoData]
-    public async Task ProjectUpdateAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(ProjectDetailsDto dto)
+    public async Task Update_WnenMediatrReturnsOk_ShouldReturnSuccessResult(ProjectDetailsDto dto)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<ProjectUpdateCommand>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Ok(true)));
 
         // Act
-        var result = await controller.ProjectUpdateAsync(dto);
+        var result = await controller.Update(dto.Id, dto);
 
         // Assert
         Assert.True(result.Success);
@@ -129,7 +129,7 @@ public class ProjectControllerTest
 
     [Theory]
     [AutoData]
-    public async Task ProjectUpdateAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+    public async Task Update_WnenMediatrReturnsFail_ShouldReturnFailureResult(
         ProjectDetailsDto dto,
         string errorMessage)
     {
@@ -138,7 +138,7 @@ public class ProjectControllerTest
             .Returns(Task.FromResult(Result.Fail<bool>(errorMessage)));
 
         // Act
-        var result = await controller.ProjectUpdateAsync(dto);
+        var result = await controller.Update(dto.Id, dto);
 
         // Assert
         Assert.False(result.Success);
@@ -148,17 +148,17 @@ public class ProjectControllerTest
     }
     #endregion
 
-    #region ProjectCreateAsync
+    #region Create
     [Theory]
     [AutoData]
-    public async Task ProjectCreateAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(ProjectDetailsDto dto)
+    public async Task Create_WnenMediatrReturnsOk_ShouldReturnSuccessResult(ProjectDetailsDto dto)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<ProjectCreateCommand>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Ok(true)));
 
         // Act
-        var result = await controller.ProjectCreateAsync(dto);
+        var result = await controller.Create(dto);
 
         // Assert
         Assert.True(result.Success);
@@ -169,7 +169,7 @@ public class ProjectControllerTest
 
     [Theory]
     [AutoData]
-    public async Task ProjectCreateAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+    public async Task Create_WnenMediatrReturnsFail_ShouldReturnFailureResult(
         ProjectDetailsDto dto,
         string errorMessage)
     {
@@ -178,7 +178,7 @@ public class ProjectControllerTest
             .Returns(Task.FromResult(Result.Fail<bool>(errorMessage)));
 
         // Act
-        var result = await controller.ProjectCreateAsync(dto);
+        var result = await controller.Create(dto);
 
         // Assert
         Assert.False(result.Success);

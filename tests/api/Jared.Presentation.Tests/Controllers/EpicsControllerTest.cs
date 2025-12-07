@@ -9,24 +9,24 @@ using Moq;
 
 namespace Jared.Application.Tests.Controllers;
 
-public class EpicControllerTest
+public class EpicsControllerTest
 {
-    private readonly EpicController controller;
+    private readonly EpicsController controller;
     private readonly Mock<IMediator> mediatorMock = new();
 
-    public EpicControllerTest() => controller = new(mediatorMock.Object);
+    public EpicsControllerTest() => controller = new(mediatorMock.Object);
 
-    #region EpicDetailsAsync
+    #region GetById
     [Theory]
     [AutoData]
-    public async Task EpicDetailsAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(EpicDetailsDto dto)
+    public async Task GetById_WnenMediatrReturnsOk_ShouldReturnSuccessResult(EpicDetailsDto dto)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<EpicDetailsQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Ok(dto)));
 
         // Act
-        var result = await controller.EpicDetailsAsync(dto.Id);
+        var result = await controller.GetById(dto.Id);
 
         // Assert
         Assert.True(result.Success);
@@ -37,14 +37,14 @@ public class EpicControllerTest
 
     [Theory]
     [AutoData]
-    public async Task EpicDetailsAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
+    public async Task GetById_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<EpicDetailsQuery>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Fail<EpicDetailsDto>(errorMessage)));
 
         // Act
-        var result = await controller.EpicDetailsAsync(1);
+        var result = await controller.GetById(1);
 
         // Assert
         Assert.False(result.Success);
@@ -54,10 +54,10 @@ public class EpicControllerTest
     }
     #endregion
 
-    #region EpicPageAsync
+    #region GetAll
     [Theory]
     [AutoData]
-    public async Task EpicPageAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(
+    public async Task GetAll_WnenMediatrReturnsOk_ShouldReturnSuccessResult(
         EpicPageDto dto,
         int page,
         int pageSize,
@@ -70,7 +70,7 @@ public class EpicControllerTest
             .Returns(Task.FromResult(Result.Ok(dto)));
 
         // Act
-        var result = await controller.EpicPageAsync(page, pageSize, sortingProperty, sortingDirection, filter);
+        var result = await controller.GetAll(page, pageSize, sortingProperty, sortingDirection, filter);
 
         // Assert
         Assert.True(result.Success);
@@ -83,7 +83,7 @@ public class EpicControllerTest
 
     [Theory]
     [AutoData]
-    public async Task EpicPageAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+    public async Task GetAll_WnenMediatrReturnsFail_ShouldReturnFailureResult(
         string errorMessage,
         int page,
         int pageSize,
@@ -96,7 +96,7 @@ public class EpicControllerTest
             .Returns(Task.FromResult(Result.Fail<EpicPageDto>(errorMessage)));
 
         // Act
-        var result = await controller.EpicPageAsync(page, pageSize, sortingProperty, sortingDirection, filter);
+        var result = await controller.GetAll(page, pageSize, sortingProperty, sortingDirection, filter);
 
         // Assert
         Assert.False(result.Success);
@@ -108,17 +108,17 @@ public class EpicControllerTest
     }
     #endregion
 
-    #region EpicUpdateAsync
+    #region Update
     [Theory]
     [AutoData]
-    public async Task EpicUpdateAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(EpicDetailsDto dto)
+    public async Task Update_WnenMediatrReturnsOk_ShouldReturnSuccessResult(EpicDetailsDto dto)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<EpicUpdateCommand>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Ok(true)));
 
         // Act
-        var result = await controller.EpicUpdateAsync(dto);
+        var result = await controller.Update(dto.Id, dto);
 
         // Assert
         Assert.True(result.Success);
@@ -129,7 +129,7 @@ public class EpicControllerTest
 
     [Theory]
     [AutoData]
-    public async Task EpicUpdateAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+    public async Task Update_WnenMediatrReturnsFail_ShouldReturnFailureResult(
         EpicDetailsDto dto,
         string errorMessage)
     {
@@ -138,7 +138,7 @@ public class EpicControllerTest
             .Returns(Task.FromResult(Result.Fail<bool>(errorMessage)));
 
         // Act
-        var result = await controller.EpicUpdateAsync(dto);
+        var result = await controller.Update(dto.Id, dto);
 
         // Assert
         Assert.False(result.Success);
@@ -148,17 +148,17 @@ public class EpicControllerTest
     }
     #endregion
 
-    #region EpicCreateAsync
+    #region Create
     [Theory]
     [AutoData]
-    public async Task EpicCreateAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(EpicDetailsDto dto)
+    public async Task Create_WnenMediatrReturnsOk_ShouldReturnSuccessResult(EpicDetailsDto dto)
     {
         // Arrange
         mediatorMock.Setup(x => x.Send(It.IsAny<EpicCreateCommand>(), It.IsAny<CancellationToken>()))
             .Returns(Task.FromResult(Result.Ok(true)));
 
         // Act
-        var result = await controller.EpicCreateAsync(dto);
+        var result = await controller.Create(dto);
 
         // Assert
         Assert.True(result.Success);
@@ -169,7 +169,7 @@ public class EpicControllerTest
 
     [Theory]
     [AutoData]
-    public async Task EpicCreateAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+    public async Task Create_WnenMediatrReturnsFail_ShouldReturnFailureResult(
         EpicDetailsDto dto,
         string errorMessage)
     {
@@ -178,7 +178,7 @@ public class EpicControllerTest
             .Returns(Task.FromResult(Result.Fail<bool>(errorMessage)));
 
         // Act
-        var result = await controller.EpicCreateAsync(dto);
+        var result = await controller.Create(dto);
 
         // Assert
         Assert.False(result.Success);

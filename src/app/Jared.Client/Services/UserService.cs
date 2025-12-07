@@ -84,9 +84,9 @@ public class UserService(HttpClient httpClient) : IUserService
         return fullName;
     }
 
-    public UserUpdateDto GetUserData()
+    public UserDetailsDto GetUserData()
     {
-        UserUpdateDto dto = new();
+        UserDetailsDto dto = new();
         var token = httpClient.DefaultRequestHeaders.Authorization;
 
         if (token is null)
@@ -100,6 +100,11 @@ public class UserService(HttpClient httpClient) : IUserService
         if (jwtToken is null)
         {
             return dto;
+        }
+
+        if (int.TryParse(jwtToken.Claims.FirstOrDefault(claim => claim.Type == ID_TYPE)?.Value, out int id))
+        {
+            dto.Id = id;
         }
 
         var fullName = jwtToken.Claims.FirstOrDefault(claim => claim.Type == NAME_TYPE)?.Value;

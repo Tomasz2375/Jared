@@ -7,5 +7,5 @@ public interface IUserService
     int GetUserId();
     string GetUserRole();
     string GetUserName();
-    UserUpdateDto GetUserData();
+    UserDetailsDto GetUserData();
 }

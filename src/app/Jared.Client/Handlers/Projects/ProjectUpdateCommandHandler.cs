@@ -12,7 +12,7 @@ public class ProjectUpdateCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(ProjectUpdateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.PROJECT_UPDATE;
+        string baseUrl = $"{BaseAdresses.PROJECTS}/{request.dto.Id}";
 
         var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

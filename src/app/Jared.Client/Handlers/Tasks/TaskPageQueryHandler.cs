@@ -15,7 +15,7 @@ public class TaskPageQueryHandler(HttpClient httpClient)
 
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.TASK_PAGE;
+        string baseUrl = BaseAdresses.TASKS;
         string queryUrl = createQueryUrl(request);
 
         string url = baseUrl + queryUrl;

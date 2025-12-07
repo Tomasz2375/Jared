@@ -13,9 +13,9 @@ public class UserRoleUpdateCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(UserRoleUpdateCommand request, CancellationToken cancellationToken)
     {
-        var baseUrl = BaseAdresses.USER_ROLE_UPDATE;
+        var baseUrl = $"{BaseAdresses.USERS}/{request.dto.Id}/role";
 
-        var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken).ConfigureAwait(false);
+        var result = await httpClient.PatchAsJsonAsync(baseUrl, request.dto, cancellationToken).ConfigureAwait(false);
 
         if (!result.IsSuccessStatusCode)
         {

@@ -1,5 +1,6 @@
 using Blazored.LocalStorage;
 using Jared.Client.Abstractions;
+using Jared.Client.Handlers.Auth;
 using Jared.Client.Handlers.Epics;
 using Jared.Client.Handlers.Projects;
 using Jared.Client.Handlers.Roles;
@@ -40,7 +41,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddClient(services);
 
         // Assert
-        Assert.Equal(38, services.Count);
+        Assert.Equal(39, services.Count);
     }
 
     [Fact]
@@ -118,23 +119,18 @@ public class DependencyInjectionTests
 
         // User
         Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserDetailsQuery, Result<UserDetailsDto>>) &&
+            x.ImplementationType == typeof(UserDetailsQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserListQuery, Result<List<UserListDto>>>) &&
             x.ImplementationType == typeof(UserListQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<UserLoginCommand, Result<string>>) &&
-            x.ImplementationType == typeof(UserLoginCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserPasswordCommand, Result<bool>>) &&
             x.ImplementationType == typeof(UserPasswordCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<UserRegisterCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(UserRegisterCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
@@ -144,6 +140,17 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserRoleUpdateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(UserRoleUpdateCommandHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        // Auth
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserLoginCommand, Result<string>>) &&
+            x.ImplementationType == typeof(UserLoginCommandHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<UserRegisterCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(UserRegisterCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         // Role

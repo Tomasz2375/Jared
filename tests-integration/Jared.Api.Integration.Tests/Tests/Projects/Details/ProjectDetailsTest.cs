@@ -9,7 +9,7 @@ namespace Jared.Api.Integration.Tests.Tests.Projects.Details;
 
 public class ProjectDetailsTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Project";
+    protected override string URL => "projects";
 
     [Fact]
     public async Task DetailsProject_WhenProjectExists_ShoutdBeSuccess()

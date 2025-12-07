@@ -9,24 +9,24 @@ using Moq;
 
 namespace Jared.Application.Tests.Controllers
 {
-    public class TaskControllerTest
+    public class TasksControllerTest
     {
-        private readonly TaskController controller;
+        private readonly TasksController controller;
         private readonly Mock<IMediator> mediatorMock = new();
 
-        public TaskControllerTest() => controller = new(mediatorMock.Object);
+        public TasksControllerTest() => controller = new(mediatorMock.Object);
 
-        #region TaskDetailsAsync
+        #region GetById
         [Theory]
         [AutoData]
-        public async Task TaskDetailsAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(TaskDetailsDto dto)
+        public async Task GetById_WnenMediatrReturnsOk_ShouldReturnSuccessResult(TaskDetailsDto dto)
         {
             // Arrange
             mediatorMock.Setup(x => x.Send(It.IsAny<TaskDetailsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(Result.Ok(dto)));
 
             // Act
-            var result = await controller.TaskDetailsAsync(dto.Id);
+            var result = await controller.GetById(dto.Id);
 
             // Assert
             Assert.True(result.Success);
@@ -37,14 +37,14 @@ namespace Jared.Application.Tests.Controllers
 
         [Theory]
         [AutoData]
-        public async Task TaskDetailsAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
+        public async Task GetById_WnenMediatrReturnsFail_ShouldReturnFailureResult(string errorMessage)
         {
             // Arrange
             mediatorMock.Setup(x => x.Send(It.IsAny<TaskDetailsQuery>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(Result.Fail<TaskDetailsDto>(errorMessage)));
 
             // Act
-            var result = await controller.TaskDetailsAsync(1);
+            var result = await controller.GetById(1);
 
             // Assert
             Assert.False(result.Success);
@@ -54,10 +54,10 @@ namespace Jared.Application.Tests.Controllers
         }
         #endregion
 
-        #region TaskPageAsync
+        #region GetAll
         [Theory]
         [AutoData]
-        public async Task TaskPageAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(
+        public async Task GetAll_WnenMediatrReturnsOk_ShouldReturnSuccessResult(
             TaskPageDto dto,
             int page,
             int pageSize,
@@ -70,7 +70,7 @@ namespace Jared.Application.Tests.Controllers
                 .Returns(Task.FromResult(Result.Ok(dto)));
 
             // Act
-            var result = await controller.TaskPageAsync(page, pageSize, sortingProperty, sortingDirection, filter);
+            var result = await controller.GetAll(page, pageSize, sortingProperty, sortingDirection, filter);
 
             // Assert
             Assert.True(result.Success);
@@ -83,7 +83,7 @@ namespace Jared.Application.Tests.Controllers
 
         [Theory]
         [AutoData]
-        public async Task TaskPageAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+        public async Task GetAll_WnenMediatrReturnsFail_ShouldReturnFailureResult(
             string errorMessage,
             int page,
             int pageSize,
@@ -96,7 +96,7 @@ namespace Jared.Application.Tests.Controllers
                 .Returns(Task.FromResult(Result.Fail<TaskPageDto>(errorMessage)));
 
             // Act
-            var result = await controller.TaskPageAsync(page, pageSize, sortingProperty, sortingDirection, filter);
+            var result = await controller.GetAll(page, pageSize, sortingProperty, sortingDirection, filter);
 
             // Assert
             Assert.False(result.Success);
@@ -108,17 +108,17 @@ namespace Jared.Application.Tests.Controllers
         }
         #endregion
 
-        #region TaskUpdateAsync
+        #region Update
         [Theory]
         [AutoData]
-        public async Task TaskUpdateAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(TaskDetailsDto dto)
+        public async Task Update_WnenMediatrReturnsOk_ShouldReturnSuccessResult(TaskDetailsDto dto)
         {
             // Arrange
             mediatorMock.Setup(x => x.Send(It.IsAny<TaskUpdateCommand>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(Result.Ok(true)));
 
             // Act
-            var result = await controller.TaskUpdateAsync(dto);
+            var result = await controller.Update(dto.Id, dto);
 
             // Assert
             Assert.True(result.Success);
@@ -129,7 +129,7 @@ namespace Jared.Application.Tests.Controllers
 
         [Theory]
         [AutoData]
-        public async Task TaskUpdateAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+        public async Task Update_WnenMediatrReturnsFail_ShouldReturnFailureResult(
             TaskDetailsDto dto,
             string errorMessage)
         {
@@ -138,7 +138,7 @@ namespace Jared.Application.Tests.Controllers
                 .Returns(Task.FromResult(Result.Fail<bool>(errorMessage)));
 
             // Act
-            var result = await controller.TaskUpdateAsync(dto);
+            var result = await controller.Update(dto.Id, dto);
 
             // Assert
             Assert.False(result.Success);
@@ -148,17 +148,17 @@ namespace Jared.Application.Tests.Controllers
         }
         #endregion
 
-        #region TaskCreateAsync
+        #region Create
         [Theory]
         [AutoData]
-        public async Task TaskCreateAsync_WnenMediatrReturnsOk_ShouldReturnSuccessResult(TaskDetailsDto dto)
+        public async Task Create_WnenMediatrReturnsOk_ShouldReturnSuccessResult(TaskDetailsDto dto)
         {
             // Arrange
             mediatorMock.Setup(x => x.Send(It.IsAny<TaskCreateCommand>(), It.IsAny<CancellationToken>()))
                 .Returns(Task.FromResult(Result.Ok(true)));
 
             // Act
-            var result = await controller.TaskCreateAsync(dto);
+            var result = await controller.Create(dto);
 
             // Assert
             Assert.True(result.Success);
@@ -169,7 +169,7 @@ namespace Jared.Application.Tests.Controllers
 
         [Theory]
         [AutoData]
-        public async Task TaskCreateAsync_WnenMediatrReturnsFail_ShouldReturnFailureResult(
+        public async Task Create_WnenMediatrReturnsFail_ShouldReturnFailureResult(
             TaskDetailsDto dto,
             string errorMessage)
         {
@@ -178,7 +178,7 @@ namespace Jared.Application.Tests.Controllers
                 .Returns(Task.FromResult(Result.Fail<bool>(errorMessage)));
 
             // Act
-            var result = await controller.TaskCreateAsync(dto);
+            var result = await controller.Create(dto);
 
             // Assert
             Assert.False(result.Success);

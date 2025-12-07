@@ -8,12 +8,10 @@ namespace Jared.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class WorkLogController(IMediator mediator) : ControllerBase
+public class WorkLogsController(IMediator mediator) : ControllerBase
 {
-    private readonly IMediator mediator = mediator;
-
-    [HttpGet("Statistics")]
-    public async Task<Result<List<WorkLogStatisticsDto>>> TaskListAsync(
+    [HttpGet]
+    public async Task<Result<List<WorkLogStatisticsDto>>> GetAll(
         [FromQuery] int userId,
         [FromQuery] int month,
         [FromQuery] int year)

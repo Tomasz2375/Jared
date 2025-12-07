@@ -9,18 +9,16 @@ namespace Jared.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ProjectController(IMediator mediator)
+public class ProjectsController(IMediator mediator)
 {
-    private readonly IMediator mediator = mediator;
-
     [HttpGet("{id}")]
-    public async Task<Result<ProjectDetailsDto>> ProjectDetailsAsync([FromRoute] int id)
+    public async Task<Result<ProjectDetailsDto>> GetById([FromRoute] int id)
     {
         return await mediator.Send(new ProjectDetailsQuery(id));
     }
 
-    [HttpGet("Page")]
-    public async Task<Result<ProjectPageDto>> ProjectPageAsync(
+    [HttpGet]
+    public async Task<Result<ProjectPageDto>> GetAll(
         [FromQuery] int page,
         [FromQuery] int pageSize,
         [FromQuery] string? sortingProperty,
@@ -35,14 +33,14 @@ public class ProjectController(IMediator mediator)
             filter));
     }
 
-    [HttpPut("Update")]
-    public async Task<Result<bool>> ProjectUpdateAsync([FromBody] ProjectDetailsDto dto)
+    [HttpPut("{Id}")]
+    public async Task<Result<bool>> Update([FromRoute] int id, [FromBody] ProjectDetailsDto dto)
     {
         return await mediator.Send(new ProjectUpdateCommand(dto));
     }
 
-    [HttpPost("Create")]
-    public async Task<Result<bool>> ProjectCreateAsync([FromBody] ProjectDetailsDto dto)
+    [HttpPost]
+    public async Task<Result<bool>> Create([FromBody] ProjectDetailsDto dto)
     {
         return await mediator.Send(new ProjectCreateCommand(dto));
     }

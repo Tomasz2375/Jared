@@ -13,9 +13,9 @@ public class UserPasswordCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(UserPasswordCommand request, CancellationToken cancellationToken)
     {
-        var baseUrl = BaseAdresses.USER_PASSWORD;
+        var baseUrl = $"{BaseAdresses.USERS}/{request.dto.Id}/password";
 
-        var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
+        var result = await httpClient.PatchAsJsonAsync(baseUrl, request.dto, cancellationToken);
 
         if (!result.IsSuccessStatusCode)
         {

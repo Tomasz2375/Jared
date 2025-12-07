@@ -14,7 +14,7 @@ public class UserListQueryHandler(HttpClient httpClient)
 
     public async Task<Result<List<UserListDto>>> Handle(UserListQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.USER_LIST;
+        string baseUrl = BaseAdresses.USERS;
 
         var response = await httpClient.GetFromJsonAsync<Result<List<UserListDto>>>(baseUrl, cancellationToken);
 

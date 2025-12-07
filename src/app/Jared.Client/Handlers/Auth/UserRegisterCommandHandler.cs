@@ -4,7 +4,7 @@ using Jared.Contracts.Users;
 using Jared.Core.Abstractions;
 using MediatR;
 
-namespace Jared.Client.Requests.Users;
+namespace Jared.Client.Handlers.Auth;
 
 public class UserRegisterCommandHandler(HttpClient httpClient)
     : IRequestHandler<UserRegisterCommand, Result<bool>>
@@ -13,7 +13,7 @@ public class UserRegisterCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(UserRegisterCommand request, CancellationToken cancellationToken)
     {
-        var baseUrl = BaseAdresses.USER_REGISTER;
+        var baseUrl = BaseAdresses.REGISTER;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

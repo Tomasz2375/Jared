@@ -13,7 +13,7 @@ public class EpicDetailsQueryHandler(HttpClient httpClient)
 
     public async Task<Result<EpicDetailsDto>> Handle(EpicDetailsQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = $"{BaseAdresses.EPIC_DETAILS}/{request.id}";
+        string baseUrl = $"{BaseAdresses.EPICS}/{request.id}";
 
         var response = await httpClient.GetFromJsonAsync<Result<EpicDetailsDto>>(baseUrl, cancellationToken);
 

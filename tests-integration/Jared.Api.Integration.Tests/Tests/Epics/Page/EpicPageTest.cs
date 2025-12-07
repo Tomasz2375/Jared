@@ -9,7 +9,7 @@ namespace Jared.Api.Integration.Tests.Tests.Epics.Page;
 
 public class EpicPageTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Epic/Page";
+    protected override string URL => "epics";
 
     [Fact]
     public async Task PageEpic_When_Page_1_PageSize_2_ShoutdBeSuccess()

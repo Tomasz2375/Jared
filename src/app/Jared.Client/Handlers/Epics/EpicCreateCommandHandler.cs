@@ -12,7 +12,7 @@ public class EpicCreateCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(EpicCreateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.EPIC_CREATE;
+        string baseUrl = BaseAdresses.EPICS;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

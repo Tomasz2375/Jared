@@ -13,7 +13,7 @@ public class TaskUpdateCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(TaskUpdateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.TASK_UPDATE;
+        string baseUrl = $"{BaseAdresses.TASKS}/{request.dto.Id}";
 
         var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

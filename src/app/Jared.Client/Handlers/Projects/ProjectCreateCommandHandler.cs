@@ -12,7 +12,7 @@ public class ProjectCreateCommandHandler(HttpClient httpClient)
 
     public async Task<Result<bool>> Handle(ProjectCreateCommand request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.PROJECT_CREATE;
+        string baseUrl = BaseAdresses.PROJECTS;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

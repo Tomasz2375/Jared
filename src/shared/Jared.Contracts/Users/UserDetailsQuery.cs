@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Jared.Contracts.Users;
 
-public sealed record UserUpdateCommand(UserDetailsDto dto)
-    : IRequest<Result<bool>>;
+public sealed record UserDetailsQuery(int id)
+    : IRequest<Result<UserDetailsDto>>;

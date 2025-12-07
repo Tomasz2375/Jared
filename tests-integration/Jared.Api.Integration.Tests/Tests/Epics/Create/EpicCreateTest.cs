@@ -9,7 +9,7 @@ namespace Jared.Api.Integration.Tests.Tests.Epics.Create;
 
 public class EpicCreateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Epic/Create";
+    protected override string URL => "epics";
 
     [Fact]
     public async Task CreateEpic_WhenAllDataIsValid_ShouldBeSuccess()

@@ -1,6 +1,6 @@
 ﻿namespace Jared.Dtos.Users;
 
-public class UserPasswordDto
+public class UserPasswordDto : BaseDto
 {
     public string CurrentPassword { get; set; } = default!;
     public string NewPassword { get; set; } = default!;

@@ -9,19 +9,16 @@ namespace Jared.Presentation.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EpicController(IMediator mediator)
+public class EpicsController(IMediator mediator)
 {
-    private readonly IMediator mediator = mediator;
-
     [HttpGet("{id}")]
-    public async Task<Result<EpicDetailsDto>> EpicDetailsAsync([FromRoute] int id)
+    public async Task<Result<EpicDetailsDto>> GetById([FromRoute] int id)
     {
         return await mediator.Send(new EpicDetailsQuery(id));
     }
 
     [HttpGet]
-    [Route("Page")]
-    public async Task<Result<EpicPageDto>> EpicPageAsync(
+    public async Task<Result<EpicPageDto>> GetAll(
         [FromQuery] int page,
         [FromQuery] int pageSize,
         [FromQuery] string? sortingProperty,
@@ -36,14 +33,14 @@ public class EpicController(IMediator mediator)
             filter));
     }
 
-    [HttpPut("Update")]
-    public async Task<Result<bool>> EpicUpdateAsync([FromBody] EpicDetailsDto dto)
+    [HttpPut("{Id}")]
+    public async Task<Result<bool>> Update([FromRoute] int id, [FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicUpdateCommand(dto));
     }
 
-    [HttpPost("Create")]
-    public async Task<Result<bool>> EpicCreateAsync([FromBody] EpicDetailsDto dto)
+    [HttpPost]
+    public async Task<Result<bool>> Create([FromBody] EpicDetailsDto dto)
     {
         return await mediator.Send(new EpicCreateCommand(dto));
     }

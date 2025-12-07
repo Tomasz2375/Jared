@@ -1,10 +1,9 @@
-﻿using Jared.Client.Handlers;
+﻿using System.Net.Http.Json;
 using Jared.Contracts.Users;
 using Jared.Core.Abstractions;
 using MediatR;
-using System.Net.Http.Json;
 
-namespace Jared.Client.Requests.Users;
+namespace Jared.Client.Handlers.Auth;
 
 public class UserLoginCommandHandler(HttpClient httpClient)
     : IRequestHandler<UserLoginCommand, Result<string>>
@@ -13,7 +12,7 @@ public class UserLoginCommandHandler(HttpClient httpClient)
 
     public async Task<Result<string>> Handle(UserLoginCommand request, CancellationToken cancellationToken)
     {
-        var baseUrl = BaseAdresses.USER_LOGIN;
+        var baseUrl = BaseAdresses.LOGIN;
 
         var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
 

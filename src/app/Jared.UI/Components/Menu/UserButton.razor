@@ -14,7 +14,7 @@
         <AuthorizeView>
             <Authorized>
                 <span class="dropdown-info">@UserService.GetUserName()</span>
-                <a href="profile" class="dropdown-item">Profile</a>
+                <a href="profile/@UserService.GetUserId()" class="dropdown-item">Profile</a>
                 <a href="statistics" class="dropdown-item">Statistics</a>
                 @if(UserService.GetUserRole() == "Admin")
                 {

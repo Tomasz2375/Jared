@@ -14,7 +14,7 @@ public class ProjectPageQueryHandler(HttpClient httpClient)
 
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.PROJECT_PAGE;
+        string baseUrl = BaseAdresses.PROJECTS;
         string queryUrl = createQueryUrl(request);
 
         string url = baseUrl + queryUrl;

@@ -13,7 +13,7 @@ public class RoleListQueryHandler(HttpClient httpClient)
 
     public async Task<Result<List<RoleListDto>>> Handle(RoleListQuery request, CancellationToken cancellationToken)
     {
-        string baseUrl = BaseAdresses.ROLE_LIST;
+        string baseUrl = BaseAdresses.ROLES;
 
         var response = await httpClient.GetFromJsonAsync<Result<List<RoleListDto>>>(baseUrl, cancellationToken);
 

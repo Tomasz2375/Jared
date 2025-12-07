@@ -1,6 +1,6 @@
 ﻿namespace Jared.Dtos.Users;
 
-public class UserUpdateDto
+public class UserDetailsDto : BaseDto
 {
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;

@@ -7,7 +7,7 @@ namespace Jared.Api.Integration.Tests.Tests.Projects.Create;
 
 public class ProjectCreateTest(JaredWebApplicationFactory factory) : BaseIntegrationTest(factory)
 {
-    protected override string URL => "Project/Create";
+    protected override string URL => "projects";
 
     [Fact]
     public async Task CreateProject_WhenAllDataIsValid_ShouldBeSuccess()
