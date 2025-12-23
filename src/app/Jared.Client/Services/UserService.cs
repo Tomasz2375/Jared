@@ -1,125 +1,27 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System.Security.Claims;
+using Jared.Client.Abstractions;
 using Jared.Dtos.Users;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace Jared.Client.Services;
 
-public class UserService(HttpClient httpClient) : IUserService
+public sealed class UserService(AuthenticationStateProvider authStateProvider) : IUserService
 {
-    private const string ID_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier";
-    private const string NAME_TYPE = "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
-    private const string USER_ROLE = "http://schemas.microsoft.com/ws/2008/06/identity/claims/role";
-    private const string BIRTHDAY_TYPE = "DateOfBirth";
-
-    private readonly HttpClient httpClient = httpClient;
-
-    public int GetUserId()
+    public async Task<UserDto> GetUserAsync()
     {
-        var token = httpClient.DefaultRequestHeaders.Authorization;
-
-        if (token is null)
+        var state = await authStateProvider.GetAuthenticationStateAsync();
+        var user = state.User;
+        if (!user.Identity?.IsAuthenticated ?? false)
         {
-            return 0;
+            return new();
         }
 
-        JwtSecurityTokenHandler handler = new();
-        var jwtToken = handler.ReadJwtToken(token.Parameter);
-
-        if (jwtToken is null)
+        return new()
         {
-            return 0;
-        }
-
-        if (int.TryParse(jwtToken.Claims.FirstOrDefault(claim => claim.Type == ID_TYPE)?.Value, out int id))
-        {
-            return id;
-        }
-
-        return 0;
-    }
-
-    public string GetUserRole()
-    {
-        var token = httpClient.DefaultRequestHeaders.Authorization;
-
-        if (token is null)
-        {
-            return string.Empty;
-        }
-
-        JwtSecurityTokenHandler handler = new();
-        var jwtToken = handler.ReadJwtToken(token.Parameter);
-
-        if (jwtToken is null)
-        {
-            return string.Empty;
-        }
-
-        var role = jwtToken.Claims.FirstOrDefault(claim => claim.Type == USER_ROLE);
-        return role is null ? string.Empty : role.Value;
-    }
-
-    public string GetUserName()
-    {
-        var token = httpClient.DefaultRequestHeaders.Authorization;
-
-        if (token is null)
-        {
-            return string.Empty;
-        }
-
-        JwtSecurityTokenHandler handler = new();
-        var jwtToken = handler.ReadJwtToken(token.Parameter);
-
-        if (jwtToken is null)
-        {
-            return string.Empty;
-        }
-
-        var fullName = jwtToken.Claims.FirstOrDefault(claim => claim.Type == NAME_TYPE)?.Value;
-        if (fullName is null)
-        {
-            return string.Empty;
-        }
-
-        return fullName;
-    }
-
-    public UserDetailsDto GetUserData()
-    {
-        UserDetailsDto dto = new();
-        var token = httpClient.DefaultRequestHeaders.Authorization;
-
-        if (token is null)
-        {
-            return dto;
-        }
-
-        JwtSecurityTokenHandler handler = new();
-        var jwtToken = handler.ReadJwtToken(token.Parameter);
-
-        if (jwtToken is null)
-        {
-            return dto;
-        }
-
-        if (int.TryParse(jwtToken.Claims.FirstOrDefault(claim => claim.Type == ID_TYPE)?.Value, out int id))
-        {
-            dto.Id = id;
-        }
-
-        var fullName = jwtToken.Claims.FirstOrDefault(claim => claim.Type == NAME_TYPE)?.Value;
-        if (fullName is not null)
-        {
-            dto.FirstName = fullName!.Split(" ")[0];
-            dto.LastName = fullName.Split(" ")[1];
-        }
-
-        var claimDateOfBirth = jwtToken.Claims.FirstOrDefault(claim => claim.Type.Contains(BIRTHDAY_TYPE))?.Value;
-        if (DateTime.TryParse(claimDateOfBirth, out DateTime dateOfBirth))
-        {
-            dto.DateOfBirth = dateOfBirth;
-        }
-
-        return dto!;
+            Id = int.Parse(user.FindFirst(ClaimTypes.NameIdentifier)!.Value),
+            FullName = user.FindFirst(ClaimTypes.Name)!.Value,
+            Email = user.FindFirst(ClaimTypes.Email)!.Value,
+            Role = user.FindFirst(ClaimTypes.Role)!.Value,
+        };
     }
 }
