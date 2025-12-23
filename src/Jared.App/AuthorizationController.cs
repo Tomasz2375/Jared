@@ -1,12 +1,10 @@
 ﻿using System.Security.Claims;
 using Jared.Contracts.Auth;
-using Jared.Core.Abstractions;
 using Jared.Dtos.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jared.App;
