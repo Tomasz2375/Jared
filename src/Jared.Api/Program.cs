@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Security.Claims;
 using System.Text;
 using ConfigurationSubstitution;
 using FluentValidation.AspNetCore;
@@ -10,6 +11,7 @@ using Jared.Domain.Models;
 using Jared.Domain.Options;
 using Jared.Infrastructure;
 using Jared.Validators;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -30,30 +32,39 @@ cultureInfo.DateTimeFormat.ShortDatePattern = "dd.MM.yyyy";
 CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
 CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 
-// Authntication.
-AuthenticationOptions authenticationOptins = new();
-builder
-    .Configuration
+// Authentication
+AuthenticationOptions authenticationOptions = new();
+builder.Configuration
     .GetSection(AuthenticationOptions.Section)
-    .Bind(authenticationOptins);
-builder.Services.AddSingleton(authenticationOptins);
-builder.Services.AddAuthentication(option =>
-{
-    option.DefaultAuthenticateScheme = "Bearer";
-    option.DefaultScheme = "Bearer";
-    option.DefaultChallengeScheme = "Bearer";
-}).AddJwtBearer(config =>
-{
-    config.RequireHttpsMetadata = false;
-    config.SaveToken = true;
-    config.TokenValidationParameters = new()
-    {
-        ValidIssuer = authenticationOptins.JwtIssurer,
-        ValidAudience = authenticationOptins.JwtIssurer,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationOptins.JwtKey)),
-    };
-});
+    .Bind(authenticationOptions);
 
+builder.Services.AddSingleton(authenticationOptions);
+
+builder.Services
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = true;
+        options.SaveToken = false;
+        options.TokenValidationParameters = new()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = authenticationOptions.JwtIssurer,
+            ValidAudience = authenticationOptions.JwtIssurer,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authenticationOptions.JwtKey)),
+            ClockSkew = TimeSpan.Zero,
+            NameClaimType = ClaimTypes.Name,
+            RoleClaimType = ClaimTypes.Role,
+        };
+    });
+builder.Services.AddAuthorization();
 builder.Services.AddValidators();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
@@ -101,9 +112,9 @@ if (!app.Environment.IsDevelopment())
 
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
-    app.UseCors("Jared.App");
 }
 
+app.UseCors("Jared.App");
 app.UseMiddleware<RequestLogContextMiddleware>();
 app.UseSerilogRequestLogging();
 app.UseStaticFiles();

@@ -22,38 +22,6 @@ namespace Jared.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Jared.Domain.Model.WorkLog", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("LoggedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("Time")
-                        .HasColumnType("time");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("WorkDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TaskId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("WorkLog");
-                });
-
             modelBuilder.Entity("Jared.Domain.Models.Epic", b =>
                 {
                     b.Property<int>("Id")
@@ -132,6 +100,40 @@ namespace Jared.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Project");
+                });
+
+            modelBuilder.Entity("Jared.Domain.Models.RefreshToken", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GETUTCDATE()");
+
+                    b.Property<DateTime>("ExpiresAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("RevokedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RefreshToken");
                 });
 
             modelBuilder.Entity("Jared.Domain.Models.Role", b =>
@@ -310,23 +312,36 @@ namespace Jared.Infrastructure.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("Jared.Domain.Model.WorkLog", b =>
+            modelBuilder.Entity("Jared.Domain.Models.WorkLog", b =>
                 {
-                    b.HasOne("Jared.Domain.Models.Task", "Task")
-                        .WithMany("WorkLogs")
-                        .HasForeignKey("TaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("Jared.Domain.Models.User", "User")
-                        .WithMany("WorkLogs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Navigation("Task");
+                    b.Property<DateTime>("LoggedDate")
+                        .HasColumnType("datetime2");
 
-                    b.Navigation("User");
+                    b.Property<int>("TaskId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("Time")
+                        .HasColumnType("time");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("WorkDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TaskId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("WorkLog");
                 });
 
             modelBuilder.Entity("Jared.Domain.Models.Epic", b =>
@@ -344,6 +359,17 @@ namespace Jared.Infrastructure.Migrations
                     b.Navigation("Parent");
 
                     b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("Jared.Domain.Models.RefreshToken", b =>
+                {
+                    b.HasOne("Jared.Domain.Models.User", "User")
+                        .WithMany("UserRefreshTokens")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Jared.Domain.Models.Task", b =>
@@ -413,6 +439,25 @@ namespace Jared.Infrastructure.Migrations
                     b.Navigation("Role");
                 });
 
+            modelBuilder.Entity("Jared.Domain.Models.WorkLog", b =>
+                {
+                    b.HasOne("Jared.Domain.Models.Task", "Task")
+                        .WithMany("WorkLogs")
+                        .HasForeignKey("TaskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Jared.Domain.Models.User", "User")
+                        .WithMany("WorkLogs")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .IsRequired();
+
+                    b.Navigation("Task");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Jared.Domain.Models.Epic", b =>
                 {
                     b.Navigation("Tasks");
@@ -444,6 +489,8 @@ namespace Jared.Infrastructure.Migrations
                     b.Navigation("CreatedTask");
 
                     b.Navigation("TaskHistories");
+
+                    b.Navigation("UserRefreshTokens");
 
                     b.Navigation("WorkLogs");
                 });

@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+﻿using Jared.Client.Abstractions;
 using Jared.Contracts.Epics;
 using Jared.Core.Abstractions;
 using Jared.Dtos.Epics;
@@ -6,22 +6,13 @@ using MediatR;
 
 namespace Jared.Client.Handlers.Epics;
 
-public class EpicDetailsQueryHandler(HttpClient httpClient)
+public class EpicDetailsQueryHandler(IApiClient apiClient)
     : IRequestHandler<EpicDetailsQuery, Result<EpicDetailsDto>>
 {
-    private readonly HttpClient httpClient = httpClient;
-
     public async Task<Result<EpicDetailsDto>> Handle(EpicDetailsQuery request, CancellationToken cancellationToken)
     {
         string baseUrl = $"{BaseAdresses.EPICS}/{request.id}";
 
-        var response = await httpClient.GetFromJsonAsync<Result<EpicDetailsDto>>(baseUrl, cancellationToken);
-
-        if (response is null)
-        {
-            return Result.Fail<EpicDetailsDto>("Invalid response type");
-        }
-
-        return response;
+        return await apiClient.GetAsync<EpicDetailsDto>(baseUrl, cancellationToken);
     }
 }

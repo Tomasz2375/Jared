@@ -1,5 +1,5 @@
-﻿using System.Net.Http.Json;
-using System.Text;
+﻿using System.Text;
+using Jared.Client.Abstractions;
 using Jared.Contracts.Projects;
 using Jared.Core.Abstractions;
 using Jared.Dtos.Projects;
@@ -7,26 +7,16 @@ using MediatR;
 
 namespace Jared.Client.Handlers.Projects;
 
-public class ProjectPageQueryHandler(HttpClient httpClient)
+public class ProjectPageQueryHandler(IApiClient apiClient)
     : IRequestHandler<ProjectPageQuery, Result<ProjectPageDto>>
 {
-    private readonly HttpClient httpClient = httpClient;
-
     public async Task<Result<ProjectPageDto>> Handle(ProjectPageQuery request, CancellationToken cancellationToken)
     {
         string baseUrl = BaseAdresses.PROJECTS;
         string queryUrl = createQueryUrl(request);
-
         string url = baseUrl + queryUrl;
 
-        var response = await httpClient.GetFromJsonAsync<Result<ProjectPageDto>>(url, cancellationToken);
-
-        if (response is null)
-        {
-            return Result.Fail<ProjectPageDto>("Invalid response type");
-        }
-
-        return response;
+        return await apiClient.GetAsync<ProjectPageDto>(url, cancellationToken);
     }
 
     private static string createQueryUrl(ProjectPageQuery query)

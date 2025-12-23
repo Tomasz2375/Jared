@@ -1,7 +1,8 @@
 ﻿using System.Reflection;
+using Jared.Application.Abstractions;
+using Jared.Application.Services;
 using Jared.Application.Services.Filters;
 using Jared.Application.Services.TaskHistory;
-using Jared.Application.Services.User;
 using Jared.Contracts.Middleware;
 using Jared.Domain.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +23,8 @@ public static class DependencyInjection
         });
         services.AddScoped<ITaskHistoryService, TaskHistoryService>();
         services.AddScoped<IUserService, UserService>();
+        services.AddScoped<IJwtTokenService, JwtTokenService>();
+        services.AddScoped<IRefreshTokenService, RefreshTokenService>();
         services.AddScoped<IFilterStrategy<Task>, TaskFilter>();
         services.AddScoped<IFilterStrategy<Epic>, EpicFilter>();
         services.AddScoped<IFilterStrategy<Project>, ProjectFilter>();

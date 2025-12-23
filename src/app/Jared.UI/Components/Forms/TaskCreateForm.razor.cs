@@ -1,4 +1,5 @@
 ﻿using Jared.Client.Commons;
+using Jared.Client.Services;
 using Jared.Contracts.Epics;
 using Jared.Contracts.Projects;
 using Jared.Contracts.Tasks;
@@ -13,6 +14,7 @@ namespace Jared.UI.Components.Forms;
 public partial class TaskCreateForm
 {
     public TaskDetailsDto Dto { get; set; } = new();
+    private UserDto user = default!;
     private List<ProjectListDto> projects = new();
     private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();
@@ -20,7 +22,7 @@ public partial class TaskCreateForm
 
     protected override async Task OnInitializedAsync()
     {
-        await base.OnInitializedAsync();
+        user = await UserService.GetUserAsync();
         await getProjectsAsync();
         await getEpicsAsync();
         await getTasksAsync();
@@ -30,7 +32,7 @@ public partial class TaskCreateForm
         Dto.Priority = Core.Enums.Priority.Normal;
         Dto.Status = Core.Enums.TaskStatus.Created;
         Dto.ParentId = null;
-        Dto.CreatedById = UserService.GetUserId();
+        Dto.CreatedById = user.Id;
     }
 
     private async Task getProjectsAsync()

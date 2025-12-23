@@ -1,38 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Security.Claims;
+﻿using System.Security.Claims;
+using Jared.Application.Abstractions;
+using Jared.Domain.Models;
+using Microsoft.AspNetCore.Http;
 
-namespace Jared.Application.Services.User;
+namespace Jared.Application.Services;
 
 public class UserService(IHttpContextAccessor httpContextAccessor) : IUserService
 {
-    private readonly IHttpContextAccessor httpContextAccessor = httpContextAccessor;
-
-    public Domain.Models.User GetUser()
+    public User GetUser()
     {
         var claimId = httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         var claimName = httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Name)?.Value;
         var claimRole = httpContextAccessor.HttpContext?.User.FindFirst(ClaimTypes.Role)?.Value;
-        var claimDateOfBirth = httpContextAccessor.HttpContext?.User.FindFirst("DateOfBirth")?.Value;
-
-        Domain.Models.User user = new();
-
+        User user = new();
         if (int.TryParse(claimId, out int id))
         {
             user.Id = id;
         }
 
-        if (DateTime.TryParse(claimDateOfBirth, out DateTime dateOfBirth))
-        {
-            user.DateOfBirth = dateOfBirth;
-        }
-
-        if (claimName != null)
+        if (!string.IsNullOrEmpty(claimName))
         {
             user.FirstName = claimName.Split(" ")[0];
             user.LastName = claimName.Split(" ")[1];
         }
 
-        if (claimRole is not null)
+        if (!string.IsNullOrEmpty(claimRole))
         {
             user.Role = new()
             {

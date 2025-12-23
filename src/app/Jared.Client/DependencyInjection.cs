@@ -23,6 +23,8 @@ public static class DependencyInjection
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IDialogService, DialogService>();
+        services.AddScoped<IApiClient, ApiClient>();
+
         return services;
     }
 }

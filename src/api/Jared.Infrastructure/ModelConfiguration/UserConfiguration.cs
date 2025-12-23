@@ -11,6 +11,10 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
         builder.HasOne(u => u.Role)
             .WithMany(r => r.Users)
             .HasForeignKey(u => u.RoleId);
+        builder.HasMany(x => x.UserRefreshTokens)
+            .WithOne(urt => urt.User)
+            .HasForeignKey(urt => urt.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(x => x.FirstName).HasMaxLength(50).IsRequired();
         builder.Property(x => x.LastName).HasMaxLength(50).IsRequired();

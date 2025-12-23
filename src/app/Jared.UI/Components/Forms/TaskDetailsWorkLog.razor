@@ -24,7 +24,7 @@
                     <td>@worklog.WorkDate.ToString("dd.MM.yyyy")</td>
                     <td>@worklog.UserFullName</td>
                     <td>@($"{worklog.Time.Hours}h {worklog.Time.Minutes}m")</td>
-                    @if (worklog.UserId == userId)
+                    @if (worklog.UserId == user.Id)
                     {
                         @if (worklog.Delete)
                         {

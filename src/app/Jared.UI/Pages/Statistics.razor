@@ -6,14 +6,14 @@
 @inject IMediator Mediator
 
 <h4>Statistics</h4>
-<EditForm Model="@month" OnValidSubmit="@(() => getWorkLogs(user, (int)month, year))">
+<EditForm Model="@month" OnValidSubmit="@(() => getWorkLogs(user.Id, (int)month, year))">
 <div class="form-modal-tabs">
         <InputSelectList
-            @bind-Value="@user"
+            @bind-Value="@userId"
             Items="@getUsersDictionary()"
-            ValidationFor="(() => user)"
+            ValidationFor="(() => userId)"
             ShowDefault="false"
-            Disabled="@(userRole == "User")"
+            Disabled="@(user.Role == "User")"
             Id="user"
             Label="User" />
         <InputSelectEnum

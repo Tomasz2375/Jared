@@ -1,6 +1,8 @@
 ﻿using System.Data.Common;
 using Jared.Domain.Abstractions;
 using Jared.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -40,6 +42,14 @@ public class JaredWebApplicationFactory : WebApplicationFactory<Program>, IAsync
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(dbConnection);
+            });
+            services.AddAuthentication("Test")
+                .AddScheme<AuthenticationSchemeOptions, TestAuthHandler>("Test", options => { });
+            services.AddAuthorization(options =>
+            {
+                options.DefaultPolicy = new AuthorizationPolicyBuilder("Test")
+                    .RequireAuthenticatedUser()
+                    .Build();
             });
         });
     }

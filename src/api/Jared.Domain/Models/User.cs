@@ -18,4 +18,5 @@ public class User : Entity
     public List<WorkLog> WorkLogs { get; set; } = new();
     public List<Task> CreatedTask { get; set; } = new();
     public List<Task> AssignedTask { get; set; } = new();
+    public List<RefreshToken> UserRefreshTokens { get; set; } = new();
 }

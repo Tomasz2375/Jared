@@ -1,4 +1,4 @@
-﻿using Jared.Application.Services.User;
+﻿using Jared.Application.Abstractions;
 using Jared.Contracts.Users;
 using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;

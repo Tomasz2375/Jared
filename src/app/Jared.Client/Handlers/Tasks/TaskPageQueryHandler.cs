@@ -1,5 +1,5 @@
-﻿using System.Net.Http.Json;
-using System.Text;
+﻿using System.Text;
+using Jared.Client.Abstractions;
 using Jared.Client.Handlers;
 using Jared.Contracts.Tasks;
 using Jared.Core.Abstractions;
@@ -8,26 +8,16 @@ using MediatR;
 
 namespace Jared.Client.Requests.Tasks;
 
-public class TaskPageQueryHandler(HttpClient httpClient)
+public class TaskPageQueryHandler(IApiClient apiClient)
     : IRequestHandler<TaskPageQuery, Result<TaskPageDto>>
 {
-    private readonly HttpClient httpClient = httpClient;
-
     public async Task<Result<TaskPageDto>> Handle(TaskPageQuery request, CancellationToken cancellationToken)
     {
         string baseUrl = BaseAdresses.TASKS;
         string queryUrl = createQueryUrl(request);
-
         string url = baseUrl + queryUrl;
 
-        var response = await httpClient.GetFromJsonAsync<Result<TaskPageDto>>(url, cancellationToken);
-
-        if (response is null)
-        {
-            return Result.Fail<TaskPageDto>("Invalid response type");
-        }
-
-        return response;
+        return await apiClient.GetAsync<TaskPageDto>(url, cancellationToken);
     }
 
     private static string createQueryUrl(TaskPageQuery query)

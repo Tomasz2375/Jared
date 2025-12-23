@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Jared.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class TasksController(IMediator mediator) : ControllerBase
@@ -34,14 +35,12 @@ public class TasksController(IMediator mediator) : ControllerBase
             filter));
     }
 
-    [Authorize]
     [HttpPut("{Id}")]
     public async Task<Result<bool>> Update([FromRoute] int id, [FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }
 
-    [Authorize]
     [HttpPost]
     public async Task<Result<bool>> Create([FromBody] TaskDetailsDto dto)
     {

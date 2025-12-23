@@ -1,6 +1,5 @@
-﻿@inject ILocalStorageService LocalStorage
-@inject IUserService UserService
-@inject AuthenticationStateProvider AuthenticationStateProvider
+﻿@inject IUserService UserService
+@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
 <div class="dropdown">
@@ -13,10 +12,10 @@
     <div class="dropdown-menu dropdown-menu-2 @userMenuCssClass">
         <AuthorizeView>
             <Authorized>
-                <span class="dropdown-info">@UserService.GetUserName()</span>
-                <a href="profile/@UserService.GetUserId()" class="dropdown-item">Profile</a>
+                <span class="dropdown-info">@user.FullName</span>
+                <a href="profile/@user.Id" class="dropdown-item">Profile</a>
                 <a href="statistics" class="dropdown-item">Statistics</a>
-                @if(UserService.GetUserRole() == "Admin")
+                @if(user.Role == "Admin")
                 {
                     <a href="users" class="dropdown-item">Users</a>
                 }

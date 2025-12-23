@@ -1,5 +1,5 @@
-﻿using Jared.Application.Services.TaskHistory;
-using Jared.Application.Services.User;
+﻿using Jared.Application.Abstractions;
+using Jared.Application.Services.TaskHistory;
 using Jared.Contracts.Tasks;
 using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;

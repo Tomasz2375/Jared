@@ -1,12 +1,15 @@
-﻿using Jared.Application.Handlers.Epics;
+﻿using Jared.Application.Abstractions;
+using Jared.Application.Handlers.Auth;
+using Jared.Application.Handlers.Epics;
 using Jared.Application.Handlers.Projects;
 using Jared.Application.Handlers.Roles;
 using Jared.Application.Handlers.Tasks;
 using Jared.Application.Handlers.Users;
 using Jared.Application.Handlers.WorkLogs;
+using Jared.Application.Services;
 using Jared.Application.Services.Filters;
 using Jared.Application.Services.TaskHistory;
-using Jared.Application.Services.User;
+using Jared.Contracts.Auth;
 using Jared.Contracts.Epics;
 using Jared.Contracts.Projects;
 using Jared.Contracts.Roles;
@@ -15,6 +18,7 @@ using Jared.Contracts.Users;
 using Jared.Contracts.Worklogs;
 using Jared.Core.Abstractions;
 using Jared.Domain.Models;
+using Jared.Dtos.Auth;
 using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Roles;
@@ -39,7 +43,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddApplication(services);
 
         // Assert
-        Assert.Equal(34, services.Count);
+        Assert.Equal(38, services.Count);
     }
 
     [Fact]
@@ -52,25 +56,25 @@ public class DependencyInjectionTests
         DependencyInjection.AddApplication(services);
 
         // Assert
-        // Task
+        // Auth
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<TaskCreateCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(TaskCreateCommandHandler) &&
+            x.ServiceType == typeof(IRequestHandler<LoginCommand, Result<LoginResponseDto>>) &&
+            x.ImplementationType == typeof(LoginCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<TaskDetailsQuery, Result<TaskDetailsDto>>) &&
-            x.ImplementationType == typeof(TaskDetailsQueryHandler) &&
+            x.ServiceType == typeof(IRequestHandler<LogoutCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(LogoutCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<TaskPageQuery, Result<TaskPageDto>>) &&
-            x.ImplementationType == typeof(TaskPageQueryHandler) &&
+            x.ServiceType == typeof(IRequestHandler<RefreshTokenCommand, Result<string>>) &&
+            x.ImplementationType == typeof(RefreshTokenCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<TaskUpdateCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(TaskUpdateCommandHandler) &&
+            x.ServiceType == typeof(IRequestHandler<RegisterCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(RegisterCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         // Epic
@@ -115,6 +119,33 @@ public class DependencyInjectionTests
             x.ImplementationType == typeof(ProjectUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
+        // Role
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>) &&
+            x.ImplementationType == typeof(RoleListQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        // Task
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<TaskCreateCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(TaskCreateCommandHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<TaskDetailsQuery, Result<TaskDetailsDto>>) &&
+            x.ImplementationType == typeof(TaskDetailsQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<TaskPageQuery, Result<TaskPageDto>>) &&
+            x.ImplementationType == typeof(TaskPageQueryHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
+        Assert.NotNull(services.FirstOrDefault(x =>
+            x.ServiceType == typeof(IRequestHandler<TaskUpdateCommand, Result<bool>>) &&
+            x.ImplementationType == typeof(TaskUpdateCommandHandler) &&
+            x.Lifetime == ServiceLifetime.Transient));
+
         // User
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserDetailsQuery, Result<UserDetailsDto>>) &&
@@ -139,23 +170,6 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<UserRoleUpdateCommand, Result<bool>>) &&
             x.ImplementationType == typeof(UserRoleUpdateCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        // Auth
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<UserLoginCommand, Result<string>>) &&
-            x.ImplementationType == typeof(UserLoginCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<UserRegisterCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(UserRegisterCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        // Role
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<RoleListQuery, Result<List<RoleListDto>>>) &&
-            x.ImplementationType == typeof(RoleListQueryHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         // WorkLog

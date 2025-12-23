@@ -6,5 +6,6 @@ public class AuthenticationOptions
 
     public string JwtKey { get; set; } = default!;
     public string JwtIssurer { get; set; } = default!;
-    public int JwtExpireDays { get; set; }
+    public int JwtExpireMinutes { get; set; }
+    public int JwtRefreeshExpireDays { get; set; }
 }
