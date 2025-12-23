@@ -3,7 +3,9 @@ using Jared.Client;
 using Jared.Contracts.Middleware;
 using Jared.Validators;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server;
 using Radzen;
 using Serilog;
 
@@ -14,28 +16,41 @@ builder.Host.UseSerilog((context, loggerConfig) => loggerConfig
     .ReadFrom.Configuration(context.Configuration));
 
 // Add services to the container.
+builder.Services.AddScoped<AuthorizationHandler>();
 builder.Services.AddValidators();
 builder.Services.AddClient();
 builder.Services.AddRazorPages();
-builder.Services.AddRazorComponents();
 builder.Services.AddRadzenComponents();
 builder.Services.AddServerSideBlazor();
+builder.Services.AddHttpContextAccessor();
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/login";
+        options.LogoutPath = "/logout";
+        options.Cookie.Name = "jared-cookie";
+        options.Cookie.HttpOnly = true;
+        options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        options.Cookie.SameSite = SameSiteMode.Lax;
+        options.SlidingExpiration = true;
+    });
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(x =>
-{
-    x.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    x.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    x.DefaultSignOutScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-});
-
+builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+builder.Services.AddControllers();
 builder.Services.AddOptions();
-builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped(client => new HttpClient
+builder.Services.AddScoped<HttpClient>(sp =>
 {
-    BaseAddress = new Uri(Environment.GetEnvironmentVariable("JARED_API_URL")!),
+    var navigation = sp.GetRequiredService<NavigationManager>();
+    return new()
+    {
+        BaseAddress = new Uri(navigation.BaseUri),
+    };
 });
-builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddHttpClient("JaredApi", client =>
+{
+    client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("JARED_API_URL")!);
+}).AddHttpMessageHandler<AuthorizationHandler>();
 
 var app = builder.Build();
 
@@ -55,6 +70,7 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
 
