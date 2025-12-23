@@ -1,4 +1,5 @@
 ﻿using Jared.Dtos.Tasks;
+using Jared.Dtos.Users;
 using Jared.Dtos.WorkLogs;
 using Microsoft.AspNetCore.Components;
 
@@ -8,11 +9,11 @@ public partial class TaskDetailsWorkLog
 {
     [Parameter]
     public TaskDetailsDto Dto { get; set; } = default!;
-    private int userId;
+    private UserDto user = default!;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        userId = UserService.GetUserId();
+        user = await UserService.GetUserAsync();
     }
 
     private void deleteWorkLog(WorkLogListDto worklog)

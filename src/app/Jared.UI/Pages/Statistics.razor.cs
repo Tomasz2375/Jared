@@ -8,6 +8,8 @@ namespace Jared.UI.Pages;
 
 public partial class Statistics
 {
+    private int userId;
+    private UserDto user = default!;
     private List<WorkLogStatisticsDto> workLogsStatistics = new();
     private List<MonthWork> monthWorks = new();
     private List<ProjectWork> projectWorks = new();
@@ -17,15 +19,12 @@ public partial class Statistics
     private Month month { get; set; } = (Month)DateTime.Now.Month;
 
     private int year { get; set; } = DateTime.Now.Year;
-    private int user { get; set; }
-    private string userRole { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
-        user = UserService.GetUserId();
-        userRole = UserService.GetUserRole();
+        user = await UserService.GetUserAsync();
         users = await getUsersAsync();
-        await getWorkLogs(user, (int)month, year);
+        await getWorkLogs(user.Id, (int)month, year);
     }
 
     private static Dictionary<int, string> getYearDictionary()
@@ -44,20 +43,20 @@ public partial class Statistics
 
     private Dictionary<int, string> getUsersDictionary()
     {
-        if (userRole == "Admin" || userRole == "Manager")
+        if (user.Role.Equals("Admin") || user.Role.Equals("Manager"))
         {
             return users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}");
         }
 
         return new()
         {
-            { UserService.GetUserId(), UserService.GetUserName() },
+            { user.Id, user.FullName },
         };
     }
 
     private async Task<List<UserListDto>> getUsersAsync()
     {
-        if (userRole == "User")
+        if (user.Role == "User")
         {
             return new();
         }
@@ -75,8 +74,7 @@ public partial class Statistics
 
     private async Task getWorkLogs(int user, int month, int year)
     {
-        var result = await Mediator
-            .Send(new WorkLogStatisticsQuery(user, month, year));
+        var result = await Mediator.Send(new WorkLogStatisticsQuery(user, month, year));
 
         if (!result.Success)
         {

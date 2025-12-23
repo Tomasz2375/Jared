@@ -1,16 +1,16 @@
-﻿using Jared.Contracts.Users;
-using Jared.Dtos.Users;
+﻿using Jared.Contracts.Auth;
+using Jared.Dtos.Auth;
 using Microsoft.AspNetCore.Components;
 
 namespace Jared.UI.Pages;
 
 public partial class UserRegister
 {
-    public UserRegisterDto Dto { get; set; } = new();
+    public RegisterRequestDto Dto { get; set; } = new();
 
     private async Task registerNewUser()
     {
-        var result = await Mediator.Send(new UserRegisterCommand(Dto));
+        var result = await Mediator.Send(new RegisterCommand(Dto));
         if (!result.Success)
         {
             Console.WriteLine(result.Error);

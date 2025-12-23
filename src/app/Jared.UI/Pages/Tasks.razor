@@ -2,6 +2,8 @@
 @page "/tasks"
 @page "/tasks/{ProjectId}"
 @inject IMediator Mediator
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
 
 @if (Model is null)
 {

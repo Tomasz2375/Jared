@@ -96,6 +96,7 @@ public partial class TaskDetailsDetails
             return;
         }
 
+        var user = await UserService.GetUserAsync();
         WorkLogListDto workLog = new()
         {
             Time = new(dto.Hours, dto.Minutes, 0),
@@ -103,8 +104,8 @@ public partial class TaskDetailsDetails
                 ? DateTime.Now.Date
                 : (DateTime)dto.WorkDate,
             TaskId = Dto.Id,
-            UserId = UserService.GetUserId(),
-            UserFullName = UserService.GetUserName(),
+            UserId = user.Id,
+            UserFullName = user.FullName,
         };
 
         Dto.TotalWorkTime += workLog.Time;

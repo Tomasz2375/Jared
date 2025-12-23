@@ -1,20 +1,18 @@
-﻿using Jared.Contracts.Users;
-using Jared.Dtos.Users;
+﻿using Jared.Dtos.Auth;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.JSInterop;
 
 namespace Jared.UI.Pages;
 
 public partial class UserLogin
 {
+    private LoginRequestDto dto { get; set; } = new();
     private string errorMessage = string.Empty;
     private string returnUrl = string.Empty;
 
-    public UserLoginDto Dto { get; set; } = new();
-
     protected override void OnInitialized()
     {
-        var uri = NavigationManager.ToAbsoluteUri(NavigationManager.Uri);
-
+        var uri = Nav.ToAbsoluteUri(Nav.Uri);
         if (QueryHelpers.ParseQuery(uri.Query).TryGetValue("returnUrl", out var url))
         {
             returnUrl = url!;
@@ -23,15 +21,15 @@ public partial class UserLogin
 
     private async Task loginUser()
     {
-        var result = await Mediator.Send(new UserLoginCommand(Dto));
-        if (result.Success)
+        var ok = await JS.InvokeAsync<bool>("auth.login", dto);
+
+        if (ok)
         {
-            errorMessage = string.Empty;
-            await LocalStorage.SetItemAsync("authToken", result.Data);
-            await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            NavigationManager.NavigateTo(returnUrl);
+            Nav.NavigateTo(returnUrl, true);
+
+            return;
         }
 
-        errorMessage = result.Error;
+        errorMessage = "Login failed";
     }
 }

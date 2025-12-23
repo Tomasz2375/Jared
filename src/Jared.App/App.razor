@@ -1,10 +1,15 @@
-﻿@using Radzen.Blazor
+﻿@using Jared.UI.Components.Basic
+@using Radzen.Blazor
 <CascadingAuthenticationState>
     <Router
         AppAssembly="@typeof(App).Assembly"
         AdditionalAssemblies="new[] { typeof(Jared.UI.Pages.Epics).Assembly }">
         <Found Context="routeData">
-            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" />
+            <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+                <NotAuthorized>
+                    <RedirectToLogin />
+                </NotAuthorized>
+            </AuthorizeRouteView>
             <FocusOnNavigate RouteData="@routeData" Selector="h1" />
         </Found>
         <NotFound>

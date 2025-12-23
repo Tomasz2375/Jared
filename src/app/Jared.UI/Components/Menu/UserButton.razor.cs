@@ -1,10 +1,18 @@
-﻿namespace Jared.UI.Components.Menu;
+﻿using Jared.Dtos.Users;
+using Microsoft.JSInterop;
+
+namespace Jared.UI.Components.Menu;
 
 public partial class UserButton
 {
     private bool showUserMenu = false;
-
+    private UserDto user = default!;
     private string userMenuCssClass => showUserMenu ? "show-menu" : string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        user = await UserService.GetUserAsync();
+    }
 
     private void toggleUserMenu()
     {
@@ -19,9 +27,10 @@ public partial class UserButton
 
     private async Task logout()
     {
-        await LocalStorage.RemoveItemAsync("authToken");
-        await AuthenticationStateProvider.GetAuthenticationStateAsync();
-
-        NavigationManager.NavigateTo(string.Empty);
+        var subbess = await JSRuntime.InvokeAsync<bool>("auth.logout");
+        if (subbess)
+        {
+            NavigationManager.NavigateTo("/login", forceLoad: true);
+        }
     }
 }

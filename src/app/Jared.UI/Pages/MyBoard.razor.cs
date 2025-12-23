@@ -16,14 +16,15 @@ public partial class MyBoard
 
     protected override async Task OnInitializedAsync()
     {
+        var user = await UserService.GetUserAsync();
         Query.Filter["Status"] = "7";
         switch (Page)
         {
             case nameof(Dashboard.Created):
-                Query.Filter[nameof(TaskRootDto.CreatedById)] = UserService.GetUserId().ToString();
+                Query.Filter[nameof(TaskRootDto.CreatedById)] = user.Id.ToString();
                 break;
             case nameof(Dashboard.Assigned):
-                Query.Filter[nameof(TaskRootDto.AssignedToId)] = UserService.GetUserId().ToString();
+                Query.Filter[nameof(TaskRootDto.AssignedToId)] = user.Id.ToString();
                 break;
         }
 
