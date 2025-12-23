@@ -1,6 +1,6 @@
-﻿namespace Jared.Dtos.Users;
+﻿namespace Jared.Dtos.Auth;
 
-public class UserRegisterDto
+public class RegisterRequestDto
 {
     public string FirstName { get; set; } = default!;
     public string LastName { get; set; } = default!;
