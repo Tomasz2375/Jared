@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
-using Jared.Dtos.Users;
+using Jared.Dtos.Auth;
 
 namespace Jared.Validators.User;
 
-public class UserRegisterDtoValidator : AbstractValidator<UserRegisterDto>
+public class UserRegisterDtoValidator : AbstractValidator<RegisterRequestDto>
 {
     public UserRegisterDtoValidator()
     {

@@ -2,10 +2,12 @@
 using Jared.Core.Abstractions;
 using Jared.Dtos.WorkLogs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jared.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class WorkLogsController(IMediator mediator) : ControllerBase

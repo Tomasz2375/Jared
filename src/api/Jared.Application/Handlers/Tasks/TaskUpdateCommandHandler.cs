@@ -1,5 +1,5 @@
-﻿using Jared.Application.Services.TaskHistory;
-using Jared.Application.Services.User;
+﻿using Jared.Application.Abstractions;
+using Jared.Application.Services.TaskHistory;
 using Jared.Contracts.Tasks;
 using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;
@@ -29,7 +29,7 @@ public class TaskUpdateCommandHandler(
         try
         {
             var userId = userService.GetUser().Id;
-            command.dto.WorkLogs = command.dto.WorkLogs.Where(x => x.Id > 0 || !x.Delete).ToList();
+            command.dto.WorkLogs = command.dto.WorkLogs.Where(x => x.UserId > 0 || !x.Delete).ToList();
 
             var task = await dataContext.Set<Domain.Models.Task>()
                 .Include(x => x.Project)
@@ -43,7 +43,7 @@ public class TaskUpdateCommandHandler(
 
             command.dto.Adapt(task);
 
-            var deletedWorkLogsIds = command.dto.WorkLogs.Where(x => x.Delete).Select(x => x.Id);
+            var deletedWorkLogsIds = command.dto.WorkLogs.Where(x => x.Delete).Select(x => x.UserId);
             task.WorkLogs.RemoveAll(x => deletedWorkLogsIds.Contains(x.Id));
 
             var deletedWorkLogs = await dataContext

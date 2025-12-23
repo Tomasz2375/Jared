@@ -1,4 +1,4 @@
-﻿using Jared.Contracts.Users;
+﻿using Jared.Contracts.Auth;
 using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;
 using Jared.Domain.Models;
@@ -6,19 +6,19 @@ using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace Jared.Application.Handlers.Users;
+namespace Jared.Application.Handlers.Auth;
 
 public class UserRegisterCommandHandler(
     IDataContext dataContext,
     IMapper mapper,
     IPasswordHasher<User> passwordHasher)
-    : IRequestHandler<UserRegisterCommand, Result<bool>>
+    : IRequestHandler<RegisterCommand, Result<bool>>
 {
     private readonly IDataContext dataContext = dataContext;
     private readonly IMapper mapper = mapper;
     private readonly IPasswordHasher<User> passwordHasher = passwordHasher;
 
-    public async Task<Result<bool>> Handle(UserRegisterCommand command, CancellationToken cancellationToken)
+    public async Task<Result<bool>> Handle(RegisterCommand command, CancellationToken cancellationToken)
     {
         try
         {

@@ -1,6 +1,6 @@
-﻿using Jared.Contracts.Users;
+﻿using Jared.Contracts.Auth;
 using Jared.Core.Abstractions;
-using Jared.Dtos.Users;
+using Jared.Dtos.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,14 +11,26 @@ namespace Jared.Presentation.Controllers;
 public class AuthController(IMediator mediator)
 {
     [HttpPost("register")]
-    public async Task<Result<bool>> UserRegisterAsync(UserRegisterDto dto)
+    public async Task<Result<bool>> UserRegisterAsync(RegisterRequestDto dto)
     {
-        return await mediator.Send(new UserRegisterCommand(dto));
+        return await mediator.Send(new RegisterCommand(dto));
     }
 
     [HttpPost("login")]
-    public async Task<Result<string>> UserLoginAsync(UserLoginDto dto)
+    public async Task<Result<LoginResponseDto>> UserLoginAsync(LoginRequestDto dto)
     {
-        return await mediator.Send(new UserLoginCommand(dto));
+        return await mediator.Send(new LoginCommand(dto));
+    }
+
+    [HttpPost("logout")]
+    public async Task<Result<bool>> UserLogoutAsync(RefreshTokenDto dto)
+    {
+        return await mediator.Send(new LogoutCommand(dto));
+    }
+
+    [HttpPost("refresh")]
+    public async Task<Result<string>> RefreshTokenAsync(RefreshTokenDto dto)
+    {
+        return await mediator.Send(new RefreshTokenCommand(dto));
     }
 }

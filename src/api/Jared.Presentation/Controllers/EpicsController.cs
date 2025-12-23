@@ -3,10 +3,12 @@ using Jared.Core.Abstractions;
 using Jared.Core.Enums;
 using Jared.Dtos.Epics;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Jared.Presentation.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class EpicsController(IMediator mediator)
