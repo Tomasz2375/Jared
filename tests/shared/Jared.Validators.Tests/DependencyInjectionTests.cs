@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Jared.Dtos.Auth;
 using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Tasks;
@@ -49,12 +50,12 @@ public class DependencyInjectionTests
             x.Lifetime == ServiceLifetime.Scoped));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IValidator<UserRegisterDto>) &&
+            x.ServiceType == typeof(IValidator<RegisterRequestDto>) &&
             x.ImplementationType == typeof(UserRegisterDtoValidator) &&
             x.Lifetime == ServiceLifetime.Scoped));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IValidator<UserLoginDto>) &&
+            x.ServiceType == typeof(IValidator<LoginRequestDto>) &&
             x.ImplementationType == typeof(UserLoginDtoValidator) &&
             x.Lifetime == ServiceLifetime.Scoped));
 

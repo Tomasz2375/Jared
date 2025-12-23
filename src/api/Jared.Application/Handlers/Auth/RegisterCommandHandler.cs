@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Jared.Application.Handlers.Auth;
 
-public class UserRegisterCommandHandler(
+public class RegisterCommandHandler(
     IDataContext dataContext,
     IMapper mapper,
     IPasswordHasher<User> passwordHasher)
