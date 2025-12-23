@@ -1,4 +1,4 @@
-﻿using System.Net.Http.Json;
+﻿using Jared.Client.Abstractions;
 using Jared.Contracts.Worklogs;
 using Jared.Core.Abstractions;
 using Jared.Dtos.WorkLogs;
@@ -6,26 +6,16 @@ using MediatR;
 
 namespace Jared.Client.Handlers.WorkLogs;
 
-public class WorkLogStatisticsQueryHandler(HttpClient httpClient)
+public class WorkLogStatisticsQueryHandler(IApiClient apiClient)
     : IRequestHandler<WorkLogStatisticsQuery, Result<List<WorkLogStatisticsDto>>>
 {
-    private readonly HttpClient httpClient = httpClient;
-
     public async Task<Result<List<WorkLogStatisticsDto>>> Handle(WorkLogStatisticsQuery request, CancellationToken cancellationToken)
     {
         var baseUrl = BaseAdresses.WORK_LOGS;
         var queryUrl = createQueryUrl(request);
         var url = baseUrl + queryUrl;
 
-        var response = await httpClient
-            .GetFromJsonAsync<Result<List<WorkLogStatisticsDto>>>(url, cancellationToken);
-
-        if (response is null)
-        {
-            return Result.Fail<List<WorkLogStatisticsDto>>("Invalid response type");
-        }
-
-        return response;
+        return await apiClient.GetAsync<List<WorkLogStatisticsDto>>(url, cancellationToken);
     }
 
     private static string createQueryUrl(WorkLogStatisticsQuery query)

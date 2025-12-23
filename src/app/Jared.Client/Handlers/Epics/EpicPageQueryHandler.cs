@@ -1,5 +1,5 @@
-﻿using System.Net.Http.Json;
-using System.Text;
+﻿using System.Text;
+using Jared.Client.Abstractions;
 using Jared.Contracts.Epics;
 using Jared.Core.Abstractions;
 using Jared.Dtos.Epics;
@@ -7,11 +7,9 @@ using MediatR;
 
 namespace Jared.Client.Handlers.Epics;
 
-public class EpicPageQueryHandler(HttpClient httpClient)
+public class EpicPageQueryHandler(IApiClient apiClient)
     : IRequestHandler<EpicPageQuery, Result<EpicPageDto>>
 {
-    private readonly HttpClient httpClient = httpClient;
-
     public async Task<Result<EpicPageDto>> Handle(EpicPageQuery request, CancellationToken cancellationToken)
     {
         string baseUrl = BaseAdresses.EPICS;
@@ -19,14 +17,7 @@ public class EpicPageQueryHandler(HttpClient httpClient)
 
         string url = baseUrl + queryUrl;
 
-        var response = await httpClient.GetFromJsonAsync<Result<EpicPageDto>>(url, cancellationToken);
-
-        if (response is null)
-        {
-            return Result.Fail<EpicPageDto>("Invalid response type");
-        }
-
-        return response;
+        return await apiClient.GetAsync<EpicPageDto>(url, cancellationToken);
     }
 
     private static string createQueryUrl(EpicPageQuery query)

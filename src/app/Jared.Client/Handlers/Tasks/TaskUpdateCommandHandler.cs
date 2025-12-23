@@ -1,34 +1,19 @@
-﻿using System.Net.Http.Json;
+﻿using Jared.Client.Abstractions;
 using Jared.Client.Handlers;
 using Jared.Contracts.Tasks;
 using Jared.Core.Abstractions;
+using Jared.Dtos.Tasks;
 using MediatR;
 
 namespace Jared.Client.Requests.Tasks;
 
-public class TaskUpdateCommandHandler(HttpClient httpClient)
+public class TaskUpdateCommandHandler(IApiClient apiClient)
     : IRequestHandler<TaskUpdateCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient = httpClient;
-
     public async Task<Result<bool>> Handle(TaskUpdateCommand request, CancellationToken cancellationToken)
     {
         string baseUrl = $"{BaseAdresses.TASKS}/{request.dto.Id}";
 
-        var result = await httpClient.PutAsJsonAsync(baseUrl, request.dto, cancellationToken);
-
-        if (!result.IsSuccessStatusCode)
-        {
-            return Result.Fail<bool>($"Something went wrong. Status code: {(int)result.StatusCode} ({result.StatusCode})");
-        }
-
-        var response = await result.Content.ReadFromJsonAsync<Result<bool>>();
-
-        if (response is null)
-        {
-            return Result.Fail<bool>("Invalid response type");
-        }
-
-        return response;
+        return await apiClient.PutAsync<TaskDetailsDto, bool>(baseUrl, request.dto, cancellationToken);
     }
 }

@@ -1,33 +1,18 @@
-﻿using System.Net.Http.Json;
+﻿using Jared.Client.Abstractions;
 using Jared.Contracts.Tasks;
 using Jared.Core.Abstractions;
+using Jared.Dtos.Tasks;
 using MediatR;
 
 namespace Jared.Client.Handlers.Tasks;
 
-public class TaskCreateCommandHandler(HttpClient httpClient)
+public class TaskCreateCommandHandler(IApiClient apiClient)
     : IRequestHandler<TaskCreateCommand, Result<bool>>
 {
-    private readonly HttpClient httpClient = httpClient;
-
     public async Task<Result<bool>> Handle(TaskCreateCommand request, CancellationToken cancellationToken)
     {
         string baseUrl = BaseAdresses.TASKS;
 
-        var result = await httpClient.PostAsJsonAsync(baseUrl, request.dto, cancellationToken);
-
-        if (!result.IsSuccessStatusCode)
-        {
-            return Result.Fail<bool>($"Something went wrong. Status code: {(int)result.StatusCode} ({result.StatusCode})");
-        }
-
-        var response = await result.Content.ReadFromJsonAsync<Result<bool>>();
-
-        if (response is null)
-        {
-            return Result.Fail<bool>("Invalid response type");
-        }
-
-        return response;
+        return await apiClient.PostAsync<TaskDetailsDto, bool>(baseUrl, request.dto, cancellationToken);
     }
 }
