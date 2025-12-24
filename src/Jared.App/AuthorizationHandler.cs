@@ -55,7 +55,13 @@ public class AuthorizationHandler(IHttpContextAccessor httpContextAccessor)
     {
         try
         {
-            var refreshToken = httpContext.Request.Cookies["refresh_token"];
+            var cookieName = httpContext
+                .RequestServices
+                .GetRequiredService<IWebHostEnvironment>()
+                .IsDevelopment()
+                ? "refresh_token_dev"
+                : "refresh_token";
+            var refreshToken = httpContext.Request.Cookies[cookieName];
             if (string.IsNullOrEmpty(refreshToken))
             {
                 return string.Empty;
