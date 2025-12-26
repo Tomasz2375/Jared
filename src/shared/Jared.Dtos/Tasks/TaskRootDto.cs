@@ -15,6 +15,6 @@ public class TaskRootDto : BaseDto
     public TaskStatus Status { get; set; }
     public Priority Priority { get; set; }
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime? Deadline { get; set; }
 }
