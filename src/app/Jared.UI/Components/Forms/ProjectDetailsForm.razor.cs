@@ -20,19 +20,20 @@ public partial class ProjectDetailsForm
 
     private void cancel()
     {
-        NotificationService.Information(NotificationHelper.PROJECT_UPDATE_CANCELED);
         Close();
     }
 
     private async Task save()
     {
         var result = await Mediator.Send(new ProjectUpdateCommand(Dto));
-        if (!result.Success)
+        if (result.Success)
         {
-            NotificationService.Error(NotificationHelper.PROJECT_UPDATE_FAILED);
+            NotificationService.Success(NotificationHelper.ProjectUpdated(Dto.Title));
         }
-
-        NotificationService.Success(NotificationHelper.PROJECT_UPDATE_SUCCESS);
+        else
+        {
+            NotificationService.Error(NotificationHelper.ProjectUpdateFailed(result.Error));
+        }
 
         if (closeDialog)
         {
@@ -43,10 +44,11 @@ public partial class ProjectDetailsForm
     private async Task getDetails(int id)
     {
         var result = await Mediator.Send(new ProjectDetailsQuery(id));
-
         if (!result.Success)
         {
-            Console.WriteLine("Get project failed");
+            NotificationService.Error(NotificationHelper.ProjectFetchFailed(result.Error));
+
+            return;
         }
 
         Dto = result.Data;

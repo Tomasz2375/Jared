@@ -66,7 +66,6 @@ public partial class EpicCreateForm
 
     private void cancel()
     {
-        NotificationService.Information(NotificationHelper.EPIC_CREATION_CANCELED);
         Close();
     }
 
@@ -75,10 +74,12 @@ public partial class EpicCreateForm
         var result = await Mediator.Send(new EpicCreateCommand(Dto));
         if (!result.Success)
         {
-            NotificationService.Error(NotificationHelper.EPIC_CREATION_FAILED);
+            NotificationService.Error(NotificationHelper.EpicCreationFailed(result.Error));
+
+            return;
         }
 
-        NotificationService.Success(NotificationHelper.EPIC_CREATION_SUCCESS);
+        NotificationService.Success(NotificationHelper.EpicCreated(Dto.Title));
         Close();
     }
 
@@ -87,7 +88,8 @@ public partial class EpicCreateForm
         var result = await Mediator.Send(new ProjectPageQuery());
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            NotificationService.Warning(NotificationHelper.ProjectsFetchFailed(result.Error));
+
             return;
         }
 
@@ -104,7 +106,8 @@ public partial class EpicCreateForm
         var result = await Mediator.Send(new EpicPageQuery(filters: filters));
         if (!result.Success)
         {
-            Console.WriteLine("Error when get epics list");
+            NotificationService.Warning(NotificationHelper.EpicsFetchFailed(result.Error));
+
             return;
         }
 
