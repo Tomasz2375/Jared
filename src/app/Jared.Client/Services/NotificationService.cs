@@ -6,48 +6,68 @@ namespace Jared.Client.Services;
 
 public class NotificationService : INotificationService
 {
-    public event Action OnChange = default!;
+    public event Action? OnChange;
 
-    public List<NotificationMessage> Messages { get; set; } = new();
+    private const int MaxNotifications = 5;
+    private readonly object lockNotification = new();
 
-    public void Success(string message)
-    {
-        addNotification(message, NotificationType.Success);
-    }
-
-    public void Information(string message)
-    {
-        addNotification(message, NotificationType.Information);
-    }
-
-    public void Warning(string message)
-    {
-        addNotification(message, NotificationType.Warning);
-    }
-
-    public void Error(string message)
-    {
-        addNotification(message, NotificationType.Error);
-    }
+    public List<NotificationMessage> Messages { get; } = new();
+    public void Success(string message) => _ = AddNotification(message, NotificationType.Success);
+    public void Information(string message) => _ = AddNotification(message, NotificationType.Information);
+    public void Warning(string message) => _ = AddNotification(message, NotificationType.Warning);
+    public void Error(string message) => _ = AddNotification(message, NotificationType.Error);
 
     public void RemoveNotification(NotificationMessage notification)
     {
-        Messages.Remove(notification);
+        lock (lockNotification)
+        {
+            if (!Messages.Contains(notification))
+            {
+                return;
+            }
+
+            notification.IsClosing = true;
+        }
+
         OnChange?.Invoke();
+
+        _ = Task.Run(async () =>
+        {
+            await Task.Delay(300);
+
+            lock (lockNotification)
+            {
+                Messages.Remove(notification);
+            }
+
+            OnChange?.Invoke();
+        });
     }
 
-    private void addNotification(string message, NotificationType type)
+    private async Task AddNotification(string message, NotificationType type)
     {
         var cssClass = Enum.GetName(typeof(NotificationType), type)?.ToLower() ?? string.Empty;
-        NotificationMessage notification = new(message, cssClass);
-
-        Messages.Add(notification);
-
-        OnChange.Invoke();
-        Task.Run(async () =>
+        var notification = new NotificationMessage(message, cssClass);
+        lock (lockNotification)
         {
-            await Task.Delay(5000);
-            RemoveNotification(notification);
-        });
+            if (Messages.Count >= MaxNotifications)
+            {
+                Messages.RemoveAt(0);
+            }
+
+            Messages.Add(notification);
+        }
+
+        OnChange?.Invoke();
+        await Task.Delay(5000);
+        lock (lockNotification)
+        {
+            if (!Messages.Contains(notification))
+            {
+                return;
+            }
+        }
+
+        RemoveNotification(notification);
     }
 }

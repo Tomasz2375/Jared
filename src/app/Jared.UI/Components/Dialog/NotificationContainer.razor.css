@@ -1,85 +1,88 @@
 ﻿.notification-container {
     position: fixed;
     right: 30px;
-    top: 50px;
+    bottom: 30px;
     width: 400px;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .notification {
     display: flex;
-    margin-bottom: 10px;
+    align-items: center;
+    padding: 10px;
     border-radius: 5px;
-    justify-content: flex-start;
-    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
-    transition: opacity 0.5s ease-in-out;
-    color: var(--font-color);
     background-color: var(--background-1);
+    color: var(--font-color);
+    box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
+    .notification.closing {
+        opacity: 0;
+        transform: translateY(20px);
+    }
 
 .notification-icon {
     width: 40px;
     font-size: 24px;
-    padding: 10px;
+    margin-right: 10px;
 }
 
-.notification span {
-    width:100%;
-    padding: 10px;
+.notification-text {
+    flex-grow: 1;
     overflow: hidden;
-    margin-top: 3px;
 }
 
 .notification-close {
+    background: transparent;
     border: none;
-    padding: 10px;
-    font-size: 20px;
     cursor: pointer;
-    align-items: center;
-    justify-content: center;
-    width: 10%;
-    height: 100%;
-    float: right;
+    font-size: 20px;
     color: var(--font-color);
 }
 
-.notification-close:focus {
-    outline: none;
-    box-shadow: none;
-}
+    .notification-close:focus {
+        outline: none;
+        box-shadow: none;
+    }
 
-.success {
+.notification.success {
     border: 2px solid var(--success-color);
 }
 
-.error {
+.notification.error {
     border: 2px solid var(--error-color);
 }
 
-.information {
-    border: 2px solid var(--information-color);
-}
-
-.warning {
+.notification.warning {
     border: 2px solid var(--warning-color);
 }
 
-.success .notification-close:hover,
-.success .notification-icon {
+.notification.information {
+    border: 2px solid var(--information-color);
+}
+
+.notification.success .notification-icon,
+.notification.success .notification-close:hover {
     color: var(--success-color);
 }
 
-.information .notification-close:hover,
-.information .notification-icon {
+.notification.information .notification-icon,
+.notification.information .notification-close:hover {
     color: var(--information-color);
 }
 
-.warning .notification-close:hover,
-.warning .notification-icon {
+.notification.warning .notification-icon,
+.notification.warning .notification-close:hover {
     color: var(--warning-color);
 }
 
-.error .notification-close:hover,
-.error .notification-icon {
+.notification.error .notification-icon,
+.notification.error .notification-close:hover {
     color: var(--error-color);
 }

@@ -1,7 +1,16 @@
 ﻿namespace Jared.Client.Entities;
 
-public class NotificationMessage(string message, string cssClass)
+public class NotificationMessage
 {
-    public string Message { get; set; } = message;
-    public string CssClass { get; set; } = cssClass;
+    public Guid Id { get; }
+    public string Message { get; }
+    public string CssClass { get; }
+    public bool IsClosing { get; set; }
+
+    public NotificationMessage(string message, string cssClass)
+    {
+        Id = Guid.NewGuid();
+        Message = message;
+        CssClass = cssClass;
+    }
 }
