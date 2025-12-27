@@ -21,8 +21,8 @@ public class TaskIntegrationFaker : BaseIntegrationFaker<Task>
         StartDate = new(2024, 3, 5, 12, 45, 12),
         EndDate = new(2024, 3, 7, 11, 4, 52),
         Deadline = new(2025, 3, 31, 23, 59, 59),
-        EstimatedTime = new(0, 0, 1, 0, 0),
-        TotalWorkTime = new(0, 0, 0, 50, 0),
+        EstimatedTimeMinutes = 65,
+        TotalWorkTimeMinutes = 50,
     };
 
     public static Task SecondTask => new()
@@ -40,7 +40,7 @@ public class TaskIntegrationFaker : BaseIntegrationFaker<Task>
         StartDate = new(2024, 3, 7, 8, 4, 25),
         EndDate = null,
         Deadline = new(2025, 3, 31, 23, 59, 59),
-        EstimatedTime = new(0, 0, 2, 0, 0),
-        TotalWorkTime = new(0, 0, 0, 30, 0),
+        EstimatedTimeMinutes = 125,
+        TotalWorkTimeMinutes = 40,
     };
 }

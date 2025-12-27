@@ -20,8 +20,6 @@ public class Task : Entity
     public DateTime? StartDate { get; set; }
     public DateTime? EndDate { get; set; }
     public DateTime? Deadline { get; set; }
-    public TimeSpan EstimatedTime { get; set; }
-    public TimeSpan TotalWorkTime { get; set; }
     public int EstimatedTimeMinutes { get; set; }
     public int TotalWorkTimeMinutes { get; set; }
 
