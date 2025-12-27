@@ -8,12 +8,12 @@ using MediatR;
 namespace Jared.Client.Requests.Tasks;
 
 public class TaskUpdateCommandHandler(IApiClient apiClient)
-    : IRequestHandler<TaskUpdateCommand, Result<bool>>
+    : IRequestHandler<TaskUpdateCommand, Result<TaskDetailsDto>>
 {
-    public async Task<Result<bool>> Handle(TaskUpdateCommand request, CancellationToken cancellationToken)
+    public async Task<Result<TaskDetailsDto>> Handle(TaskUpdateCommand request, CancellationToken cancellationToken)
     {
         string baseUrl = $"{BaseAdresses.TASKS}/{request.dto.Id}";
 
-        return await apiClient.PutAsync<TaskDetailsDto, bool>(baseUrl, request.dto, cancellationToken);
+        return await apiClient.PutAsync<TaskDetailsDto, TaskDetailsDto>(baseUrl, request.dto, cancellationToken);
     }
 }

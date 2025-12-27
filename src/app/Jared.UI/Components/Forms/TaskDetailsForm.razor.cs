@@ -47,7 +47,6 @@ public partial class TaskDetailsForm
     private async Task save()
     {
         var result = await Mediator.Send(new TaskUpdateCommand(Dto));
-
         if (!result.Success)
         {
             NotificationService.Error(NotificationHelper.TaskUpdateFailed(result.Error));
@@ -55,6 +54,7 @@ public partial class TaskDetailsForm
             return;
         }
 
+        Dto = result.Data;
         NotificationService.Success(NotificationHelper.TaskUpdated(Dto.Title));
 
         if (closeDialog)

@@ -142,7 +142,7 @@ public class DependencyInjectionTests
             x.Lifetime == ServiceLifetime.Transient));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<TaskUpdateCommand, Result<bool>>) &&
+            x.ServiceType == typeof(IRequestHandler<TaskUpdateCommand, Result<TaskDetailsDto>>) &&
             x.ImplementationType == typeof(TaskUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 

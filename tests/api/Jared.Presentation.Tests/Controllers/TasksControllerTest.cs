@@ -115,14 +115,14 @@ namespace Jared.Application.Tests.Controllers
         {
             // Arrange
             mediatorMock.Setup(x => x.Send(It.IsAny<TaskUpdateCommand>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(Result.Ok(true)));
+                .Returns(Task.FromResult(Result.Ok(dto)));
 
             // Act
             var result = await controller.Update(dto.Id, dto);
 
             // Assert
             Assert.True(result.Success);
-            Assert.True(result.Data);
+            Assert.Equal(dto, result.Data);
             Assert.Equal(string.Empty, result.Error);
             mediatorMock.Verify(x => x.Send(new TaskUpdateCommand(dto), default), Times.Once);
         }
@@ -135,14 +135,14 @@ namespace Jared.Application.Tests.Controllers
         {
             // Arrange
             mediatorMock.Setup(x => x.Send(It.IsAny<TaskUpdateCommand>(), It.IsAny<CancellationToken>()))
-                .Returns(Task.FromResult(Result.Fail<bool>(errorMessage)));
+                .Returns(Task.FromResult(Result.Fail<TaskDetailsDto>(errorMessage)));
 
             // Act
             var result = await controller.Update(dto.Id, dto);
 
             // Assert
             Assert.False(result.Success);
-            Assert.False(result.Data);
+            Assert.Null(result.Data);
             Assert.Equal(errorMessage, result.Error);
             mediatorMock.Verify(x => x.Send(new TaskUpdateCommand(dto), default), Times.Once);
         }
