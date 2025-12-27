@@ -36,7 +36,7 @@ public class TasksController(IMediator mediator) : ControllerBase
     }
 
     [HttpPut("{Id}")]
-    public async Task<Result<bool>> Update([FromRoute] int id, [FromBody] TaskDetailsDto dto)
+    public async Task<Result<TaskDetailsDto>> Update([FromRoute] int id, [FromBody] TaskDetailsDto dto)
     {
         return await mediator.Send(new TaskUpdateCommand(dto));
     }

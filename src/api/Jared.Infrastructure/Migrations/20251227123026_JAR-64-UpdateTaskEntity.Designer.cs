@@ -4,6 +4,7 @@ using Jared.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Jared.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20251227123026_JAR-64-UpdateTaskEntity")]
+    partial class JAR64UpdateTaskEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -190,6 +193,9 @@ namespace Jared.Infrastructure.Migrations
                     b.Property<int?>("EpicId")
                         .HasColumnType("int");
 
+                    b.Property<TimeSpan>("EstimatedTime")
+                        .HasColumnType("time");
+
                     b.Property<int>("EstimatedTimeMinutes")
                         .HasColumnType("int");
 
@@ -212,6 +218,9 @@ namespace Jared.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<TimeSpan>("TotalWorkTime")
+                        .HasColumnType("time");
 
                     b.Property<int>("TotalWorkTimeMinutes")
                         .HasColumnType("int");

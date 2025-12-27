@@ -3,7 +3,6 @@ using Jared.Application.Services.TaskHistory;
 using Jared.Contracts.Tasks;
 using Jared.Core.Abstractions;
 using Jared.Domain.Abstractions;
-using Jared.Domain.Models;
 using Jared.Dtos.Tasks;
 using Mapster;
 using MapsterMapper;
@@ -17,21 +16,21 @@ public class TaskUpdateCommandHandler(
     ITaskHistoryService taskHistoryService,
     IMapper mapper,
     IUserService userService)
-    : IRequestHandler<TaskUpdateCommand, Result<bool>>
+    : IRequestHandler<TaskUpdateCommand, Result<TaskDetailsDto>>
 {
     private readonly IDataContext dataContext = dataContext;
     private readonly ITaskHistoryService taskHistoryService = taskHistoryService;
     private readonly IMapper mapper = mapper;
     private readonly IUserService userService = userService;
 
-    public async Task<Result<bool>> Handle(TaskUpdateCommand command, CancellationToken cancellationToken)
+    public async Task<Result<TaskDetailsDto>> Handle(TaskUpdateCommand command, CancellationToken cancellationToken)
     {
         try
         {
             var userId = userService.GetUser().Id;
-            command.dto.WorkLogs = command.dto.WorkLogs.Where(x => x.UserId > 0 || !x.Delete).ToList();
-
+            command.dto.WorkLogs = command.dto.WorkLogs.Where(x => !x.Delete).ToList();
             var task = await dataContext.Set<Domain.Models.Task>()
+                .Include(x => x.WorkLogs)
                 .Include(x => x.Project)
                 .Include(x => x.Epic)
                 .Include(x => x.TaskHistories)
@@ -40,26 +39,17 @@ public class TaskUpdateCommandHandler(
 
             var changes = taskHistoryService.GetChanged(mapper.Map<TaskDetailsDto>(task), command.dto, userId);
             command.dto.TaskHistories.AddRange(changes);
-
             command.dto.Adapt(task);
-
-            var deletedWorkLogsIds = command.dto.WorkLogs.Where(x => x.Delete).Select(x => x.UserId);
-            task.WorkLogs.RemoveAll(x => deletedWorkLogsIds.Contains(x.Id));
-
-            var deletedWorkLogs = await dataContext
-                .Set<WorkLog>()
-                .Where(x => deletedWorkLogsIds.Contains(x.Id))
-                .ToListAsync(cancellationToken);
-
-            dataContext.RemoveRange(deletedWorkLogs);
 
             await dataContext.SaveChangesAsync(cancellationToken);
 
-            return Result.Ok(true);
+            var result = mapper.Map<TaskDetailsDto>(task);
+
+            return Result.Ok(result);
         }
         catch (Exception ex)
         {
-            return Result.Fail<bool>(ex.Message);
+            return Result.Fail<TaskDetailsDto>(ex.Message);
         }
     }
 }
