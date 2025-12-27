@@ -17,21 +17,9 @@
             </div>
             <div class="form-modal-content">
                 <div class="form-modal-tabs" style="position:sticky; top:0;">
-                    <TabForm
-                        Id="0"
-                        Label="Details"
-                        ActiceTab=@tabNumber
-                        OnTabSelected=@((x => tabNumber = x))/>
-                    <TabForm
-                        Id="1"
-                        Label="History"
-                        ActiceTab=@tabNumber
-                        OnTabSelected=@((x => tabNumber = x))/>
-                    <TabForm
-                        Id="2"
-                        Label="Worklogs"
-                        ActiceTab=@tabNumber
-                        OnTabSelected=@((x => tabNumber = x))/>
+                    <TabForm Id="0" Label="Details" ActiceTab="@tabNumber" OnTabSelected="@(x => tabNumber = x)" />
+                    <TabForm Id="1" Label="History" ActiceTab="@tabNumber" OnTabSelected="@(x => tabNumber = x)" />
+                    <TabForm Id="2" Label="Worklogs" ActiceTab="@tabNumber" OnTabSelected="@(x => tabNumber = x)" />
                 </div>
                 <div class="form-modal-details">
                     @switch (tabNumber)
@@ -43,7 +31,12 @@
                             <TaskDetailsWorkLog Dto="@Dto" />
                             break;
                         default:
-                            <TaskDetailsDetails Dto="@Dto" />
+                            <TaskDetailsDetails
+                                Dto="@Dto"
+                                Projects="@projects"
+                                Epics="@epics"
+                                Tasks="@tasks"
+                                Users="@users" />
                             break;
                     }
                 </div>

@@ -10,7 +10,6 @@ public partial class ProjectCreateForm
 
     private void cancel()
     {
-        NotificationService.Information(NotificationHelper.PROJECT_CREATION_CANCELED);
         Close();
     }
 
@@ -19,10 +18,12 @@ public partial class ProjectCreateForm
         var result = await Mediator.Send(new ProjectCreateCommand(Dto));
         if (!result.Success)
         {
-            NotificationService.Error(NotificationHelper.PROJECT_CREATION_FAILED);
+            NotificationService.Error(NotificationHelper.ProjectCreationFailed(result.Error));
+
+            return;
         }
 
-        NotificationService.Success(NotificationHelper.PROJECT_CREATION_SUCCESS);
+        NotificationService.Success(NotificationHelper.ProjectCreated(Dto.Title));
         Close();
     }
 }

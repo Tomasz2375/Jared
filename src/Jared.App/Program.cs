@@ -29,7 +29,7 @@ builder.Services
     {
         options.LoginPath = "/login";
         options.LogoutPath = "/logout";
-        options.Cookie.Name = "jared-cookie";
+        options.Cookie.Name = builder.Environment.IsDevelopment() ? "jared-cookie-dev" : "jared-cookie";
         options.Cookie.HttpOnly = true;
         options.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
         options.Cookie.SameSite = SameSiteMode.Lax;

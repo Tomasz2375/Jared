@@ -64,22 +64,24 @@ public partial class EpicDetailsForm
 
     private void cancel()
     {
-        NotificationService.Information(NotificationHelper.EPIC_UPDATE_CANCELED);
         Close();
     }
 
     private async Task save()
     {
         var result = await Mediator.Send(new EpicUpdateCommand(Dto));
-        if (!result.Success)
+        if (result.Success)
         {
-            NotificationService.Error(NotificationHelper.EPIC_UPDATE_FAILED);
+            NotificationService.Success(NotificationHelper.EpicUpdated(Dto.Title));
+        }
+        else
+        {
+            NotificationService.Error(NotificationHelper.EpicCreationFailed(result.Error));
         }
 
-        NotificationService.Success(NotificationHelper.EPIC_UPDATE_SUCCESS);
         if (closeDialog)
         {
-            Close();
+            cancel();
         }
     }
 
@@ -89,7 +91,9 @@ public partial class EpicDetailsForm
 
         if (!result.Success)
         {
-            Console.WriteLine("Get epic failed");
+            NotificationService.Error(NotificationHelper.EpicFetchFailed(result.Error));
+
+            return;
         }
 
         Dto = result.Data;
@@ -100,7 +104,8 @@ public partial class EpicDetailsForm
         var result = await Mediator.Send(new ProjectPageQuery());
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            NotificationService.Warning(NotificationHelper.ProjectsFetchFailed(result.Error));
+
             return;
         }
 
@@ -117,7 +122,8 @@ public partial class EpicDetailsForm
         var result = await Mediator.Send(new EpicPageQuery(filters: filters));
         if (!result.Success)
         {
-            Console.WriteLine("Error when get epics list");
+            NotificationService.Warning(NotificationHelper.EpicsFetchFailed(result.Error));
+
             return;
         }
 

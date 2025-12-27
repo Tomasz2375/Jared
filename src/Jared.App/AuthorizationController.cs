@@ -32,7 +32,13 @@ public class AuthorizationController(IMediator mediator) : ControllerBase
             new(ClaimTypes.Email, user.Email),
         };
 
-        Response.Cookies.Append("refresh_token", user.RefreshToken, new CookieOptions
+        var cookieName = HttpContext
+            .RequestServices
+            .GetRequiredService<IWebHostEnvironment>()
+            .IsDevelopment()
+            ? "refresh_token_dev"
+            : "refresh_token";
+        Response.Cookies.Append(cookieName, user.RefreshToken, new CookieOptions
         {
             HttpOnly = true,
             Secure = true,
@@ -60,7 +66,13 @@ public class AuthorizationController(IMediator mediator) : ControllerBase
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
-        var refreshToken = HttpContext.Request.Cookies["refresh_token"];
+        var cookieName = HttpContext
+            .RequestServices
+            .GetRequiredService<IWebHostEnvironment>()
+            .IsDevelopment()
+            ? "refresh_token_dev"
+            : "refresh_token";
+        var refreshToken = HttpContext.Request.Cookies[cookieName];
         RefreshTokenDto dto = new()
         {
             RefreshToken = refreshToken ?? string.Empty,
@@ -72,7 +84,7 @@ public class AuthorizationController(IMediator mediator) : ControllerBase
             return Unauthorized();
         }
 
-        Response.Cookies.Delete("refresh_token");
+        Response.Cookies.Delete(cookieName);
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
         return Ok();

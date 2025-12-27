@@ -40,7 +40,8 @@ public partial class TaskCreateForm
         var result = await Mediator.Send(new ProjectPageQuery());
         if (!result.Success)
         {
-            Console.WriteLine("Error when get project list");
+            NotificationService.Error(NotificationHelper.ProjectsFetchFailed(result.Error));
+
             return;
         }
 
@@ -56,7 +57,8 @@ public partial class TaskCreateForm
         var result = await Mediator.Send(new EpicPageQuery(filters: filters));
         if (!result.Success)
         {
-            Console.WriteLine("Error when get epics list");
+            NotificationService.Error(NotificationHelper.EpicsFetchFailed(result.Error));
+
             return;
         }
 
@@ -73,7 +75,8 @@ public partial class TaskCreateForm
         var result = await Mediator.Send(new TaskPageQuery(filters: filters));
         if (!result.Success)
         {
-            Console.WriteLine("Error when get task list");
+            NotificationService.Error(NotificationHelper.TasksFetchFailed(result.Error));
+
             return;
         }
 
@@ -86,7 +89,8 @@ public partial class TaskCreateForm
 
         if (!result.Success)
         {
-            Console.WriteLine("Error when get users list");
+            NotificationService.Error(NotificationHelper.UsersFetchFailed(result.Error));
+
             return;
         }
 
@@ -95,7 +99,6 @@ public partial class TaskCreateForm
 
     private void cancel()
     {
-        NotificationService.Information(NotificationHelper.TASK_CREATION_CANCELED);
         Close();
     }
 
@@ -104,10 +107,12 @@ public partial class TaskCreateForm
         var result = await Mediator.Send(new TaskCreateCommand(Dto));
         if (!result.Success)
         {
-            NotificationService.Error(NotificationHelper.TASK_CREATION_FAILED);
+            NotificationService.Error(NotificationHelper.TaskCreationFailed(result.Error));
+
+            return;
         }
 
-        NotificationService.Success(NotificationHelper.TASK_CREATION_SUCCESS);
-        Close();
+        NotificationService.Success(NotificationHelper.TaskCreated(Dto.Title));
+        cancel();
     }
 }

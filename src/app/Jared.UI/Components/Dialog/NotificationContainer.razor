@@ -4,10 +4,16 @@
 <div class="notification-container">
     @foreach (var notification in NotificationService.Messages)
     {
-        <div class="notification @notification.CssClass">
+        <div
+            @key="notification.Id"
+            class="notification @notification.CssClass @(notification.IsClosing ? "closing" : "")">
             <i class="@getIconClass(notification.CssClass) notification-icon"></i>
             <span class="notification-text">@notification.Message</span>
-            <button class="btn notification-close" @onclick="() => NotificationService.RemoveNotification(notification)">✖</button>
+            <button
+                class="notification-close"
+                @onclick="() => NotificationService.RemoveNotification(notification)">
+                ✖
+            </button>
         </div>
     }
 </div>
