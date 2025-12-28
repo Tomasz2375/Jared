@@ -29,7 +29,6 @@ public class TaskPageQueryHandler(
         {
             var tasksQuery = dataContext
                 .Set<Domain.Models.Task>()
-                .Include(x => x.Epic)
                 .Include(x => x.Project)
                 .Include(x => x.CreatedBy)
                 .Include(x => x.AssignedTo)

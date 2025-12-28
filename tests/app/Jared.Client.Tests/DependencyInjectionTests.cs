@@ -1,7 +1,6 @@
 using Blazored.LocalStorage;
 using Jared.Client.Abstractions;
 using Jared.Client.Handlers.Auth;
-using Jared.Client.Handlers.Epics;
 using Jared.Client.Handlers.Projects;
 using Jared.Client.Handlers.Roles;
 using Jared.Client.Handlers.Tasks;
@@ -11,7 +10,6 @@ using Jared.Client.Requests.Tasks;
 using Jared.Client.Requests.Users;
 using Jared.Client.Services;
 using Jared.Contracts.Auth;
-using Jared.Contracts.Epics;
 using Jared.Contracts.Projects;
 using Jared.Contracts.Roles;
 using Jared.Contracts.Tasks;
@@ -19,7 +17,6 @@ using Jared.Contracts.Users;
 using Jared.Contracts.Worklogs;
 using Jared.Core.Abstractions;
 using Jared.Dtos.Auth;
-using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Roles;
 using Jared.Dtos.Tasks;
@@ -44,7 +41,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddClient(services);
 
         // Assert
-        Assert.Equal(41, services.Count);
+        Assert.Equal(37, services.Count);
     }
 
     [Fact]
@@ -71,27 +68,6 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<RegisterCommand, Result<bool>>) &&
             x.ImplementationType == typeof(RegisterCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        // Epic
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicCreateCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(EpicCreateCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicDetailsQuery, Result<EpicDetailsDto>>) &&
-            x.ImplementationType == typeof(EpicDetailsQueryHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicPageQuery, Result<EpicPageDto>>) &&
-            x.ImplementationType == typeof(EpicPageQueryHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicUpdateCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(EpicUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         // Project

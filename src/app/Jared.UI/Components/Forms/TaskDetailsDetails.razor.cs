@@ -1,10 +1,4 @@
-﻿using Jared.Client.Commons;
-using Jared.Contracts.Epics;
-using Jared.Contracts.Projects;
-using Jared.Contracts.Tasks;
-using Jared.Contracts.Users;
-using Jared.Dtos.Epics;
-using Jared.Dtos.Projects;
+﻿using Jared.Dtos.Projects;
 using Jared.Dtos.Tasks;
 using Jared.Dtos.Users;
 using Jared.Dtos.WorkLogs;
@@ -20,11 +14,11 @@ public partial class TaskDetailsDetails
     [Parameter]
     public List<ProjectListDto> Projects { get; set; } = new();
     [Parameter]
-    public List<EpicListDto> Epics { get; set; } = new();
-    [Parameter]
     public List<TaskListDto> Tasks { get; set; } = new();
     [Parameter]
     public List<UserListDto> Users { get; set; } = new();
+    [Parameter]
+    public EventCallback<int> OnProjectChanged { get; set; }
 
     private async Task addWorkLog()
     {
@@ -46,5 +40,11 @@ public partial class TaskDetailsDetails
 
         Dto.TotalWorkTime += workLog.Time;
         Dto.WorkLogs.Add(workLog);
+    }
+
+    private async Task projectChanged(int projectId)
+    {
+        Dto.ProjectId = projectId;
+        await OnProjectChanged.InvokeAsync(projectId);
     }
 }

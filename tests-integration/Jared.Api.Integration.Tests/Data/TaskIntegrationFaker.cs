@@ -10,7 +10,6 @@ public class TaskIntegrationFaker : BaseIntegrationFaker<Task>
     {
         Id = BASE_ID + 1,
         ProjectId = ProjectIntegrationFaker.FirstProject.Id,
-        EpicId = EpicIntegrationFaker.FirstEpic.Id,
         ParentId = null,
         Title = "FIRST_TASK_TITLE",
         Description = "FIRST_TASK_DESCRIPTION",
@@ -29,7 +28,6 @@ public class TaskIntegrationFaker : BaseIntegrationFaker<Task>
     {
         Id = BASE_ID + 2,
         ProjectId = ProjectIntegrationFaker.FirstProject.Id,
-        EpicId = EpicIntegrationFaker.FirstEpic.Id,
         ParentId = FirstTask.Id,
         Title = "SECOND_TASK_TITLE",
         Description = "SECOND_TASK_DESCRIPTION",

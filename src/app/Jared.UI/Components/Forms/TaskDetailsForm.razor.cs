@@ -1,9 +1,7 @@
 ﻿using Jared.Client.Commons;
-using Jared.Contracts.Epics;
 using Jared.Contracts.Projects;
 using Jared.Contracts.Tasks;
 using Jared.Contracts.Users;
-using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Tasks;
 using Jared.Dtos.Users;
@@ -21,7 +19,6 @@ public partial class TaskDetailsForm
     private bool closeDialog;
 
     private List<ProjectListDto> projects = new();
-    private List<EpicListDto> epics = new();
     private List<TaskListDto> tasks = new();
     private List<UserListDto> users = new();
 
@@ -34,8 +31,7 @@ public partial class TaskDetailsForm
     {
         await getDetails(Id);
         await getProjects();
-        await getEpics(Dto.ProjectId);
-        await getTasks(Dto.ProjectId, Dto.EpicId);
+        await getTasks(Dto.ProjectId);
         await getUsers();
     }
 
@@ -93,25 +89,11 @@ public partial class TaskDetailsForm
         projects = result.Data.Items;
     }
 
-    private async Task getEpics(int projectId)
-    {
-        var result = await Mediator.Send(new EpicPageQuery(projectId));
-        if (!result.Success)
-        {
-            NotificationService.Warning(NotificationHelper.EpicsFetchFailed(result.Error));
-
-            return;
-        }
-
-        epics = result.Data.Items;
-    }
-
-    private async Task getTasks(int projectId, int? epicId)
+    private async Task getTasks(int projectId)
     {
         var filters = new Dictionary<string, string?>
         {
             { nameof(TaskListDto.ProjectId), projectId.ToString() },
-            { nameof(TaskListDto.EpicId), epicId?.ToString() },
         };
         var result = await Mediator.Send(new TaskPageQuery(filters: filters));
         if (!result.Success)

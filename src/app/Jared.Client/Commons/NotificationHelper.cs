@@ -32,21 +32,6 @@ public static class NotificationHelper
         => $"Failed to load projects. '{message}'";
     #endregion
 
-    #region Epic
-    public static string EpicCreated(string epicTitle)
-        => $"Epic '{epicTitle}' successfully created.";
-    public static string EpicCreationFailed(string message)
-        => $"Failed to create epic. '{message}'";
-    public static string EpicUpdated(string epicTitle)
-        => $"Epic '{epicTitle}' successfully updated.";
-    public static string EpicUpdateFailed(string message)
-        => $"Failed to update epic. '{message}'";
-    public static string EpicFetchFailed(string message)
-        => $"Failed to load epic '{message}'.";
-    public static string EpicsFetchFailed(string message)
-        => $"Failed to load epics. '{message}'";
-    #endregion
-
     #region Users
     public static string UsersFetchFailed(string message)
         => $"Failed to load users. '{message}'";

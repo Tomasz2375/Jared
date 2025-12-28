@@ -1,6 +1,5 @@
 ﻿using Jared.Application.Abstractions;
 using Jared.Application.Handlers.Auth;
-using Jared.Application.Handlers.Epics;
 using Jared.Application.Handlers.Projects;
 using Jared.Application.Handlers.Roles;
 using Jared.Application.Handlers.Tasks;
@@ -10,7 +9,6 @@ using Jared.Application.Services;
 using Jared.Application.Services.Filters;
 using Jared.Application.Services.TaskHistory;
 using Jared.Contracts.Auth;
-using Jared.Contracts.Epics;
 using Jared.Contracts.Projects;
 using Jared.Contracts.Roles;
 using Jared.Contracts.Tasks;
@@ -19,7 +17,6 @@ using Jared.Contracts.Worklogs;
 using Jared.Core.Abstractions;
 using Jared.Domain.Models;
 using Jared.Dtos.Auth;
-using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Roles;
 using Jared.Dtos.Tasks;
@@ -43,7 +40,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddApplication(services);
 
         // Assert
-        Assert.Equal(38, services.Count);
+        Assert.Equal(32, services.Count);
     }
 
     [Fact]
@@ -75,27 +72,6 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IRequestHandler<RegisterCommand, Result<bool>>) &&
             x.ImplementationType == typeof(RegisterCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        // Epic
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicCreateCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(EpicCreateCommandHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicDetailsQuery, Result<EpicDetailsDto>>) &&
-            x.ImplementationType == typeof(EpicDetailsQueryHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicPageQuery, Result<EpicPageDto>>) &&
-            x.ImplementationType == typeof(EpicPageQueryHandler) &&
-            x.Lifetime == ServiceLifetime.Transient));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IRequestHandler<EpicUpdateCommand, Result<bool>>) &&
-            x.ImplementationType == typeof(EpicUpdateCommandHandler) &&
             x.Lifetime == ServiceLifetime.Transient));
 
         // Project
@@ -205,11 +181,6 @@ public class DependencyInjectionTests
             x.Lifetime == ServiceLifetime.Scoped));
 
         Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IFilterStrategy<Epic>) &&
-            x.ImplementationType == typeof(EpicFilter) &&
-            x.Lifetime == ServiceLifetime.Scoped));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IFilterStrategy<Project>) &&
             x.ImplementationType == typeof(ProjectFilter) &&
             x.Lifetime == ServiceLifetime.Scoped));
@@ -217,11 +188,6 @@ public class DependencyInjectionTests
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IFilterBuilder<Task>) &&
             x.ImplementationType == typeof(FilterBuilder<Task>) &&
-            x.Lifetime == ServiceLifetime.Scoped));
-
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IFilterBuilder<Epic>) &&
-            x.ImplementationType == typeof(FilterBuilder<Epic>) &&
             x.Lifetime == ServiceLifetime.Scoped));
 
         Assert.NotNull(services.FirstOrDefault(x =>

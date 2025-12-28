@@ -12,5 +12,4 @@ public class Project : Entity
     public int LastTaskNumber { get; set; }
 
     public List<Task> Tasks { get; set; } = new();
-    public List<Epic> Epics { get; set; } = new();
 }
