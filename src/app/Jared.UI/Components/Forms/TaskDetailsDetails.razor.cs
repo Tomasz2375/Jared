@@ -17,6 +17,8 @@ public partial class TaskDetailsDetails
     public List<TaskListDto> Tasks { get; set; } = new();
     [Parameter]
     public List<UserListDto> Users { get; set; } = new();
+    [Parameter]
+    public EventCallback<int> OnProjectChanged { get; set; }
 
     private async Task addWorkLog()
     {
@@ -38,5 +40,11 @@ public partial class TaskDetailsDetails
 
         Dto.TotalWorkTime += workLog.Time;
         Dto.WorkLogs.Add(workLog);
+    }
+
+    private async Task projectChanged(int projectId)
+    {
+        Dto.ProjectId = projectId;
+        await OnProjectChanged.InvokeAsync(projectId);
     }
 }

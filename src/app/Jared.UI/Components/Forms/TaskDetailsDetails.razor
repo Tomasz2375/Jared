@@ -6,7 +6,9 @@
 
 <div class="form-modal-tabs">
     <InputSelectList
-        @bind-Value="Dto.ProjectId"
+        Value="Dto.ProjectId"
+        ValueChanged="projectChanged"
+        ValueExpression="() => Dto.ProjectId"
         Items="@Projects.ToDictionary(x => x.Id, x => x.Title)"
         TKey="int"
         Id="project"
@@ -14,7 +16,7 @@
         ValidationFor="(() => Dto.ProjectId)" />
     <InputSelectList
         @bind-Value="Dto.ParentId"
-        Items="@Tasks.Where(x => x.ProjectId == Dto.ProjectId).ToDictionary(x => x.Id, x => x.Title)"
+        Items="@Tasks.Where(x => x.ProjectId == Dto.ProjectId && x.Id != Dto.Id).ToDictionary(x => x.Id, x => x.Title)"
         TKey="int?"
         Id="parent"
         Label="Parent task"

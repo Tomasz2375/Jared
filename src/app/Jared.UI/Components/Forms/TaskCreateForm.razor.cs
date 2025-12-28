@@ -92,4 +92,12 @@ public partial class TaskCreateForm
         NotificationService.Success(NotificationHelper.TaskCreated(Dto.Title));
         cancel();
     }
+
+    private async Task onProjectChanged(int projectId)
+    {
+        Dto.ProjectId = projectId;
+        Dto.ParentId = null;
+
+        await getTasksAsync();
+    }
 }

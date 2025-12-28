@@ -25,7 +25,9 @@
                         ValidationFor="(() => Dto.Description)" />
                     <div class="form-modal-tabs">
                         <InputSelectList
-                            @bind-Value="@(Dto.ProjectId)"
+                            Value="@(Dto.ProjectId)"
+                            ValueChanged="@(onProjectChanged)"
+                            ValueExpression="() => Dto.ProjectId"
                             Items="@projects.ToDictionary(x => x.Id, x => x.Title)"
                             TKey="int"
                             Id="project"
