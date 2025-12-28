@@ -26,10 +26,8 @@ public static class DependencyInjection
         services.AddScoped<IJwtTokenService, JwtTokenService>();
         services.AddScoped<IRefreshTokenService, RefreshTokenService>();
         services.AddScoped<IFilterStrategy<Task>, TaskFilter>();
-        services.AddScoped<IFilterStrategy<Epic>, EpicFilter>();
         services.AddScoped<IFilterStrategy<Project>, ProjectFilter>();
         services.AddScoped<IFilterBuilder<Task>, FilterBuilder<Task>>();
-        services.AddScoped<IFilterBuilder<Epic>, FilterBuilder<Epic>>();
         services.AddScoped<IFilterBuilder<Project>, FilterBuilder<Project>>();
 
         return services;

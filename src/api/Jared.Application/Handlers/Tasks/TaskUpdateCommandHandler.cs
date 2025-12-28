@@ -32,7 +32,6 @@ public class TaskUpdateCommandHandler(
             var task = await dataContext.Set<Domain.Models.Task>()
                 .Include(x => x.WorkLogs)
                 .Include(x => x.Project)
-                .Include(x => x.Epic)
                 .Include(x => x.TaskHistories)
                     .ThenInclude(x => x.User)
                 .FirstAsync(x => x.Id == command.dto.Id, cancellationToken);

@@ -30,10 +30,6 @@ public class TaskFilter : IFilterStrategy<Task>
             (tasks, value) => tasks.Where(x => x.Code.Contains(value))
         },
         {
-            nameof(TaskListDto.EpicId),
-            (tasks, value) => tasks.Where(x => x.EpicId != null && x.EpicId.ToString()!.Contains(value))
-        },
-        {
             nameof(TaskListDto.ProjectId),
             (tasks, value) => tasks.Where(x => x.ProjectId.ToString().Contains(value))
         },

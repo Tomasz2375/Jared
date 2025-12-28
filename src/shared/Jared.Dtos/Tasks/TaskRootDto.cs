@@ -8,7 +8,6 @@ public class TaskRootDto : BaseDto
     public string Title { get; set; } = default!;
     public int ProjectId { get; set; }
     public string? Code { get; set; }
-    public int? EpicId { get; set; }
     public int? CreatedById { get; set; }
     public int? AssignedToId { get; set; }
 

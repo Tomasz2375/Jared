@@ -1,11 +1,9 @@
 ﻿using FluentValidation;
 using Jared.Dtos.Auth;
-using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Tasks;
 using Jared.Dtos.Users;
 using Jared.Dtos.WorkLogs;
-using Jared.Validators.Epic;
 using Jared.Validators.Project;
 using Jared.Validators.Task;
 using Jared.Validators.User;
@@ -18,7 +16,6 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddValidators(this IServiceCollection services)
     {
-        services.AddScoped<IValidator<EpicDetailsDto>, EpicDetailsDtoValidator>();
         services.AddScoped<IValidator<TaskDetailsDto>, TaskDetailsDtoValidator>();
         services.AddScoped<IValidator<RegisterRequestDto>, UserRegisterDtoValidator>();
         services.AddScoped<IValidator<LoginRequestDto>, UserLoginDtoValidator>();

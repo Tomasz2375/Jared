@@ -42,7 +42,6 @@ public class TaskHistoryService : ITaskHistoryService
             nameof(TaskDetailsDto.Description),
             nameof(TaskDetailsDto.Code),
             nameof(TaskDetailsDto.ParentId),
-            nameof(TaskDetailsDto.EpicId),
             nameof(TaskDetailsDto.ProjectId),
             nameof(TaskDetailsDto.Status),
             nameof(TaskDetailsDto.Priority),

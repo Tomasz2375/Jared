@@ -13,20 +13,12 @@
         Label="Project"
         ValidationFor="(() => Dto.ProjectId)" />
     <InputSelectList
-        @bind-Value="Dto.EpicId"
-        Items="@Epics.Where(x => x.ProjectId == Dto.ProjectId).ToDictionary(x => x.Id, x => x.Title)"
-        TKey="int?"
-        Id="epic"
-        Label="Epic"
-        Disabled="@(Dto.ProjectId == 0)"
-        ValidationFor="(() => Dto.EpicId)" />
-    <InputSelectList
         @bind-Value="Dto.ParentId"
-        Items="@Tasks.Where(x => x.ProjectId == Dto.ProjectId && x.EpicId == Dto.EpicId).ToDictionary(x => x.Id, x => x.Title)"
+        Items="@Tasks.Where(x => x.ProjectId == Dto.ProjectId).ToDictionary(x => x.Id, x => x.Title)"
         TKey="int?"
         Id="parent"
         Label="Parent task"
-        Disabled="@(Dto.EpicId == 0 || Dto.EpicId is null || Dto.ProjectId == 0)"
+        Disabled="@(Dto.ProjectId == 0)"
         ValidationFor="(() => Dto.ParentId)" />
 </div>
 <div class="form-modal-tabs">
