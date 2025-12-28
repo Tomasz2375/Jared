@@ -1,11 +1,9 @@
 ﻿using FluentValidation;
 using Jared.Dtos.Auth;
-using Jared.Dtos.Epics;
 using Jared.Dtos.Projects;
 using Jared.Dtos.Tasks;
 using Jared.Dtos.Users;
 using Jared.Dtos.WorkLogs;
-using Jared.Validators.Epic;
 using Jared.Validators.Project;
 using Jared.Validators.Task;
 using Jared.Validators.User;
@@ -26,7 +24,7 @@ public class DependencyInjectionTests
         DependencyInjection.AddValidators(services);
 
         // Assert
-        Assert.Equal(7, services.Count);
+        Assert.Equal(6, services.Count);
     }
 
     [Fact]
@@ -39,11 +37,6 @@ public class DependencyInjectionTests
         DependencyInjection.AddValidators(services);
 
         // Assert
-        Assert.NotNull(services.FirstOrDefault(x =>
-            x.ServiceType == typeof(IValidator<EpicDetailsDto>) &&
-            x.ImplementationType == typeof(EpicDetailsDtoValidator) &&
-            x.Lifetime == ServiceLifetime.Scoped));
-
         Assert.NotNull(services.FirstOrDefault(x =>
             x.ServiceType == typeof(IValidator<TaskDetailsDto>) &&
             x.ImplementationType == typeof(TaskDetailsDtoValidator) &&

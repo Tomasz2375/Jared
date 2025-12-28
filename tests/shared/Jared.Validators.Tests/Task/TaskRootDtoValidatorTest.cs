@@ -89,7 +89,6 @@ public class TaskRootDtoValidatorTest
         Title = "Task title",
         ProjectId = 2,
         Code = "CD-1",
-        EpicId = 3,
         CreatedById = 10,
         AssignedToId = 11,
         Status = TaskStatus.Done,
