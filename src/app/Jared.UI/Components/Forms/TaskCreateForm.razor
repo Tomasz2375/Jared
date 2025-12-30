@@ -33,16 +33,14 @@
                             Items="@projects.ToDictionary(x => x.Id, x => x.Title)"
                             TKey="int"
                             Id="project"
-                            Label="Project"
-                            ValidationFor="@(() => Dto.ProjectId)" />
+                            Placeholder="Project"/>
                         <InputSelectList
                             @bind-Value="@Dto.ParentId"
                             Items="@tasks.Where(x => x.ProjectId == Dto.ProjectId).ToDictionary(x => x.Id, x => x.Title)"
                             TKey="int?"
                             Id="parent"
-                            Label="Parent task"
-                            Disabled=@(Dto.ProjectId == 0)
-                            ValidationFor="@(() => Dto.ParentId)" />
+                            Placeholder="Parent task"
+                            Disabled=@(Dto.ProjectId == 0) />
                     </div>
                     <div class="form-modal-tabs">
                         <InputSelectList
@@ -50,16 +48,14 @@
                             Items="@users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}" )"
                             TKey="int?"
                             Id="created-by"
-                            Label="Created by"
-                            Disabled=true
-                            ValidationFor="@(() => Dto.CreatedById)" />
+                            Placeholder="Created by"
+                            Disabled=true />
                         <InputSelectList
                             @bind-Value="@Dto.AssignedToId"
                             Items="@users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}" )"
                             TKey="int?"
                             Id="assigned-to"
-                            Label="Assigned to"
-                            ValidationFor="@(() => Dto.AssignedToId)" />
+                            Placeholder="Assigned to" />
                     </div>
                     <div class="form-modal-tabs">
                         <InputSelectEnum

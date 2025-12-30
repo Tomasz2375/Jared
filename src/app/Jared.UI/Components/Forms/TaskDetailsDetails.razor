@@ -21,16 +21,14 @@
             Items="@Projects.ToDictionary(x => x.Id, x => x.Title)"
             TKey="int"
             Id="project"
-            Label="Project"
-            ValidationFor="(() => Dto.ProjectId)" />
+            Placeholder="Project" />
         <InputSelectList
             @bind-Value="Dto.ParentId"
             Items="@Tasks.Where(x => x.ProjectId == Dto.ProjectId && x.Id != Dto.Id).ToDictionary(x => x.Id, x => x.Title)"
             TKey="int?"
             Id="parent"
-            Label="Parent task"
-            Disabled="@(Dto.ProjectId == 0)"
-            ValidationFor="(() => Dto.ParentId)" />
+            Placeholder="Parent task"
+            Disabled="@(Dto.ProjectId == 0)" />
 </div>
 <div class="form-modal-tabs">
     <InputSelectEnum @bind-Value="Dto.Priority" Id="priority" Placeholder="Priority" />
@@ -48,15 +46,13 @@
         Items="@Users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}")"
         TKey="int?"
         Id="created-by"
-        Label="Created by"
-        ValidationFor="(() => Dto.CreatedById)" />
+        Placeholder="Created by" />
     <InputSelectList
         @bind-Value="Dto.AssignedToId"
         Items="@Users.ToDictionary(x => x.Id, x => $"{x.FirstName} {x.LastName}")"
         TKey="int?"
         Id="assigned-to"
-        Label="Assigned to"
-        ValidationFor="(() => Dto.AssignedToId)" />
+        Placeholder="Assigned to" />
 </div>
 
 <div class="form-modal-tabs">

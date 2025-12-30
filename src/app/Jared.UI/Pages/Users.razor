@@ -24,10 +24,11 @@
                     <EditForm Model="@user">
                         <InputSelectList
                             @bind-Value="@user.RoleId"
-                            Items="@roles"
+                            Placeholder="Role"
                             TKey="int"
+                            Items="@roles"
                             Id=@($"user-{user.Id}-role")
-                            ValidationFor="@(() => user.RoleId)" />
+                            ShowDefault="false" />
                     </EditForm>
                 </td>
                 <td>

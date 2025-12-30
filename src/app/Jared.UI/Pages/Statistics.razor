@@ -11,11 +11,10 @@
         <InputSelectList
             @bind-Value="@userId"
             Items="@getUsersDictionary()"
-            ValidationFor="(() => userId)"
             ShowDefault="false"
             Disabled="@(user.Role == "User")"
             Id="user"
-            Label="User" />
+            Placeholder="User" />
         <InputSelectEnum
             @bind-Value="@(month)"
             Id="month"
@@ -23,10 +22,9 @@
         <InputSelectList
             @bind-Value="@year"
             Items="@getYearDictionary()"
-            ValidationFor="(() => year)"
             ShowDefault="false"
             Id="year"
-            Label="Year" />
+            Placeholder="Year" />
         <div style="position:relative; bottom: -12px;">
             <button type="submit" class="btn btn-primary-dialog">Show</button>
         </div>
