@@ -1,16 +1,17 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Linq.Expressions;
 
 namespace Jared.UI.Components.Basic;
 
 public partial class InputNumberField
 {
     [Parameter]
-    public Expression<Func<int>> ValidationFor { get; set; } = default!;
+    [EditorRequired]
+    public string Id { get; set; } = default!;
+
     [Parameter]
-    public string? Id { get; set; }
-    [Parameter]
-    public string? Label { get; set; }
+    [EditorRequired]
+    public string Placeholder { get; set; } = default!;
+
     [Parameter]
     public bool Disabled { get; set; }
 
@@ -23,11 +24,13 @@ public partial class InputNumberField
         {
             result = number;
             validationErrorMessage = null!;
+
             return true;
         }
 
         result = 0;
-        validationErrorMessage = "Error";
+        validationErrorMessage = "Insert number";
+
         return false;
     }
 }
