@@ -33,11 +33,12 @@
                             Id="color"
                             Placeholder="Color" />
                     </div>
-                    <InputTextAreaField
-                        @bind-Value="@Dto.Description"
-                        Id="description"
-                        Label="Description"
-                        ValidationFor="(() => Dto.Description)" />
+                    <div class="form-modal-tabs">
+                        <InputTextAreaField
+                            @bind-Value="@Dto.Description"
+                            Id="description"
+                            Placeholder="Description"/>
+                    </div>
                 </div>
             </div>
             <div class="form-modal-footer">
