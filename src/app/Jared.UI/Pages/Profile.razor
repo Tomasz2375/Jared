@@ -11,25 +11,25 @@
         <FluentValidationValidator />
         <h5>Change password</h5>
         <div>
-            <InputPasswordField
+            <InputTextField
                 @bind-Value="@userPasswordDto.CurrentPassword"
                 Id="password"
-                Label="Current password"
-                ValidationFor="(() => userPasswordDto.CurrentPassword)" />
+                Placeholder="Current password"
+                IsPassword="true" />
         </div>
         <div>
-            <InputPasswordField
+            <InputTextField
                 @bind-Value="@userPasswordDto.NewPassword"
                 Id="new-password"
-                Label="New password"
-                ValidationFor="(() => userPasswordDto.NewPassword)" />
+                Placeholder="New password"
+                IsPassword="true" />
         </div>
         <div>
-            <InputPasswordField
+            <InputTextField
                 @bind-Value="@userPasswordDto.ConfirmPassword"
-                Id="confirm-new-password"
-                Label="Confirm new password"
-                ValidationFor="(() => userPasswordDto.ConfirmPassword)" />
+                Id="confirm-password"
+                Placeholder="Confirm password"
+                IsPassword="true" />
         </div>
         <div>
             <button type="submit" class="btn btn-primary-dialog">Change password</button>
@@ -47,12 +47,12 @@
         <InputTextField
             @bind-Value="@userUpdateDto.FirstName"
             Id="firstName"
-            Label="First name"
+            Placeholder="First name"
             ValidationFor="(() => userUpdateDto.FirstName)" />
         <InputTextField
             @bind-Value="@userUpdateDto.LastName"
             Id="lastName"
-            Label="Last name"
+            Placeholder="Last name"
             ValidationFor="(() => userUpdateDto.LastName)" />
         <InputDateField
             @bind-Value="@(userUpdateDto.DateOfBirth)"

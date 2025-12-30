@@ -11,13 +11,12 @@
             <InputTextField
                 @bind-Value="@dto.Email"
                 Id="email"
-                Label="Email"
-                ValidationFor="(() => dto.Email)" />
-            <InputPasswordField
+                Placeholder="Email" />
+            <InputTextField
                 @bind-Value="@dto.Password"
                 Id="password"
-                Label="Password"
-                ValidationFor="(() => dto.Password)" />
+                Placeholder="Password"
+                IsPassword="true" />
         </div>
         <div>
             <button type="submit" class="btn btn-primary-dialog">Login</button>

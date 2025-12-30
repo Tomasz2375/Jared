@@ -1,27 +1,37 @@
 ﻿@inject IUserService UserService
 @inject IDialogService DialogService
 
-<InputTextField @bind-Value="@Dto.Title" Id="title" Label="Title" ValidationFor="(() => Dto.Title)" />
-<InputTextAreaField @bind-Value="@Dto.Description" Id="description" Label="Description" Row="5" ValidationFor="(() => Dto.Description)" />
-
 <div class="form-modal-tabs">
-    <InputSelectList
-        Value="Dto.ProjectId"
-        ValueChanged="projectChanged"
-        ValueExpression="() => Dto.ProjectId"
-        Items="@Projects.ToDictionary(x => x.Id, x => x.Title)"
-        TKey="int"
-        Id="project"
-        Label="Project"
-        ValidationFor="(() => Dto.ProjectId)" />
-    <InputSelectList
-        @bind-Value="Dto.ParentId"
-        Items="@Tasks.Where(x => x.ProjectId == Dto.ProjectId && x.Id != Dto.Id).ToDictionary(x => x.Id, x => x.Title)"
-        TKey="int?"
-        Id="parent"
-        Label="Parent task"
-        Disabled="@(Dto.ProjectId == 0)"
-        ValidationFor="(() => Dto.ParentId)" />
+    <InputTextField
+        @bind-Value="@Dto.Title"
+        Id="title"
+        Placeholder="Title" />
+</div>
+<div class="form-modal-tabs">
+    <InputTextAreaField
+        @bind-Value="@Dto.Description"
+        Id="description"
+        Label="Description"
+        Row="5" ValidationFor="(() => Dto.Description)" />
+</div>
+<div class="form-modal-tabs">
+        <InputSelectList
+            Value="Dto.ProjectId"
+            ValueChanged="projectChanged"
+            ValueExpression="() => Dto.ProjectId"
+            Items="@Projects.ToDictionary(x => x.Id, x => x.Title)"
+            TKey="int"
+            Id="project"
+            Label="Project"
+            ValidationFor="(() => Dto.ProjectId)" />
+        <InputSelectList
+            @bind-Value="Dto.ParentId"
+            Items="@Tasks.Where(x => x.ProjectId == Dto.ProjectId && x.Id != Dto.Id).ToDictionary(x => x.Id, x => x.Title)"
+            TKey="int?"
+            Id="parent"
+            Label="Parent task"
+            Disabled="@(Dto.ProjectId == 0)"
+            ValidationFor="(() => Dto.ParentId)" />
 </div>
 <div class="form-modal-tabs">
     <InputSelectEnum @bind-Value="Dto.Priority" ValidationFor="(() => Dto.Priority)" Id="priority" Label="Priority" />

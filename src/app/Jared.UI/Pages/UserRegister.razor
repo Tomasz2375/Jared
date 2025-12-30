@@ -13,12 +13,12 @@
             <InputTextField
                 @bind-Value="@Dto.FirstName"
                 Id="firstName"
-                Label="First name"
+                Placeholder="First name"
                 ValidationFor="(() => Dto.FirstName)" />
             <InputTextField
                 @bind-Value="@Dto.LastName"
                 Id="lastName"
-                Label="Last name"
+                Placeholder="Last name"
                 ValidationFor="(() => Dto.LastName)" />
             <InputDateField
                 @bind-Value="@(Dto.DateOfBirth)"
@@ -28,18 +28,18 @@
             <InputTextField
                 @bind-Value="@Dto.Email"
                 Id="email"
-                Label="Email"
+                Placeholder="Email"
                 ValidationFor="(() => Dto.Email)" />
-            <InputPasswordField
+            <InputTextField
                 @bind-Value="@Dto.Password"
                 Id="password"
-                Label="Password"
-                ValidationFor="(() => Dto.Password)" />
-            <InputPasswordField
+                Placeholder="Password"
+                IsPassword="true" />
+            <InputTextField
                 @bind-Value="@Dto.ConfirmPassword"
                 Id="confirmPassword"
-                Label="Confirm password"
-                ValidationFor="(() => Dto.ConfirmPassword)" />
+                Placeholder="Confirm password"
+                IsPassword="true" />
         </div>
         <div>
             <button type="submit" class="btn btn-primary-dialog">Register</button>
