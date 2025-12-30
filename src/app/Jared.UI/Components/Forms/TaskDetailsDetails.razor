@@ -33,8 +33,8 @@
             ValidationFor="(() => Dto.ParentId)" />
 </div>
 <div class="form-modal-tabs">
-    <InputSelectEnum @bind-Value="Dto.Priority" ValidationFor="(() => Dto.Priority)" Id="priority" Label="Priority" />
-    <InputSelectEnum @bind-Value="Dto.Status" ValidationFor="(() => Dto.Status)" Id="status" Label="Status" />
+    <InputSelectEnum @bind-Value="Dto.Priority" Id="priority" Placeholder="Priority" />
+    <InputSelectEnum @bind-Value="Dto.Status" Id="status" Placeholder="Status" />
     <InputDateField @bind-Value="Dto.Deadline" Placeholder="Deadline" Id="deadline" />
 </div>
 <div class="form-modal-tabs">

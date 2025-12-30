@@ -64,14 +64,12 @@
                     <div class="form-modal-tabs">
                         <InputSelectEnum
                             @bind-Value="@(Dto.Priority)"
-                            ValidationFor="(() => Dto.Priority)"
                             Id="priority"
-                            Label="Priority" />
+                            Placeholder="Priority" />
                         <InputSelectEnum
                             @bind-Value="@(Dto.Status)"
-                            ValidationFor="(() => Dto.Status)"
                             Id="status"
-                            Label="Status" />
+                            Placeholder="Status" />
                         <InputDateField
                             @bind-Value="@(Dto.Deadline)"
                             Placeholder="Deadline"

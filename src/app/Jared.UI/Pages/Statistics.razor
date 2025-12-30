@@ -18,9 +18,8 @@
             Label="User" />
         <InputSelectEnum
             @bind-Value="@(month)"
-            ValidationFor="(() => month)"
             Id="month"
-            Label="Month" />
+            Placeholder="Month" />
         <InputSelectList
             @bind-Value="@year"
             Items="@getYearDictionary()"

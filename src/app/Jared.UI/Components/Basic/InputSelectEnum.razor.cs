@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Linq.Expressions;
 
 namespace Jared.UI.Components.Basic;
 
@@ -7,11 +6,13 @@ public partial class InputSelectEnum<TEnum>
     where TEnum : Enum
 {
     [Parameter]
-    public Expression<Func<TEnum>> ValidationFor { get; set; } = default!;
+    [EditorRequired]
+    public string Id { get; set; } = default!;
+
     [Parameter]
-    public string? Id { get; set; }
-    [Parameter]
-    public string? Label { get; set; }
+    [EditorRequired]
+    public string Placeholder { get; set; } = default!;
+
     [Parameter]
     public EventCallback<TEnum> EnumPropertyChanged { get; set; }
 
