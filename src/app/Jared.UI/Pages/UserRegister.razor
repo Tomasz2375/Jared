@@ -13,23 +13,19 @@
             <InputTextField
                 @bind-Value="@Dto.FirstName"
                 Id="firstName"
-                Placeholder="First name"
-                ValidationFor="(() => Dto.FirstName)" />
+                Placeholder="First name" />
             <InputTextField
                 @bind-Value="@Dto.LastName"
                 Id="lastName"
-                Placeholder="Last name"
-                ValidationFor="(() => Dto.LastName)" />
+                Placeholder="Last name" />
             <InputDateField
                 @bind-Value="@(Dto.DateOfBirth)"
                 Id="dateOfBirth"
-                Label="Date of birth"
-                ValidationFor="(() => Dto.DateOfBirth)" />
+                Placeholder="Date of birth" />
             <InputTextField
                 @bind-Value="@Dto.Email"
                 Id="email"
-                Placeholder="Email"
-                ValidationFor="(() => Dto.Email)" />
+                Placeholder="Email" />
             <InputTextField
                 @bind-Value="@Dto.Password"
                 Id="password"

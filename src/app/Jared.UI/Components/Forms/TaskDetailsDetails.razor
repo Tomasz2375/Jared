@@ -35,7 +35,7 @@
 <div class="form-modal-tabs">
     <InputSelectEnum @bind-Value="Dto.Priority" ValidationFor="(() => Dto.Priority)" Id="priority" Label="Priority" />
     <InputSelectEnum @bind-Value="Dto.Status" ValidationFor="(() => Dto.Status)" Id="status" Label="Status" />
-    <InputDateField @bind-Value="Dto.Deadline" Label="Deadline" Id="deadline" ValidationFor="(() => Dto.Deadline)" />
+    <InputDateField @bind-Value="Dto.Deadline" Placeholder="Deadline" Id="deadline" />
 </div>
 <div class="form-modal-tabs">
     <LabelValueDisplay Id="created-at" Label="Created at" Value="@Dto.CreatedAt.ToString()" />
