@@ -14,8 +14,8 @@
     <div class="validation">
         <ValidationMessage For="@ValueExpression" />
     </div>
-    <div class="number-controls">
-        <div class="number-control" type="button" @onclick="@(() => CurrentValue++)">▲</div>
-        <div class="number-control" type="button" @onclick="@(() => CurrentValue--)">▼</div>
+    <div class="input-actions">
+        <div class="input-number-control" type="button" @onclick="@(() => CurrentValue++)">▲</div>
+        <div class="input-number-control" type="button" @onclick="@(() => CurrentValue--)">▼</div>
     </div>
 </div>

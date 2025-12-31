@@ -60,7 +60,7 @@
 
 }
 
-.number-controls {
+.input-actions {
     position: absolute;
     right: 6px;
     top: 8px;
@@ -69,10 +69,19 @@
     font-size: 12px;
 }
 
-.number-control {
+.input-number-control {
     color: var(--font-color);
 }
-.number-control:hover {
+.input-number-control:hover {
+    color: var(--main-color);
+}
+
+.input-edit-button {
+    margin: 12px;
+    font-size: 16px;
+    color: var(--font-color);
+}
+.input-edit-button:hover {
     color: var(--main-color);
 }
 

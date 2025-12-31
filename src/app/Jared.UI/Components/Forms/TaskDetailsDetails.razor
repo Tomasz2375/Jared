@@ -67,20 +67,15 @@
         Id="assigned-to"
         Placeholder="Assigned to" />
 </div>
-
 <div class="form-modal-tabs">
-    <div style="width:50%">
-        <InputTimeSpanField
-            @bind-Value="Dto.EstimatedTime"
-            Placeholder="Estimated time"
-            Id="estimated-time" />
-    </div>
+    <InputTimeSpanField
+        @bind-Value="Dto.EstimatedTime"
+        Placeholder="Estimated time"
+        Id="estimated-time"
+        Disabled="@(Dto.EstimatedTime > TimeSpan.Zero)" />
     <InputTimeSpanField
         @bind-Value="Dto.TotalWorkTime"
         Placeholder="Total work time"
         Id="total-work-time"
-        Disabled="true" />
-    <div style="position:relative; bottom: -12px;">
-        <button type="button" class="btn btn-simple-dialog" @onclick="addWorkLog">+</button>
-    </div>
+        OnEdit="addWorkLog" />
 </div>
