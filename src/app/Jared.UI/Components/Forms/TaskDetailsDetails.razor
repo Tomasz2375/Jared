@@ -36,9 +36,22 @@
     <InputDateField @bind-Value="Dto.Deadline" Placeholder="Deadline" Id="deadline" />
 </div>
 <div class="form-modal-tabs">
-    <LabelValueDisplay Id="created-at" Label="Created at" Value="@Dto.CreatedAt.ToString()" />
-    <LabelValueDisplay Id="start-date" Label="Start date" Value="@Dto.StartDate.ToString()" />
-    <LabelValueDisplay Id="end-date" Label="End date" Value="@Dto.EndDate.ToString()" />
+    <InputDateField
+        @bind-Value="Dto.CreatedAt"
+        TValue="DateTime"
+        Id="created-at"
+        Placeholder="Created at"
+        Disabled="true" />
+    <InputDateField
+        @bind-Value="@Dto.StartDate"
+        Id="start-date"
+        Placeholder="Start date"
+        Disabled="true" />
+    <InputDateField
+        @bind-Value="@Dto.EndDate"
+        Id="end-date"
+        Placeholder="End date"
+        Disabled="true" />
 </div>
 <div class="form-modal-tabs">
     <InputSelectList
@@ -57,9 +70,16 @@
 
 <div class="form-modal-tabs">
     <div style="width:50%">
-        <InputTimeSpanField @bind-Value="Dto.EstimatedTime" Label="Estimated time" Id="estimated-time" ValidationFor="(() => Dto.EstimatedTime)" />
+        <InputTimeSpanField
+            @bind-Value="Dto.EstimatedTime"
+            Placeholder="Estimated time"
+            Id="estimated-time" />
     </div>
-    <InputTimeSpanField @bind-Value="Dto.TotalWorkTime" Label="Total work time" Id="total-work-time" Disabled="true" ValidationFor="(() => Dto.TotalWorkTime)" />
+    <InputTimeSpanField
+        @bind-Value="Dto.TotalWorkTime"
+        Placeholder="Total work time"
+        Id="total-work-time"
+        Disabled="true" />
     <div style="position:relative; bottom: -12px;">
         <button type="button" class="btn btn-simple-dialog" @onclick="addWorkLog">+</button>
     </div>

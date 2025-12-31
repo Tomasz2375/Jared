@@ -1,12 +1,14 @@
-﻿@inherits InputBase<DateTime?>
+﻿@typeparam TValue
+@inherits InputBase<TValue>
 
 <div class="input-wrapper">
-    <input @bind-value="CurrentValue"
-           @bind-value:event="oninput"
-           @attributes="AdditionalAttributes"
-           id="@Id"
-           class="form-control @CssClass"
-           type="date" />
+    <input
+        @attributes="AdditionalAttributes"
+        value="@CurrentValueAsString"
+        id="@Id"
+        class="form-control @CssClass"
+        disabled="@Disabled"
+        type="date" />
     <span class="placeholder">@Placeholder</span>
     <div class="validation">
         <ValidationMessage For="@ValueExpression" />

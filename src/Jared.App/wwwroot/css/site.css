@@ -2,10 +2,10 @@
 
 :root {
     --font-color: black;
-    --background-1: #f5f5f5;
+    --background-1: #eaeaea;
     --background-2: #dddddd;
     --field-enabled: #dddddd;
-    --field-disabled: #f5f5f5;
+    --field-disabled: #eaeaea;
     --button-primary: #1b6ec2;
     --button-danger: #dc3545;
     --main-color: #aa6622;
