@@ -1,0 +1,38 @@
+﻿@inject IDragDropService DragDropService
+
+<div class="kanban-column"
+     ondragover="event.preventDefault()"
+     @ondrop="@HandleDrop"
+    dropzone="move">
+
+    @foreach (var item in Items)
+    {
+        <KanbanTaskCard OnClick="@HandleClick" Item="item" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Jared.Core.Enums.TaskStatus Status { get; set; }
+    [Parameter]
+    public Priority Priority { get; set; }
+    [Parameter]
+    public IEnumerable<TaskListDto> Items { get; set; } = [];
+    [Parameter]
+    public EventCallback<(int taskId, Jared.Core.Enums.TaskStatus newStatus)> OnItemDropped { get; set; }
+    [Parameter]
+    public EventCallback<int> OnClick { get; set; }
+
+    private async Task HandleDrop(DragEventArgs e)
+    {
+        if (DragDropService.DraggedTaskId.HasValue)
+        {
+            await OnItemDropped.InvokeAsync(((int)DragDropService.DraggedTaskId, Status));
+        }
+    }
+
+    private async Task HandleClick(int id)
+    {
+        await OnClick.InvokeAsync(id);
+    }
+}

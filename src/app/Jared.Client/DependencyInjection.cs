@@ -24,6 +24,7 @@ public static class DependencyInjection
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IDialogService, DialogService>();
         services.AddScoped<IApiClient, ApiClient>();
+        services.AddScoped<IDragDropService, DragDropService>();
 
         return services;
     }

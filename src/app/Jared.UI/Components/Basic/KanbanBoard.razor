@@ -1,0 +1,43 @@
+﻿<div class="kanban-header" style="grid-template-columns: 120px repeat(@Statuses.Count(), 1fr);">
+
+    <div class="kanban-header-empty"></div>
+    @foreach (var status in Statuses)
+    {
+        <div class="kanban-header-cell">@status</div>
+    }
+</div>
+<div class="kanban-grid">
+
+    @foreach (Priority priority in Enum.GetValues(typeof(Priority)))
+    {
+        <KanbanRow
+            OnClick="@HandleClick"
+            Priority="@priority"
+            Items="Items.Where(i => i.Priority == priority)"
+            Statuses="@Statuses"
+            OnItemMoved="OnItemMovedInternal" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public IEnumerable<TaskListDto> Items { get; set; } = [];
+
+    [Parameter]
+    public EventCallback<(int taskId, Jared.Core.Enums.TaskStatus newStatus, Priority newPriority)> OnStatusChanged { get; set; }
+    [Parameter]
+    public EventCallback<int> OnClick { get; set; }
+
+    // Kolumny = statusy
+    private readonly Jared.Core.Enums.TaskStatus[] Statuses = Enum.GetValues<Jared.Core.Enums.TaskStatus>();
+
+    private async Task OnItemMovedInternal((int taskId, Jared.Core.Enums.TaskStatus newStatus, Priority newPriority) move)
+    {
+        await OnStatusChanged.InvokeAsync(move);
+    }
+
+    private async Task HandleClick(int id)
+    {
+        await OnClick.InvokeAsync(id);
+    }
+}

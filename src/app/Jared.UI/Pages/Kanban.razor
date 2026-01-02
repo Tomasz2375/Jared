@@ -1,0 +1,57 @@
+﻿@page "/kanban"
+@inject IMediator Mediator
+@inject IDialogService DialogService
+@using Jared.Contracts.Tasks
+
+<KanbanBoard OnClick="@showDialog" Items="@items" OnStatusChanged="@(x => onTaskEdit(x.taskId, x.newStatus, x.newPriority))"/>
+
+@code{
+    private List<TaskListDto> items = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Query query = new();
+        var result = await Mediator.Send(new TaskPageQuery(
+            query.Page,
+            query.PageSize,
+            query.SortingProperty,
+            query.SortingDirection,
+            query.Filter));
+
+        if (!result.Success)
+        {
+            return;
+        }
+
+        items = result.Data.Items;
+    }
+
+    private async Task onTaskEdit(int id, Jared.Core.Enums.TaskStatus status, Priority priority)
+    {
+        var taskGetResult = await Mediator.Send(new TaskDetailsQuery(id));
+        if (!taskGetResult.Success)
+        {
+            return;
+        }
+
+        var task = taskGetResult.Data;
+        task.Status = status;
+        task.Priority = priority;
+
+
+        var taskUpdateResult = await Mediator.Send(new TaskUpdateCommand(task));
+        if (!taskUpdateResult.Success)
+        {
+            return;
+        }
+
+        var updatedTask = items.First(x => x.Id == id);
+        updatedTask.Status = status;
+        updatedTask.Priority = priority;
+    }
+
+    private void showDialog(int id)
+    {
+        DialogService.Update(typeof(TaskDetailsForm), id);
+    }
+}

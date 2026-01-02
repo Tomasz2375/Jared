@@ -1,0 +1,36 @@
+﻿<div class="kanban-row" style="grid-template-columns: 120px repeat(@Statuses.Count(), 1fr);">
+    <div class="kanban-row-title">@Priority</div>
+
+    @foreach (var status in Statuses)
+    {
+        <KanbanColumn
+            OnClick="@HandleClick"
+            Status="@status"
+            Priority="@Priority"
+            Items="Items.Where(i => i.Status == status)"
+            OnItemDropped="OnItemDropped" />
+    }
+</div>
+
+@code {
+    [Parameter]
+    public Priority Priority { get; set; }
+    [Parameter]
+    public IEnumerable<TaskListDto> Items { get; set; } = [];
+    [Parameter]
+    public IEnumerable<Jared.Core.Enums.TaskStatus> Statuses { get; set; } = [];
+    [Parameter]
+    public EventCallback<(int taskId, Jared.Core.Enums.TaskStatus newStatus, Priority newPriority)> OnItemMoved { get; set; }
+    [Parameter]
+    public EventCallback<int> OnClick { get; set; }
+
+    private async Task OnItemDropped((int taskId, Jared.Core.Enums.TaskStatus newStatus) drop)
+    {
+        await OnItemMoved.InvokeAsync((drop.taskId, drop.newStatus, Priority));
+    }
+
+    private async Task HandleClick(int id)
+    {
+        await OnClick.InvokeAsync(id);
+    }
+}

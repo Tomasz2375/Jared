@@ -1,0 +1,35 @@
+﻿@inject IDragDropService DragDropService
+
+<div
+    @onclick="@HandleClick"
+    @ondragend="@OnDragEnd"
+    @ondragstart="@OnDragStart"
+    class="kanban-card"
+    draggable="true">
+
+    <strong>@Item.Title</strong>
+    <div>@Item.Code</div>
+</div>
+
+@code {
+    [Parameter]
+    public TaskListDto Item { get; set; } = default!;
+    [Parameter]
+    public EventCallback<int> OnClick { get; set; }
+
+
+    private void OnDragStart(DragEventArgs e)
+    {
+        DragDropService.StartDrag(Item.Id);
+    }
+
+    private void OnDragEnd(DragEventArgs e)
+    {
+        DragDropService.EndDrag();
+    }
+
+    private async Task HandleClick()
+    {
+        await OnClick.InvokeAsync(Item.Id);
+    }
+}

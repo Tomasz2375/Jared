@@ -1,0 +1,49 @@
+﻿.kanban-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.kanban-row {
+    display: grid;
+    gap: 1rem;
+}
+
+.kanban-row-title {
+    font-weight: bold;
+    padding-top: 1rem;
+}
+
+.kanban-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 150px;
+    background: var(--background-2);
+    padding: .5rem;
+    border-radius: 8px;
+}
+
+.kanban-card {
+    background: var(--background-1);
+    padding: .5rem;
+    margin-bottom: .5rem;
+    border-radius: 6px;
+    cursor: grab;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.kanban-header {
+    display: grid;
+    gap: .1rem;
+    font-weight: bold;
+}
+
+.kanban-header-cell {
+    text-align: center;
+    padding-bottom: .5rem;
+}
+
+.kanban-header-empty {
+    width: 120px;
+}
