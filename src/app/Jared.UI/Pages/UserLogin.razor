@@ -1,11 +1,11 @@
 ﻿@page "/login"
 @inject IJSRuntime JS
+@inject INotificationService NotificationService
 @inject NavigationManager Nav
-@attribute [AllowAnonymous]
 
 <h4>User login</h4>
 <div style="max-width:500px">
-    <EditForm Model="@dto" OnValidSubmit="loginUser">
+    <EditForm Model="@dto">
         <FluentValidationValidator />
         <div>
             <InputTextField
@@ -18,13 +18,6 @@
                 Placeholder="Password"
                 IsPassword="true" />
         </div>
-        <div>
-            <button type="submit" class="btn btn-primary-dialog">Login</button>
-        </div>
+        <ConfirmButton Id="login-button" OnClick="@loginUser" Text="Login" Class="btn-right" />
     </EditForm>
-    <div class="text-danger">
-        <span>
-            @errorMessage
-        </span>
-    </div>
 </div>

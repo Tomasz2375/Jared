@@ -1,5 +1,6 @@
 ﻿@page "/profile/{Id:int}"
 @inject IMediator Mediator
+@inject INotificationService NotificationService
 @attribute [Authorize]
 
 <div>
@@ -7,7 +8,7 @@
 </div>
 
 <div style="max-width:500px">
-    <EditForm Model="@userPasswordDto" OnValidSubmit="changePassword">
+    <EditForm Model="@userPasswordDto">
         <FluentValidationValidator />
         <h5>Change password</h5>
         <div>
@@ -31,40 +32,24 @@
                 Placeholder="Confirm password"
                 IsPassword="true" />
         </div>
-        <div>
-            <button type="submit" class="btn btn-primary-dialog">Change password</button>
-        </div>
-        <div class=@((isPasswordChanged ? "text-success" : "text-danger"))>
-            <span>
-                @passwordMessage
-            </span>
-        </div>
+        <ConfirmButton Id="change-password-button" OnClick="@changePassword" Text="Change password" />
     </EditForm>
     <br />
     <br />
-    <EditForm Model="@userUpdateDto" OnValidSubmit="updateUser">
+    <EditForm Model="@userUpdateDto">
         <h5>Update user data</h5>
         <InputTextField
             @bind-Value="@userUpdateDto.FirstName"
             Id="firstName"
-            Placeholder="First name"
-            ValidationFor="(() => userUpdateDto.FirstName)" />
+            Placeholder="First name" />
         <InputTextField
             @bind-Value="@userUpdateDto.LastName"
             Id="lastName"
-            Placeholder="Last name"
-            ValidationFor="(() => userUpdateDto.LastName)" />
+            Placeholder="Last name" />
         <InputDateField
             @bind-Value="@(userUpdateDto.DateOfBirth)"
             Id="dateOfBirth"
             Placeholder="Date of birth" />
-        <div>
-            <button type="submit" class="btn btn-primary-dialog">Update</button>
-        </div>
-        <div class=@((isUpdateUser ? "text-success" : "text-danger"))>
-        <span>
-            @updateMessage
-        </span>
-        </div>
+        <ConfirmButton Id="update-user-button" OnClick="@updateUser" Text="Update" />
     </EditForm>
 </div>

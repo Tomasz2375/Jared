@@ -28,11 +28,21 @@
                     {
                         @if (worklog.Delete)
                         {
-                            <td><button type="button" class="btn btn-undo" @onclick="(() => restoreWorkLog(worklog))">Undo</button></td>
+                            <td>
+                                <ConfirmButton
+                                    Id="save-and-stay-button"
+                                    OnClick="@(() => restoreWorkLog(worklog))"
+                                    Text="Undo" />
+                            </td>
                         }
                         else
                         {
-                            <td><button type="button" class="btn btn-delete" @onclick="(() => deleteWorkLog(worklog))">Delete</button></td>
+                            <td>
+                                <CancelButton
+                                    Id="cancel-button"
+                                    OnClick="@(() => deleteWorkLog(worklog))"
+                                    Text="Delete" />
+                            </td>
                         }
                     }
                     else

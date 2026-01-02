@@ -32,7 +32,10 @@
                     </EditForm>
                 </td>
                 <td>
-                    <button @onclick="(() => save(user))" class="btn btn-primary">Save</button>
+                    <ConfirmButton
+                        Id="@($"save-button-{user.Id}")"
+                        OnClick="@(() => save(user))"
+                        Text="Save" />
                 </td>
             </tr>
         }

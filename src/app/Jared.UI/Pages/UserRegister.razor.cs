@@ -8,16 +8,17 @@ public partial class UserRegister
 {
     public RegisterRequestDto Dto { get; set; } = new();
 
-    private async Task registerNewUser()
+    private async Task registerUser()
     {
         var result = await Mediator.Send(new RegisterCommand(Dto));
         if (!result.Success)
         {
-            Console.WriteLine(result.Error);
+            NotificationService.Error(result.Error);
 
             return;
         }
 
+        NotificationService.Success("Registration successful. Please log in.");
         NavigationManager.NavigateTo("login");
     }
 }

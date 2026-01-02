@@ -9,10 +9,6 @@ public partial class Profile
     [Parameter]
     public int Id { get; set; }
 
-    private string passwordMessage = string.Empty;
-    private string updateMessage = string.Empty;
-    private bool isPasswordChanged;
-    private bool isUpdateUser;
     private UserPasswordDto userPasswordDto = new();
     private UserDetailsDto userUpdateDto = new();
 
@@ -34,14 +30,12 @@ public partial class Profile
 
         if (!result.Success)
         {
-            passwordMessage = result.Error;
-            isPasswordChanged = false;
+            NotificationService.Error(result.Error);
+
+            return;
         }
-        else
-        {
-            passwordMessage = "Password has been changed";
-            isPasswordChanged = true;
-        }
+
+        NotificationService.Success("Password has been changed");
     }
 
     private async Task updateUser()
@@ -50,13 +44,11 @@ public partial class Profile
 
         if (!result.Success)
         {
-            updateMessage = result.Error;
-            isUpdateUser = false;
+            NotificationService.Error(result.Error);
+
+            return;
         }
-        else
-        {
-            updateMessage = "User data updated";
-            isUpdateUser = true;
-        }
+
+        NotificationService.Success("User data updated");
     }
 }

@@ -6,7 +6,7 @@
 @inject IMediator Mediator
 
 <h4>Statistics</h4>
-<EditForm Model="@month" OnValidSubmit="@(() => getWorkLogs(user.Id, (int)month, year))">
+<EditForm Model="@month">
 <div class="form-modal-tabs">
         <InputSelectList
             @bind-Value="@userId"
@@ -25,9 +25,10 @@
             ShowDefault="false"
             Id="year"
             Placeholder="Year" />
-        <div style="position:relative; bottom: -12px;">
-            <button type="submit" class="btn btn-primary-dialog">Show</button>
-        </div>
+        <ConfirmButton
+            Id="confirm-button"
+            OnClick="@(() => getWorkLogs(user.Id, (int)month, year))"
+            Text="Show" />
     </div>
 </EditForm>
 
