@@ -7,7 +7,6 @@ namespace Jared.UI.Pages;
 public partial class UserLogin
 {
     private LoginRequestDto dto { get; set; } = new();
-    private string errorMessage = string.Empty;
     private string returnUrl = string.Empty;
 
     protected override void OnInitialized()
@@ -25,11 +24,12 @@ public partial class UserLogin
 
         if (ok)
         {
+            NotificationService.Success("Login successed");
             Nav.NavigateTo(returnUrl, true);
 
             return;
         }
 
-        errorMessage = "Login failed";
+        NotificationService.Error("Login failed");
     }
 }

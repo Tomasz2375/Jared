@@ -1,18 +1,16 @@
-﻿@inherits InputBase<DateTime?>
+﻿@typeparam TValue
+@inherits InputBase<TValue>
 
-<div class="input-field">
-    @if (!string.IsNullOrWhiteSpace(Label))
-    {
-        <label class="form-control-label" for="@($"label-{Id}")">@Label</label>
-    }
-    <input type="date" class="form-control @CssClass" id="@Id" @bind="@CurrentValue" />
-    <div class="form-control-validation">
-        <ValidationMessage For="@ValidationFor" />
+<div class="input-wrapper">
+    <input
+        @attributes="AdditionalAttributes"
+        value="@CurrentValueAsString"
+        id="@Id"
+        class="form-control @CssClass"
+        disabled="@Disabled"
+        type="date" />
+    <span class="placeholder">@Placeholder</span>
+    <div class="validation">
+        <ValidationMessage For="@ValueExpression" />
     </div>
 </div>
-
-<style>
-    .input-field {
-        padding: 0.3rem !important;
-    }
-</style>

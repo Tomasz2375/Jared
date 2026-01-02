@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Components;
-using System.Linq.Expressions;
 
 namespace Jared.UI.Components.Basic;
 
 public partial class InputTextAreaField
 {
     [Parameter]
-    public Expression<Func<string>> ValidationFor { get; set; } = default!;
+    [EditorRequired]
+    public string Id { get; set; } = default!;
+
     [Parameter]
-    public string? Id { get; set; }
+    [EditorRequired]
+    public string Placeholder { get; set; } = default!;
+
     [Parameter]
-    public string? Label { get; set; }
-    [Parameter]
-    public int Row { get; set; } = 5;
+    public int Rows { get; set; } = 5;
 
     protected override bool TryParseValueFromString(string? value, out string result, out string validationErrorMessage)
     {

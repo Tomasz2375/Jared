@@ -1,18 +1,21 @@
 ﻿@inherits InputBase<int>
 
-<div class="input-field">
-    @if (!string.IsNullOrWhiteSpace(Label))
-    {
-        <label class="form-control-label" for="@($"label-{Id}")">@Label</label>
-    }
-    <input type="number" disabled="@Disabled" class="form-control @CssClass" id="@Id" @bind="@CurrentValue" />
-    <div class="form-control-validation">
-        <ValidationMessage For="@ValidationFor" />
+<div class="input-wrapper">
+    <input @bind-value="CurrentValue"
+           @bind-value:event="oninput"
+           @attributes="AdditionalAttributes"
+           id="@Id"
+           inputmode="numeric"
+           pattern="[0-9]*"
+           class="form-control @CssClass"
+           disabled="@Disabled"
+           type="text" />
+    <span class="placeholder">@Placeholder</span>
+    <div class="validation">
+        <ValidationMessage For="@ValueExpression" />
+    </div>
+    <div class="input-actions">
+        <div class="input-number-control" type="button" @onclick="@(() => CurrentValue++)">▲</div>
+        <div class="input-number-control" type="button" @onclick="@(() => CurrentValue--)">▼</div>
     </div>
 </div>
-
-<style>
-    .input-field {
-        padding: 0.3rem !important;
-    }
-</style>

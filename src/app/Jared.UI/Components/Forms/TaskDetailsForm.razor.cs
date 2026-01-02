@@ -16,7 +16,6 @@ public partial class TaskDetailsForm
 
     public TaskDetailsDto Dto { get; set; } = new();
     private int tabNumber;
-    private bool closeDialog;
 
     private List<ProjectListDto> projects = new();
     private List<TaskListDto> tasks = new();
@@ -40,7 +39,7 @@ public partial class TaskDetailsForm
         Close();
     }
 
-    private async Task save()
+    private async Task save(bool closeDialog)
     {
         var result = await Mediator.Send(new TaskUpdateCommand(Dto));
         if (!result.Success)

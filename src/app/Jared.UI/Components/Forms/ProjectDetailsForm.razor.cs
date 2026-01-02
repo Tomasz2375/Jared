@@ -11,7 +11,6 @@ public partial class ProjectDetailsForm
     public int Id { get; set; }
 
     public ProjectDetailsDto Dto { get; set; } = default!;
-    private bool closeDialog;
 
     protected override async Task OnInitializedAsync()
     {
@@ -23,7 +22,7 @@ public partial class ProjectDetailsForm
         Close();
     }
 
-    private async Task save()
+    private async Task save(bool closeDialog)
     {
         var result = await Mediator.Send(new ProjectUpdateCommand(Dto));
         if (result.Success)
