@@ -190,12 +190,16 @@
     margin: 2px;
     display: inline-block;
 }
-
+/*dsd*/
 .form-modal-footer {
     padding: 0.6rem;
     height: 60px;
     background-color: var(--background-2);
     border-radius: 0 0 10px 10px;
+    display: flex; /* włączamy flexbox */
+    justify-content: flex-end; /* wyrównanie do prawej */
+    gap: 16px; /* odstęp między przyciskami */
+    padding-right: 20px;
 }
 
 .form-close {
@@ -229,7 +233,7 @@
     float: right;
     margin-right: 15px;
 }
-
+/*dd*/
 .btn-primary-dialog:hover {
     color: #fff;
     border-color: var(--main-color);

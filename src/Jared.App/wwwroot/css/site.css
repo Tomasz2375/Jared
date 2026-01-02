@@ -45,6 +45,7 @@ h1:focus {
 
 .table {
     color: var(--font-color);
+    vertical-align:middle;
 }
 
 div.main {
@@ -52,28 +53,47 @@ div.main {
     color: var(--font-color);
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: var(--background);
-    border-color: #1861ac;
+.btn-right{
+    margin-right: 4px;
+    float:right
 }
 
-.btn-secondary {
+.btn-primary {
+    border-width: 2px;
+    min-width:120px;
     color: var(--font-color);
     background-color: var(--background-2);
     border-color: var(--main-color);
 }
 
-.btn-secondary:hover {
-    color: var(--font-color);
-    background-color: var(--background-1);
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:active:focus,
+.btn-primary:focus-visible {
+    color: var(--main-color);
+    background-color: var(--background-2);
     border-color: var(--main-color);
+    box-shadow: 0 0 4px 2px var(--main-color);
 }
-.btn-secondary:focus {
+
+.btn-secondary {
+    border-width: 2px;
+    min-width: 120px;
     color: var(--font-color);
-    background-color: var(--background-1);
-    border-color: var(--main-color);
-    box-shadow: none;
+    background-color: var(--background-2);
+    border-color: var(--error-color);
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary:active:focus,
+.btn-secondary:focus-visible {
+    color: var(--error-color);
+    background-color: var(--background-2);
+    border-color: var(--error-color);
+    box-shadow: 0 0 4px 2px var(--error-color);
 }
 
 .btn-delete {
